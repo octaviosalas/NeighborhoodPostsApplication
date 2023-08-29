@@ -3,7 +3,7 @@ import bodyParser from "body-parser"
 import cors from "cors"
 import usersRoutes from "./routes/users.routes.js"
 import publicationsRoutes from "./routes/publications.routes.js"
-import { addCars } from "./controllers/cars.js"
+
 
 const app = express()
 const port = 4000
@@ -17,7 +17,7 @@ app.use(express.json({type:"*/*"}))
 app.use(express.urlencoded({extended:true}))
 
 app.use(usersRoutes)
-app.use(usersRpublicationsRoutesutes)
+app.use(publicationsRoutes)
 
 
 app.get('/', (req, res) => {
