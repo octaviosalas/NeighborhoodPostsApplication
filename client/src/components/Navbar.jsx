@@ -3,18 +3,19 @@ import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import New from './New'
+import {Link} from "react-router-dom"
 
 
-const navigation = [
-  { name: 'Wall', href: '#', current: false },
-  { name: 'New Report', href: '#', current: false },
-  { name: 'My Publications', href: '#', current: false }
-]
+    const navigation = [
+      { name: 'Wall', href: '/wall', current: false },
+      { name: 'My Publications', href: '#', current: false }
+    ]
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
+    function classNames(...classes) {
+      return classes.filter(Boolean).join(' ')
+    }
 
+   
 
 const Navbar = () => {
   return (
@@ -37,7 +38,7 @@ const Navbar = () => {
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
-                  <p className='text-yellow-500'>Nei United.</p>
+                  <Link to={"/main"}><p className='text-yellow-500' >Nei United.</p></Link> 
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
@@ -97,6 +98,16 @@ const Navbar = () => {
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
                             Your Profile
+                          </a>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <a
+                            href="#"
+                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                          >
+                           <New/>
                           </a>
                         )}
                       </Menu.Item>

@@ -3,6 +3,8 @@ import bodyParser from "body-parser"
 import cors from "cors"
 import usersRoutes from "./routes/users.routes.js"
 import publicationsRoutes from "./routes/publications.routes.js"
+import connectDataBase from "./database/connectdb.js"
+
 
 
 const app = express()
@@ -26,7 +28,8 @@ app.get('/', (req, res) => {
   
 app.listen(port, () => {
     console.log(`El servidor esta funcionando correctamente en el puerto ${port} ✔✔`)
-    //connectDataBase()
+    connectDataBase()
+   
   })
 
   

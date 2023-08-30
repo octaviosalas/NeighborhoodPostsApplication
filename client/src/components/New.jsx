@@ -8,6 +8,7 @@ const New = () => {
 
 
     const [imagenes, setImagenes] = useState([]);
+    const [address, setAddress] = useState("")
     const [title, setTitle] = useState(false);
     const [ubication, setUbication] = useState("")
     const [category, setCategory] = useState("")
@@ -37,6 +38,27 @@ const New = () => {
             });
         });
       };
+      
+       const sendMyReview = () => { 
+        const review = ({ 
+            creatorName: "Jonh Dillwen",
+            creatorId: "1b2j3l4oa0dn48302ncs",
+            publicationDate: "2023-08-21",
+            publicationImages: imagenes,
+            publicationTitle: title,
+            typeOfPublication: category,
+            creatorLocation: ubication,
+            address: address,
+            publicationDescription: description
+        })
+        axios.post("http://localhost:4000/saveNewPublication", review)
+             .then((res) => { 
+                console.log(res.data)
+             })
+             .catch((err) => { 
+                console.log(err)
+             })
+      }
 
 
   return (
@@ -79,6 +101,11 @@ const New = () => {
                         <div className="mt-2">
                             <input  id="Contraseña" name="Contraseña" placeholder="Ubication.." type="text" required className="input input-sm block w-full border border-black font-PoppinsRegular 
                             ring-pallete-grey focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6 "  onChange={(e) => setUbication(e.target.value)}/>           
+                        </div>
+
+                        <div className="mt-2">
+                            <input  id="Contraseña" name="Contraseña" placeholder="Adress.." type="text" required className="input input-sm block w-full border border-black font-PoppinsRegular 
+                            ring-pallete-grey focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6 "  onChange={(e) => setAddress(e.target.value)}/>           
                         </div>
 
                         <div className='mt-4'> 

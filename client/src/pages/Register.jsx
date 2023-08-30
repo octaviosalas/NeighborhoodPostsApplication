@@ -1,7 +1,49 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import Dropzone from 'react-dropzone';
+import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid'
+import axios from "axios"
 
 const Register = () => {
+
+    const [profileImage, setProfileImage] = useState("")
+    const [showPhotoIcon, setShowPhotoIcon] = useState(true)
+    const [name, setName] = useState("")
+    const [location, setLocation] = useState("")
+    const [birthdate, setBirthdate] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+ 
+   
+
+    const handleDropImage = (files) => {
+        const uploaders = files.map((file) => {
+          const formData = new FormData();
+          formData.append('file', file);
+          formData.append('tags', `codeinfuse, medium, gist`);
+          formData.append('upload_preset', 'App-Cars');
+          formData.append('api_key', '687985773113572');
+          formData.append('timestamp', Date.now() / 1000 / 0);
+         
+          return axios
+            .post('https://api.cloudinary.com/v1_1/dgheotuij/image/upload', formData, {
+              headers: { 'X-Requested-With': 'XMLHttpRequest' },
+            })
+            .then((res) => {
+              const data = res.data;
+              const fileURL = data.secure_url;
+              console.log(fileURL);
+              setProfileImage(fileURL)
+              setTimeout(() => { 
+                setShowPhotoIcon(false)
+              }, 500)
+       
+            });
+        });
+      };
+      
+
+
   return (
     <div>
         <>
@@ -18,57 +60,65 @@ const Register = () => {
 
                         <div>
                             <div className="mt-2">
-                                <input  id="user" name="user" placeholder="Nombre" type="text" required className="input input-sm block w-full border border-black font-PoppinsRegular 
-                                 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"/>
-                            </div>
-                        </div>
-
-                        <div>
-                        <div className="mt-2">
-                                <input  id="user" name="user" placeholder="Apellido" type="text" required className="input input-sm block w-full border border-black font-PoppinsRegular 
-                                ring-pallete-grey focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
-                                />
+                                <input  id="user" name="user" placeholder="Complete Name.." type="text" required className="input input-sm block w-full border border-black font-PoppinsRegular 
+                                 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"  onChange={(e) => setName(e.target.value)}/>
                             </div>
                         </div>
 
                         <div>
                             <div className="mt-2">
-                                <input   id="residence" name="residence" placeholder="Lugar de Nacimiento" type="text" required className="input input-sm block w-full border border-black font-PoppinsRegular 
-                                ring-pallete-grey focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"/>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div className="mt-2">
-                                <input  id="location"  name="location" placeholder="Localidad de Residencia" type="text"  autoComplete="location" required className="input input-sm block w-full border border-black font-PoppinsRegular 
-                                ring-pallete-grey focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6" />
+                                <input  id="location"  name="location" placeholder="Residence Location" type="text"  autoComplete="location" required className="input input-sm block w-full border border-black font-PoppinsRegular ring-pallete-grey focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6" onChange={(e) => setLocation(e.target.value)}/>
                             </div>
                         </div>
 
                     <div>
                         <div className="mt-2">
-                            <input  id="date"  name="date" placeholder="Fecha de nacimiento" type="text" required className="input input-sm block w-full border border-black font-PoppinsRegular 
-                                ring-pallete-grey focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6" />
+                            <input  id="date"  name="date" placeholder="Birthdate" type="text" required className="input input-sm block w-full border border-black font-PoppinsRegular 
+                                ring-pallete-grey focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"  onChange={(e) => setBirthdate(e.target.value)}/>
                         </div>
                     </div>
 
-                    <div className='mt-12'>
+                    
+                    <div>
+                        <div className="mt-2">
+                            <span><small className='text-gray-400 text-sm'>Select your Profile Image</small></span>
+                        </div>
+                        
+                        <Dropzone onDrop={handleDropImage}>
+                                {({ getRootProps, getInputProps }) => (
+                                    <div {...getRootProps({ className: 'dropzone' })} className=' flex justify-center'>
+                                    <input {...getInputProps()} />
+                                       <div className=" avatar mt-4 w-36 h-24  flex justify-center rounded-full border border-dashed border-gray-900/25 " style={{ backgroundImage: `url(${profileImage})`, backgroundSize: 'cover' }}>
+                                             <div className="text-center">
+                                                  {showPhotoIcon ?  <PhotoIcon className="mx-auto mt-6 h-12 w-12 text-gray-300" aria-hidden="true" /> : null}
+                                                    <div className="mt-4 flex text-sm leading-6 text-gray-600">
+                                                        <label
+                                                        htmlFor="file-upload"
+                                                        className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
+                                                        >
+                                                        
+                                                        <input id="file-upload" name="file-upload" type="file" className="sr-only" />
+                                                        </label>
+                                                    </div>
+                                              </div>
+                                        </div>
+                                  </div> )}
+                               </Dropzone>
+                        
+                    </div>
+
+                    <div className='mt-2'>
                         <div className="mt-2">
                             <input  id="email" name="email" placeholder="Email" type="Email" required  className="input input-sm block w-full border border-black font-PoppinsRegular 
-                                ring-pallete-grey focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"/>
+                                ring-pallete-grey focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"  onChange={(e) => setEmail(e.target.value)}/>
                         </div>
                     </div>
 
                     <div className="">
                         <div className="">
-                        <input  id="password"  name="password"  placeholder="Contraseña" type="password" required className="input input-sm block w-full border border-black font-PoppinsRegular 
-                                ring-pallete-grey focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6" />
-                           <p className="mt-2 text-sm text-gray-500">Password must contain</p>
-                           <ul>
-                                <li className=" text-xs">. One Lowercasse</li>
-                                <li className=" text-xs">. One Number</li>
-                                <li className=" text-xs">. Eigth Characeteres</li>
-                            </ul>
+                        <input  id="password"  name="password"  placeholder="Password" type="password" required className="input input-sm block w-full border border-black font-PoppinsRegular 
+                                ring-pallete-grey focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"  onChange={(e) => setLocation(e.target.value)} />
+                           
                         </div>
                      
                     </div>

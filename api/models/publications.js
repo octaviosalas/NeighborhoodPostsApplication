@@ -23,6 +23,9 @@ const publicationsSchema = mongoose.Schema( {
         type: String,
         required: true
     },
+    publicationDescription: { 
+        type: String
+    },
     typeOfPublication: { 
         type: String,
         required: true
@@ -34,6 +37,9 @@ const publicationsSchema = mongoose.Schema( {
         type: String,
         required: true
     },
+    creatorProfileImage: { 
+        type: String
+    }
    
 
 
