@@ -42,6 +42,23 @@ const Register = () => {
         });
       };
       
+      const registerNewUser = () => { 
+        const newUser = ( { 
+          profileImage: profileImage,
+          name: name,
+          location: location,
+          birthdate: birthdate,
+          email: email,
+          password: password
+        })
+        axios.post("http://localhost:4000/registerNewUser", newUser)
+             .then((res) => { 
+                console.log(res.data)
+             })
+             .catch((err) => { 
+                console.log(err)
+             })
+      }
 
 
   return (
@@ -117,7 +134,7 @@ const Register = () => {
                     <div className="">
                         <div className="">
                         <input  id="password"  name="password"  placeholder="Password" type="password" required className="input input-sm block w-full border border-black font-PoppinsRegular 
-                                ring-pallete-grey focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"  onChange={(e) => setLocation(e.target.value)} />
+                                ring-pallete-grey focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"  onChange={(e) => setPassword(e.target.value)} />
                            
                         </div>
                      
@@ -131,7 +148,7 @@ const Register = () => {
                     <div className='flex flex-col gap-3 mt-5 mx-auto items-center justify-center'>              
                         <p className=" text-center text-xs sm:text-sm font-PoppinsSemibold text-pallete-grey">
                         ¿Are you Registered?
-                        <Link Link to="/" className="px-2 font-PoppinsSemibold leading-6 text-yellow-500">SignIn</Link>
+                        <Link Link to="/" className="px-2 font-PoppinsSemibold leading-6 text-yellow-500" onClick={() => registerNewUser()}>SignIn</Link>
                         </p>
                     </div>
                     </div>

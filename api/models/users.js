@@ -12,7 +12,7 @@ const usersSchema = mongoose.Schema( {
         required: true,
         unique: true
     },
-    telephone: { 
+    birthdate: { 
         type: String, 
         required: true
     },
@@ -23,6 +23,10 @@ const usersSchema = mongoose.Schema( {
         type: String,
         required: true
     },
+    location: { 
+        type: String,
+        required: true
+    }
    
 
 
