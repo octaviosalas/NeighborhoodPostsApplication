@@ -3,6 +3,8 @@ import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid'
 import { useState, useEffect } from 'react';
 import Dropzone from 'react-dropzone';
 import axios from "axios"
+import { useContext } from 'react';
+import { UserContext } from '../store/usercontext';
 
 const New = () => {
 
@@ -13,6 +15,19 @@ const New = () => {
     const [ubication, setUbication] = useState("")
     const [category, setCategory] = useState("")
     const [description, setDescription] = useState("")
+    const userContx = useContext(UserContext)
+
+    
+        const getActualDate = () => {
+          const fechaActual = new Date();
+          const year = fechaActual.getFullYear();
+          const month = String(fechaActual.getMonth() + 1).padStart(2, '0');
+          const day = String(fechaActual.getDate()).padStart(2, '0');
+          
+          return `${year}-${month}-${day}`;
+        };
+      
+        const actualDate = getActualDate();
 
     const handleDropImage = (files) => {
         const uploaders = files.map((file) => {
@@ -38,18 +53,27 @@ const New = () => {
             });
         });
       };
+
       
+      
+       useEffect(() => { 
+            console.log(userContx.userId, userContx.userName)
+            console.log(actualDate)
+       }, [])
+
+
        const sendMyReview = () => { 
         const review = ({ 
-            creatorName: "Jonh Dillwen",
-            creatorId: "1b2j3l4oa0dn48302ncs",
-            publicationDate: "2023-08-21",
+            creatorName: userContx.userName,
+            creatorId:  userContx.userId,
+            publicationDate: actualDate,
             publicationImages: imagenes,
             publicationTitle: title,
             typeOfPublication: category,
             creatorLocation: ubication,
             address: address,
-            publicationDescription: description
+            publicationDescription: description,
+            creatorProfileImage: userContx.userProfileImage
         })
         axios.post("http://localhost:4000/saveNewPublication", review)
              .then((res) => { 
@@ -63,7 +87,7 @@ const New = () => {
 
   return (
     <div>
-       <button className="btn" onClick={()=>window.my_modal_3.showModal()}>Nuevo Reporte</button>
+       <button className="btn text-white bg-blue-950 hover:text-blue-950 hover:bg-yellow-400 border p-2 rounded-2xl border-terciary-100 font-bold text-terciary-100  transition-colors" onClick={()=>window.my_modal_3.showModal()}>Create new Report</button>
                     <dialog id="my_modal_3" className="modal">
                     <form method="dialog" className="modal-box">
                         <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>

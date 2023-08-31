@@ -142,13 +142,13 @@ const Register = () => {
 
 
                     <div className=' justify-center text-center mt-6 bg-blue-950 border rounded-xl'>                        
-                        <button className='border-none bg-blue-950  text-white' >Register</button>
+                        <button className='border-none bg-blue-950  text-white'  onClick={() => registerNewUser()}>Register</button>
                     </div>
 
                     <div className='flex flex-col gap-3 mt-5 mx-auto items-center justify-center'>              
                         <p className=" text-center text-xs sm:text-sm font-PoppinsSemibold text-pallete-grey">
                         ¿Are you Registered?
-                        <Link Link to="/" className="px-2 font-PoppinsSemibold leading-6 text-yellow-500" onClick={() => registerNewUser()}>SignIn</Link>
+                        <Link Link to="/" className="px-2 font-PoppinsSemibold leading-6 text-yellow-500">SignIn</Link>
                         </p>
                     </div>
                     </div>

@@ -6,20 +6,26 @@ import SignIn from './pages/SignIn'
 import Register from './pages/Register'
 import Main from './pages/Main'
 import Wall from './pages/Wall'
+import { UserProvider } from './store/usercontext'
 
 function App() {
   
 
   return (
     <>
-      <Navbar/>
+     
+             <UserProvider>
+                  <Navbar/>
+                    <Routes>
+                      <Route path="/" element={<Main/>}></Route> 
+                      <Route path="/register" element={<Register/>}></Route> 
+                      <Route path="/login" element={<SignIn/>}></Route> 
+                      <Route path="/wall" element={<Wall/>}></Route> 
+                    </Routes>
 
-              <Routes>
-                 <Route path="/" element={<SignIn/>}></Route> 
-                 <Route path="/register" element={<Register/>}></Route> 
-                 <Route path="/main" element={<Main/>}></Route> 
-                 <Route path="/wall" element={<Wall/>}></Route> 
-              </Routes>
+             </UserProvider>
+            
+        
     </>
   )
 }

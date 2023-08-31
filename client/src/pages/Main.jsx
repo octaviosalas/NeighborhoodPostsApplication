@@ -1,102 +1,79 @@
-import React from 'react'
-import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid'
-import { useState, useEffect } from 'react';
-import Dropzone from 'react-dropzone';
-import axios from "axios"
-import New from '../components/New';
+import React from "react";
+import { Link } from "react-router-dom";
+import puzzle from "../img/puzzle.png";
+import logi from "../img/logi.png";
+import New from "../components/New"
+import { useEffect, useState } from "react";
+import { useContext } from "react";
+import { UserContext } from "../store/usercontext";
 
-const Main = () => {
 
-    const [imagenes, setImagenes] = useState([]);
-    const [title, setTitle] = useState(false);
-    const [ubication, setUbication] = useState("")
-    const [category, setCategory] = useState("")
-    const [description, setDescription] = useState("")
 
-    const handleDropImage = (files) => {
-        const uploaders = files.map((file) => {
-          const formData = new FormData();
-          formData.append('file', file);
-          formData.append('tags', `codeinfuse, medium, gist`);
-          formData.append('upload_preset', 'App-Cars');
-          formData.append('api_key', '687985773113572');
-          formData.append('timestamp', Date.now() / 1000 / 0);
-         
-          return axios
-            .post('https://api.cloudinary.com/v1_1/dgheotuij/image/upload', formData, {
-              headers: { 'X-Requested-With': 'XMLHttpRequest' },
-            })
-            .then((res) => {
-              const data = res.data;
-              const fileURL = data.secure_url;
-              console.log(fileURL);
-              const imagenesActuales = [...imagenes];
-              imagenesActuales.push(fileURL);
-              setImagenes(imagenesActuales)
-       
-            });
-        });
-      };
+export default function Landing() {
 
-      const sendMyReview = () => { 
-        const review = ({ 
-            title,
-            ubication,
-            category,
-            description,
-            imagenes
-        })
-        axios.post("http://localhost:4000/saveNewPublication", review)
-             .then((res) => { 
-                console.log(res.data)
-             })
-             .catch((err) => { 
-                console.log(err)
-             })
-      }
+    const userContx = useContext(UserContext)
+    const [showButtons, setShowButtons] = useState(true)
+
+      useEffect(() => { 
+        if(userContx.userId !== null) { 
+          setShowButtons(false)
+        }
+      })
+
+      useEffect(() => { 
+               console.log(userContx.userId, userContx.userName, userContx.userProfileImage)
+      }, [userContx.userId, userContx.userName, userContx.userProfileImage])
 
   return (
-    <div>
-          <div className='mb-6'>
-                <h1 className='font-bold text-xl'>La convivencia ciudadana y cuidar los espacios comunes es una responsabilidad Colectiva</h1>
-                    <div>
-                        <h2>Tu reporte ayuda a manetener los espacios en optimas condiciones</h2>
-                    </div>
+    <main className="px-20 py-2">
+      <div
+        id="hero-section"
+        className="h-screen flex flex-col items-center gap-4 justify-center"
+      >
+        <div className="flex justify-center items-center gap-4">
+          <div id="hero-section__img">
+            <img
+              width="500"
+              height="500"
+              src={puzzle}
+              alt="Personas sobre un rompecabezas"
+            />
           </div>
-
-       <div className='flex'>
-
-            <div className=''>
-                    <div className='flex'>
-                        <img className='w-96 m-2' src="https://media.istockphoto.com/id/1580010490/es/vector/locks-in-voices-in-activism-energized-woman-with-bullhorn-destroy-this-thought-rally-subject.jpg?s=612x612&w=0&k=20&c=zbVAcnX1d_CvJ3w1SHNG7vJV2xEqZkOp7HWhLYRWPKI=" alt="" />
-                        <img className='w-96 m-2' src='https://media.istockphoto.com/id/1165545415/es/vector/grupo-de-amigos-sociales-para-el-concepto-de-comunicaci%C3%B3n.jpg?s=2048x2048&w=is&k=20&c=8tbBrLIFMCL9DU9LVIYGcQhyRAFxeCbRu1VmSBBVrG8='/>
-                    </div>
-
-                    <div className='flex'>
-                        <img className='w-96 m-2' src="https://media.istockphoto.com/id/1308582227/es/vector/enhorabuena-%C3%A9xito-empresarial-y-concepto-de-celebraci%C3%B3n.jpg?s=612x612&w=0&k=20&c=maeDNtTI_dlmb-2uIEjpKZ45-ElswSwFe0EM9bI-Xro=" alt="" />
-                        <img className='w-96 m-2' src="https://media.istockphoto.com/id/1308580483/es/vector/trabajo-en-equipo-%C3%A9xito-concepto-de-cooperaci%C3%B3n-empresarial.jpg?s=612x612&w=0&k=20&c=hLE9vuqEnBZfdcUXGnD5Lr1nTAUcXRTCm15hRulIUg8="/>
-                    </div>            
+          <div
+            id="hero-section__content"
+            className="flex flex-col justify-center items-center gap-4"
+          >
+            <img className="w-96" src={logi} alt="Logo de la página" />
+            <p className="w-[30ch] text-center text-title-lg">
+            Your contribution as a citizen helps to make visible problems in
+                 goods for public use
+            </p>
+            <div className="flex gap-2">
+             {showButtons ?
+             <>
+                <Link to="/register"   className="font-bold border bg-terciary-100 p-2 rounded-2xl hover:bg-terciary-50 transition-colors"  >  Registrarme  </Link>
+                <Link to="/login"    className="border-terciary-100 font-bold text-terciary-100 border p-2 rounded-2xl hover:border-2 hover:border-terciary-50 transition-colors" > Iniciar sesión </Link>
+              </>
+               : 
+                <div>
+                  <New/>
                 </div>
-
-                <div className='flex  h-24 mt-12 ml-2'> 
-                            <div>
-                                <New/>
-                            </div>
-
-                            <div>
-                            <button>Mis Reportes</button>
-                            </div>
-                    </div>
-
-
-       </div>
-
+            }
+             
+            </div>
+          </div>
+        </div>
+        <div>
          
+        </div>
+      </div>
 
-          
-           
-    </div>
-  )
+      <section className="flex flex-col items-center gap-8 py-10">
+        
+        <Link className="border border-terciary-100 text-terciary-100 font-bold p-4 rounded-2xl">
+          Ir a reportar
+        </Link>
+      </section>
+    </main>
+  );
 }
-
-export default Main

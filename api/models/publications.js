@@ -8,9 +8,7 @@ const publicationsSchema = mongoose.Schema( {
         required: true
     }, 
     creatorId: { 
-        type: String,
-        required: true,
-        unique: true
+        type: String
     },
     publicationDate: { 
         type: String, 
