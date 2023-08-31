@@ -2,8 +2,11 @@ import React from 'react'
 import MarkUnreadChatAltIcon from '@mui/icons-material/MarkUnreadChatAlt';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShareIcon from '@mui/icons-material/Share';
+import { useState } from 'react';
 
 const PublicationsCard = ({pub}) => {
+
+  const [liked, setLiked] = useState(false);
 
   function openModalThree() {
     const modal = document.getElementById('my_modal_3');
@@ -15,29 +18,41 @@ const PublicationsCard = ({pub}) => {
     modal.showModal();
   }
 
+ 
+
+    const toggleLike = () => {
+        setLiked(!liked);
+    };
+
   
 
   return (
     <div>
         <div className="card w-96 bg-base-100 shadow-2xl shadow-side-left">
                                 <div className="card-body">
-                                    <div className='flex'>
-                                       <div className="avatar">
-                                          <div className="w-8 rounded-full">
-                                              <img src={pub.creatorProfileImage} />
-                                           </div>
-                                       </div>
-                                      <p className="text-gray-400 ml-6">{pub.creatorName}</p>
-                                    </div>
-                                    <div className=' ml-4'>
-                                        <p className='font-bold text-sm color-black'>{pub.publicationTitle}</p>
-                                        <p className='justify-center  text-xs mr-4'>{pub.publicationDescription}</p>
+                                      <div className='flex'>
+                                            <div className="avatar">
+                                                <div className="w-8 rounded-full">
+                                                    <img src={pub.creatorProfileImage} />
+                                                </div>
+                                            </div>
 
-                                        <div className='mt-2 '>
-                                           <p className=' text-xs mr-4'>{pub.address}</p>
-                                           <p className=' text-xs mr-4 underline cursor-pointer'>Ver en Mapa</p>
-                                        </div>
+                                            <div className=''>
+                                              <p className="text-black text-sm ml-2">{pub.creatorName}</p>
+                                            </div>
+                                            <p className='justify-end ml-8 whitespace-no-wrap text-sm border h-6 border-black cursor-pointer rounded-full bg-blue-950 text-white hover:bg-yellow-400 hover:text-black hover:font-bold'>
+                                              {pub.typeOfPublication}
+                                            </p>
                                     </div>
+                                      <div className=' ml-4'>
+                                          <p className='font-bold text-sm color-black'>{pub.publicationTitle}</p>
+                                          <p className='justify-center  text-xs mr-4'>{pub.publicationDescription}</p>
+
+                                          <div className='mt-2 '>
+                                            <p className=' text-xs mr-4'>{pub.address}</p>
+                                            <p className=' text-xs mr-4 underline cursor-pointer'>Ver en Mapa</p>
+                                          </div>
+                                      </div>
                                     <div className='flex'>
                                          <div className="avatar">
                                             <div className="w-24 rounded">
@@ -52,8 +67,9 @@ const PublicationsCard = ({pub}) => {
                                          </div>
                                     </div> 
                                     <div className='flex justify-between'>
-
-                                       <button className="btn"><FavoriteBorderIcon/></button>
+                                         <button className="btn border-none" onClick={toggleLike}>
+                                           {liked ? <FavoriteBorderIcon style={{ color: 'red' }} /> : <FavoriteBorderIcon />}
+                                         </button>                            
                                         <button className="btn" onClick={() => openModalThree()}><MarkUnreadChatAltIcon/></button>
                                         <button className="btn" onClick={() => openModalFour()}><ShareIcon/></button>
                                            </div>

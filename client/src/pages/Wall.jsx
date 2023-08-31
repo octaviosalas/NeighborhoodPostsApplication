@@ -43,9 +43,9 @@ const Wall = () => {
                         </ul>
                     </div>
 
-                    <div className='flex flex-wrap '>
+                    <div className='  '>
                           {allPublications.map((p) => (
-                            <div className='w-1/2 p-6 ' key={p.id}>
+                            <div className=' p-6 ' key={p.id}>
                               <PublicationsCard pub={p} />
                             </div>
                           ))}
