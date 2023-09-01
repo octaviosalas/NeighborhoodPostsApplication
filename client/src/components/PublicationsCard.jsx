@@ -29,6 +29,8 @@ const PublicationsCard = ({pub}) => {
             modal.showModal();
           }
 
+         
+
           const toggleLike = () => {
                 setLiked(!liked);
           };
@@ -88,13 +90,13 @@ const PublicationsCard = ({pub}) => {
     <div>
 
       {allPublications.map((pub) => ( 
-        <div className="card w-96 bg-base-100 shadow-2xl shadow-side-left">
+        <div className="card w-96 bg-base-100 shadow-2xl shadow-side-left mt-4">
                                 <div className="card-body" key={pub._id}>
                                  
                                       <div className='flex'>
                                             <div className="avatar">
                                                 <div className="w-8 rounded-full">
-                                                    <img src={pub.creatorProfileImage} />
+                                                    <img src={pub.creatorProfileImage}  />
                                                 </div>
                                             </div>
 
@@ -109,8 +111,8 @@ const PublicationsCard = ({pub}) => {
                                           <p className='font-bold text-sm color-black'>{pub.publicationTitle}</p>
                                           <p className='justify-center  text-xs mr-4'>{pub.publicationDescription}</p>
 
-                                          <div className='mt-2 '>
-                                            <p className=' text-xs mr-4'>{pub.address}</p>
+                                          <div className='mt-4 whitespace-no-wrap'>
+                                            <p className=' text-xs mr-4  whitespace-no-wrap'>{pub.creatorLocation}, {pub.address}</p>
                                             <p className=' text-xs mr-4 underline cursor-pointer'>Ver en Mapa</p>
                                           </div>
                                       </div>

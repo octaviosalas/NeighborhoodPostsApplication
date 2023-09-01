@@ -11,22 +11,6 @@ import PublicationsCard from '../components/PublicationsCard'
 
 const Wall = () => {
 
-
-  const [allPublications, setAllPublications] = useState([])
-
-   useEffect(() => { 
-       axios.get("http://localhost:4000/getOtherUsersPublications")
-            .then((res) => { 
-              console.log(res.data)
-              setAllPublications(res.data)
-            })
-            .catch((err) => { 
-              console.log(err)
-            })
-   }, [])
-
-
-
   return (
     <div>
        <div className='aling justify-center'>
@@ -47,7 +31,7 @@ const Wall = () => {
                     <div className='  '>
                           
                             <div className=' p-6 '>
-                              <PublicationsCard  />
+                              <PublicationsCard/>
                             </div>
                         
                     </div>           
@@ -55,6 +39,7 @@ const Wall = () => {
            
              </div>
         </div>
+        
     </div>
   )
 }
