@@ -3,10 +3,14 @@ import MarkUnreadChatAltIcon from '@mui/icons-material/MarkUnreadChatAlt';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShareIcon from '@mui/icons-material/Share';
 import { useState } from 'react';
+import { UserContext } from '../store/usercontext';
+import { useContext } from 'react';
+
 
 const PublicationsCard = ({pub}) => {
 
   const [liked, setLiked] = useState(false);
+  const userContx = useContext(UserContext)
 
   function openModalThree() {
     const modal = document.getElementById('my_modal_3');
@@ -17,8 +21,6 @@ const PublicationsCard = ({pub}) => {
     const modal = document.getElementById('my_modal_4');
     modal.showModal();
   }
-
- 
 
     const toggleLike = () => {
         setLiked(!liked);
@@ -81,9 +83,9 @@ const PublicationsCard = ({pub}) => {
                                                     <div className='flex items-center space-x-2'>
                                                         <div className="avatar">                                                     
                                                           <div className="w-8 rounded-full">
-                                                              <img src="https://p1.pxfuel.com/preview/473/60/844/model-portrait-girl-woman.jpg" />                                               
+                                                              <img src={userContx.userProfileImage} />                                               
                                                           </div>
-                                                          <p className='ml-2 text-gray-500 text-sm'>Marisa Dinamond</p>
+                                                          <p className='ml-2 text-gray-500 text-sm'>{userContx.userName}</p>
                                                         </div>
                                                     </div>
                                                       <textarea className='mt-2 border border-gray-400 w-full rounded-xl text-sm text-center' placeholder='Write your commnent..'/>
