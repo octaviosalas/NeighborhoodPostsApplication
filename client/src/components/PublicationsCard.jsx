@@ -2,36 +2,94 @@ import React from 'react'
 import MarkUnreadChatAltIcon from '@mui/icons-material/MarkUnreadChatAlt';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShareIcon from '@mui/icons-material/Share';
-import { useState } from 'react';
+import { useState, useEffect, useM } from 'react';
 import { UserContext } from '../store/usercontext';
 import { useContext } from 'react';
+import axios from 'axios';
+import CommentPub from './CommentPub';
 
 
 const PublicationsCard = ({pub}) => {
 
-  const [liked, setLiked] = useState(false);
-  const userContx = useContext(UserContext)
+      const [liked, setLiked] = useState(false);
+      const [allPublications, setAllPublications] = useState([])
+      const [publicationChoosenId, setPublicationChoosenId] = useState("")
+      const [publicationChoosenName, setPublicationChoosenName] = useState("")
+      const [publicationChoosenaddresseeName, setPublicationChoosenaddresseeName] = useState("")
+      const [commentText, setCommentText] = useState("")
+      const userContx = useContext(UserContext)
 
-  function openModalThree() {
-    const modal = document.getElementById('my_modal_3');
-    modal.showModal();
-  }
+          function openModalThree() {
+            const modal = document.getElementById('my_modal_3');
+            modal.showModal();
+          }
 
-  function openModalFour() {
-    const modal = document.getElementById('my_modal_4');
-    modal.showModal();
-  }
+          function openModalFour() {
+            const modal = document.getElementById('my_modal_4');
+            modal.showModal();
+          }
 
-    const toggleLike = () => {
-        setLiked(!liked);
-    };
+          const toggleLike = () => {
+                setLiked(!liked);
+          };
 
-  
+          const settingPubData = (x) => { 
+              setPublicationChoosenId(x._id)
+              setPublicationChoosenName(x.creatorName)
+              setPublicationChoosenaddresseeName(x.creatorId)
+           }
+
+          const getActualDate = () => {
+            const fechaActual = new Date();
+            const year = fechaActual.getFullYear();
+            const month = String(fechaActual.getMonth() + 1).padStart(2, '0');
+            const day = String(fechaActual.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+          };
+        
+          const actualDate = getActualDate();
+
+          useEffect(() => { 
+              axios.get("http://localhost:4000/getOtherUsersPublications")
+                    .then((res) => { 
+                      console.log(res.data)
+                      setAllPublications(res.data)
+                    })
+                    .catch((err) => { 
+                      console.log(err)
+                    })
+          }, [])
+
+            const sendMyComment = () => { 
+              const newComment = ( { 
+                senderName: userContx.userName,
+                senderId: userContx.userId,
+                senderProfileImage: userContx.userProfileImage,
+                publicationId: publicationChoosenId,
+                addresseeName: publicationChoosenName,
+                addresseeId: publicationChoosenaddresseeName,
+                commentDate: actualDate,
+                comment: commentText
+              })
+              axios.post("http://localhost:4000/saveComment", newComment)
+                  .then((res) => { 
+                    console.log(res.data)
+                  })
+                  .catch((err) => { 
+                    console.log(err)
+                  })
+            }
+
+    
+
+   
 
   return (
     <div>
+
+      {allPublications.map((pub) => ( 
         <div className="card w-96 bg-base-100 shadow-2xl shadow-side-left">
-                                <div className="card-body">
+                                <div className="card-body" key={pub._id}>
                                  
                                       <div className='flex'>
                                             <div className="avatar">
@@ -70,14 +128,19 @@ const PublicationsCard = ({pub}) => {
                                          </div>
                                     </div> 
                                     <div className='flex justify-between'>
+
                                          <button className="btn border-none" onClick={toggleLike}>
                                            {liked ? <FavoriteBorderIcon style={{ color: 'red' }} /> : <FavoriteBorderIcon />}
-                                         </button>                            
-                                        <button className="btn" onClick={() => openModalThree()}><MarkUnreadChatAltIcon/></button>
+                                         </button>  
+
+                                         <div onClick={() => settingPubData(pub)}>
+                                            <button className="btn" onClick={() => openModalThree()}><MarkUnreadChatAltIcon/></button>
+                                          </div>    
+
                                         <button className="btn" onClick={() => openModalFour()}><ShareIcon/></button>
                                            </div>
 
-                                              <dialog id="my_modal_3" className="modal">
+                                           <dialog id="my_modal_3" className="modal">
                                                   <form method="dialog" className="modal-box">
                                                     <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                                                     <div className='flex items-center space-x-2'>
@@ -88,12 +151,16 @@ const PublicationsCard = ({pub}) => {
                                                           <p className='ml-2 text-gray-500 text-sm'>{userContx.userName}</p>
                                                         </div>
                                                     </div>
-                                                      <textarea className='mt-2 border border-gray-400 w-full rounded-xl text-sm text-center' placeholder='Write your commnent..'/>
+                                                      <textarea className='mt-2 border border-gray-400 w-full rounded-xl text-sm text-center'
+                                                       placeholder='Write your commnent..' onChange={(e) => setCommentText(e.target.value)}/>
                                                       <div className='flex justify-end'>
-                                                          <button className='bg-blue-950 border-none mt-2 h-9 w-18 text-sm text-white hover:text-black hover:bg-yellow-400'>Send</button>
+                                                          <button className='bg-blue-950 border-none mt-2 h-9 w-18 text-sm text-white hover:text-black hover:bg-yellow-400' onClick={sendMyComment}>
+                                                              Send
+                                                            </button>
                                                       </div>
                                                   </form>
-                                                </dialog>    
+                                                </dialog> 
+                                                  
 
                                                 <dialog id="my_modal_4" className="modal">
                                                   <form method="dialog" className="modal-box w-80">
@@ -106,8 +173,11 @@ const PublicationsCard = ({pub}) => {
                                                 </dialog>              
                                    </div>
                         </div>
+      ))}
+        
     </div>
   )
 }
 
 export default PublicationsCard
+

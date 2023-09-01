@@ -8,6 +8,7 @@ import PublicationsCard from '../components/PublicationsCard'
 
 
 
+
 const Wall = () => {
 
 
@@ -44,11 +45,11 @@ const Wall = () => {
                     </div>
 
                     <div className='  '>
-                          {allPublications.map((p) => (
-                            <div className=' p-6 ' key={p.id}>
-                              <PublicationsCard pub={p} />
+                          
+                            <div className=' p-6 '>
+                              <PublicationsCard  />
                             </div>
-                          ))}
+                        
                     </div>           
                  </div>
            
@@ -59,3 +60,4 @@ const Wall = () => {
 }
 
 export default Wall
+

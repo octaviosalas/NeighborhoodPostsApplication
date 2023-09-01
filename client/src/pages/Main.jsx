@@ -68,12 +68,7 @@ export default function Landing() {
         </div>
       </div>
 
-      <section className="flex flex-col items-center gap-8 py-10">
-        
-        <Link className="border border-terciary-100 text-terciary-100 font-bold p-4 rounded-2xl">
-          Ir a reportar
-        </Link>
-      </section>
+     
     </main>
   );
 }
