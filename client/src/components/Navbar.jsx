@@ -9,18 +9,12 @@ import { UserContext } from '../store/usercontext';
 import { useNavigate } from 'react-router-dom';
 
 
-    const navigation = [
-      { name: 'Wall', href: '/wall', current: false },
-      { name: 'My Publications', href: '#', current: false }
-    ]
-
-    function classNames(...classes) {
-      return classes.filter(Boolean).join(' ')
-    }
+   
 
   
   const Navbar = () => {
 
+   
         const userContx = useContext(UserContext) 
         const navigate = useNavigate()
         const [showPic, setShowPic] = useState(true)
@@ -32,6 +26,15 @@ import { useNavigate } from 'react-router-dom';
           setTimeout(() => { 
             navigate("/login")
           }, 500)
+        }
+
+        const navigation = [
+          { name: 'Wall', href: '/wall', current: false },
+          { name: 'My Publications', href: `/myPublications/${userContx.userId}`, current: false }
+        ]
+    
+        function classNames(...classes) {
+          return classes.filter(Boolean).join(' ')
         }
 
 

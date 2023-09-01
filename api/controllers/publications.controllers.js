@@ -42,3 +42,16 @@ export const getAllPublications = async (req, res) => {
                   console.log(err)
                })
 }
+
+export const myPublications = async (req, res) => { 
+   
+   const {userId} = req.params
+
+   Publications.find({creatorId: userId})
+               .then((pubs) => { 
+                  res.json(pubs)
+               })
+               .catch((err) => { 
+                  console.log(err)
+               })
+}
