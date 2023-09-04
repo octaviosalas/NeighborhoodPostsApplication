@@ -38,3 +38,15 @@ export const getMyComments = async (req, res) => {
                 console.log(err)
             })
 }
+
+export const getMyCommentsSent = async (req, res) => { 
+    const {userId} = req.params
+
+    Comments.find({senderId: userId})
+            .then((com) => { 
+                res.json(com)
+            })
+            .catch((err) => { 
+                console.log(err)
+            })
+}

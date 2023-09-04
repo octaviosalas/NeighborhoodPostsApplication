@@ -15,7 +15,7 @@ const Wall = () => {
     <div>
        <div className='aling justify-center'>
              <div className='flex'>
-                <div className='flex items-center justify-center h-screen'> 
+                <div className='flex items-center justify-center h-screen mr-6'> 
                   <WallFilters/>
                 </div>
          

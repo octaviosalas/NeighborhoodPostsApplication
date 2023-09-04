@@ -8,6 +8,9 @@ import Main from './pages/Main'
 import Wall from './pages/Wall'
 import MyPublications from './pages/MyPublications'
 import { UserProvider } from './store/usercontext'
+import UserSearch from './pages/UserSearch'
+import MyProfile from './pages/MyProfile'
+import PublicationDetail from './components/PublicationDetail'
 
 function App() {
   
@@ -23,6 +26,9 @@ function App() {
                       <Route path="/login" element={<SignIn/>}></Route> 
                       <Route path="/wall" element={<Wall/>}></Route> 
                       <Route path="/myPublications/:id" element={<MyPublications/>}></Route> 
+                      <Route path="/publicationsSearched/:searchParam" element={<UserSearch/>}></Route> 
+                      <Route path="/myProfile/:userId" element={<MyProfile/>}></Route> 
+                      <Route path="/publication/:publicationId" element={<PublicationDetail/>}></Route> 
                     </Routes>
 
              </UserProvider>

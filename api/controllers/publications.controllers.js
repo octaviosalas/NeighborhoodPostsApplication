@@ -55,3 +55,39 @@ export const myPublications = async (req, res) => {
                   console.log(err)
                })
 }
+
+
+export const getPublicationWithParam = async (req, res) => { 
+   const { searchParam } = req.params;
+   const regex = new RegExp(searchParam, 'i');
+ 
+   Publications.find({
+     $or: [
+       { creatorName: regex },
+       { publicationTitle: regex }, 
+       { typeOfPublication: regex },   
+       {creatorLocation: regex},
+       {address: regex}
+     ],
+   })
+     .then((results) => {
+       res.json(results);
+     })
+     .catch((err) => console.log(err));
+}
+
+export const getOnePublication = async (req, res) => { 
+   const {publicationId} = req.params
+
+   Publications.find({_id: publicationId})
+               .then((pub) => { 
+                  res.json(pub)
+               })
+               .catch((err) => { 
+                  console.log(err)
+               })
+}
+
+export const savePubInFavs = async (req, res) => { 
+    
+}

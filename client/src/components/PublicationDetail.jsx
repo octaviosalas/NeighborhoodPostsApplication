@@ -1,97 +1,50 @@
 import React from 'react'
+import axios from "axios"
+import { useParams } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 import MarkUnreadChatAltIcon from '@mui/icons-material/MarkUnreadChatAlt';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShareIcon from '@mui/icons-material/Share';
-import { useState, useEffect, useM } from 'react';
-import { UserContext } from '../store/usercontext';
-import { useContext } from 'react';
-import axios from 'axios';
-import CommentPub from './CommentPub';
 import { Link } from 'react-router-dom';
+import { UserContext } from '../store/usercontext';
+
+import { useContext } from 'react'
 
 
-const PublicationsCard = ({pub}) => {
+const PublicationDeatil = () => { 
 
-      const [liked, setLiked] = useState(false);
-      const [allPublications, setAllPublications] = useState([])
-      const [publicationChoosenId, setPublicationChoosenId] = useState("")
-      const [publicationChoosenName, setPublicationChoosenName] = useState("")
-      const [publicationChoosenaddresseeName, setPublicationChoosenaddresseeName] = useState("")
-      const [commentText, setCommentText] = useState("")
-      const userContx = useContext(UserContext)
+  const params = useParams()
+  const [publicationData, setPublicationData] = useState([])
 
-          function openModalThree() {
-            const modal = document.getElementById('my_modal_3');
-            modal.showModal();
-          }
+  function openModalThree() {
+    const modal = document.getElementById('my_modal_3');
+    modal.showModal();
+  }
 
-          function openModalFour() {
-            const modal = document.getElementById('my_modal_4');
-            modal.showModal();
-          }
+  function openModalFour() {
+    const modal = document.getElementById('my_modal_4');
+    modal.showModal();
+  }
 
-         
+  const userContx = useContext(UserContext)
 
-          const toggleLike = () => {
-                setLiked(!liked);
-          };
-
-          const settingPubData = (x) => { 
-              setPublicationChoosenId(x._id)
-              setPublicationChoosenName(x.creatorName)
-              setPublicationChoosenaddresseeName(x.creatorId)
-           }
-
-          const getActualDate = () => {
-            const fechaActual = new Date();
-            const year = fechaActual.getFullYear();
-            const month = String(fechaActual.getMonth() + 1).padStart(2, '0');
-            const day = String(fechaActual.getDate()).padStart(2, '0');
-            return `${year}-${month}-${day}`;
-          };
-        
-          const actualDate = getActualDate();
-
-          useEffect(() => { 
-              axios.get("http://localhost:4000/getOtherUsersPublications")
-                    .then((res) => { 
-                      console.log(res.data)
-                      setAllPublications(res.data)
-                    })
-                    .catch((err) => { 
-                      console.log(err)
-                    })
-          }, [])
-
-            const sendMyComment = () => { 
-              const newComment = ( { 
-                senderName: userContx.userName,
-                senderId: userContx.userId,
-                senderProfileImage: userContx.userProfileImage,
-                publicationId: publicationChoosenId,
-                addresseeName: publicationChoosenName,
-                addresseeId: publicationChoosenaddresseeName,
-                commentDate: actualDate,
-                comment: commentText
-              })
-              axios.post("http://localhost:4000/saveComment", newComment)
-                  .then((res) => { 
-                    console.log(res.data)
-                  })
-                  .catch((err) => { 
-                    console.log(err)
-                  })
-            }
-
-    
-
-   
+ 
+  useEffect(() => { 
+     axios.get(`http://localhost:4000/getOnePublication/${params.publicationId}`)
+          .then((res) => { 
+            console.log(res.data)
+            setPublicationData(res.data)
+          })
+          .catch((err) => { 
+            console.log(err)
+          })
+  }, [])
 
   return (
-    <div>
-
-      {allPublications.map((pub) => ( 
-        <div className="card w-96 bg-base-100 shadow-2xl shadow-side-left mt-4">
+    
+    <div> 
+        { publicationData.map((pub) => ( 
+           <div className="card w-96 bg-base-100 shadow-2xl shadow-side-left mt-4">
                                 <div className="card-body" key={pub._id}>
                                  
                                       <div className='flex'>
@@ -132,8 +85,8 @@ const PublicationsCard = ({pub}) => {
                                     </div> 
                                     <div className='flex justify-between'>
 
-                                         <button className="btn border-none" onClick={toggleLike}>
-                                           {liked ? <FavoriteBorderIcon style={{ color: 'red' }} /> : <FavoriteBorderIcon />}
+                                         <button className="btn border-none" >
+                                            <FavoriteBorderIcon />
                                          </button>  
 
                                          <div onClick={() => settingPubData(pub)}>
@@ -155,9 +108,9 @@ const PublicationsCard = ({pub}) => {
                                                         </div>
                                                     </div>
                                                       <textarea className='mt-2 border border-gray-400 w-full rounded-xl text-sm text-center'
-                                                       placeholder='Write your commnent..' onChange={(e) => setCommentText(e.target.value)}/>
+                                                       placeholder='Write your commnent..'/>
                                                       <div className='flex justify-end'>
-                                                          <button className='bg-blue-950 border-none mt-2 h-9 w-18 text-sm text-white hover:text-black hover:bg-yellow-400' onClick={sendMyComment}>
+                                                          <button className='bg-blue-950 border-none mt-2 h-9 w-18 text-sm text-white hover:text-black hover:bg-yellow-400'>
                                                               Send
                                                             </button>
                                                       </div>
@@ -175,12 +128,12 @@ const PublicationsCard = ({pub}) => {
                                                   </form>
                                                 </dialog>              
                                    </div>
-                        </div>
-      ))}
-        
+                                   </div>
+                                   ))}                   
     </div>
+    
+           
   )
 }
 
-export default PublicationsCard
-
+export default PublicationDeatil

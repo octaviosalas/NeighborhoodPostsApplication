@@ -105,7 +105,7 @@ const MyPublicationsCard = ({pub, comments}) => {
                                                                       <p className='ml-2 text-gray-500 text-sm'><b className='mr-4'>{c.senderName}</b>   {c.commentDate}</p>
                                                                     </div>
                                                                 </div>
-                                                              <div className='text-sm border  rounded-lg mt-4'>
+                                                              <div className='text-sm   rounded-lg mt-4'>
                                                                 <p>{c.comment}</p>
                                                               </div>
                                                               <div className='flex justify-between mt-2'>
@@ -115,10 +115,19 @@ const MyPublicationsCard = ({pub, comments}) => {
                                                               </div>
                                                       </form>
                                                 </div>
-                                          </div>
+                                            </div>
                                               )
-                                            } else { 
-                                              console.log("No Comments")
+                                            } else if (c.publicationId !== pub._id) { 
+                                              return (
+                                                 <div className=''>
+                                                    <div className=''>
+                                                      
+                                                            <button className="btn btn-sm btn-circle btn-ghost absolute  right-2 top-2" onClick={() => setShowComments(false)}>✕</button>
+                                                            <p>aa</p> 
+                                                   </div>
+                                              </div>
+                                              )
+                                              
                                             }
                                           })}
                                           
