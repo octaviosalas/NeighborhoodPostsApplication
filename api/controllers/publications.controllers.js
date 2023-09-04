@@ -1,5 +1,5 @@
 import Publications from "../models/publications.js"
-
+import Favorites from "../models/favorites.js"
 
 
 export const savePublication = async (req, res) => { 
@@ -89,5 +89,33 @@ export const getOnePublication = async (req, res) => {
 }
 
 export const savePubInFavs = async (req, res) => { 
-    
+
+    const {publicationId, userId, publicationAddress, publicationCreatorName,
+           publicationImages, publicationTitle, publicationDescription, 
+           typeOfPublication, creatorLocation, creatorProfileImage} = req.body
+
+     try {
+       const newFavPublication = new Favorites({ 
+         publicationId, 
+         userId, 
+         publicationAddress, 
+         publicationCreatorName,
+         publicationImages, 
+         publicationTitle, 
+         publicationDescription, 
+         typeOfPublication, 
+         creatorLocation, 
+         creatorProfileImage
+       })
+       await newFavPublication.save()
+                              .then((saved) => { 
+                                 res.json({message: "The Publication was saved in your Favorites", saved})
+                              })
+                              .catch((err) => { 
+                                 console.log(err)
+                              })
+     } catch (error) {
+      
+     }      
 }
+

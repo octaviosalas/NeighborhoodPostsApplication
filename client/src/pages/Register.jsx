@@ -72,7 +72,7 @@ const Register = () => {
                 <div className="basis-1/2 w-[50vh] flex flex-1 flex-col sm:gap-0 justify-center p-6 py-8 sm:py-6 lg:px-8 rounded-lg bg-gray-white bg-opacity-60 shadow-md">
                 <h2 className="text-center font-bold text-2xl font-PoppinsBold leading-9 tracking-tight text-pallete-black"> Create Account </h2>
 
-                <form className='w-full' action="#">
+                
                     <div className="flex flex-col gap-6 sm:gap-4 mt-9 sm:mx-auto sm:w-full sm:max-w-sm">
 
                         <div>
@@ -152,7 +152,7 @@ const Register = () => {
                         </p>
                     </div>
                     </div>
-                </form>
+              
                 </div>
                 </main>
 

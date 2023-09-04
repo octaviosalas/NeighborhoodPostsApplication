@@ -8,6 +8,7 @@ import { useContext } from 'react';
 import axios from 'axios';
 import CommentPub from './CommentPub';
 import { Link } from 'react-router-dom';
+import {toast, ToastContainer} from "react-toastify"
 
 
 const PublicationsCard = ({pub}) => {
@@ -18,6 +19,7 @@ const PublicationsCard = ({pub}) => {
       const [publicationChoosenName, setPublicationChoosenName] = useState("")
       const [publicationChoosenaddresseeName, setPublicationChoosenaddresseeName] = useState("")
       const [commentText, setCommentText] = useState("")
+      const [backendMessageOfFavs, setBackendMessageOfFavs] = useState("")
       const userContx = useContext(UserContext)
 
           function openModalThree() {
@@ -29,8 +31,6 @@ const PublicationsCard = ({pub}) => {
             const modal = document.getElementById('my_modal_4');
             modal.showModal();
           }
-
-         
 
           const toggleLike = () => {
                 setLiked(!liked);
@@ -63,7 +63,7 @@ const PublicationsCard = ({pub}) => {
                     })
           }, [])
 
-            const sendMyComment = () => { 
+          const sendMyComment = () => { 
               const newComment = ( { 
                 senderName: userContx.userName,
                 senderId: userContx.userId,
@@ -81,7 +81,40 @@ const PublicationsCard = ({pub}) => {
                   .catch((err) => { 
                     console.log(err)
                   })
-            }
+          }
+
+          const notificacionDeToast = () =>{ 
+            toast.success("Publication was saved in your Favorites", {
+              position: toast.POSITION.TOP_CENTER,
+              style: {
+                color: "#082E58", // Cambia el color del texto a rojo
+              },
+            });
+          }
+
+          const saveInFavorites = (pub) => { 
+            const newFavPub = ({ 
+               publicationId: pub._id,
+               userId: userContx.userId,
+               publicationAddress: pub.address,
+               publicationCreatorName: pub.creatorName,
+               publicationImages: pub.publicationImages,
+               publicationTitle: pub.publicationTitle, 
+               publicationDescription: pub.publicationDescription,
+               typeOfPublication: pub.typeOfPublication,
+               creatorLocation: pub.creatorLocation, 
+               creatorProfileImage: pub.creatorProfileImage
+            })
+            axios.post("http://localhost:4000/markAsFavorite", newFavPub)
+                 .then((res) => { 
+                 console.log(res.data) 
+                    notificacionDeToast()                        
+                 })
+                 .catch((err) => { 
+                  console.log(err)
+                 })
+          }
+
 
     
 
@@ -132,8 +165,8 @@ const PublicationsCard = ({pub}) => {
                                     </div> 
                                     <div className='flex justify-between'>
 
-                                         <button className="btn border-none" onClick={toggleLike}>
-                                           {liked ? <FavoriteBorderIcon style={{ color: 'red' }} /> : <FavoriteBorderIcon />}
+                                         <button className="btn border-none" onClick={() => saveInFavorites(pub)}>
+                                           <FavoriteBorderIcon />
                                          </button>  
 
                                          <div onClick={() => settingPubData(pub)}>
@@ -177,6 +210,8 @@ const PublicationsCard = ({pub}) => {
                                    </div>
                         </div>
       ))}
+
+      <ToastContainer/>
         
     </div>
   )

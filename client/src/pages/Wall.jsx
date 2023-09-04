@@ -11,14 +11,28 @@ import PublicationsCard from '../components/PublicationsCard'
 
 const Wall = () => {
 
+  const [load, setLoad] = useState(true)
+
+  useEffect(() => { 
+     setTimeout(() => { 
+         setLoad(false)
+     }, 1500)
+  }, [])
+
   return (
     <div>
        <div className='aling justify-center'>
-             <div className='flex'>
+           { load ? 
+            <div>
+                 <span>Loading Publications..</span>
+                 <br />
+                 <span className="loading loading-dots loading-lg"></span>
+            </div>
+            :
+           <div className='flex'>
                 <div className='flex items-center justify-center h-screen mr-6'> 
-                  <WallFilters/>
+                   <WallFilters/>
                 </div>
-         
                  <div >
                    <div className="dropdown">
                       <label tabIndex={0} className="btn m-1">Ordenar Por</label>
@@ -27,19 +41,14 @@ const Wall = () => {
                             <li><a>Mas Antiguos</a></li>
                         </ul>
                     </div>
-
-                    <div className='  '>
-                          
+                    <div className='  '>                         
                             <div className=' p-6 '>
                               <PublicationsCard/>
                             </div>
-                        
                     </div>           
                  </div>
-           
-             </div>
+             </div>}
         </div>
-        
     </div>
   )
 }
