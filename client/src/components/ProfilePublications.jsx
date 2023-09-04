@@ -14,7 +14,12 @@ const ProfilePublications = ({pub}) => {
                                     <div className=''>
                                         <p className="text-black text-sm ml-2"> {pub.creatorName}</p>
                                     </div>
-                                    <p className='justify-end ml-8 whitespace-no-wrap text-sm border h-6 border-black cursor-pointer rounded-full bg-blue-950 text-white hover:bg-yellow-400 hover:text-black hover:font-bold'> {pub.typeOfPublication} </p>
+                                   
+                              <div className="ml-auto mr-12"> {/* Utiliza ml-auto para moverlo a la derecha */}
+                                <p className='flex whitespace-no-wrap text-sm border h-6 border-black cursor-pointer rounded-full bg-blue-950 text-white hover:bg-yellow-400 hover:text-black hover:font-bold'> 
+                                   {pub.typeOfPublication} 
+                                </p>
+                            </div>
                                  
                             </div>
                     

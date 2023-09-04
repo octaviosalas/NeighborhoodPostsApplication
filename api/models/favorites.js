@@ -37,6 +37,9 @@ const favsSchema = mongoose.Schema( {
     },
     creatorProfileImage: { 
         type: String
+    },
+    creatorName: { 
+        type: String
     }
    
 

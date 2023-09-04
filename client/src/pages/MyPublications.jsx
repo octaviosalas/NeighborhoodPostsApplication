@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { useContext } from 'react';
 import { UserContext } from '../store/usercontext';
 import MyPublicationsCard from '../components/MyPublicationsCard';
+import { Link } from 'react-router-dom';
 
 const MyPublications = () => {
     
@@ -34,8 +35,19 @@ const MyPublications = () => {
     }, [])
 
   return (
-    <div>
-         {allMyPubs.map((p) => <MyPublicationsCard pub={p} comments={publicationsComments}/>)}
+    <div>  
+          <div className='mt-12'>
+              <span className='text-md'> <b>{userContx.userName}</b> these are your Publications at the moment.</span>
+          </div> 
+          
+          <div>
+              {allMyPubs.map((p) => <MyPublicationsCard pub={p} comments={publicationsComments}/>)}
+          </div>
+
+          <div className='mt-12'>
+           <Link to={`/`}> <span className='text-blue-950 cursor-pointer'>Create One</span></Link> 
+          </div>
+         
     </div>
   )
 }

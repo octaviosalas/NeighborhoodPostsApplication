@@ -92,7 +92,7 @@ export const savePubInFavs = async (req, res) => {
 
     const {publicationId, userId, publicationAddress, publicationCreatorName,
            publicationImages, publicationTitle, publicationDescription, 
-           typeOfPublication, creatorLocation, creatorProfileImage} = req.body
+           typeOfPublication, creatorLocation, creatorProfileImage, creatorName} = req.body
 
      try {
        const newFavPublication = new Favorites({ 
@@ -105,7 +105,8 @@ export const savePubInFavs = async (req, res) => {
          publicationDescription, 
          typeOfPublication, 
          creatorLocation, 
-         creatorProfileImage
+         creatorProfileImage,
+         creatorName
        })
        await newFavPublication.save()
                               .then((saved) => { 
@@ -119,3 +120,33 @@ export const savePubInFavs = async (req, res) => {
      }      
 }
 
+export const getFavs = async (req, res) => { 
+   const {userId} = req.params
+   Favorites.find({userId: userId})
+            .then((favs) => { 
+               res.json(favs)
+            })
+            .catch((err) => { 
+               console.log(err)
+            })
+}
+
+export const deleteMyPub = async (req, res) => { 
+   const {id} = req.params
+   
+   try {
+      Publications.findOneAndDelete({_id: id})
+                  .then((publi) => { 
+                     if (publi) {
+                        res.json({ message: "The Publication has been deleted", publi });
+                     } else {
+                        res.status(404).json({ message: "Publication not found" });
+                     }
+                  })
+                  .catch((err) => { 
+                     console.log(err)
+                  })
+   } catch (error) {
+      console.log(error)
+   }
+}

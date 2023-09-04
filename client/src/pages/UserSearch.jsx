@@ -33,7 +33,7 @@ const UserSearch = () => {
         <div>
        <div className='aling justify-center'>
              <div className='flex'>
-                <div className='flex items-center justify-center h-screen'> 
+                <div className='flex items-center justify-center h-screen mr-6'> 
                   <WallFilters/>
                 </div>
          
@@ -46,9 +46,9 @@ const UserSearch = () => {
                         </ul>
                     </div>
 
-                    <div className='  '>
+                    <div className='mt-12'>
                         <div>
-                            <h2 className='text-sm font-bold text-black '>You are seeing the results of your search <b >{param.searchParam}</b></h2>
+                            <h2 className='text-sm text-black '>You are seeing the results of your search <b >{param.searchParam}</b></h2>
                         </div>
                           
                             <div className=' p-6 '>

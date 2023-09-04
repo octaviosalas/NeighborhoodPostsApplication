@@ -6,13 +6,22 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { useState } from 'react';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import axios from "axios"
+import { Link } from 'react-router-dom';
 
 
 const MyPublicationsCard = ({pub, comments}) => {
     
    const [showComments, setShowComments] = useState(false)
    
-   console.log(comments)
+   const deleteMyPublication = (pub) => { 
+     axios.delete(`http://localhost:4000/deleteMyPublication/${pub._id}`) 
+          .then((res) => { 
+            console.log(res.data)
+          })
+          .catch((err) => { 
+            console.log(err)
+          })
+   }
 
 
   return (
@@ -25,7 +34,7 @@ const MyPublicationsCard = ({pub, comments}) => {
                                                <label tabIndex={0} className="btn m-1 font-bold text-xl">...</label>
                                               <ul tabIndex={0} className="dropdown-content text-blue-950 z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
                                                 <li ><a className=" text-blue-950 hover:text-yellow-400">Edit</a></li>
-                                                <li ><a className=" text-blue-950 hover:text-yellow-400">Delete</a></li>
+                                                <li ><a className=" text-blue-950 hover:text-yellow-400" onClick={() => deleteMyPublication(pub)}>Delete</a></li>
                                               </ul>
                                         </div>
                                      </div>                               
@@ -40,9 +49,14 @@ const MyPublicationsCard = ({pub, comments}) => {
                                               <div className=''>
                                                 <p className="text-black text-sm ml-2"> {pub.creatorName}</p>
                                               </div>
-                                              <p className='justify-end ml-8 whitespace-no-wrap text-sm border h-6 border-black cursor-pointer rounded-full bg-blue-950 text-white hover:bg-yellow-400 hover:text-black hover:font-bold'>
-                                                {pub.typeOfPublication}
-                                              </p>
+                                           <Link to={`/publicationsSearched/${pub.typeOfPublication}`}>
+                                            <div className='justify-end '>
+                                                <p className='justify-end ml-8 whitespace-no-wrap text-sm border h-6 border-black cursor-pointer rounded-full bg-blue-950 text-white hover:bg-yellow-400 hover:text-black hover:font-bold'>
+                                                    {pub.typeOfPublication}
+                                                </p>
+                                            </div>
+                                            
+                                           </Link>  
                                         </div>
                                         
                                         <div className=' ml-4'>
@@ -118,16 +132,7 @@ const MyPublicationsCard = ({pub, comments}) => {
                                             </div>
                                               )
                                             } else if (c.publicationId !== pub._id) { 
-                                              return (
-                                                 <div className=''>
-                                                    <div className=''>
-                                                      
-                                                            <button className="btn btn-sm btn-circle btn-ghost absolute  right-2 top-2" onClick={() => setShowComments(false)}>✕</button>
-                                                            <p>aa</p> 
-                                                   </div>
-                                              </div>
-                                              )
-                                              
+                                              alert("No hay comentarios") 
                                             }
                                           })}
                                           

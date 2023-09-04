@@ -7,6 +7,11 @@ const UserDataProfile = () => {
 
     const userContx = useContext(UserContext)
 
+    function openModalThree() {
+        const modal = document.getElementById('my_modal_3');
+        modal.showModal();
+      }
+
   return (
     <div className='border border-black rounded-2xl w-[600px]'> 
 
@@ -27,7 +32,19 @@ const UserDataProfile = () => {
 
                 <div className='flex'>
                     <span className='font-bold'>{userContx.userName}</span> 
-                    <EditIcon style={{marginLeft:"12px", fontSize: "20px"}}/>
+                          <EditIcon style={{marginLeft:"12px", fontSize: "20px", cursor:"pointer"}} onClick={()=>openModalThree()}/>
+                            <dialog id="my_modal_3" className="modal">
+                            <div className="modal-box">
+                                <form method="dialog">
+                                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                                </form>
+                                <h3 className="font-bold text-sm">Do you want to change your name?</h3>
+                                <input type="text" placeholder='Your new user name..' className='text-center text-sm border border-black w-60 h-8 text-black bg-gray-200 mt-2'/>
+                                <br />
+                                <button className='mt-4 text-sm bg-blue-950 text-white  hover:text-yellow-400'>Save</button>
+                            </div>
+                            </dialog>
+                    
                 </div>
 
                 <div className='flex'>
@@ -37,17 +54,17 @@ const UserDataProfile = () => {
 
                 <div>
                         <div className='flex'>
-                           <input type='text' placeholder='Ubication..' className='mt-2 h-8 border border-blue-950 text-sm w-80'/>
+                           <input type='text' placeholder='Ubication..' className='mt-2 text-center h-8 border border-blue-950 text-sm w-80'/>
                            <EditIcon style={{marginLeft:"12px", fontSize: "20px", marginTop:"10px"}}/>
                         </div>
 
                         <div className='flex'>
-                           <input type='text' placeholder='Ubication..' className='mt-2 border h-8  border-blue-950 text-sm w-80'/>
+                           <input type='text' placeholder='Ubication..' className='mt-2 text-center border h-8  border-blue-950 text-sm w-80'/>
                            <EditIcon style={{marginLeft:"12px", fontSize: "20px", marginTop:"10px"}}/>
                         </div>
 
                         <div className='flex'>
-                           <input type='text' placeholder='Ubication..' className='mt-2 border h-8 border-blue-950 text-sm w-80'/>
+                           <input type='text' placeholder='Ubication..' className='mt-2 text-center border h-8 border-blue-950 text-sm w-80'/>
                            <EditIcon style={{marginLeft:"12px", fontSize: "20px", marginTop:"10px"}}/>
                         </div>
                 </div>
