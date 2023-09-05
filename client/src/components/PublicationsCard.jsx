@@ -87,7 +87,7 @@ const PublicationsCard = ({pub}) => {
             toast.success("Publication was saved in your Favorites", {
               position: toast.POSITION.TOP_CENTER,
               style: {
-                color: "#082E58", // Cambia el color del texto a rojo
+                color: "#082E58", 
               },
             });
           }
@@ -116,16 +116,6 @@ const PublicationsCard = ({pub}) => {
                  })
           }
 
-          const deleteMyPublication = (pub) => { 
-            axios.delete(`http://localhost:4000/deleteMyPublication/${pub._id}`) 
-                 .then((res) => { 
-                   console.log(res.data)
-                 })
-                 .catch((err) => { 
-                   console.log(err)
-                 })
-          }
-
 
     
 
@@ -137,20 +127,6 @@ const PublicationsCard = ({pub}) => {
       {allPublications.map((pub) => ( 
         <div className="card w-96 bg-base-100 shadow-2xl shadow-side-left mt-4">
                                 <div className="card-body" key={pub._id}>
-                                  <div>
-                                  {pub.creatorId === userContx.userId ? 
-                                           <div className='flex justify-center text-lg'>
-                                           <div className="dropdown justify-end">
-                                                  <label tabIndex={0} className=" ml-auto mb-2 font-bold text-xl cursor-pointer">...</label>
-                                                 <ul tabIndex={0} className="dropdown-content text-blue-950 z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-                                                   <li ><a className=" text-blue-950 hover:text-yellow-400">Edit</a></li>
-                                                   <li ><a className=" text-blue-950 hover:text-yellow-400" onClick={() => deleteMyPublication(pub)} >Delete</a></li>
-                                                 </ul>
-                                           </div>
-                                        </div>         
-                                           : 
-                                           null}
-                                  </div>
                                  
                                       <div className='flex'>
                                             <div className="avatar">
@@ -159,23 +135,13 @@ const PublicationsCard = ({pub}) => {
                                                 </div>
                                             </div>
 
-                                           {pub.creatorName === userContx.userName ? 
                                             <div className=''>
-                                              <p className="text-black text-sm whitespace-no-wrap ml-2">Me</p>
-                                            </div> : 
-                                             <div className=''>
-                                             <p className="text-black text-sm whitespace-no-wrap ml-2">{pub.creatorName}</p>
-                                           </div> 
-                                            }
-
-                                          <Link to={`/publicationsSearched/${pub.typeOfPublication}`}> 
-                                            <p className='justify-end whitespace-no-wrap text-xs  h-6 underline cursor-pointer hover:font-bold w-[70px]'>
+                                              <p className="text-black text-sm ml-2">{pub.creatorName}</p>
+                                            </div>
+                                          <Link to={`/publicationsSearched/${pub.typeOfPublication}`}> <p className='justify-end ml-8 whitespace-no-wrap text-sm border h-6 border-black cursor-pointer rounded-full bg-blue-950 text-white hover:bg-yellow-400 hover:text-black hover:font-bold w-[70px]'>
                                               {pub.typeOfPublication}
-                                            </p>
-                                          </Link>
-                                         
+                                            </p></Link>
                                     </div>
-
                                       <div className=' ml-4'>
                                           <p className='font-bold text-sm color-black'>{pub.publicationTitle}</p>
                                           <p className='justify-center  text-xs mr-4'>{pub.publicationDescription}</p>
@@ -185,7 +151,7 @@ const PublicationsCard = ({pub}) => {
                                             <p className=' text-xs mr-4 underline cursor-pointer'>Ver en Mapa</p>
                                           </div>
                                       </div>
-                                    <div className='flex justify-center'>
+                                    <div className='flex'>
                                          <div className="avatar">
                                             <div className="w-24 rounded">
                                                 <img src={pub.publicationImages[0]} />
