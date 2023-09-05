@@ -51,7 +51,7 @@ const MyPublicationsCard = ({pub, comments}) => {
                                               </div>
                                            <Link to={`/publicationsSearched/${pub.typeOfPublication}`}>
                                             <div className='justify-end '>
-                                                <p className='justify-end ml-8 whitespace-no-wrap text-sm border h-6 border-black cursor-pointer rounded-full bg-blue-950 text-white hover:bg-yellow-400 hover:text-black hover:font-bold'>
+                                                <p className='justify-end ml-8 whitespace-no-wrap text-sm  h-6  cursor-pointer hover:font-bold w-[70px]'>
                                                     {pub.typeOfPublication}
                                                 </p>
                                             </div>

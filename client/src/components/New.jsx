@@ -5,6 +5,7 @@ import Dropzone from 'react-dropzone';
 import axios from "axios"
 import { useContext } from 'react';
 import { UserContext } from '../store/usercontext';
+import { useNavigate } from 'react-router-dom';
 
 const New = () => {
 
@@ -15,8 +16,10 @@ const New = () => {
     const [ubication, setUbication] = useState("")
     const [category, setCategory] = useState("")
     const [description, setDescription] = useState("")
+    const [succesfullyMsgBackend, setSuccesfullyMsgBackend] = useState("")
+    const [showSuccesfullyMsgBackend, setShowSuccesfullyMsgBackend] = useState(true)
     const userContx = useContext(UserContext)
-
+    const navigate = useNavigate()
     
         const getActualDate = () => {
           const fechaActual = new Date();
@@ -78,6 +81,11 @@ const New = () => {
         axios.post("http://localhost:4000/saveNewPublication", review)
              .then((res) => { 
                 console.log(res.data)
+                setSuccesfullyMsgBackend(res.data.message)
+                setShowSuccesfullyMsgBackend(false)
+                setTimeout(() => { 
+                    navigate("/wall")
+                }, 1800)
              })
              .catch((err) => { 
                 console.log(err)
@@ -192,9 +200,15 @@ const New = () => {
                                 </div>
                             </div>
 
-                                <div className='justify-center text-center mt-6 bg-blue-950 border rounded-xl'>
-                                    <button className=' bg-blue-950 border-none  text-white' onClick={() => sendMyReview()}>Public Report</button>
-                                </div>
+                               {showSuccesfullyMsgBackend ? 
+                                    <div className='justify-center text-center mt-6 bg-blue-950 border rounded-xl'>
+                                        <button className=' bg-blue-950 border-none  text-white' onClick={() => sendMyReview()}>Public Report</button>
+                                    </div>
+                                    :
+                                    <div>
+                                       <button className=' bg-blue-950 border-none  text-white' >{succesfullyMsgBackend}</button>
+                                    </div>
+                                 }
                        </div>
             </form>
                                 

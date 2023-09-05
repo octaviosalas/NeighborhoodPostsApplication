@@ -67,7 +67,7 @@ const SignIn = () => {
                               <input  id="Contraseña" name="Contraseña" placeholder="Contraseña" type="password" required className="input input-sm block w-full border border-black font-PoppinsRegular 
                               ring-pallete-grey focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"  onChange={(e) => setPassword(e.target.value)}
                               />
-                              <p className="mt-2 text-xs text-black underline ml-[250px] cursor-pointer">Olvide la contraseña</p>
+                              <p className="mt-2 text-xs text-black underline ml-[250px] cursor-pointer">I miss my Password</p>
                           </div>
                       </div>
 
@@ -86,7 +86,7 @@ const SignIn = () => {
                       </div>
 
                       <div className='flex flex-col gap-3 mt-5 mx-auto items-center justify-center'>              
-                          <Link to={"/register"}><p className=" text-center text-xs sm:text-sm font-PoppinsSemibold text-pallete-grey">Registrarse con Email</p></Link> 
+                          <Link to={"/register"}><p className=" text-center text-xs sm:text-sm font-PoppinsSemibold text-pallete-grey">Register with Email</p></Link> 
                           <p className='text-blue-950'><b>{messageLogin}</b></p>
                       </div>
                 </div>

@@ -27,7 +27,7 @@ export const register = async (req, res) => {
                            })
                             newUser.save()
                                    .then((user) => { 
-                                       res.json({message: "Usuario creado correctamente", user})     
+                                       res.json({message: "Your Account has been created Succesfully. Now, we redirect you tu Login.", user})     
                                    })
                                    .catch((err) => console.log(err))               
                        }
@@ -62,7 +62,7 @@ export const registerNewAccount = async (req, res) => {
                                  })
                                  newUser.save()
                                        .then((user) => { 
-                                             res.json({message: "Usuario creado correctamente", user})     
+                                             res.json({message: "Your Account has been created Succesfully. Now, we redirect you tu Login.", user})     
                                        })
                                        .catch((err) => console.log(err))               
                            }

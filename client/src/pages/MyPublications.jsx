@@ -5,12 +5,16 @@ import { useContext } from 'react';
 import { UserContext } from '../store/usercontext';
 import MyPublicationsCard from '../components/MyPublicationsCard';
 import { Link } from 'react-router-dom';
+import New from '../components/New';
+import puzzle from "../img/puzzle.png";
+import fon from "../img/imageFon.png"
 
 const MyPublications = () => {
     
     const userContx = useContext(UserContext)
     const [allMyPubs, setAllMyPubs] = useState([])
     const [publicationsComments, setPublicationsComments] = useState([])
+    const [noPublications, setNoPublications] = useState(true)
     
     useEffect(() => { 
       axios.get(`http://localhost:4000/getPublicationComments/${userContx.userId}`)
@@ -27,7 +31,12 @@ const MyPublications = () => {
        axios.get(`http://localhost:4000/getMyPublications/${userContx.userId}`)
             .then((res) => { 
                 console.log(res.data)
-                setAllMyPubs(res.data)
+                if(res.data.length !== 0) { 
+                    setAllMyPubs(res.data)
+                } else { 
+                    setNoPublications(false)
+                }
+            
             })
             .catch((err) => { 
                 console.log(err)
@@ -36,20 +45,42 @@ const MyPublications = () => {
 
   return (
     <div>  
-          <div className='mt-12'>
-              <span className='text-md'> <b>{userContx.userName}</b> these are your Publications at the moment.</span>
-          </div> 
+        {noPublications ? 
+        <>
+                    <div className='mt-12'>
+                        <span className='text-md'> <b>{userContx.userName}</b> these are your Publications at the moment.</span>
+                    </div> 
           
-          <div>
-              {allMyPubs.map((p) => <MyPublicationsCard pub={p} comments={publicationsComments}/>)}
-          </div>
+                    <div>
+                        {allMyPubs.map((p) => <MyPublicationsCard pub={p} comments={publicationsComments}/>)}
+                    </div>
 
-          <div className='mt-12'>
-           <Link to={`/`}> <span className='text-blue-950 cursor-pointer'>Create One</span></Link> 
-          </div>
+                    <div className='mt-12'>
+                        <Link to={`/`}> <span className='text-blue-950 cursor-pointer'>Create One</span></Link> 
+                    </div>
+             </>
+              :
+                    <div>
+                        <p><b>{userContx.userName}</b> , at the moment you dont have Publications </p> 
+                        <div className='mt-6'>
+                                <div className='flex'> 
+                                        <div id="hero-section__img">
+                                            <img width="300" height="300" src={fon} alt="Personas sobre un rompecabezas" />
+                                       </div>                                   
+                                        <div className='flex flex-col items-center gap-4 justify-center  ml-6'>
+                                          <New/>      
+                                        </div>
+                                </div>
+                        </div>
+                    </div>  
+            }
+         
+        
+        
          
     </div>
   )
 }
 
 export default MyPublications
+

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import Dropzone from 'react-dropzone';
 import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid'
 import axios from "axios"
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
 
@@ -13,6 +14,10 @@ const Register = () => {
     const [birthdate, setBirthdate] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [backendMsg, setBackendMsg] = useState("")
+    const [showBackendMsg, setShowBackendMsg] = useState(true)
+    const navigate = useNavigate()
+
  
    
 
@@ -54,6 +59,11 @@ const Register = () => {
         axios.post("http://localhost:4000/registerNewUser", newUser)
              .then((res) => { 
                 console.log(res.data)
+                setBackendMsg(res.data.message)
+                setShowBackendMsg(false)
+                setTimeout(() => { 
+                    navigate("/login")
+                }, 1700)
              })
              .catch((err) => { 
                 console.log(err)
@@ -141,9 +151,15 @@ const Register = () => {
                     </div>
 
 
+                   {showBackendMsg ?
                     <div className=' justify-center text-center mt-6 bg-blue-950 border rounded-xl'>                        
                         <button className='border-none bg-blue-950  text-white'  onClick={() => registerNewUser()}>Register</button>
                     </div>
+                     :
+                     <div className='justify-center text-center mt-6'>
+                        <button className='border-none bg-blue-950  text-white'>{backendMsg}</button>
+                     </div>
+                     }
 
                     <div className='flex flex-col gap-3 mt-5 mx-auto items-center justify-center'>              
                         <p className=" text-center text-xs sm:text-sm font-PoppinsSemibold text-pallete-grey">
