@@ -1,11 +1,13 @@
 import express from "express"
 const commentsRoutes = express.Router()
-import { saveComment, getMyComments, getMyCommentsSent } from "../controllers/comments.controllers.js"
+import { saveComment, getMyComments, getMyCommentsSent, sendResponseToOneComment, getResponsesToMyComments } from "../controllers/comments.controllers.js"
 
 
 
 commentsRoutes.post("/saveComment", saveComment)
 commentsRoutes.get("/getPublicationComments/:userId", getMyComments)
+commentsRoutes.post("/saveResponseToComment", sendResponseToOneComment)
+commentsRoutes.get("/getResponsesToMyComments", getResponsesToMyComments)
 commentsRoutes.get("/getAllMyComments")
 commentsRoutes.get("/getMyCommentsSent/:userId", getMyCommentsSent)
 commentsRoutes.put("/editComment/")

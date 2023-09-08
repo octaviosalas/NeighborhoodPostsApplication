@@ -72,7 +72,7 @@ const SignIn = () => {
                       </div>
 
                       <div className='justify-center text-center mt-6 bg-blue-950 border rounded-xl'>
-                          <button className=' bg-blue-950 border-none  text-white' onClick={() => login()}>Iniciar Sesion</button>
+                          <button className=' bg-blue-950 w-full border-none  text-white' onClick={() => login()}>Iniciar Sesion</button>
                       </div>
 
                       <div className=' flex justify-center mt-4 bg-white border rounded-xl'>

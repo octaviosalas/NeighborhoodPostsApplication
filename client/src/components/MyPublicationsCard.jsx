@@ -7,12 +7,19 @@ import { useState } from 'react';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import axios from "axios"
 import { Link } from 'react-router-dom';
+import { useContext } from "react";
+import { UserContext } from "../store/usercontext";
+import { useNavigate } from 'react-router-dom';
 
 
 const MyPublicationsCard = ({pub, comments}) => {
     
+   const userContx = useContext(UserContext)
+   const navigate = useNavigate()
    const [showComments, setShowComments] = useState(false)
-   
+
+
+
    const deleteMyPublication = (pub) => { 
      axios.delete(`http://localhost:4000/deleteMyPublication/${pub._id}`) 
           .then((res) => { 
@@ -22,7 +29,11 @@ const MyPublicationsCard = ({pub, comments}) => {
             console.log(err)
           })
    }
-
+ 
+   const goToPublicationDetail = (pub) => { 
+      navigate(`/publication/${pub._id}`)
+   }
+   
 
   return (
     <div>
@@ -101,43 +112,58 @@ const MyPublicationsCard = ({pub, comments}) => {
                                                 </div>
                                         </div> 
 
+                                      
                                         {showComments ? 
                                           <> 
-                                          {comments.map((c) => { 
-                                            if(c.publicationId === pub._id) { 
-                                              console.log("Es igual")
-                                              return ( 
-                                                 <div className=''>
-                                                    <div className=''>
-                                                      <form method="dialog" className="modal-box w-auto ">
+                                           {comments.map((c) => { 
+                                                  console.log(comments)
+                                                  
+                                                  if(c.publicationId === pub._id) { 
+                                                
+                                                    return ( 
+                                                      <div className='flex flex-grow justify-start'>
+                                                        <div className=''>
+                                                          <form method="dialog" className=" border modal-box w-auto ">
                                                             <button className="btn btn-sm btn-circle btn-ghost absolute  right-2 top-2" onClick={() => setShowComments(false)}>✕</button>
-                                                                <div className='flex items-center space-x-2'>
-                                                                    <div className="avatar">                                                     
-                                                                      <div className="w-8 rounded-full">
-                                                                        <img src={c.senderProfileImage}/>                                        
-                                                                    </div>
-                                                                      <p className='ml-2 text-gray-500 text-sm'><b className='mr-4'>{c.senderName}</b>   {c.commentDate}</p>
-                                                                    </div>
+                                                            <div className='flex items-center space-x-2'>
+                                                              <div className="avatar">                                                     
+                                                                <div className="w-8 rounded-full">
+                                                                  <img src={c.senderProfileImage}/>                                        
                                                                 </div>
-                                                              <div className='text-sm   rounded-lg mt-4'>
-                                                                <p>{c.comment}</p>
+                                                                <p className='ml-2 text-gray-500 text-sm'><b className='mr-4'>{c.senderName}</b>   {c.commentDate}</p>
                                                               </div>
-                                                              <div className='flex justify-between mt-2'>
-                                                                  <FavoriteBorderIcon style={{marginTop:"12px", cursor: "pointer"}}/>
-                                                                   <DeleteIcon style={{marginTop:"14px", cursor: "pointer"}}/>
-                                                                  <button className='bg-blue-950 justify-end border-none mt-2 h-9 w-18 text-sm text-white hover:text-black hover:bg-yellow-400'>Answer</button>
-                                                              </div>
-                                                      </form>
-                                                </div>
-                                            </div>
-                                              )
-                                            } else if (c.publicationId !== pub._id) { 
-                                              alert("No hay comentarios") 
-                                            }
-                                          })}
-                                          
-                                
-                                          </>
+                                                            </div>
+                                                            <div className='text-sm   rounded-lg mt-4'>
+                                                              <p>{c.comment}</p>
+                                                            </div>
+                                                         
+                                                               <div className='flex justify-between mt-2'>
+                                                                          
+                                                                              <FavoriteBorderIcon style={{marginTop:"12px", cursor: "pointer"}}/>
+                                                                              <DeleteIcon style={{marginTop:"13px", marginLeft: "5px", cursor: "pointer"}}/>
+                                                                        
+
+                                                                          <div>
+                                                                              <button className='bg-blue-950 justify-end border-none mt-2 h-9 w-18 text-sm text-white hover:text-black hover:bg-yellow-400' onClick={() => goToPublicationDetail(pub)}>
+                                                                                   Answer
+                                                                              </button>
+                                                                          </div>   
+                                                               </div>  
+                                                               
+                                                              
+                                                                         
+                                                          </form>
+                                                         
+                                                        </div>
+                                                      </div>
+                                                    );
+                                                  }
+                                                })}
+
+                                             {comments.every((c) => c.publicationId !== pub._id) && (                                                 
+                                                     <small className='font-bold mt-4'>No comments yet</small>                                                                                                
+                                                )}          
+                                             </>
                                           :
                                           null
                                          }
@@ -150,5 +176,4 @@ const MyPublicationsCard = ({pub, comments}) => {
 }
 
 export default MyPublicationsCard
-
 

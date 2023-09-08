@@ -1,4 +1,5 @@
 import Comments from "../models/comments.js"
+import ResponseToComments from "../models/responseToComments.js"
 
 export const saveComment = async (req, res) => { 
     
@@ -50,3 +51,33 @@ export const getMyCommentsSent = async (req, res) => {
                 console.log(err)
             })
 }
+
+export const sendResponseToOneComment = async (req, res) => { 
+   console.log(req.body)
+   const {senderName, senderId, senderProfileImage, addresseeId, commentDate, comment, targetCommentId} = req.body
+
+   try {
+     const newResponseForComment = new ResponseToComments( { 
+        senderName, 
+        senderId, 
+        senderProfileImage, 
+        addresseeId, 
+        commentDate, 
+        comment, 
+        targetCommentId
+     })
+     newResponseForComment.save()
+                           .then((saved) => { 
+                            res.json({message: "Yout comment has been Send!", saved})
+                           })
+                           .catch((err) => { 
+                            console.log(err)
+                           })
+   } catch (error) {
+    
+   }
+}
+
+export const getResponsesToMyComments = async (req, res) => { 
+    
+ }

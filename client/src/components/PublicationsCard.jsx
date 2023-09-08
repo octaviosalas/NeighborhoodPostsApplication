@@ -151,7 +151,7 @@ const PublicationsCard = ({pub}) => {
                                             <p className=' text-xs mr-4 underline cursor-pointer'>Ver en Mapa</p>
                                           </div>
                                       </div>
-                                    <div className='flex'>
+                                    <div className='flex justify-center mt-2'>
                                          <div className="avatar">
                                             <div className="w-24 rounded">
                                                 <img src={pub.publicationImages[0]} />
@@ -164,7 +164,7 @@ const PublicationsCard = ({pub}) => {
                                             </div>
                                          </div>
                                     </div> 
-                                    <div className='flex justify-between'>
+                                    <div className='flex justify-between mt-4'>
 
                                          <button className="btn border-none" onClick={() => saveInFavorites(pub)}>
                                            <FavoriteBorderIcon />
