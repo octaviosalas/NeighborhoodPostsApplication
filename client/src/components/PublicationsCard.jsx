@@ -165,17 +165,19 @@ const PublicationsCard = ({pub}) => {
                                          </div>
                                     </div> 
                                     <div className='flex justify-between mt-4'>
+                                            <button className="btn border-none" onClick={() => saveInFavorites(pub)}>
+                                              <FavoriteBorderIcon />
+                                            </button>  
 
-                                         <button className="btn border-none" onClick={() => saveInFavorites(pub)}>
-                                           <FavoriteBorderIcon />
-                                         </button>  
+                                            <div onClick={() => settingPubData(pub)}>
+                                                <button className="btn" onClick={() => openModalThree()}><MarkUnreadChatAltIcon/></button>
+                                              </div>    
+                                            <button className="btn" onClick={() => openModalFour()}><ShareIcon/></button>
+                                       </div>
 
-                                         <div onClick={() => settingPubData(pub)}>
-                                            <button className="btn" onClick={() => openModalThree()}><MarkUnreadChatAltIcon/></button>
-                                          </div>    
-
-                                        <button className="btn" onClick={() => openModalFour()}><ShareIcon/></button>
-                                           </div>
+                                       <div>
+                                        <Link to={`/publication/${pub._id}`}><p className='text-sm text-gray-500 underline cursor-pointer' >View Deatil</p></Link> 
+                                       </div>
 
                                            <dialog id="my_modal_3" className="modal">
                                                   <form method="dialog" className="modal-box">

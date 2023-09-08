@@ -17,6 +17,7 @@ const MyPublicationsCard = ({pub, comments}) => {
    const userContx = useContext(UserContext)
    const navigate = useNavigate()
    const [showComments, setShowComments] = useState(false)
+   console.log(pub)
 
 
 

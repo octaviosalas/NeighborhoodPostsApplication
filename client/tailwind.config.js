@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 
 import daisyui from 'daisyui';
-
+import formsPlugin from '@tailwindcss/forms';
 
 
 
@@ -27,6 +27,7 @@ export default {
     },
   },
   plugins: [
-    daisyui
+    daisyui,
+    formsPlugin,
   ]
 }
