@@ -6,9 +6,7 @@ const MyProfile = () => {
   return (
     <div>
         <div className='flex '>
-            <div className='ml-4 mt-12'>
-               <UserDataProfile/>
-            </div>
+            
 
             <div className='m-4 mt-12'>
                  <UserStats/>
