@@ -5,6 +5,7 @@ import { useEffect } from 'react'
 import axios from 'axios'
 import { useState } from 'react'
 import PublicationsCard from '../components/PublicationsCard'
+import LoadingPublications from '../Hooks/LoadingPublications'
 
 
 
@@ -23,29 +24,29 @@ const Wall = () => {
     <div>
        <div className='aling justify-center'>
            { load ? 
-            <div>
-                 <span>Loading Publications..</span>
-                 <br />
-                 <span className="loading loading-dots loading-lg"></span>
-            </div>
-            :
+
+              <LoadingPublications/>
+
+                      :
+
            <div className='flex'>
                 <div className='flex items-center justify-center h-screen mr-6'> 
                    <WallFilters/>
                 </div>
                  <div >
-                   <div className="dropdown">
-                      <label tabIndex={0} className="btn m-1">Ordenar Por</label>
-                        <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-                            <li><a>Mas Recientes</a></li>
-                            <li><a>Mas Antiguos</a></li>
-                        </ul>
-                    </div>
-                    <div className='  '>                         
-                            <div className=' p-6 '>
-                              <PublicationsCard/>
-                            </div>
-                    </div>           
+                        <div className="dropdown">
+                            <label tabIndex={0} className="btn m-1">Ordenar Por</label>
+                              <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                                  <li><a>Mas Recientes</a></li>
+                                  <li><a>Mas Antiguos</a></li>
+                              </ul>
+                          </div>
+
+                          <div className=''>                         
+                                  <div className=' p-6 '>
+                                    <PublicationsCard/>
+                                  </div>
+                          </div>           
                  </div>
              </div>}
         </div>

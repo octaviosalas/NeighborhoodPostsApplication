@@ -6,7 +6,7 @@ import {useNavigate} from "react-router-dom"
 import { useParams } from 'react-router-dom';
 import PublicationsSearched from '../components/PublicationsSearched';
 import WallFilters from '../components/WallFilters';
-
+import useGetBackendQueries from '../Hooks/useGetBackendQueries';
 
 const UserSearch = () => { 
      
@@ -14,18 +14,7 @@ const UserSearch = () => {
     console.log(param)
   
     const [searchResults, setSearchResults] = useState([])
-   
-
-    useEffect(() => { 
-        axios.get(`http://localhost:4000/getPublicationsWithParams/${param.searchParam}`)
-        .then((res) => { 
-          console.log(res.data)
-          setSearchResults(res.data)
-        })
-        .catch((err) => { 
-          console.log(err)
-        })
-    }, [])
+    const {data, loading} = useGetBackendQueries(`getPublicationsWithParams/${param.searchParam}`)
 
 
   return (
@@ -52,7 +41,7 @@ const UserSearch = () => {
                         </div>
                           
                             <div className=' p-6 '>
-                              <PublicationsSearched pubs={searchResults}/>
+                              <PublicationsSearched pubs={data}/>
                             </div>
                         
                     </div>           

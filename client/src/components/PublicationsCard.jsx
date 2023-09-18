@@ -9,6 +9,7 @@ import axios from 'axios';
 import CommentPub from './CommentPub';
 import { Link } from 'react-router-dom';
 import {toast, ToastContainer} from "react-toastify"
+import useGetBackendQueries from '../Hooks/useGetBackendQueries';
 
 
 const PublicationsCard = ({pub}) => {
@@ -21,6 +22,7 @@ const PublicationsCard = ({pub}) => {
       const [commentText, setCommentText] = useState("")
       const [backendMessageOfFavs, setBackendMessageOfFavs] = useState("")
       const userContx = useContext(UserContext)
+      const { data, loading } = useGetBackendQueries(`getOtherUsersPublications`); 
 
           function openModalThree() {
             const modal = document.getElementById('my_modal_3');
@@ -51,18 +53,7 @@ const PublicationsCard = ({pub}) => {
           };
         
           const actualDate = getActualDate();
-
-          useEffect(() => { 
-              axios.get("http://localhost:4000/getOtherUsersPublications")
-                    .then((res) => { 
-                      console.log(res.data)
-                      setAllPublications(res.data)
-                    })
-                    .catch((err) => { 
-                      console.log(err)
-                    })
-          }, [])
-
+          
           const sendMyComment = () => { 
               const newComment = ( { 
                 senderName: userContx.userName,
@@ -124,7 +115,7 @@ const PublicationsCard = ({pub}) => {
   return (
     <div>
 
-      {allPublications.map((pub) => ( 
+      {data.map((pub) => ( 
         <div className="card w-96 bg-base-100 shadow-2xl shadow-side-left mt-4">
                                 <div className="card-body" key={pub._id}>
                                  

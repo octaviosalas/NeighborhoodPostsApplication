@@ -6,9 +6,12 @@ import { useState, useEffect } from 'react';
 import { UserContext } from '../store/usercontext';
 import { useContext } from 'react';
 
+
 const PublicationsSearched = ({pubs}) => {
 
     const userContx = useContext(UserContext)
+
+
   return (
     <div>
                     <div>

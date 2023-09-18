@@ -6,15 +6,13 @@ import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon } from
 import axios from "axios"
 import { useParams } from 'react-router-dom'
 import { useEffect } from 'react'
-import MarkUnreadChatAltIcon from '@mui/icons-material/MarkUnreadChatAlt';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import ShareIcon from '@mui/icons-material/Share';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../store/usercontext';
 import { useContext } from 'react'
-import PublicationsCard from './PublicationsCard'
-import MyPublicationsCard from './MyPublicationsCard'
+import useGetBackendQueries from '../Hooks/useGetBackendQueries';
+
 import CommentsDetail from './CommentsDetail'
+import LoadingPublications from '../Hooks/LoadingPublications'
 
 const sortOptions = [
   { name: 'Edit Publication', href: '#', current: true },
@@ -22,7 +20,7 @@ const sortOptions = [
   { name: 'Puse Publication', href: '#', current: false },
   { name: 'Share Again', href: '#', current: false },
  
-]
+] 
 const filters = [
   {
     id: 'color',
@@ -71,23 +69,16 @@ export default function PublicationDetail() {
   const userContx = useContext(UserContext)
 
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
-  const [publicationData, setPublicationData] = useState([])
+  const { data, loading } = useGetBackendQueries(`getOnePublication/${params.publicationId}`); 
   const [showCommentDetails, setShowCommentDetails] = useState(false)
  
-  useEffect(() => { 
-     axios.get(`http://localhost:4000/getOnePublication/${params.publicationId}`)
-          .then((res) => { 
-            console.log(res.data)
-            setPublicationData(res.data)
-          })
-          .catch((err) => { 
-            console.log(err)
-          })
-  }, [])
+ 
 
 
 
   return (
+    
+  
     <div className="bg-white">
       <div>
         {/* Mobile filter dialog */}
@@ -181,9 +172,19 @@ export default function PublicationDetail() {
           </Dialog>
         </Transition.Root>
 
-        <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+
+       { loading ? 
+  
+            <div>   
+              <LoadingPublications/>      
+            </div> 
+
+            :
+       
+          <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-baseline justify-between border-b border-gray-200  pt-24">
-            <h1 className="text-xl font-bold tracking-tight text-gray-900">{publicationData.map((p) => p.publicationTitle)}</h1>
+            <h1 className="text-xl font-bold tracking-tight text-gray-900">{data.map((p) => p.publicationTitle)}</h1>
 
             <div className="flex items-center">
               <Menu as="div" className="relative inline-block text-left">
@@ -282,7 +283,7 @@ export default function PublicationDetail() {
 
               {/* Product grid */}
               <div className="lg:col-span-3 ">
-                {publicationData.map((pub) => ( 
+                {data.map((pub) => ( 
                      <div className="card w-96  bg-base-100 shadow-xs shadow-side-left ">
                          <div className="" key={pub._id}>
 
@@ -336,9 +337,9 @@ export default function PublicationDetail() {
               </div>
             </div>
           </section>
-        </main>
+        </main> }
       </div>
-    </div>
+    </div> 
   )
 }
 
@@ -352,155 +353,3 @@ export default function PublicationDetail() {
 
 
 
-
-
-
-/*
-
-
-
-
-
-
-
-
-import React from 'react'
-import axios from "axios"
-import { useParams } from 'react-router-dom'
-import { useState, useEffect } from 'react'
-import MarkUnreadChatAltIcon from '@mui/icons-material/MarkUnreadChatAlt';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import ShareIcon from '@mui/icons-material/Share';
-import { Link } from 'react-router-dom';
-import { UserContext } from '../store/usercontext';
-
-import { useContext } from 'react'
-
-
-const PublicationDeatil = () => { 
-
-  const params = useParams()
-  const [publicationData, setPublicationData] = useState([])
-
-  function openModalThree() {
-    const modal = document.getElementById('my_modal_3');
-    modal.showModal();
-  }
-
-  function openModalFour() {
-    const modal = document.getElementById('my_modal_4');
-    modal.showModal();
-  }
-
-  const userContx = useContext(UserContext)
-
- 
-  useEffect(() => { 
-     axios.get(`http://localhost:4000/getOnePublication/${params.publicationId}`)
-          .then((res) => { 
-            console.log(res.data)
-            setPublicationData(res.data)
-          })
-          .catch((err) => { 
-            console.log(err)
-          })
-  }, [])
-
-  return (
-    
-    <div> 
-        { publicationData.map((pub) => ( 
-           <div className="card w-96 bg-base-100 shadow-2xl shadow-side-left mt-4">
-                                <div className="card-body" key={pub._id}>
-                                 
-                                      <div className='flex'>
-                                            <div className="avatar">
-                                                <div className="w-8 rounded-full">
-                                                    <img src={pub.creatorProfileImage}  />
-                                                </div>
-                                            </div>
-
-                                            <div className=''>
-                                              <p className="text-black text-sm ml-2">{pub.creatorName}</p>
-                                            </div>
-                                          <Link to={`/publicationsSearched/${pub.typeOfPublication}`}> <p className='justify-end ml-8 whitespace-no-wrap text-sm border h-6 border-black cursor-pointer rounded-full bg-blue-950 text-white hover:bg-yellow-400 hover:text-black hover:font-bold w-[70px]'>
-                                              {pub.typeOfPublication}
-                                            </p></Link>
-                                    </div>
-                                      <div className=' ml-4'>
-                                          <p className='font-bold text-sm color-black'>{pub.publicationTitle}</p>
-                                          <p className='justify-center  text-xs mr-4'>{pub.publicationDescription}</p>
-
-                                          <div className='mt-4 whitespace-no-wrap'>
-                                            <p className=' text-xs mr-4  whitespace-no-wrap'>{pub.creatorLocation}, {pub.address}</p>
-                                            <p className=' text-xs mr-4 underline cursor-pointer'>Ver en Mapa</p>
-                                          </div>
-                                      </div>
-                                    <div className='flex'>
-                                         <div className="avatar">
-                                            <div className="w-24 rounded">
-                                                <img src={pub.publicationImages[0]} />
-                                            </div>
-                                         </div>
-
-                                         <div className="avatar">
-                                            <div className="w-24 rounded ml-4">
-                                            <img src={pub.publicationImages[1]} />
-                                            </div>
-                                         </div>
-                                    </div> 
-                                    <div className='flex justify-between'>
-
-                                         <button className="btn border-none" >
-                                            <FavoriteBorderIcon />
-                                         </button>  
-
-                                         <div onClick={() => settingPubData(pub)}>
-                                            <button className="btn" onClick={() => openModalThree()}><MarkUnreadChatAltIcon/></button>
-                                          </div>    
-
-                                        <button className="btn" onClick={() => openModalFour()}><ShareIcon/></button>
-                                           </div>
-
-                                           <dialog id="my_modal_3" className="modal">
-                                                  <form method="dialog" className="modal-box">
-                                                    <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-                                                    <div className='flex items-center space-x-2'>
-                                                        <div className="avatar">                                                     
-                                                          <div className="w-8 rounded-full">
-                                                              <img src={userContx.userProfileImage} />                                               
-                                                          </div>
-                                                          <p className='ml-2 text-gray-500 text-sm'>{userContx.userName}</p>
-                                                        </div>
-                                                    </div>
-                                                      <textarea className='mt-2 border border-gray-400 w-full rounded-xl text-sm text-center'
-                                                       placeholder='Write your commnent..'/>
-                                                      <div className='flex justify-end'>
-                                                          <button className='bg-blue-950 border-none mt-2 h-9 w-18 text-sm text-white hover:text-black hover:bg-yellow-400'>
-                                                              Send
-                                                            </button>
-                                                      </div>
-                                                  </form>
-                                                </dialog> 
-                                                  
-
-                                                <dialog id="my_modal_4" className="modal">
-                                                  <form method="dialog" className="modal-box w-80">
-                                                    <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-                                                    <h3 className="font-bold text-sm flex justify-start">Compartir reclamo en mi muro</h3>
-                                                    <div className=''>
-                                                          <button className='bg-blue-950 border-none mt-4 h-9 w-18 text-sm text-white hover:text-black hover:bg-yellow-400'>Share</button>
-                                                      </div>
-                                                  </form>
-                                                </dialog>              
-                                   </div>
-                                   </div>
-                                   ))}                   
-    </div>
-    
-           
-  )
-}
-
-export default PublicationDeatil
-*/

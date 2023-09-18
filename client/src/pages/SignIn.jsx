@@ -18,6 +18,8 @@ const SignIn = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [messageLogin, setMessageLogin] = useState("")
+    const [messageError, setMessageError] = useState("")
+    const [showBackendMessage, setShowBackendMessage] = useState(false)
 
     const login = () => { 
       const userData = ( { 
@@ -27,13 +29,27 @@ const SignIn = () => {
       axios.post("http://localhost:4000/login", userData)
            .then((res) => { 
             console.log(res.data)
-            userContx.updateUser(res.data.id)
-            userContx.updateUserName(res.data.name)
-            userContx.updateUserProfileImage(res.data.profileImage)
-            setMessageLogin("Session started successfully")
-            setTimeout(() => { 
-               navigate("/")
-            }, 1200)
+            if(res.data.message === "The Email is not Registered. Please, go to create your Account and try Again!") { 
+                setMessageError(res.data.message)
+                setShowBackendMessage(true)
+                setTimeout(() => { 
+                    setShowBackendMessage(false)
+                }, 3500)
+            } else if (res.data.message === "You typed an incorrect password. You have 2 more tries to Login") { 
+                setMessageError(res.data.message)
+                setShowBackendMessage(true)
+                setTimeout(() => { 
+                    setShowBackendMessage(false)
+                }, 3500)
+            } else { 
+                userContx.updateUser(res.data.id)
+                userContx.updateUserName(res.data.name)
+                userContx.updateUserProfileImage(res.data.profileImage)
+                setMessageLogin("Session started successfully")
+                setTimeout(() => { 
+                   navigate("/")
+                }, 1200)
+            }
            })
            .catch((err) => { 
             console.log(err)
@@ -67,12 +83,12 @@ const SignIn = () => {
                               <input  id="Contraseña" name="Contraseña" placeholder="Contraseña" type="password" required className="input input-sm block w-full border border-black font-PoppinsRegular 
                               ring-pallete-grey focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"  onChange={(e) => setPassword(e.target.value)}
                               />
-                              <p className="mt-2 text-xs text-black underline ml-[250px] cursor-pointer">I miss my Password</p>
+                              <p className="mt-2 text-xs text-black underline ml-[250px] cursor-pointer xs:whitespace-nowrap">I miss my Password</p>
                           </div>
                       </div>
 
                       <div className='justify-center text-center mt-6 bg-blue-950 border rounded-xl'>
-                          <button className=' bg-blue-950 w-full border-none  text-white' onClick={() => login()}>Iniciar Sesion</button>
+                          <button className=' bg-blue-950 w-full border-none  text-white  hover:bg-gray-300 hover:text-black hover:font-bold' onClick={() => login()}>Iniciar Sesion</button>
                       </div>
 
                       <div className=' flex justify-center mt-4 bg-white border rounded-xl'>
@@ -87,7 +103,8 @@ const SignIn = () => {
 
                       <div className='flex flex-col gap-3 mt-5 mx-auto items-center justify-center'>              
                           <Link to={"/register"}><p className=" text-center text-xs sm:text-sm font-PoppinsSemibold text-pallete-grey">Register with Email</p></Link> 
-                          <p className='text-blue-950'><b>{messageLogin}</b></p>
+                          <p className='text-blue-950 font-bold mt-4 text-sm'><b>{messageLogin}</b></p>
+                          {showBackendMessage ?   <p className='text-blue-950 font-bold mt-4 text-sm'><b>{messageError}</b></p> : null}
                       </div>
                 </div>
             
