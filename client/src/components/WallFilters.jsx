@@ -5,7 +5,25 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import {useNavigate} from "react-router-dom"
 import {toast, ToastContainer} from "react-toastify"
+import { Link } from 'react-router-dom';
 
+/*// Para almacenar un valor en localStorage
+localStorage.setItem('clave', 'valor');
+
+// Ejemplo:
+localStorage.setItem('usuario', 'juan');
+
+// Para recuperar un valor de localStorage
+const valorRecuperado = localStorage.getItem('clave');
+
+// Ejemplo:
+const usuario = localStorage.getItem('usuario');
+
+// Para eliminar un valor de localStorage
+localStorage.removeItem('clave');
+
+// Ejemplo:
+localStorage.removeItem('usuario');*/
 
 const WallFilters = () => {
 
@@ -18,6 +36,8 @@ const WallFilters = () => {
         const [paramFour, setParamFour] = useState(null)
         const [paramFive, setParamFive] = useState(null)
         const navigate = useNavigate()
+  
+
 
         const notificacionDeToast = () =>{ 
           toast.error("Its not possible to do a personal search with out filters aplicated", {
@@ -36,12 +56,6 @@ const WallFilters = () => {
                   .then((res) => { 
                     console.log(res.data)
                     setSearchResults(res.data)
-                    setTimeout(() => { 
-                      navigate(`/publicationsSearched/${searchParam}`)
-                    },200)
-                    setTimeout(() => { 
-                    window.location.reload()
-                    }, 500)
                   })
                   .catch((err) => { 
                     console.log(err)
@@ -49,15 +63,35 @@ const WallFilters = () => {
                  } 
         } 
 
-        const searchWithSomeParams = () => { 
-          axios.get(`http://localhost:4000/getPublicationsWithSomeParams/${paramOne}/${paramTwo}/${paramThree}/${paramFour}/${paramFive}`)
-               .then((res) => { 
-                console.log(res.data)
-               })
-               .catch((err) => { 
-                console.log(err)
-               })
-        }
+        const [filterState, setFilterState] = useState({
+          Sidewalks: false,
+          Lightning: false,
+          Cleaning: false,
+          Streets: false,
+          Transit: false
+        });
+
+        const handleCheckboxChange = (event) => {
+          const { name, checked } = event.target;
+          setFilterState({
+            ...filterState,
+            [name]: checked,
+          });
+        };
+
+        useEffect(() => {
+          sessionStorage.setItem('filterState', JSON.stringify(filterState));
+          console.log(sessionStorage.filterState)
+        }, [filterState]);
+
+    
+
+      const goSearchFiltered = () => { 
+       navigate("/searchWithFilters") 
+       setTimeout(() => { 
+          window.location.reload()
+       }, 500)
+      }
 
 
 
@@ -73,63 +107,27 @@ const WallFilters = () => {
 
                 <div className="mt-6">
                       <div className="flex mt-4">
-                          <input type="checkbox" className="checkbox checkbox-sm border-slate-700" 
-                                    checked={paramOne !== null}
-                                    onChange={() => {
-                                      if (paramOne === null) {
-                                        setParamOne("Sidewalks");
-                                      } else {
-                                        setParamOne(null);
-                                      }}}/>
-
+                          <input type="checkbox" className="checkbox checkbox-sm border-slate-700" name="Sidewalks" checked={filterState.Sidewalks} onChange={handleCheckboxChange}/>
                           <p className="ml-2 text-black">Sidewalks</p>
                       </div>
 
                       <div className="flex mt-4">
-                          <input  type="checkbox" className="checkbox checkbox-sm border-slate-700" 
-                                    checked={paramTwo !== null}
-                                    onChange={() => {
-                                      if (paramTwo === null) {
-                                        setParamTwo("Lightning");
-                                      } else {
-                                        setParamTwo(null);
-                                      }}}/>
+                          <input className="checkbox checkbox-sm border-slate-700" type="checkbox"  name="Lightning" checked={filterState.Lightning} onChange={handleCheckboxChange}/>
                           <p className="ml-2 text-black">Lightning</p>
                       </div>
 
                       <div className="flex mt-4">
-                          <input  type="checkbox"  className="checkbox checkbox-sm border-slate-700" 
-                                  checked={paramThree !== null}
-                                    onChange={() => {
-                                      if (paramThree === null) {
-                                        setParamThree("Cleaning");
-                                      } else {
-                                        setParamThree(null);
-                                      }}}/>
+                          <input  type="checkbox"  className="checkbox checkbox-sm border-slate-700" name="Cleaning" checked={filterState.Cleaning} onChange={handleCheckboxChange}/>
                           <p className="ml-2 text-black">Cleaning</p>
                       </div>
 
                       <div className="flex mt-4">
-                          <input type="checkbox" className="checkbox checkbox-sm border-slate-700"
-                                    checked={paramFour !== null}
-                                    onChange={() => {
-                                      if (paramFour === null) {
-                                        setParamFour("Streets");
-                                      } else {
-                                        setParamFour(null);
-                                      }}}/>
+                          <input type="checkbox" className="checkbox checkbox-sm border-slate-700" name="Streets" checked={filterState.Streets} onChange={handleCheckboxChange}/>
                           <p className="ml-2 text-black">Streets and Squares</p>
                       </div>
 
                       <div className="flex mt-4">
-                          <input type="checkbox" className="checkbox checkbox-sm border-slate-700" 
-                                checked={paramFive !== null}
-                                    onChange={() => {
-                                      if (paramFive === null) {
-                                        setParamFive("Transit");
-                                      } else {
-                                        setParamFive(null);
-                                      }}}/>
+                          <input type="checkbox" className="checkbox checkbox-sm border-slate-700" name="Transit" checked={filterState.Transit} onChange={handleCheckboxChange}/>
                           <p className="ml-2 text-black">Transit</p>
                       </div>
 
@@ -139,11 +137,13 @@ const WallFilters = () => {
                       </div>
 
                       <div className=" mt-4  text-left">
-                        {paramOne !== null || paramTwo !== null || paramThree !== null || paramFour !== null || paramFive !== null?
-                        (
-                            <button className="text-black font-bold bg-gray-400 text-xs h-[32px] w-16 hover:bg-white hover:text-black border border-none hover:border-none" onClick={() => searchWithSomeParams()}>
-                              APPLY
-                            </button>
+                        {filterState && Object.values(filterState).some((value) => value === true)  ?
+                         (
+                          
+                                <button className="text-black font-bold bg-gray-400 text-xs h-[32px] w-16 hover:bg-white hover:text-black border border-none hover:border-none" onClick={() => goSearchFiltered()}>
+                                    APPLY
+                                </button>
+                   
                           ) : null}
                           
                           <br/>

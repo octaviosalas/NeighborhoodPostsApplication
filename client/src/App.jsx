@@ -11,6 +11,7 @@ import { UserProvider } from './store/usercontext'
 import UserSearch from './pages/UserSearch'
 import MyProfile from './pages/MyProfile'
 import PublicationDetail from './components/PublicationDetail'
+import SearchWithMultipleFilters from './pages/SearchWithMultipleFilters'
 
 function App() {
   
@@ -29,6 +30,7 @@ function App() {
                       <Route path="/publicationsSearched/:searchParam" element={<UserSearch/>}></Route> 
                       <Route path="/myProfile/:userId" element={<MyProfile/>}></Route> 
                       <Route path="/publication/:publicationId" element={<PublicationDetail/>}></Route> 
+                      <Route path="/searchWithFilters" element={<SearchWithMultipleFilters/>}></Route> 
                     </Routes>
 
              </UserProvider>

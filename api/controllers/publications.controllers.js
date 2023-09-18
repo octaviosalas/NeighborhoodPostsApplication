@@ -77,49 +77,6 @@ export const getPublicationWithParam = async (req, res) => {
 }
 
 
-
-export const getPublicationWithSomeParams = async (req, res) => { 
-   const { paramOne, paramTwo, paramThree, paramFour, paramFive } = req.params;
-   const { searchParam } = req.query;
-   const regex = new RegExp(searchParam, 'i');
- 
-   const query = {};
-
-   if (paramOne) {
-      query.$or = query.$or || [];
-      query.$or.push({ fieldOne: paramOne });
-    }
-    if (paramTwo) {
-      query.$or = query.$or || [];
-      query.$or.push({ fieldTwo: paramTwo });
-    }
-    if (paramThree) {
-      query.$or = query.$or || [];
-      query.$or.push({ fieldThree: paramThree });
-    }
-    if (paramFour) {
-      query.$or = query.$or || [];
-      query.$or.push({ fieldFour: paramFour });
-    }
-    if (paramFive) {
-      query.$or = query.$or || [];
-      query.$or.push({ fieldFive: paramFive });
-    }
-
-    // Combinar la búsqueda por typeOfPublication y las condiciones dinámicas
-    const combinedQuery = {
-      $or: query.$or,
-      typeOfPublication: regex
-    };
-
-    Publications.find(combinedQuery)
-      .then((results) => {
-        res.json(results);
-      })
-      .catch((err) => console.log(err));
-}
-
-
 export const getOnePublication = async (req, res) => { 
    const {publicationId} = req.params
 
