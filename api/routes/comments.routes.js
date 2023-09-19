@@ -1,6 +1,6 @@
 import express from "express"
 const commentsRoutes = express.Router()
-import { saveComment, getMyComments, getMyCommentsSent, sendResponseToOneComment, getResponsesToMyComments } from "../controllers/comments.controllers.js"
+import { saveComment, getMyComments, getMyCommentsSent, sendResponseToOneComment, getResponsesToMyComments, viewPublicationComments } from "../controllers/comments.controllers.js"
 
 
 
@@ -12,6 +12,7 @@ commentsRoutes.get("/getAllMyComments")
 commentsRoutes.get("/getMyCommentsSent/:userId", getMyCommentsSent)
 commentsRoutes.put("/editComment/")
 commentsRoutes.delete("/deleteMyComment/:id")
+commentsRoutes.get("/viewPublicationComments/:idPublication", viewPublicationComments)
 
 
 

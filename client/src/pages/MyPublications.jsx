@@ -51,7 +51,7 @@ const MyPublications = () => {
                           </div>  
                      </>
           )  : loading ? ( 
-                         <LoadingPublications/>
+                         <LoadingPublications text={"Publications"}/>
                          )
                        : ( 
                    <>

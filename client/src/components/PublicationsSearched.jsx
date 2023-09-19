@@ -56,6 +56,14 @@ const PublicationsSearched = ({pubs}) => {
                                                 </div>
                                             </div>
                                         </div> 
+
+                                        <div className="h-6 bg-gray-100">
+                                                    <div className='flex flex-grow justify-end'>
+                                                        <small className='text-xs text-gray-500 cursor-pointer underline'>2 Comments  </small>
+                                                        <small className='text-xs text-gray-500 ml-2 cursor-pointer underline'>1 Shared</small>
+                                                    </div>
+                                                </div>
+                                                
                                         <div className='flex justify-between'>
 
                                             <button className="btn border-none" >
@@ -68,6 +76,8 @@ const PublicationsSearched = ({pubs}) => {
 
                                             <button className="btn" onClick={() => openModalFour()}><ShareIcon/></button>
                                                 </div>
+
+                                                
 
                                                 <dialog id="my_modal_3" className="modal">
                                                         <form method="dialog" className="modal-box">

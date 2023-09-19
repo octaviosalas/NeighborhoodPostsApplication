@@ -4,6 +4,7 @@ import ResponseToComments from "../models/responseToComments.js"
 export const saveComment = async (req, res) => { 
     
     const {senderName, senderId, senderProfileImage, publicationId, addresseeName, addresseeId, commentDate, comment} = req.body
+    console.log(req.body)
     
     try {
         const commentToBeSaved = new Comments( { 
@@ -39,6 +40,21 @@ export const getMyComments = async (req, res) => {
                 console.log(err)
             })
 }
+
+
+export const viewPublicationComments = async (req, res) => { 
+    const {idPublication} = req.params
+    
+    Comments.find({publicationId: idPublication})
+            .then((comments) => { 
+                res.json(comments)
+            })
+            .catch((err) => { 
+                console.log(err)
+            })
+}
+
+
 
 export const getMyCommentsSent = async (req, res) => { 
     const {userId} = req.params

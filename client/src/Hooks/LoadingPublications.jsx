@@ -1,10 +1,10 @@
 import React from 'react'
 
-const LoadingPublications = () => {
+const LoadingPublications = ({text}) => {
   return (
     <div> 
             <div>
-                 <span>Loading Publications..</span>
+                 <span>Loading {text}..</span>
                  <br />
                  <span className="loading loading-dots loading-lg"></span>
             </div>

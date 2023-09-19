@@ -105,7 +105,7 @@ const WallFilters = () => {
                           </div>                       
                         </div>
 
-                <div className="mt-6">
+                <div className="mt-6 ml-2">
                       <div className="flex mt-4">
                           <input type="checkbox" className="checkbox checkbox-sm border-slate-700" name="Sidewalks" checked={filterState.Sidewalks} onChange={handleCheckboxChange}/>
                           <p className="ml-2 text-black">Sidewalks</p>

@@ -10,8 +10,6 @@ import { Link } from 'react-router-dom';
 import { UserContext } from '../store/usercontext';
 import { useContext } from 'react'
 import useGetBackendQueries from '../Hooks/useGetBackendQueries';
-
-import CommentsDetail from './CommentsDetail'
 import LoadingPublications from '../Hooks/LoadingPublications'
 
 const sortOptions = [
@@ -177,7 +175,7 @@ export default function PublicationDetail() {
        { loading ? 
   
             <div>   
-              <LoadingPublications/>      
+              <LoadingPublications text={"Publication"}/>      
             </div> 
 
             :
@@ -331,9 +329,7 @@ export default function PublicationDetail() {
                       </div>
               </div> 
              ))}
-              <div>
-               {showCommentDetails ? <CommentsDetail/> : null}
-              </div>
+             
               </div>
             </div>
           </section>
