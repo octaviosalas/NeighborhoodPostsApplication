@@ -91,6 +91,8 @@ const PublicationsCard = ({pub}) => {
                  })
           }
 
+         
+      
       
 
   return (
@@ -157,7 +159,7 @@ const PublicationsCard = ({pub}) => {
                                                             <CommentModal publicationId={publicationChoosenId} creatorName={publicationChoosenName} creatorId={publicationChoosenaddresseeName} />
                                                          </div>   
 
-                                                        <ShareModal/>
+                                                        <ShareModal publication={pub}/>
                                              </div>                                                     
                                 </div>
 

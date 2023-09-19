@@ -1,7 +1,12 @@
 import React from 'react'
 import ShareIcon from '@mui/icons-material/Share';
+import { useEffect } from 'react';
 
-const ShareModal = () => {
+const ShareModal = ({publication}) => {
+
+  useEffect(() => { 
+    console.log(publication)
+  }, [publication])
 
     function openModalFour() {
         const modal = document.getElementById('my_modal_4');
