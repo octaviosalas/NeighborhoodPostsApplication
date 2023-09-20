@@ -14,7 +14,7 @@ const CommentsPublications = ({comments, close}) => {
 
   return (
     <div>
-      <div className='flex flex-grow justify-end'>
+      <div className='flex flex-grow justify-end bg-white'>
           <small onClick={close} className='cursor-pointer'>X</small>
       </div>
       {noComments ? <small className='font-bold'>This Publication has no comments yet</small> : 

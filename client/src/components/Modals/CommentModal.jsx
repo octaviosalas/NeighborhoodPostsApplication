@@ -6,10 +6,14 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 
-const CommentModal = ({publicationId, creatorName, creatorId}) => {
+const CommentModal = ({publicationId}) => {
    
     const userContx = useContext(UserContext)
      const [commentText, setCommentText] = useState("")
+
+     useEffect(() => { 
+      console.log(publicationId)
+     }, [publicationId])
 
     function openModalThree() {
         const modal = document.getElementById('my_modal_3');
@@ -32,8 +36,6 @@ const CommentModal = ({publicationId, creatorName, creatorId}) => {
           senderId: userContx.userId,
           senderProfileImage: userContx.userProfileImage,
           publicationId: publicationId,
-          addresseeName: creatorName,
-          addresseeId: creatorId,
           commentDate: actualDate,
           comment: commentText
         })

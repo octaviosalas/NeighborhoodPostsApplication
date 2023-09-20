@@ -3,7 +3,7 @@ import ResponseToComments from "../models/responseToComments.js"
 
 export const saveComment = async (req, res) => { 
     
-    const {senderName, senderId, senderProfileImage, publicationId, addresseeName, addresseeId, commentDate, comment} = req.body
+    const {senderName, senderId, senderProfileImage, publicationId, commentDate, comment} = req.body
     console.log(req.body)
     
     try {
@@ -12,8 +12,6 @@ export const saveComment = async (req, res) => {
              senderId: senderId,
              senderProfileImage: senderProfileImage,
              publicationId: publicationId,
-             addresseeId: addresseeId,
-             addresseeName: addresseeName,
              commentDate: commentDate,
              comment: comment
         }) 

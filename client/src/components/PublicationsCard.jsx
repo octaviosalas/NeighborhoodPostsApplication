@@ -13,21 +13,24 @@ import CommentsPublications from './CommentsPublications';
 import LoadingPublications from '../Hooks/LoadingPublications';
 
 
-const PublicationsCard = ({pub}) => {
+const PublicationsCard = ({pubs}) => {
+  console.log(pubs)
 
    
           const [publicationChoosenId, setPublicationChoosenId] = useState("")
-          const [publicationChoosenName, setPublicationChoosenName] = useState("")
-          const [publicationChoosenaddresseeName, setPublicationChoosenaddresseeName] = useState("")
+        //  const [publicationChoosenName, setPublicationChoosenName] = useState("")
+        //  const [publicationChoosenaddresseeName, setPublicationChoosenaddresseeName] = useState("")
           const [publicationComments, setPublicationComments] = useState([])
           const [quantityComments, setQuantityComments] = useState(0)
           const [showComments, setShowComments] = useState(false)
           const [loadComments, setLoadComments] = useState(false)
           const userContx = useContext(UserContext)
-          const { data, loading } = useGetBackendQueries(`getOtherUsersPublications`); 
+          const [publicationSelectedToShare, setPublicationSelectedToShare] = useState("")
+         
+        
 
           useEffect(() => { 
-            axios.get(`http://localhost:4000/viewPublicationComments/${pub._id}`)
+            axios.get(`http://localhost:4000/viewPublicationComments/${pubs._id}`)
                 .then((res) => { 
                   setQuantityComments(res.data.length)
                 })
@@ -37,9 +40,14 @@ const PublicationsCard = ({pub}) => {
           }, [])
 
           const settingPubData = (x) => { 
-              setPublicationChoosenId(x._id)
-              setPublicationChoosenName(x.creatorName)
-              setPublicationChoosenaddresseeName(x.creatorId)
+            console.log(x)
+              setPublicationChoosenId(x)
+             
+           }
+
+           const settingPubDataShared = (x) => { 
+            console.log(x.creatorName)
+            setPublicationSelectedToShare(x)
            }
           
           const notificacionDeToast = () =>{ 
@@ -92,14 +100,18 @@ const PublicationsCard = ({pub}) => {
           }
 
          
-      
+       const cancelPublication = () => { 
+        setPublicationSelectedToShare(null)
+        console.log("Seteado")
+       }
       
 
   return (
     <div>
-       
-         <div className="card w-[500px] bg-base-100 shadow-2xl shadow-side-left mt-4">
-                                <div className="card-body" key={pub._id}>
+
+      {pubs.map((pub) => (  
+         <div className="card w-[500px] bg-base-100 shadow-2xl shadow-side-left mt-4"  key={pub._id}>
+                                <div className="card-body" onClick={() => console.log(pub._id)}>
                                         <div className='flex'>
                                                <div className="avatar">
                                                     <div className="w-8 rounded-full">
@@ -155,11 +167,15 @@ const PublicationsCard = ({pub}) => {
                                                           <FavoriteBorderIcon />
                                                         </button>  
 
-                                                        <div onClick={() => settingPubData(pub)}>
-                                                            <CommentModal publicationId={publicationChoosenId} creatorName={publicationChoosenName} creatorId={publicationChoosenaddresseeName} />
+                                                        <div  >                                                    
+                                                            <CommentModal  publicationId={pub._id}  />
                                                          </div>   
 
-                                                        <ShareModal publication={pub}/>
+                                                       
+                                                            <div onClick={()=> settingPubDataShared(pub)}>
+                                                              <ShareModal publication={publicationSelectedToShare} cancelPub={cancelPublication}/>
+                                                            </div>
+                                                         
                                              </div>                                                     
                                 </div>
 
@@ -168,11 +184,14 @@ const PublicationsCard = ({pub}) => {
                                                 <LoadingPublications text={"comments"}/>
                                               </div>
                                             ) : showComments ? (
-                                              <div>
+                                              <div className='bg-white'>
                                                 <CommentsPublications comments={publicationComments} close={() => setShowComments(false)}/>
                                               </div>
                                             ) : null}
                         </div>
+      ))}
+       
+         
       
 
       <ToastContainer/>
