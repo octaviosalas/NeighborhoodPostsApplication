@@ -39,7 +39,7 @@ const Wall = () => {
 
                           <div className=''>                         
                                   <div className=' p-6 '>
-                                   {data.map((d) => <PublicationsCard pub={d}/>)}
+                                  {data.map((p) => <PublicationsCard pub={p}/>)}
                                   </div>
                           </div>           
                  </div>

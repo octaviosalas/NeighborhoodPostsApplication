@@ -11,11 +11,12 @@ import CommentModal from './Modals/CommentModal';
 import ShareModal from './Modals/ShareModal';
 import CommentsPublications from './CommentsPublications';
 import LoadingPublications from '../Hooks/LoadingPublications';
+import RateReviewIcon from '@mui/icons-material/RateReview';
 
 
 const PublicationsCard = ({pub}) => {
 
-   
+          const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
           const [publicationChoosenId, setPublicationChoosenId] = useState("")
           const [publicationChoosenName, setPublicationChoosenName] = useState("")
           const [publicationChoosenaddresseeName, setPublicationChoosenaddresseeName] = useState("")
@@ -25,6 +26,7 @@ const PublicationsCard = ({pub}) => {
           const [loadComments, setLoadComments] = useState(false)
           const userContx = useContext(UserContext)
           const { data, loading } = useGetBackendQueries(`getOtherUsersPublications`); 
+
 
           useEffect(() => { 
             axios.get(`http://localhost:4000/viewPublicationComments/${pub._id}`)
@@ -40,6 +42,7 @@ const PublicationsCard = ({pub}) => {
               setPublicationChoosenId(x._id)
               setPublicationChoosenName(x.creatorName)
               setPublicationChoosenaddresseeName(x.creatorId)
+
            }
           
           const notificacionDeToast = () =>{ 
@@ -91,13 +94,15 @@ const PublicationsCard = ({pub}) => {
                  })
           }
 
-         
-      
+
+        const openCommentModal = (pub) => {
+          settingPubData(pub);
+          setIsCommentModalOpen(true);
+        };
       
 
   return (
     <div>
-       
          <div className="card w-[500px] bg-base-100 shadow-2xl shadow-side-left mt-4">
                                 <div className="card-body" key={pub._id}>
                                         <div className='flex'>
@@ -155,11 +160,13 @@ const PublicationsCard = ({pub}) => {
                                                           <FavoriteBorderIcon />
                                                         </button>  
 
-                                                        <div onClick={() => settingPubData(pub)}>
-                                                            <CommentModal publicationId={publicationChoosenId} creatorName={publicationChoosenName} creatorId={publicationChoosenaddresseeName} />
-                                                         </div>   
+                                                         <div>
+                                                           {isCommentModalOpen ? null : <button onClick={() => openCommentModal(pub)}><RateReviewIcon/></button>}
+                                                            {isCommentModalOpen && (
+                                                              <CommentModal  publicationId={publicationChoosenId} creatorName={publicationChoosenName}  creatorId={publicationChoosenaddresseeName}/>  )}
+                                                         </div> 
 
-                                                        <ShareModal publication={pub}/>
+                                                        <ShareModal publication={publicationChoosenId}/>
                                              </div>                                                     
                                 </div>
 

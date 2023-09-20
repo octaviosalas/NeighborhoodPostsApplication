@@ -2,14 +2,19 @@ import React from 'react'
 import { UserContext } from '../../store/usercontext';
 import { useContext } from 'react';
 import MarkUnreadChatAltIcon from '@mui/icons-material/MarkUnreadChatAlt';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import axios from 'axios';
 
 
 const CommentModal = ({publicationId, creatorName, creatorId}) => {
-   
-    const userContx = useContext(UserContext)
+
+     const userContx = useContext(UserContext)
      const [commentText, setCommentText] = useState("")
+
+
+     useEffect(() => { 
+      console.log(publicationId)
+     }, [])
 
     function openModalThree() {
         const modal = document.getElementById('my_modal_3');
@@ -49,10 +54,11 @@ const CommentModal = ({publicationId, creatorName, creatorId}) => {
 
   return (
     <div>
-         <button className="btn" onClick={() => openModalThree()}><MarkUnreadChatAltIcon/></button>
+         <button className="btn" onClick={() => openModalThree()} title="Leave a Comment"><MarkUnreadChatAltIcon/></button> 
+         
                 <dialog id="my_modal_3" className="modal">
                      <form method="dialog" className="modal-box">
-                                     <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                                     <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" >✕</button>
                                           <div className='flex items-center space-x-2'>
                                                 <div className="avatar">                                                     
                                                         <div className="w-8 rounded-full">
