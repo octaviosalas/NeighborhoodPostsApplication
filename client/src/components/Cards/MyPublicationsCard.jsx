@@ -51,7 +51,7 @@ const MyPublicationsCard = ({pub, comments}) => {
                                         </div>
                                      </div>                               
 
-                                        <div className='flex mt-2 '>
+                                        <div className='flex mt-2'>
                                               <div className="avatar">
                                                   <div className="w-8 rounded-full">
                                                       <img src={pub.creatorProfileImage} />
@@ -61,14 +61,16 @@ const MyPublicationsCard = ({pub, comments}) => {
                                               <div className=''>
                                                 <p className="text-black text-sm ml-2"> {pub.creatorName}</p>
                                               </div>
-                                           <Link to={`/publicationsSearched/${pub.typeOfPublication}`}>
-                                            <div className='justify-end '>
-                                                <p className='justify-end ml-8 whitespace-no-wrap text-sm  h-6  cursor-pointer hover:font-bold w-[70px]'>
-                                                    {pub.typeOfPublication}
-                                                </p>
+
+                                          
+                                            <div className='flex flex-grow justify-end '>
+                                              <Link to={`/publicationsSearched/${pub.typeOfPublication}`}>
+                                                  <p className=' ml-8 whitespace-no-wrap text-sm  h-6  cursor-pointer hover:font-bold w-[70px]'>
+                                                      {pub.typeOfPublication}
+                                                  </p>
+                                            </Link>  
                                             </div>
-                                            
-                                           </Link>  
+                                           
                                         </div>
                                         
                                         <div className=' ml-4'>

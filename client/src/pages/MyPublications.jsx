@@ -19,7 +19,7 @@ const MyPublications = () => {
     const [allMyPubs, setAllMyPubs] = useState([])
     const [publicationsComments, setPublicationsComments] = useState([])
     const { data: myData, loading: myLoading, noPublications: myNoPublications } = useGetBackendQueries(`getMyPublications/${userContx.userId}`);
-    const { data: otherData, loading: otherLoading, noPublications: otherNoPublications } = useGetBackendQueries(`getMySharedPublications/${userContx.userId}`); // Cambia 'otherRoute' por la ruta que desees.
+    const { data: otherData, loading: otherLoading, noPublications: otherNoPublications } = useGetBackendQueries(`getMySharedPublications/${userContx.userId}`); 
     
     useEffect(() => { 
       axios.get(`http://localhost:4000/getPublicationComments/${userContx.userId}`)

@@ -1,22 +1,24 @@
 import React from 'react'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { useState, useEffect, useM } from 'react';
-import { UserContext } from '../store/usercontext';
+import { UserContext } from '../../store/usercontext';
 import { useContext } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import {toast, ToastContainer} from "react-toastify"
-import useGetBackendQueries from '../Hooks/useGetBackendQueries';
-import CommentModal from './Modals/CommentModal';
-import ShareModal from './Modals/ShareModal';
-import CommentsPublications from './CommentsPublications';
-import LoadingPublications from '../Hooks/LoadingPublications';
+import useGetBackendQueries from '../../Hooks/useGetBackendQueries';
+import CommentModal from '../Modals/CommentModal';
+import ShareModal from '../Modals/ShareModal';
+import CommentsPublications from '../CommentsPublications';
+import LoadingPublications from '../../Hooks/LoadingPublications';
 import RateReviewIcon from '@mui/icons-material/RateReview';
 import ShareIcon from '@mui/icons-material/Share';
+import WhoSharedPub from '../Modals/WhoSharedPub';
 
 
 const PublicationsCard = ({pub}) => {
 
+          const [clickedPublicationId, setClickedPublicationId] = useState(null);
           const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
           const [isShareModalOpen, setIsShareModalOpen] = useState(false)
           const [pubChoosen, setPubChoosen] = useState([])
@@ -28,11 +30,16 @@ const PublicationsCard = ({pub}) => {
           const [publicationChoosenaddresseeName, setPublicationChoosenaddresseeName] = useState("")
           const [publicationComments, setPublicationComments] = useState([])
           const [quantityComments, setQuantityComments] = useState(0)
+          const [quantityTimesShared, setQuantityTimesShared] = useState(0)
           const [showComments, setShowComments] = useState(false)
           const [loadComments, setLoadComments] = useState(false)
           const userContx = useContext(UserContext)
-          const { data, loading } = useGetBackendQueries(`getOtherUsersPublications`); 
 
+        
+
+          const handlePublicationClick = (publicationId) => {
+            setClickedPublicationId(publicationId);
+          };
 
           useEffect(() => { 
             axios.get(`http://localhost:4000/viewPublicationComments/${pub._id}`)
@@ -42,6 +49,16 @@ const PublicationsCard = ({pub}) => {
                 .catch((err) => { 
                   console.log(err)
              })
+          }, [])
+
+          useEffect(() => { 
+            axios.get(`http://localhost:4000/getSharedNumber/${pub._id}`)
+            .then((res) => { 
+              setQuantityTimesShared(res.data.length)
+            })
+            .catch((err) => { 
+              console.log(err)
+         })
           }, [])
 
           const settingPubData = (x) => { 
@@ -123,7 +140,7 @@ const PublicationsCard = ({pub}) => {
     <div>
          <div className="card w-[500px] bg-base-100 shadow-2xl shadow-side-left mt-4">
                                 <div className="card-body" key={pub._id}>
-                                        <div className='flex'>
+                                        <div className='flex '>
                                                <div className="avatar">
                                                     <div className="w-8 rounded-full">
                                                         <img src={pub.creatorProfileImage}  />
@@ -131,22 +148,16 @@ const PublicationsCard = ({pub}) => {
                                                 </div>
 
                                                 <div className='flex flex-grow'>
-
                                                       <div className='flex justify-start'>
                                                         <p className="text-black text-sm ml-2 mt-[6px]">{pub.creatorName}</p>
                                                       </div>
 
-                                                      <div className='flex justify-end'>
+                                                      <div className='flex flex-grow justify-end'>
                                                         <Link to={`/publicationsSearched/${pub.typeOfPublication}`}> <p className='ml-8 whitespace-no-wrap text-sm  h-6  cursor-pointer hover:font-bold w-[70px]'>
                                                           {pub.typeOfPublication}
                                                         </p></Link>
-                                                    </div>
-                                                    
+                                                    </div>                                                    
                                                 </div>
-
-                                                
-
-                                                
                                          </div>
 
 
@@ -178,8 +189,10 @@ const PublicationsCard = ({pub}) => {
 
                                           <div className="h-6 bg-gray-100">
                                                 <div className='flex flex-grow justify-end'>
-                                                    <small className='text-xs text-gray-500 cursor-pointer underline' onClick={() => getPublicationComments(pub._id)}>{quantityComments} Comments  </small>
-                                                    <small className='text-xs text-gray-500 ml-2 cursor-pointer underline'>1 Shared</small>
+                                                    <small className='text-xs text-gray-500 cursor-pointer underline' onClick={() => getPublicationComments(pub._id)}>{quantityComments} Comments </small>
+                                                    <small className='text-xs text-gray-500 ml-2 cursor-pointer underline' onClick={() => handlePublicationClick(pub._id)} >
+                                                            <WhoSharedPub publicationId={clickedPublicationId} quantity={quantityTimesShared} />
+                                                     </small>
                                                 </div>
                                           </div>
 

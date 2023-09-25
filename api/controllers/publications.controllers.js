@@ -203,3 +203,14 @@ export const mySharedPublications = async (req, res) => {
                         console.log(err)
                      })
 }
+
+export const getSharedNumber = async (req, res) => { 
+    const {publicationId} = req.params
+    SharedPublications.find({publicationId: publicationId})
+                      .then((pubs) => { 
+                        res.json(pubs)
+                      })
+                      .catch((err) => { 
+                        console.log(err)
+                      })
+}

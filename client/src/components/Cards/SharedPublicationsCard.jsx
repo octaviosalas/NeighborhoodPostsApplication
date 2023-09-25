@@ -57,13 +57,13 @@ const SharedPublicationsCard = ({pub}) => {
                                                     </div>
                                                 </div>
 
-                                                <div className='flex flex-grow'>
+                                                <div className='flex'>
 
-                                                      <div className='flex justify-start'>
+                                                      <div className='flex flex-grow justify-start'>
                                                         <p className="text-black text-sm ml-2 mt-[6px]">{pub.publicationCreatorName}</p>
                                                       </div>
 
-                                                      <div className='flex justify-end'>
+                                                      <div className='flex flew-grow justify-end ml-24'>
                                                         <Link to={`/publicationsSearched/${pub.categoryPub}`}> <p className='ml-8 whitespace-no-wrap text-sm  h-6  cursor-pointer hover:font-bold w-[70px]'>
                                                           {pub.categoryPub}
                                                         </p></Link>

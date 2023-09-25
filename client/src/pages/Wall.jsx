@@ -4,7 +4,7 @@ import New from '../components/New'
 import { useEffect } from 'react'
 import axios from 'axios'
 import { useState } from 'react'
-import PublicationsCard from '../components/PublicationsCard'
+import PublicationsCard from '../components/Cards/PublicationsCard'
 import LoadingPublications from '../Hooks/LoadingPublications'
 import useGetBackendQueries from '../Hooks/useGetBackendQueries';
 

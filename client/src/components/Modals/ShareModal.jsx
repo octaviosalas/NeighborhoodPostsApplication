@@ -3,7 +3,7 @@ import ShareIcon from '@mui/icons-material/Share';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import axios from 'axios';
-import PublicationsCard from '../PublicationsCard';
+import PublicationsCard from '../Cards/PublicationsCard';
 import { UserContext } from '../../store/usercontext';
 import { useContext } from 'react';
 
