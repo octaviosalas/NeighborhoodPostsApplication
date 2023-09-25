@@ -4,13 +4,22 @@ import { useContext } from 'react';
 import MarkUnreadChatAltIcon from '@mui/icons-material/MarkUnreadChatAlt';
 import { useEffect, useState, useMemo } from 'react';
 import axios from 'axios';
-
+import {toast, ToastContainer} from "react-toastify"
 
 const CommentModal = ({publicationId, creatorName, creatorId}) => {
 
      const userContx = useContext(UserContext)
      const [commentText, setCommentText] = useState("")
 
+
+     const commentNotificationToast = () =>{ 
+      toast.success(`Your comment has been send`, {
+        position: toast.POSITION.TOP_CENTER,
+        style: {
+          color: "#082E58", 
+        },
+      });
+    }
 
      useEffect(() => { 
       console.log(publicationId)
@@ -45,6 +54,7 @@ const CommentModal = ({publicationId, creatorName, creatorId}) => {
         axios.post("http://localhost:4000/saveComment", newComment)
             .then((res) => { 
               console.log(res.data)
+              commentNotificationToast()
             })
             .catch((err) => { 
               console.log(err)
@@ -76,6 +86,7 @@ const CommentModal = ({publicationId, creatorName, creatorId}) => {
                          </div>
                      </form>
                  </dialog> 
+                 <ToastContainer/>
     </div>
   )
 }

@@ -1,5 +1,6 @@
 import Publications from "../models/publications.js"
 import Favorites from "../models/favorites.js"
+import SharedPublications from "../models/shared.js"
 
 
 export const savePublication = async (req, res) => { 
@@ -150,4 +151,55 @@ export const deleteMyPub = async (req, res) => {
    } catch (error) {
       console.log(error)
    }
+}
+
+export const sharePublication = async (req, res) => { 
+    const {publicationId} = req.params
+      const {sharer, sharerId, sharerProfileImage, publicationCreatorId, publicationCreatorName, 
+      publicationCreatorProfileImage, sharingDate, comment, pubDate, categoryPub, publicationImages, publicationDescription, publicationTitle, publicationUbication, publicationAddress} = req.body
+    console.log(req.body)
+    console.log(sharerProfileImage)
+
+    try {
+      const newPublicationToShareInMyWall = new SharedPublications({ 
+         sharer,
+         sharerId,
+         sharerProfileImage,
+         publicationCreatorId,
+         publicationCreatorName,
+         publicationCreatorProfileImage,
+         sharingDate,
+         comment,
+         publicationId,
+         publicationImages,
+         pubDate,
+         categoryPub,
+         publicationDescription,
+         publicationTitle,
+         publicationAddress,
+         publicationUbication
+
+       })
+       await newPublicationToShareInMyWall.save()
+                                          .then((saved) => { 
+                                             res.json({message: "The Publication was shared in your Wall", saved})
+                                          })
+                                          .catch((err) => { 
+                                             console.log(err)
+                                          })
+
+    } catch (error) {
+      console.log(error)
+    }
+}
+
+export const mySharedPublications = async (req, res) => { 
+   const {userId} = req.params
+   SharedPublications.find({sharerId: userId})
+                     .then((pubs) => { 
+                        res.json(pubs)
+                     })
+                     .catch((err) =>  {
+                        console.log(err)
+                     })
 }

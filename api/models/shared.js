@@ -30,6 +30,27 @@ const sharedSchema = mongoose.Schema( {
     },
     publicationId: { 
         type: String
+    },
+    publicationImages : { 
+        type: [String]
+    },
+    pubDate: { 
+        type: String
+    },
+    categoryPub: { 
+        type: String
+    },
+    publicationDescription: { 
+        type: String
+    },
+    publicationTitle: { 
+        type: String
+    },
+    publicationAddress: { 
+        type: String
+    },
+    publicationUbication: { 
+        type: String
     }
 
 

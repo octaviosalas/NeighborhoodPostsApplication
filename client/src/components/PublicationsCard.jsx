@@ -12,12 +12,18 @@ import ShareModal from './Modals/ShareModal';
 import CommentsPublications from './CommentsPublications';
 import LoadingPublications from '../Hooks/LoadingPublications';
 import RateReviewIcon from '@mui/icons-material/RateReview';
+import ShareIcon from '@mui/icons-material/Share';
 
 
 const PublicationsCard = ({pub}) => {
 
           const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
+          const [isShareModalOpen, setIsShareModalOpen] = useState(false)
+          const [pubChoosen, setPubChoosen] = useState([])
+          const [publicationChoosenFirstImage, setPublicationChoosenFirstImage] = useState("")
+          const [publicationChoosenSecondImage, setPublicationChoosenSecondImage] = useState("")
           const [publicationChoosenId, setPublicationChoosenId] = useState("")
+          const [publicationChoosenUserProfileImage, setPublicationChoosenUserProfileImage] = useState("")
           const [publicationChoosenName, setPublicationChoosenName] = useState("")
           const [publicationChoosenaddresseeName, setPublicationChoosenaddresseeName] = useState("")
           const [publicationComments, setPublicationComments] = useState([])
@@ -39,10 +45,14 @@ const PublicationsCard = ({pub}) => {
           }, [])
 
           const settingPubData = (x) => { 
+              setPubChoosen(x)
+              setPublicationChoosenFirstImage(x.publicationImages[0])
+              setPublicationChoosenSecondImage(x.publicationImages[1])
               setPublicationChoosenId(x._id)
               setPublicationChoosenName(x.creatorName)
               setPublicationChoosenaddresseeName(x.creatorId)
-
+              setPublicationChoosenUserProfileImage(x.creatorProfileImage)
+              
            }
           
           const notificacionDeToast = () =>{ 
@@ -94,12 +104,20 @@ const PublicationsCard = ({pub}) => {
                  })
           }
 
+          const closeModalShareNow  = () => { 
+            setIsShareModalOpen(false)
+          }
+
 
         const openCommentModal = (pub) => {
           settingPubData(pub);
           setIsCommentModalOpen(true);
         };
       
+        const openShareModal = (pub) => {
+          settingPubData(pub);
+          setIsShareModalOpen(true);
+        };
 
   return (
     <div>
@@ -112,13 +130,23 @@ const PublicationsCard = ({pub}) => {
                                                     </div>
                                                 </div>
 
-                                                <div className=''>
-                                                    <p className="text-black text-sm ml-2">{pub.creatorName}</p>
+                                                <div className='flex flex-grow'>
+
+                                                      <div className='flex justify-start'>
+                                                        <p className="text-black text-sm ml-2 mt-[6px]">{pub.creatorName}</p>
+                                                      </div>
+
+                                                      <div className='flex justify-end'>
+                                                        <Link to={`/publicationsSearched/${pub.typeOfPublication}`}> <p className='ml-8 whitespace-no-wrap text-sm  h-6  cursor-pointer hover:font-bold w-[70px]'>
+                                                          {pub.typeOfPublication}
+                                                        </p></Link>
+                                                    </div>
+                                                    
                                                 </div>
 
-                                                <Link to={`/publicationsSearched/${pub.typeOfPublication}`}> <p className='justify-end ml-8 whitespace-no-wrap text-sm  h-6  cursor-pointer hover:font-bold w-[70px]'>
-                                                    {pub.typeOfPublication}
-                                                  </p></Link>
+                                                
+
+                                                
                                          </div>
 
 
@@ -166,7 +194,22 @@ const PublicationsCard = ({pub}) => {
                                                               <CommentModal  publicationId={publicationChoosenId} creatorName={publicationChoosenName}  creatorId={publicationChoosenaddresseeName}/>  )}
                                                          </div> 
 
-                                                        <ShareModal publication={publicationChoosenId}/>
+                                                         <div>
+                                                           {isShareModalOpen ? null : <button onClick={() => openShareModal(pub)}><ShareIcon/></button>}
+                                                            {isShareModalOpen && (
+                                                              <ShareModal 
+                                                              pubChoosen={pubChoosen}
+                                                              publicationId={publicationChoosenId} 
+                                                              creatorName={publicationChoosenName}  
+                                                              creatorId={publicationChoosenaddresseeName}
+                                                              closeModalShare={closeModalShareNow}
+                                                              profileImage ={publicationChoosenUserProfileImage}
+                                                              firstImage= {publicationChoosenFirstImage}
+                                                              secondImage= {publicationChoosenSecondImage}
+                                                              /> 
+                                                              )}
+                                                         </div> 
+                                                    
                                              </div>                                                     
                                 </div>
 

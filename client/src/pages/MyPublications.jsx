@@ -3,13 +3,14 @@ import axios from "axios"
 import { useState, useEffect } from 'react'
 import { useContext } from 'react';
 import { UserContext } from '../store/usercontext';
-import MyPublicationsCard from '../components/MyPublicationsCard';
+import MyPublicationsCard from '../components/Cards/MyPublicationsCard';
 import { Link } from 'react-router-dom';
 import New from '../components/New';
 import puzzle from "../img/puzzle.png";
 import fon from "../img/imageFon.png"
 import useGetBackendQueries from "../Hooks/useGetBackendQueries"
 import LoadingPublications from "../Hooks/LoadingPublications"
+import SharedPublicationsCard from '../components/Cards/SharedPublicationsCard';
 
 
 const MyPublications = () => {
@@ -17,7 +18,8 @@ const MyPublications = () => {
     const userContx = useContext(UserContext)
     const [allMyPubs, setAllMyPubs] = useState([])
     const [publicationsComments, setPublicationsComments] = useState([])
-    const {data, loading, noPublications} = useGetBackendQueries(`getMyPublications/${userContx.userId}`)
+    const { data: myData, loading: myLoading, noPublications: myNoPublications } = useGetBackendQueries(`getMyPublications/${userContx.userId}`);
+    const { data: otherData, loading: otherLoading, noPublications: otherNoPublications } = useGetBackendQueries(`getMySharedPublications/${userContx.userId}`); // Cambia 'otherRoute' por la ruta que desees.
     
     useEffect(() => { 
       axios.get(`http://localhost:4000/getPublicationComments/${userContx.userId}`)
@@ -30,11 +32,15 @@ const MyPublications = () => {
               })
     }, [])
 
+    useEffect(() => { 
+        console.log(otherData)
+    }, [otherData])
+
    
 
   return (
     <div>  
-        {noPublications ? ( 
+        {myNoPublications ? ( 
                      <>
                            <div>
                                    <p><b>{userContx.userName}</b> , at the moment you dont have Publications </p> 
@@ -50,7 +56,7 @@ const MyPublications = () => {
                                    </div>
                           </div>  
                      </>
-          )  : loading ? ( 
+          )  : myLoading ? ( 
                          <LoadingPublications text={"Publications"}/>
                          )
                        : ( 
@@ -60,7 +66,8 @@ const MyPublications = () => {
                         </div> 
 
                         <div>
-                            {data.map((p) => <MyPublicationsCard pub={p} comments={publicationsComments}/>)}
+                            {myData.map((p) => <MyPublicationsCard pub={p} comments={publicationsComments}/>)}
+                            {otherData.map((p) => <SharedPublicationsCard pub={p} />)}
                         </div>
 
                         <div className='mt-12'>

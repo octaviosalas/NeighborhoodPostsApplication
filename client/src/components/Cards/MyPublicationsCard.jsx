@@ -8,7 +8,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import axios from "axios"
 import { Link } from 'react-router-dom';
 import { useContext } from "react";
-import { UserContext } from "../store/usercontext";
+import { UserContext } from "../../store/usercontext";
 import { useNavigate } from 'react-router-dom';
 
 
