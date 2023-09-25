@@ -39,6 +39,7 @@ const PublicationsCard = ({pub}) => {
 
           const handlePublicationClick = (publicationId) => {
             setClickedPublicationId(publicationId);
+            console.log("cambie a : ", publicationId)
           };
 
           useEffect(() => { 
@@ -191,7 +192,7 @@ const PublicationsCard = ({pub}) => {
                                                 <div className='flex flex-grow justify-end'>
                                                     <small className='text-xs text-gray-500 cursor-pointer underline' onClick={() => getPublicationComments(pub._id)}>{quantityComments} Comments </small>
                                                     <small className='text-xs text-gray-500 ml-2 cursor-pointer underline' onClick={() => handlePublicationClick(pub._id)} >
-                                                            <WhoSharedPub publicationId={clickedPublicationId} quantity={quantityTimesShared} />
+                                                            <WhoSharedPub publicationId={clickedPublicationId} quantity={quantityTimesShared} closeShared={handlePublicationClick}/>
                                                      </small>
                                                 </div>
                                           </div>

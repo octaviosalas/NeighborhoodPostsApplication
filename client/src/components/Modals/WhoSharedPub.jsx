@@ -3,21 +3,25 @@ import { useEffect, useState } from 'react';
 import useGetBackendQueries from '../../Hooks/useGetBackendQueries';
 import axios from "axios"
 
-const WhoSharedPub = ({quantity, publicationId}) => {
+const WhoSharedPub = ({quantity, publicationId, closeShared}) => {
         
     const [peopleWhoShared, setPeopleWhoShared] = useState([])
+    const [loadInfo, setLoadInfo] = useState(true)
   
         useEffect(() => { 
             axios.get(`http://localhost:4000/getSharedNumber/${publicationId}`)
             .then((res) => { 
                 setPeopleWhoShared(res.data)
                 console.log(res.data)
+                setTimeout(() => { 
+                     setLoadInfo(false)
+                }, 2500)
             })
             .catch((err) => { 
               console.log(err)
          })
           }, [publicationId])
-  
+
 
     function openModalThree() {
         const modal = document.getElementById('my_modal_3');
@@ -33,20 +37,21 @@ const WhoSharedPub = ({quantity, publicationId}) => {
                 
                         <dialog id="my_modal_3" className="modal">
                             <form method="dialog" className="modal-box">
-                                            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" >✕</button>
-                                                <div className='flex items-center space-x-2'>
-                                                        <div className="avatar">                                                     
-                                                               
-                                                            <p className='ml-2 text-gray-500 text-sm'>aaaa</p>
-                                                        </div>
-                                                </div>
-                                    <textarea className='mt-2 border border-gray-400 w-full rounded-xl text-sm text-center'
-                                            placeholder='Write your commnent..' />
-                                <div className='flex justify-end'>
-                                    <button className='bg-blue-950 border-none mt-2 h-9 w-18 text-sm text-white hover:text-black hover:bg-yellow-400' >
-                                        Send
-                                    </button>
-                                </div>
+                                            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onClick={closeShared(null)}>✕</button> 
+
+                                            {loadInfo ? <p>Cargando..</p> 
+                                                      :
+                                                      <div>
+                                                        {peopleWhoShared.map((p) => ( 
+                                                            <div className="flex flex-grow">
+                                                                <img className='rounded-xl h-8 w-8' src={p.sharerProfileImage}/>
+                                                                <small className='text-sm font-bold'>{p.sharer}</small>
+                                                            </div>
+                                                        ))}
+                                                        Aaaa
+                                                   </div>        
+                                                }
+                                              
                             </form>
                         </dialog> 
            
