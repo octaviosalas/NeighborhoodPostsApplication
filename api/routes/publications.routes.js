@@ -17,4 +17,5 @@ publicationsRoutes.get("/getMySharedPublications/:userId", mySharedPublications)
 publicationsRoutes.get(`/getSharedNumber/:publicationId`, getSharedNumber)
 
 
+
 export default publicationsRoutes;

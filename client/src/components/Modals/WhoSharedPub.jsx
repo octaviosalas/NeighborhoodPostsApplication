@@ -1,32 +1,57 @@
 import React from 'react'
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import useGetBackendQueries from '../../Hooks/useGetBackendQueries';
 import axios from "axios"
 
-const WhoSharedPub = ({quantity, publicationId, closeShared}) => {
+const WhoSharedPub = ({quantity, publicationId}) => {
         
-    const [peopleWhoShared, setPeopleWhoShared] = useState([])
-    const [loadInfo, setLoadInfo] = useState(true)
+     const [peopleWhoShared, setPeopleWhoShared] = useState([]);
+     const [loadInfo, setLoadInfo] = useState(true);
+
+  // Utiliza useRef para mantener vivo el valor de publicationId
+     const publicationIdRef = useRef(null);
+     const datosBackendRef = useRef(null)
+
+  useEffect(() => {
+    // Actualiza publicationIdRef.current cuando publicationId cambia
+    publicationIdRef.current = publicationId;
+  }, [publicationId]);
+
   
-        useEffect(() => { 
-            axios.get(`http://localhost:4000/getSharedNumber/${publicationId}`)
-            .then((res) => { 
-                setPeopleWhoShared(res.data)
-                console.log(res.data)
-                setTimeout(() => { 
-                     setLoadInfo(false)
-                }, 2500)
-            })
-            .catch((err) => { 
-              console.log(err)
-         })
-          }, [publicationId])
+  useEffect(() => {
+    // Actualiza publicationIdRef.current cuando publicationId cambia
+    datosBackendRef.current = peopleWhoShared;
+  }, [peopleWhoShared]);
+
+  useEffect(() => {
+    
+        axios.get(`http://localhost:4000/getSharedNumber/${publicationIdRef.current}`)
+             .then((res) => { 
+               
+                  console.log(res.data)
+                  setPeopleWhoShared(res.data);
+                  setTimeout(() => { 
+                     setLoadInfo(false);
+                  }, 5500)
+             })
+             .catch((err) => { 
+                console.log(err)
+             })
+
+    }, [publicationId]);
+
+  useEffect(() => {
+    console.log(peopleWhoShared);
+    console.log(datosBackendRef)
+  }, [peopleWhoShared]);
 
 
     function openModalFive() {
         const modal = document.getElementById('my_modal_5');
         modal.showModal();
       }
+
+     
 
 
 
@@ -37,20 +62,17 @@ const WhoSharedPub = ({quantity, publicationId, closeShared}) => {
                 
                         <dialog id="my_modal_5" className="modal">
                             <form method="dialog" className="modal-box">
-                                            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onClick={closeShared(null)}>✕</button> 
+                                            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onClick={() => {setLoadInfo(true)}}>✕</button> 
+                                             
+                                             <div>
 
-                                            {loadInfo ? <p>Cargando..</p> 
-                                                      :
-                                                      <div>
-                                                        {peopleWhoShared.map((p) => ( 
-                                                            <div className="flex flex-grow">
-                                                                <img className='rounded-xl h-8 w-8' src={p.sharerProfileImage}/>
-                                                                <small className='text-sm font-bold'>{p.sharer}</small>
-                                                            </div>
-                                                        ))}
-                                                        iii
-                                                   </div>        
-                                                }
+                                             {loadInfo ? (
+                                                        <p>...</p>
+                                                        ) : (
+                                                        <p>{datosBackendRef.current.length}</p>
+                                                        )}
+                                             </div>
+                                       
                                               
                             </form>
                         </dialog> 
