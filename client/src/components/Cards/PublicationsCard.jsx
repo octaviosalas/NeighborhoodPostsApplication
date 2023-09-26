@@ -130,6 +130,7 @@ const PublicationsCard = ({pub}) => {
         const openCommentModal = (pub) => {
           settingPubData(pub);
           setIsCommentModalOpen(true);
+          console.log("aa")
         };
       
         const openShareModal = (pub) => {
@@ -202,7 +203,7 @@ const PublicationsCard = ({pub}) => {
                                                           <FavoriteBorderIcon />
                                                         </button>  
 
-                                                         <div>
+                                                         <div className='border'>
                                                            {isCommentModalOpen ? null : <button onClick={() => openCommentModal(pub)}><RateReviewIcon/></button>}
                                                             {isCommentModalOpen && (
                                                               <CommentModal  publicationId={publicationChoosenId} creatorName={publicationChoosenName}  creatorId={publicationChoosenaddresseeName}/>  )}

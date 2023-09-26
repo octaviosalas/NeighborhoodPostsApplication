@@ -23,8 +23,8 @@ const WhoSharedPub = ({quantity, publicationId, closeShared}) => {
           }, [publicationId])
 
 
-    function openModalThree() {
-        const modal = document.getElementById('my_modal_3');
+    function openModalFive() {
+        const modal = document.getElementById('my_modal_5');
         modal.showModal();
       }
 
@@ -33,9 +33,9 @@ const WhoSharedPub = ({quantity, publicationId, closeShared}) => {
   return (
     <div>
          <div>
-         <small className='text-xs text-gray-500 ml-2 cursor-pointer underline' onClick={() => openModalThree()} >{quantity} Shared</small> 
+         <small className='text-xs text-gray-500 ml-2 cursor-pointer underline' onClick={() => openModalFive()} >{quantity} Shared</small> 
                 
-                        <dialog id="my_modal_3" className="modal">
+                        <dialog id="my_modal_5" className="modal">
                             <form method="dialog" className="modal-box">
                                             <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onClick={closeShared(null)}>✕</button> 
 
@@ -48,7 +48,7 @@ const WhoSharedPub = ({quantity, publicationId, closeShared}) => {
                                                                 <small className='text-sm font-bold'>{p.sharer}</small>
                                                             </div>
                                                         ))}
-                                                        Aaaa
+                                                        iii
                                                    </div>        
                                                 }
                                               
