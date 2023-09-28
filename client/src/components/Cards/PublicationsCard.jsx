@@ -21,6 +21,7 @@ const PublicationsCard = ({pub}) => {
           const [clickedPublicationId, setClickedPublicationId] = useState(null);
           const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
           const [isShareModalOpen, setIsShareModalOpen] = useState(false)
+          const [isWhoShareModalOpen, setIsWhoShareModalOpen] = useState(false)
           const [pubChoosen, setPubChoosen] = useState([])
           const [publicationChoosenFirstImage, setPublicationChoosenFirstImage] = useState("")
           const [publicationChoosenSecondImage, setPublicationChoosenSecondImage] = useState("")
@@ -127,6 +128,10 @@ const PublicationsCard = ({pub}) => {
             setIsShareModalOpen(false)
           }
 
+          const closeModalWhoShareNow  = () => { 
+            setIsWhoShareModalOpen(false)
+          }
+
 
         const openCommentModal = (pub) => {
           settingPubData(pub);
@@ -138,6 +143,11 @@ const PublicationsCard = ({pub}) => {
           settingPubData(pub);
           setIsShareModalOpen(true);
         };
+
+        const openWhoShareModal = (pub) => { 
+          settingPubData(pub)
+          setIsWhoShareModalOpen(true)
+        }
 
   return (
     <div>
@@ -193,8 +203,11 @@ const PublicationsCard = ({pub}) => {
                                           <div className="h-6 bg-gray-100">
                                                 <div className='flex flex-grow justify-end'>
                                                     <small className='text-xs text-gray-500 cursor-pointer underline' onClick={() => getPublicationComments(pub._id)}>{quantityComments} Comments </small>
-                                                    <small className='text-xs text-gray-500 ml-2 cursor-pointer underline' onClick={() => handlePublicationClick(pub._id)} >
-                                                            <WhoSharedPub publicationId={clickedPublicationId} quantity={quantityTimesShared} />
+                                                    <small className='text-xs text-gray-500 ml-2 cursor-pointer underline' >
+                                                      {isWhoShareModalOpen ? null : <small onClick={() => openWhoShareModal(pub)} className='text-xs'>{quantityTimesShared} shared</small>}
+                                                            {isWhoShareModalOpen && (
+                                                              <WhoSharedPub publicationId={publicationChoosenId} quantity={quantityTimesShared} close={closeModalWhoShareNow}/>  )} 
+                                                          
                                                      </small>
                                                 </div>
                                           </div>
@@ -203,6 +216,8 @@ const PublicationsCard = ({pub}) => {
                                                         <button className="btn border-none" onClick={() => saveInFavorites(pub)}>
                                                           <FavoriteBorderIcon />
                                                         </button>  
+
+                                                        {/* isWhoShareModalOpen*/}
 
                                                          <div className='border'>
                                                            {isCommentModalOpen ? null : <button onClick={() => openCommentModal(pub)}><RateReviewIcon/></button>}

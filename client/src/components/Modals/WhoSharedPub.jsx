@@ -3,61 +3,66 @@ import { useEffect, useState } from 'react';
 import useGetBackendQueries from '../../Hooks/useGetBackendQueries';
 import axios from "axios"
 
-const WhoSharedPub = ({quantity, publicationId}) => {
-    const [peopleWhoShared, setPeopleWhoShared] = useState([]);
-    const [loadInfo, setLoadInfo] = useState(true);
-    var infoShared;
-    var idSharedPeople;
-  
+const WhoSharedPub = ({ publicationId, close}) => {
+  const [peopleWhoShared, setPeopleWhoShared] = useState([]);
+
+  function openModalFive() {
+    const modal = document.getElementById('my_modal_5');
+    modal.showModal();
+  }
+
+
+  useEffect(() => { 
+    console.log("recibi: ", publicationId)
+  }, [publicationId])
+
+  useEffect(() => { 
+    console.log("cambie a: ", peopleWhoShared)
+  }, [peopleWhoShared])
+
+
+
+
+
+
     useEffect(() => {
       axios.get(`http://localhost:4000/getSharedNumber/${publicationId}`)
         .then((res) => {
           setPeopleWhoShared(res.data);
           console.log(res.data)
+          
         })
         .catch((err) => {
           console.log(err);
         });
     }, [publicationId]);
   
-    function openModalFive() {
-      const modal = document.getElementById('my_modal_5');
-      modal.showModal();
-    }
-    
-    useEffect(() => { 
-        console.log(peopleWhoShared.length)
-    }, [peopleWhoShared])
-
-    useEffect(() => { 
-        console.log(peopleWhoShared)
-        var infoShared = peopleWhoShared.length
-        var idSharedPeople = peopleWhoShared.map((p) => p._id)
-        console.log("Info Shared Length: ", infoShared)
-        console.log("Info Shared ID: ", idSharedPeople)
-    }, [peopleWhoShared])
-   
-   
-    
-
-    
 
   
-    return (
+
+
+
+
+     return (
       <div>
-        <small
-          className='text-xs text-gray-500 ml-2 cursor-pointer underline'
-          onClick={() => openModalFive()}
-        >
-          {quantity} Shared
-        </small>
+        <small className='text-xs text-gray-500 ml-2 cursor-pointer underline' onClick={() => openModalFive()} > View </small>
   
         <dialog id="my_modal_5" className="modal">
           <form method="dialog" className="modal-box">
-            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" >✕</button> 
-
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onClick={close}>✕</button> 
+ 
+             {peopleWhoShared.length !== 0 ? 
+               <div>
+                 {peopleWhoShared.map((p, index) => 
+                  <div key={index} className='flex mt-2'>
+                    <img src={p.sharerProfileImage} className='h-8 w-8 rounded-2xl'></img>
+                    <small className='text-sm font-bold ml-2'>{p.sharer}</small>
+                   </div>
+                  )}
+               </div> : <p>Yet, the Publications didnt Have Shared</p>
+              }
             
-         {idSharedPeople !== 0 ? <p>{idSharedPeople.map((c) => <p>{c}</p>)}</p> : <p>bbbb</p>} 
+        
        
           </form>
         </dialog>
