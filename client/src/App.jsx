@@ -12,6 +12,7 @@ import UserSearch from './pages/UserSearch'
 import MyProfile from './pages/MyProfile'
 import PublicationDetail from './components/PublicationDetail'
 import SearchWithMultipleFilters from './pages/SearchWithMultipleFilters'
+import OtherUsersProfile from './pages/OtherUsersProfile'
 
 function App() {
   
@@ -31,6 +32,7 @@ function App() {
                       <Route path="/myProfile/:userId" element={<MyProfile/>}></Route> 
                       <Route path="/publication/:publicationId" element={<PublicationDetail/>}></Route> 
                       <Route path="/searchWithFilters" element={<SearchWithMultipleFilters/>}></Route> 
+                      <Route path="/userProfile/:userId" element={<OtherUsersProfile/>}></Route> 
                     </Routes>
 
              </UserProvider>

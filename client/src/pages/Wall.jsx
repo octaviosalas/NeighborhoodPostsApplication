@@ -31,13 +31,13 @@ const Wall = () => {
                       :
 
            <div className='flex'>
-                  <div className='flex items-center justify-center h-screen mr-6'> 
+                  <div className='flex fixed items-center justify-center h-screen '> 
                     <WallFilters/>
                   </div>
                  <div >
                         
 
-                          <div className=''>                         
+                          <div className='ml-[260px]'>                         
                                   <div className=' p-6 '>
                                   {data.map((p) => <PublicationsCard pub={p}/>)}
                                   </div>

@@ -162,7 +162,7 @@ const PublicationsCard = ({pub}) => {
 
                                                 <div className='flex flex-grow'>
                                                       <div className='flex justify-start'>
-                                                        <p className="text-black text-sm ml-2 mt-[6px]">{pub.creatorName}</p>
+                                                      <Link to={`/userProfile/${pub.creatorId}`}><p className="text-black text-sm ml-2 mt-[6px]">{pub.creatorName}</p></Link>
                                                       </div>
 
                                                       <div className='flex flex-grow justify-end'>
@@ -200,13 +200,13 @@ const PublicationsCard = ({pub}) => {
                                          </div> 
 
 
-                                          <div className="h-6 bg-gray-100">
+                                          <div className="h-6">
                                                 <div className='flex flex-grow justify-end'>
                                                     <small className='text-xs text-gray-500 cursor-pointer underline' onClick={() => getPublicationComments(pub._id)}>{quantityComments} Comments </small>
                                                     <small className='text-xs text-gray-500 ml-2 cursor-pointer underline' >
                                                       {isWhoShareModalOpen ? null : <small onClick={() => openWhoShareModal(pub)} className='text-xs'>{quantityTimesShared} shared</small>}
                                                             {isWhoShareModalOpen && (
-                                                              <WhoSharedPub publicationId={publicationChoosenId} quantity={quantityTimesShared} close={closeModalWhoShareNow}/>  )} 
+                                                              <WhoSharedPub publicationId={publicationChoosenId}  close={closeModalWhoShareNow}/>  )} 
                                                           
                                                      </small>
                                                 </div>

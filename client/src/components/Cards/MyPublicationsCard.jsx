@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import MarkUnreadChatAltIcon from '@mui/icons-material/MarkUnreadChatAlt';
 import ShareIcon from '@mui/icons-material/Share';
 import EditIcon from '@mui/icons-material/Edit';
@@ -10,15 +10,37 @@ import { Link } from 'react-router-dom';
 import { useContext } from "react";
 import { UserContext } from "../../store/usercontext";
 import { useNavigate } from 'react-router-dom';
+import useGetBackendQueries from '../../Hooks/useGetBackendQueries';
+import LoadingPublications from '../../Hooks/LoadingPublications';
+import CommentsPublications from '../CommentsPublications';
 
 
 const MyPublicationsCard = ({pub, comments}) => {
     
    const userContx = useContext(UserContext)
    const navigate = useNavigate()
+   const [quantityCommentsPublication, setQuantityCommentsPublication] = useState(null)
    const [showComments, setShowComments] = useState(false)
-   console.log(pub)
+   const [loadComments, setLoadComments] = useState(false)
+   const [publicationComments, setPublicationComments] = useState([])
+   const { data: commentsData } = useGetBackendQueries(`viewPublicationComments/${pub._id}`);
 
+
+   const getPublicationComments = (idPublication) => { 
+    axios.get(`http://localhost:4000/viewPublicationComments/${idPublication}`)
+         .then((res) => { 
+          console.log(res.data)
+          setPublicationComments(res.data)
+          setLoadComments(true)
+          setTimeout(() => { 
+            setShowComments(true)
+              setLoadComments(false)
+          }, 2700)
+         })
+         .catch((err) => { 
+          console.log(err)
+         })
+  }
 
 
    const deleteMyPublication = (pub) => { 
@@ -30,6 +52,10 @@ const MyPublicationsCard = ({pub, comments}) => {
             console.log(err)
           })
    }
+
+   useEffect(() => { 
+      setQuantityCommentsPublication(commentsData.length)
+   }, [commentsData])
  
    const goToPublicationDetail = (pub) => { 
       navigate(`/publication/${pub._id}`)
@@ -100,7 +126,7 @@ const MyPublicationsCard = ({pub, comments}) => {
                                         <div className='flex justify-between'>
                                                                       
                                             <div className='flex'>
-                                              <button className="btn" onClick={() => setShowComments(true)}>1 <MarkUnreadChatAltIcon titleAccess='View Comments'/></button>
+                                              <button className="btn" onClick={() => getPublicationComments(pub._id)}>{quantityCommentsPublication} <MarkUnreadChatAltIcon titleAccess='View Comments'/></button>
                                             </div>
                                             <button className="btn">1 <ShareIcon/></button>
                                         </div>
@@ -115,61 +141,18 @@ const MyPublicationsCard = ({pub, comments}) => {
                                                 </div>
                                         </div> 
 
+                                        {loadComments ? (
+                                              <div>
+                                                <LoadingPublications text={"comments"}/>
+                                              </div>
+                                            ) : showComments ? (
+                                              <div>
+                                                <CommentsPublications comments={publicationComments} close={() => setShowComments(false)}/>
+                                              </div>
+                                            ) : null}
+
                                       
-                                        {showComments ? 
-                                          <> 
-                                           {comments.map((c) => { 
-                                                  console.log(comments)
-                                                  
-                                                  if(c.publicationId === pub._id) { 
-                                                
-                                                    return ( 
-                                                      <div className='flex flex-grow justify-start'>
-                                                        <div className=''>
-                                                          <form method="dialog" className=" border modal-box w-auto ">
-                                                            <button className="btn btn-sm btn-circle btn-ghost absolute  right-2 top-2" onClick={() => setShowComments(false)}>✕</button>
-                                                            <div className='flex items-center space-x-2'>
-                                                              <div className="avatar">                                                     
-                                                                <div className="w-8 rounded-full">
-                                                                  <img src={c.senderProfileImage}/>                                        
-                                                                </div>
-                                                                <p className='ml-2 text-gray-500 text-sm'><b className='mr-4'>{c.senderName}</b>   {c.commentDate}</p>
-                                                              </div>
-                                                            </div>
-                                                            <div className='text-sm   rounded-lg mt-4'>
-                                                              <p>{c.comment}</p>
-                                                            </div>
-                                                         
-                                                               <div className='flex justify-between mt-2'>
-                                                                          
-                                                                              <FavoriteBorderIcon style={{marginTop:"12px", cursor: "pointer"}}/>
-                                                                              <DeleteIcon style={{marginTop:"13px", marginLeft: "5px", cursor: "pointer"}}/>
-                                                                        
-
-                                                                          <div>
-                                                                              <button className='bg-blue-950 justify-end border-none mt-2 h-9 w-18 text-sm text-white hover:text-black hover:bg-yellow-400' onClick={() => goToPublicationDetail(pub)}>
-                                                                                   Answer
-                                                                              </button>
-                                                                          </div>   
-                                                               </div>  
-                                                               
-                                                              
-                                                                         
-                                                          </form>
-                                                         
-                                                        </div>
-                                                      </div>
-                                                    );
-                                                  }
-                                                })}
-
-                                             {comments.every((c) => c.publicationId !== pub._id) && (                                                 
-                                                     <small className='font-bold mt-4'>No comments yet</small>                                                                                                
-                                                )}          
-                                             </>
-                                          :
-                                          null
-                                         }
+                                        
 
 
                                    </div>

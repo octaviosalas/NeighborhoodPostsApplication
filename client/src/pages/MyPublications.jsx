@@ -13,9 +13,11 @@ import LoadingPublications from "../Hooks/LoadingPublications"
 import SharedPublicationsCard from '../components/Cards/SharedPublicationsCard';
 
 
+
 const MyPublications = () => {
     
     const userContx = useContext(UserContext)
+
     const [allMyPubs, setAllMyPubs] = useState([])
     const [publicationsComments, setPublicationsComments] = useState([])
     const { data: myData, loading: myLoading, noPublications: myNoPublications } = useGetBackendQueries(`getMyPublications/${userContx.userId}`);
