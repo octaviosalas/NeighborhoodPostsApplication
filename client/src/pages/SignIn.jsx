@@ -66,7 +66,7 @@ const SignIn = () => {
         
        <main className='flex justify-end  items-center  gap-10 sm:gap-0 my-6 mx-2 sm:mx-5 md:mx-10'>
         
-            <div className="basis-1/2 w-[50vh] flex flex-1 flex-col sm:gap-0 justify-center p-6 py-8 sm:py-6 lg:px-8 rounded-lg bg-gray-200 bg-opacity-60 shadow-md">
+            <div className="basis-1/2 w-[50vh] flex flex-1 flex-col sm:gap-0 justify-center p-6 py-8 sm:py-6 lg:px-8 rounded-lg  bg-opacity-60 shadow-md">
             <h2 className="text-center text-2xl font-PoppinsBold leading-9 tracking-tight text-pallete-black">
                Sign In
             </h2>

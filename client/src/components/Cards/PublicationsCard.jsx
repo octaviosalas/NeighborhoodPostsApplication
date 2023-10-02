@@ -1,265 +1,318 @@
-import React from 'react'
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import { useState, useEffect, useM } from 'react';
-import { UserContext } from '../../store/usercontext';
-import { useContext } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-import {toast, ToastContainer} from "react-toastify"
-import useGetBackendQueries from '../../Hooks/useGetBackendQueries';
-import CommentModal from '../Modals/CommentModal';
-import ShareModal from '../Modals/ShareModal';
-import CommentsPublications from '../CommentsPublications';
-import LoadingPublications from '../../Hooks/LoadingPublications';
-import RateReviewIcon from '@mui/icons-material/RateReview';
-import ShareIcon from '@mui/icons-material/Share';
-import WhoSharedPub from '../Modals/WhoSharedPub';
+import React from "react";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { useState, useEffect, useM } from "react";
+import { UserContext } from "../../store/usercontext";
+import { useContext } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import useGetBackendQueries from "../../Hooks/useGetBackendQueries";
+import CommentModal from "../Modals/CommentModal";
+import ShareModal from "../Modals/ShareModal";
+import CommentsPublications from "../CommentsPublications";
+import LoadingPublications from "../../Hooks/LoadingPublications";
+import RateReviewIcon from "@mui/icons-material/RateReview";
+import ShareIcon from "@mui/icons-material/Share";
+import WhoSharedPub from "../Modals/WhoSharedPub";
 
+const PublicationsCard = ({ pub }) => {
+  const [clickedPublicationId, setClickedPublicationId] = useState(null);
+  const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
+  const [isWhoShareModalOpen, setIsWhoShareModalOpen] = useState(false);
+  const [pubChoosen, setPubChoosen] = useState([]);
+  const [publicationChoosenFirstImage, setPublicationChoosenFirstImage] = useState("");
+  const [publicationChoosenSecondImage, setPublicationChoosenSecondImage] =useState("");
+  const [publicationChoosenId, setPublicationChoosenId] = useState("");
+  const [ publicationChoosenUserProfileImage,setPublicationChoosenUserProfileImage] = useState("");
+  const [publicationChoosenName, setPublicationChoosenName] = useState("");
+  const [publicationChoosenaddresseeName, setPublicationChoosenaddresseeName] =useState("");
+  const [publicationComments, setPublicationComments] = useState([]);
+  const [quantityComments, setQuantityComments] = useState(0);
+  const [quantityTimesShared, setQuantityTimesShared] = useState(0);
+  const [showComments, setShowComments] = useState(false);
+  const [loadComments, setLoadComments] = useState(false);
+  const userContx = useContext(UserContext);
 
-const PublicationsCard = ({pub}) => {
+  const handlePublicationClick = (publicationId) => {
+    setClickedPublicationId(publicationId);
+    console.log("cambie a : ", publicationId);
+  };
 
-          const [clickedPublicationId, setClickedPublicationId] = useState(null);
-          const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
-          const [isShareModalOpen, setIsShareModalOpen] = useState(false)
-          const [isWhoShareModalOpen, setIsWhoShareModalOpen] = useState(false)
-          const [pubChoosen, setPubChoosen] = useState([])
-          const [publicationChoosenFirstImage, setPublicationChoosenFirstImage] = useState("")
-          const [publicationChoosenSecondImage, setPublicationChoosenSecondImage] = useState("")
-          const [publicationChoosenId, setPublicationChoosenId] = useState("")
-          const [publicationChoosenUserProfileImage, setPublicationChoosenUserProfileImage] = useState("")
-          const [publicationChoosenName, setPublicationChoosenName] = useState("")
-          const [publicationChoosenaddresseeName, setPublicationChoosenaddresseeName] = useState("")
-          const [publicationComments, setPublicationComments] = useState([])
-          const [quantityComments, setQuantityComments] = useState(0)
-          const [quantityTimesShared, setQuantityTimesShared] = useState(0)
-          const [showComments, setShowComments] = useState(false)
-          const [loadComments, setLoadComments] = useState(false)
-          const userContx = useContext(UserContext)
+  useEffect(() => {
+    axios
+      .get(`http://localhost:4000/viewPublicationComments/${pub._id}`)
+      .then((res) => {
+        setQuantityComments(res.data.length);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
+  useEffect(() => {
+    axios
+      .get(`http://localhost:4000/getSharedNumber/${pub._id}`)
+      .then((res) => {
+        setQuantityTimesShared(res.data.length);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
-        
+  const settingPubData = (x) => {
+    setPubChoosen(x);
+    setPublicationChoosenFirstImage(x.publicationImages[0]);
+    setPublicationChoosenSecondImage(x.publicationImages[1]);
+    setPublicationChoosenId(x._id);
+    setPublicationChoosenName(x.creatorName);
+    setPublicationChoosenaddresseeName(x.creatorId);
+    setPublicationChoosenUserProfileImage(x.creatorProfileImage);
+  };
 
-          const handlePublicationClick = (publicationId) => {
-            setClickedPublicationId(publicationId);
-            console.log("cambie a : ", publicationId)
-          };
+  const notificacionDeToast = () => {
+    toast.success("Publication was saved in your Favorites", {
+      position: toast.POSITION.TOP_CENTER,
+      style: {
+        color: "#082E58",
+      },
+    });
+  };
 
-          useEffect(() => { 
-            axios.get(`http://localhost:4000/viewPublicationComments/${pub._id}`)
-                .then((res) => { 
-                  setQuantityComments(res.data.length)
-                })
-                .catch((err) => { 
-                  console.log(err)
-             })
-          }, [])
+  const saveInFavorites = (pub) => {
+    const newFavPub = {
+      publicationId: pub._id,
+      userId: userContx.userId,
+      publicationAddress: pub.address,
+      publicationCreatorName: pub.creatorName,
+      publicationImages: pub.publicationImages,
+      publicationTitle: pub.publicationTitle,
+      publicationDescription: pub.publicationDescription,
+      typeOfPublication: pub.typeOfPublication,
+      creatorLocation: pub.creatorLocation,
+      creatorProfileImage: pub.creatorProfileImage,
+      creatorName: pub.creatorName,
+    };
+    axios
+      .post("http://localhost:4000/markAsFavorite", newFavPub)
+      .then((res) => {
+        console.log(res.data);
+        notificacionDeToast();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-          useEffect(() => { 
-            axios.get(`http://localhost:4000/getSharedNumber/${pub._id}`)
-            .then((res) => { 
-              setQuantityTimesShared(res.data.length)
-            })
-            .catch((err) => { 
-              console.log(err)
-         })
-          }, [])
+  const getPublicationComments = (idPublication) => {
+    axios
+      .get(`http://localhost:4000/viewPublicationComments/${idPublication}`)
+      .then((res) => {
+        console.log(res.data);
+        setPublicationComments(res.data);
+        setLoadComments(true);
+        setTimeout(() => {
+          setShowComments(true);
+          setLoadComments(false);
+        }, 2700);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-          const settingPubData = (x) => { 
-              setPubChoosen(x)
-              setPublicationChoosenFirstImage(x.publicationImages[0])
-              setPublicationChoosenSecondImage(x.publicationImages[1])
-              setPublicationChoosenId(x._id)
-              setPublicationChoosenName(x.creatorName)
-              setPublicationChoosenaddresseeName(x.creatorId)
-              setPublicationChoosenUserProfileImage(x.creatorProfileImage)
-              
-           }
-          
-          const notificacionDeToast = () =>{ 
-            toast.success("Publication was saved in your Favorites", {
-              position: toast.POSITION.TOP_CENTER,
-              style: {
-                color: "#082E58", 
-              },
-            });
-          }
+  const closeModalShareNow = () => {
+    setIsShareModalOpen(false);
+  };
 
-          const saveInFavorites = (pub) => { 
-            const newFavPub = ({ 
-               publicationId: pub._id,
-               userId: userContx.userId,
-               publicationAddress: pub.address,
-               publicationCreatorName: pub.creatorName,
-               publicationImages: pub.publicationImages,
-               publicationTitle: pub.publicationTitle, 
-               publicationDescription: pub.publicationDescription,
-               typeOfPublication: pub.typeOfPublication,
-               creatorLocation: pub.creatorLocation, 
-               creatorProfileImage: pub.creatorProfileImage,
-               creatorName: pub.creatorName
-            })
-            axios.post("http://localhost:4000/markAsFavorite", newFavPub)
-                 .then((res) => { 
-                 console.log(res.data) 
-                    notificacionDeToast()                        
-                 })
-                 .catch((err) => { 
-                  console.log(err)
-                 })
-          }
+  const closeModalWhoShareNow = () => {
+    setIsWhoShareModalOpen(false);
+  };
 
-          const getPublicationComments = (idPublication) => { 
-            axios.get(`http://localhost:4000/viewPublicationComments/${idPublication}`)
-                 .then((res) => { 
-                  console.log(res.data)
-                  setPublicationComments(res.data)
-                  setLoadComments(true)
-                  setTimeout(() => { 
-                    setShowComments(true)
-                      setLoadComments(false)
-                  }, 2700)
-                 })
-                 .catch((err) => { 
-                  console.log(err)
-                 })
-          }
+  const openCommentModal = (pub) => {
+    settingPubData(pub);
+    setIsCommentModalOpen(true);
+    console.log("aa");
+  };
 
-          const closeModalShareNow  = () => { 
-            setIsShareModalOpen(false)
-          }
+  const openShareModal = (pub) => {
+    settingPubData(pub);
+    setIsShareModalOpen(true);
+  };
 
-          const closeModalWhoShareNow  = () => { 
-            setIsWhoShareModalOpen(false)
-          }
-
-
-        const openCommentModal = (pub) => {
-          settingPubData(pub);
-          setIsCommentModalOpen(true);
-          console.log("aa")
-        };
-      
-        const openShareModal = (pub) => {
-          settingPubData(pub);
-          setIsShareModalOpen(true);
-        };
-
-        const openWhoShareModal = (pub) => { 
-          settingPubData(pub)
-          setIsWhoShareModalOpen(true)
-        }
+  const openWhoShareModal = (pub) => {
+    settingPubData(pub);
+    setIsWhoShareModalOpen(true);
+  };
 
   return (
     <div>
-         <div className="card w-[500px] bg-base-100 shadow-2xl shadow-side-left mt-4">
-                                <div className="card-body" key={pub._id}>
-                                        <div className='flex '>
-                                               <div className="avatar">
-                                                    <div className="w-8 rounded-full">
-                                                        <img src={pub.creatorProfileImage}  />
-                                                    </div>
-                                                </div>
+      <div className="card  w-[500px] bg-base-100 shadow-2xl shadow-side-left mt-4">
+        <div className="card-body grid grid-cols-2" key={pub._id}>
+          <div className="grid col-span-2">
+            <div className="flex">
+              <div className="avatar">
+                <div className="w-8 rounded-full">
+                  <img src={pub.creatorProfileImage} />
+                </div>
+              </div>
 
-                                                <div className='flex flex-grow'>
-                                                      <div className='flex justify-start'>
-                                                      <Link to={`/userProfile/${pub.creatorId}`}><p className="text-black text-sm ml-2 mt-[6px]">{pub.creatorName}</p></Link>
-                                                      </div>
+              <div className="flex flex-grow">
+                <div className="flex justify-start">
+                  <Link to={`/userProfile/${pub.creatorId}`}>
+                    <p className="text-black text-sm ml-2 mt-[6px]">
+                      {pub.creatorName}
+                    </p>
+                  </Link>
+                </div>
 
-                                                      <div className='flex flex-grow justify-end'>
-                                                        <Link to={`/publicationsSearched/${pub.typeOfPublication}`}> <p className='ml-8 whitespace-no-wrap text-sm  h-6  cursor-pointer hover:font-bold w-[70px]'>
-                                                          {pub.typeOfPublication}
-                                                        </p></Link>
-                                                    </div>                                                    
-                                                </div>
-                                         </div>
+                <div className="flex flex-grow justify-end">
+                  <Link to={`/publicationsSearched/${pub.typeOfPublication}`}>
+                    {" "}
+                    <p className="ml-8 whitespace-no-wrap text-sm  h-6  cursor-pointer hover:font-bold w-[70px]">
+                      {pub.typeOfPublication}
+                    </p>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
 
+          <div className="grid col-span-2">
+            <div className=" ml-4">
+              <Link to={`/publication/${pub._id}`}>
+                {" "}
+                <p className="font-bold text-sm text-black">
+                  {pub.publicationTitle}
+                </p>
+              </Link>
+              <p className="justify-center  text-xs mr-4">
+                {pub.publicationDescription}
+              </p>
 
-                                         <div className=' ml-4'>
-                                                  <Link to={`/publication/${pub._id}`}> <p className='font-bold text-sm text-black'>{pub.publicationTitle}</p></Link> 
-                                                  <p className='justify-center  text-xs mr-4'>{pub.publicationDescription}</p>
+              <div className="mt-4 whitespace-no-wrap">
+                <p className=" text-xs mr-4  whitespace-no-wrap">
+                  {pub.creatorLocation}, {pub.address}
+                </p>
+                <p className=" text-xs mr-4 underline cursor-pointer">
+                  Ver en Mapa
+                </p>
+              </div>
+            </div>
+          </div>
 
-                                                  <div className='mt-4 whitespace-no-wrap'>
-                                                      <p className=' text-xs mr-4  whitespace-no-wrap'>{pub.creatorLocation}, {pub.address}</p>
-                                                      <p className=' text-xs mr-4 underline cursor-pointer'>Ver en Mapa</p>
-                                                  </div>
-                                         </div>
+          <div className="grid col-span-2">
+            <div className="flex justify-center mt-2">
+              <div className="avatar">
+                <div className="w-24 rounded">
+                  <img src={pub.publicationImages[0]} />
+                </div>
+              </div>
 
+              <div className="avatar">
+                <div className="w-24 rounded ml-4">
+                  <img src={pub.publicationImages[1]} />
+                </div>
+              </div>
+            </div>
+          </div>
 
-                                       <div className='flex justify-center mt-2'>
-                                               <div className="avatar">
-                                                    <div className="w-24 rounded">
-                                                        <img src={pub.publicationImages[0]} />
-                                                    </div>
-                                              </div>
+          <div className="grid col-start-2">
+            <div className="h-6">
+              <div className="flex flex-grow justify-end">
+                <small
+                  className="text-xs text-gray-500 cursor-pointer underline"
+                  onClick={() => getPublicationComments(pub._id)}
+                >
+                  {quantityComments} Comments{" "}
+                </small>
+                <small className="text-xs text-gray-500 ml-2 cursor-pointer underline">
+                  {isWhoShareModalOpen ? null : (
+                    <small
+                      onClick={() => openWhoShareModal(pub)}
+                      className="text-xs"
+                    >
+                      {quantityTimesShared} shared
+                    </small>
+                  )}
+                  {isWhoShareModalOpen && (
+                    <WhoSharedPub
+                      publicationId={publicationChoosenId}
+                      close={closeModalWhoShareNow}
+                    />
+                  )}
+                </small>
+              </div>
+            </div>
+          </div>
 
-                                               <div className="avatar">
-                                                    <div className="w-24 rounded ml-4">
-                                                        <img src={pub.publicationImages[1]} />
-                                                    </div>
-                                               </div>
-                                         </div> 
+          <div className="grid col-span-2">
+            <div className="flex justify-between ">
+              <button
+                className="btn border-none"
+                onClick={() => saveInFavorites(pub)}
+              >
+                <FavoriteBorderIcon />
+              </button>
 
+              {/* isWhoShareModalOpen*/}
 
-                                          <div className="h-6">
-                                                <div className='flex flex-grow justify-end'>
-                                                    <small className='text-xs text-gray-500 cursor-pointer underline' onClick={() => getPublicationComments(pub._id)}>{quantityComments} Comments </small>
-                                                    <small className='text-xs text-gray-500 ml-2 cursor-pointer underline' >
-                                                      {isWhoShareModalOpen ? null : <small onClick={() => openWhoShareModal(pub)} className='text-xs'>{quantityTimesShared} shared</small>}
-                                                            {isWhoShareModalOpen && (
-                                                              <WhoSharedPub publicationId={publicationChoosenId}  close={closeModalWhoShareNow}/>  )} 
-                                                          
-                                                     </small>
-                                                </div>
-                                          </div>
+              <div className="border">
+                {isCommentModalOpen ? null : (
+                  <button onClick={() => openCommentModal(pub)}>
+                    <RateReviewIcon />
+                  </button>
+                )}
+                {isCommentModalOpen && (
+                  <CommentModal
+                    publicationId={publicationChoosenId}
+                    creatorName={publicationChoosenName}
+                    creatorId={publicationChoosenaddresseeName}
+                  />
+                )}
+              </div>
 
-                                             <div className='flex justify-between '>
-                                                        <button className="btn border-none" onClick={() => saveInFavorites(pub)}>
-                                                          <FavoriteBorderIcon />
-                                                        </button>  
+              <div>
+                {isShareModalOpen ? null : (
+                  <button onClick={() => openShareModal(pub)}>
+                    <ShareIcon />
+                  </button>
+                )}
+                {isShareModalOpen && (
+                  <ShareModal
+                    pubChoosen={pubChoosen}
+                    publicationId={publicationChoosenId}
+                    creatorName={publicationChoosenName}
+                    creatorId={publicationChoosenaddresseeName}
+                    closeModalShare={closeModalShareNow}
+                    profileImage={publicationChoosenUserProfileImage}
+                    firstImage={publicationChoosenFirstImage}
+                    secondImage={publicationChoosenSecondImage}
+                  />
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
 
-                                                        {/* isWhoShareModalOpen*/}
+        {loadComments ? (
+          <div>
+            <LoadingPublications text={"comments"} />
+          </div>
+        ) : showComments ? (
+          <div>
+            <CommentsPublications
+              comments={publicationComments}
+              close={() => setShowComments(false)}
+            />
+          </div>
+        ) : null}
+      </div>
 
-                                                         <div className='border'>
-                                                           {isCommentModalOpen ? null : <button onClick={() => openCommentModal(pub)}><RateReviewIcon/></button>}
-                                                            {isCommentModalOpen && (
-                                                              <CommentModal  publicationId={publicationChoosenId} creatorName={publicationChoosenName}  creatorId={publicationChoosenaddresseeName}/>  )}
-                                                         </div> 
-
-                                                         <div>
-                                                           {isShareModalOpen ? null : <button onClick={() => openShareModal(pub)}><ShareIcon/></button>}
-                                                            {isShareModalOpen && (
-                                                              <ShareModal 
-                                                              pubChoosen={pubChoosen}
-                                                              publicationId={publicationChoosenId} 
-                                                              creatorName={publicationChoosenName}  
-                                                              creatorId={publicationChoosenaddresseeName}
-                                                              closeModalShare={closeModalShareNow}
-                                                              profileImage ={publicationChoosenUserProfileImage}
-                                                              firstImage= {publicationChoosenFirstImage}
-                                                              secondImage= {publicationChoosenSecondImage}
-                                                              /> 
-                                                              )}
-                                                         </div> 
-                                                    
-                                             </div>                                                     
-                                </div>
-
-                                           {loadComments ? (
-                                              <div>
-                                                <LoadingPublications text={"comments"}/>
-                                              </div>
-                                            ) : showComments ? (
-                                              <div>
-                                                <CommentsPublications comments={publicationComments} close={() => setShowComments(false)}/>
-                                              </div>
-                                            ) : null}
-                        </div>
-      
-
-      <ToastContainer/>
-        
+      <ToastContainer />
     </div>
-  )
-}
+  );
+};
 
-export default PublicationsCard
+export default PublicationsCard;

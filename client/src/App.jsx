@@ -13,6 +13,7 @@ import MyProfile from './pages/MyProfile'
 import PublicationDetail from './components/PublicationDetail'
 import SearchWithMultipleFilters from './pages/SearchWithMultipleFilters'
 import OtherUsersProfile from './pages/OtherUsersProfile'
+import Prueba from './components/Prueba'
 
 function App() {
   
@@ -33,6 +34,7 @@ function App() {
                       <Route path="/publication/:publicationId" element={<PublicationDetail/>}></Route> 
                       <Route path="/searchWithFilters" element={<SearchWithMultipleFilters/>}></Route> 
                       <Route path="/userProfile/:userId" element={<OtherUsersProfile/>}></Route> 
+                       <Route path="/prueba" element={<Prueba/>}></Route> 
                     </Routes>
 
              </UserProvider>

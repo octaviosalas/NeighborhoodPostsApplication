@@ -56,7 +56,7 @@ const WhoSharedPub = ({ publicationId, close}) => {
       <div>
         <small className='text-xs text-gray-500 ml-2 cursor-pointer underline' onClick={() => openModalFive()} > View Who Shared </small>
   
-        <dialog id="my_modal_5" className="modal">
+        <dialog id="my_modal_5" className="modal border border-black max-w: fit-content">
           <form method="dialog" className="modal-box">
             <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onClick={close}>✕</button> 
  
