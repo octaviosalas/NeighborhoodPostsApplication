@@ -14,6 +14,7 @@ import LoadingPublications from "../../Hooks/LoadingPublications";
 import RateReviewIcon from "@mui/icons-material/RateReview";
 import ShareIcon from "@mui/icons-material/Share";
 import WhoSharedPub from "../Modals/WhoSharedPub";
+import ImagesModal from "../Modals/ImagesModal";
 
 const PublicationsCard = ({ pub }) => {
 
@@ -147,6 +148,9 @@ const PublicationsCard = ({ pub }) => {
     settingPubData(pub);
     setIsWhoShareModalOpen(true);
   };
+  
+  
+ 
 
   return (
     <div className="mb-4">
@@ -181,7 +185,7 @@ const PublicationsCard = ({ pub }) => {
             </div>
           </div>
 
-          <div className="grid col-span-2">
+          <div className="grid col-span-2 max-w-fit-contain">
             <div className=" ml-4">
               <Link to={`/publication/${pub._id}`}>
                 {" "}
@@ -205,46 +209,55 @@ const PublicationsCard = ({ pub }) => {
           </div>
 
           <div className="grid col-span-2">
-            <div className="flex justify-center mt-2">
-              <div className="avatar">
-                <div className="w-24 rounded">
+            <div className="flex justify-center mt-2 max-w-fit-contain">
+            <div className="avatar flex">
+                <div className="w-24 h-full border rounded">
                   <img src={pub.publicationImages[0]} />
-                </div>
+                </div> 
               </div>
 
-              <div className="avatar">
-                <div className="w-24 rounded ml-4">
+              <div className="avatar flex">
+                <div className="w-24 border rounded ml-4">
                   <img src={pub.publicationImages[1]} />
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="grid col-start-2">
-            <div className="h-6">
-              <div className="flex flex-grow justify-end">
-                <small
-                  className="text-xs text-gray-500 cursor-pointer underline"
-                  onClick={() => getPublicationComments(pub._id)}
-                >
-                  {quantityComments} Comments{" "}
-                </small>
-                <small className="text-xs text-gray-500 ml-2 cursor-pointer underline">
-                  {isWhoShareModalOpen ? null : (
-                    <small
-                      onClick={() => openWhoShareModal(pub)}
-                      className="text-xs"
-                    >
-                      {quantityTimesShared} shared
-                    </small>
-                  )}
-                  {isWhoShareModalOpen && (
-                    <WhoSharedPub
-                      publicationId={publicationChoosenId}
-                      close={closeModalWhoShareNow}
-                    />
-                  )}
-                </small>
+         {/*     <small className="text-xs text-gray-500 cursor-pointer underline "> Photos</small> */}
+            
+          <div className="grid col-span-2 mt-2">
+             <div className="flex">
+                <div className="flex flex-justify-start">
+                   <ImagesModal firstImage={pub.publicationImages[0]} secondImage={pub.publicationImages[1]}/>
+                </div>
+             </div>
+             <div className="grid col-start-2">
+              <div className="h-6">
+                <div className="flex flex-grow justify-end">
+                  <small
+                    className="text-xs text-gray-500 cursor-pointer underline ml-4"
+                    onClick={() => getPublicationComments(pub._id)}
+                  >
+                    {quantityComments} Comments{" "}
+                  </small>
+                  <small className="text-xs text-gray-500 ml-2 cursor-pointer underline">
+                    {isWhoShareModalOpen ? null : (
+                      <small
+                        onClick={() => openWhoShareModal(pub)}
+                        className="text-xs"
+                      >
+                        {quantityTimesShared} shared
+                      </small>
+                    )}
+                    {isWhoShareModalOpen && (
+                      <WhoSharedPub
+                        publicationId={publicationChoosenId}
+                        close={closeModalWhoShareNow}
+                      />
+                    )}
+                  </small>
+                </div>
               </div>
             </div>
           </div>
