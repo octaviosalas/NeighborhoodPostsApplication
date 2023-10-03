@@ -14,6 +14,7 @@ import PublicationDetail from './components/PublicationDetail'
 import SearchWithMultipleFilters from './pages/SearchWithMultipleFilters'
 import OtherUsersProfile from './pages/OtherUsersProfile'
 import Prueba from './components/Prueba'
+import UserManualSearch from './pages/UserManualSearch'
 
 function App() {
   
@@ -34,7 +35,8 @@ function App() {
                       <Route path="/publication/:publicationId" element={<PublicationDetail/>}></Route> 
                       <Route path="/searchWithFilters" element={<SearchWithMultipleFilters/>}></Route> 
                       <Route path="/userProfile/:userId" element={<OtherUsersProfile/>}></Route> 
-                       <Route path="/prueba" element={<Prueba/>}></Route> 
+                      <Route path="/userManualSearch/:searchParam" element={<UserManualSearch/>}></Route> 
+                      <Route path="/prueba" element={<Prueba/>}></Route> 
                     </Routes>
 
              </UserProvider>

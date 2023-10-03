@@ -75,6 +75,7 @@ export const myPublications = async (req, res) => {
 
 export const getPublicationWithParam = async (req, res) => { 
    const { searchParam } = req.params;
+   console.log("RECIBI", req.params)
    const regex = new RegExp(searchParam, 'i');
  
    Publications.find({

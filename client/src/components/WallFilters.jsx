@@ -52,15 +52,8 @@ const WallFilters = () => {
           if(searchParam === "") { 
             notificacionDeToast()
           } else { 
-             axios.get(`http://localhost:4000/getPublicationsWithParams/${searchParam}`)
-                  .then((res) => { 
-                    console.log(res.data)
-                    setSearchResults(res.data)
-                  })
-                  .catch((err) => { 
-                    console.log(err)
-                  })
-                 } 
+                 navigate(`/userManualSearch/${searchParam}`)
+                  }
         } 
 
         const [filterState, setFilterState] = useState({

@@ -5,6 +5,7 @@ import axios from 'axios'
 import LoadingPublications from "../Hooks/LoadingPublications"
 import PublicationsSearched from '../components/PublicationsSearched'
 import WallFilters from '../components/WallFilters'
+import PublicationsCard from '../components/Cards/PublicationsCard'
 
 
 
@@ -58,24 +59,16 @@ const SearchWithMultipleFilters = () => {
                         : 
 
                         <> 
-                          <div className='flex'>
+                          <div className='flex flex-wrap gap-4 items-center place-content-around'>
 
-                                    <div className='flex items-center justify-center h-screen mr-6'> 
-                                        <WallFilters/>
-                                    </div>
+                          <div className='flex fixed 2xl:left-72 xl:left-20 lg:left-6 invisible  lg:visible '> 
+                             <WallFilters/>
+                          </div>
                  
                                 <div>
-                                    <div className="dropdown">
-                                            <label tabIndex={0} className="btn m-1">Ordenar Por</label>
-                                                <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-                                                    <li><a>Mas Recientes</a></li>
-                                                    <li><a>Mas Antiguos</a></li>
-                                                </ul>
-                                    </div>
-        
-                                   <div className='mt-12'>
-                                            <div className=' p-6 '>
-                                                <PublicationsSearched pubs={pubsFiltered}/>
+                                  <div className='mt-24 ml-auto flex'>
+                                      <div className=' justify-center items-center h-screen'>
+                                              {pubsFiltered.map((p) => <PublicationsCard pub={p}/>)}
                                             </div>
                                     </div>           
                                </div>
