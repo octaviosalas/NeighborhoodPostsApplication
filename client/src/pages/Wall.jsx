@@ -24,26 +24,23 @@ const Wall = () => {
   return (
     <div>
        <div className='aling justify-center'>
-           { load ? 
-
+          { load ? 
               <LoadingPublications text={"Publications"}/>
-
                       :
-
-           <div className='flex'>
-                  <div className='flex fixed items-center justify-center h-screen '> 
-                    <WallFilters/>
-                  </div>
-                 <div >
+                  <div className='flex'>
+                      <div className='flex fixed items-center justify-center h-screen '> 
+                         <WallFilters/>
+                      </div>
+                  <div >
                         
-
-                          <div className='ml-[260px]'>                         
-                                  <div className=' p-6 '>
-                                  {data.map((p) => <PublicationsCard pub={p}/>)}
-                                  </div>
-                          </div>           
-                 </div>
-             </div>}
+                  <div className='ml-[260px]'>                         
+                      <div className=' p-6 '>
+                        {data.map((p) => <PublicationsCard pub={p}/>)}
+                      </div>
+                  </div>           
+                </div>
+             </div>
+             }
         </div>
     </div>
   )

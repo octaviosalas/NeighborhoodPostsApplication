@@ -17,7 +17,7 @@ const PublicationsSearched = ({pubs}) => {
                     <div>
 
             {pubs.map((pub) => ( 
-            <div className="card w-96 bg-base-100 shadow-2xl shadow-side-left mt-4">
+            <div className="card w-[500px] bg-base-100 shadow-2xl shadow-side-left mt-4">
                                     <div className="card-body" key={pub._id}>
                                     
                                             <div className='flex'>

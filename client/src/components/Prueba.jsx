@@ -19,49 +19,16 @@ const Prueba = () => {
                 console.log(err)
             })
     }, [])
-  return (
-    <>  
-         {publicationData.map((p) => ( 
-            <div className='mt-6 border grid grid-cols-2 gap-12'>
-                <div className='bg-red-500 grid place-content-center text-white text-xl col-span-2'>
-                        <div className='flex gap-12'>
-                            <small className=' justify-start'>{p.creatorName}</small>
-                            <small className=' justify-end'>{p.typeOfPublication}</small>
-                        </div>
-                </div>
-                <div className='bg-red-500 grid place-content-center text-white text-xl col-span-2'>
-                     <div className='flex flex-col justify-center items-center'>
-                         <h2 className='text-xl font-bold'>{p.publiationTitle}</h2>
-                         <small className='text-lg'>{p.publicationDescription}</small>
-                         <small className='text-sm'>{p.creatorLocation}</small>
-                     </div>
-                </div>
-                 <div className='bg-red-500 grid place-content-center text-white text-xl col-span-2'>
-                    <div className='flex gap-4'>
-                        <img src={p.publicationImages[0]} className='h-12 w-12'/>
-                        <img src={p.publicationImages[1]} className='h12 w-12'/>
-                    </div>
-                </div>
-                 <div className='bg-red-500 grid place-content-center text-white text-xl col-start-2'>
-                       <div className='flex'>
-                          <small className=' flex justify-end text-xs text-black underline cursor-pointer'>1 Comment</small>
-                          <small className='flex justify-end text-xs text-black underline cursor-pointer'>1 Shared</small>
-                       </div>
-                 </div>
-                  <div className='bg-red-500 grid place-content-center text-white text-xl col-span-2'>
-                       <div className='flex flex-wrap gap-10'>
-                         <img src="https://www.iconpacks.net/icons/2/free-favourite-icon-2765-thumb.png" className="h-12 w-12"/>
-                         <img src="https://www.nicepng.com/png/detail/207-2078186_comment-free-icon-comment-free-download.png" className="h-12 w-12"/>
-                         <img src="https://cdn-icons-png.flaticon.com/512/1358/1358023.png" className="h-12 w-12"/>
-                       </div>
-                  </div>
-         </div>
-         ))}
-         
-   
-    </>
     
+  return (
+
+      <div className='grid grid-cols-2 border border-green-400 h-[200px] w-[200px]'>
+    
+              <div className='bg-red-400 text-white  items-center h-auto w-auto grid col-start-1 fixed left-4'>Filtros</div>
+              <div className='bg-yellow-400 text-white grid col-start-2  items-center h-auto w-auto '>Filtros</div>
+ 
+      </div>
   )
 }
 
-export default Prueba
+export default Prueba;
