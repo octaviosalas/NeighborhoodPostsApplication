@@ -15,6 +15,7 @@ import SearchWithMultipleFilters from './pages/SearchWithMultipleFilters'
 import OtherUsersProfile from './pages/OtherUsersProfile'
 import Prueba from './components/Prueba'
 import UserManualSearch from './pages/UserManualSearch'
+import ProfileDos from './pages/ProfileDos'
 
 function App() {
   
@@ -36,7 +37,7 @@ function App() {
                       <Route path="/searchWithFilters" element={<SearchWithMultipleFilters/>}></Route> 
                       <Route path="/userProfile/:userId" element={<OtherUsersProfile/>}></Route> 
                       <Route path="/userManualSearch/:searchParam" element={<UserManualSearch/>}></Route> 
-                      <Route path="/prueba" element={<Prueba/>}></Route> 
+                      <Route path="/prueba" element={<ProfileDos/>}></Route> 
                     </Routes>
 
              </UserProvider>

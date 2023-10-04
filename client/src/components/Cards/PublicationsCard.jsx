@@ -18,8 +18,6 @@ import ImagesModal from "../Modals/ImagesModal";
 
 const PublicationsCard = ({ pub }) => {
 
-  console.log(pub)
-  const [clickedPublicationId, setClickedPublicationId] = useState(null);
   const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const [isWhoShareModalOpen, setIsWhoShareModalOpen] = useState(false);
@@ -28,7 +26,7 @@ const PublicationsCard = ({ pub }) => {
   const [publicationChoosenFirstImage, setPublicationChoosenFirstImage] = useState("");
   const [publicationChoosenSecondImage, setPublicationChoosenSecondImage] =useState("");
   const [publicationChoosenId, setPublicationChoosenId] = useState("");
-  const [ publicationChoosenUserProfileImage,setPublicationChoosenUserProfileImage] = useState("");
+  const [publicationChoosenUserProfileImage,setPublicationChoosenUserProfileImage] = useState("");
   const [publicationChoosenName, setPublicationChoosenName] = useState("");
   const [publicationChoosenaddresseeName, setPublicationChoosenaddresseeName] =useState("");
   const [publicationComments, setPublicationComments] = useState([]);
@@ -38,10 +36,7 @@ const PublicationsCard = ({ pub }) => {
   const [loadComments, setLoadComments] = useState(false);
   const userContx = useContext(UserContext);
 
-  const handlePublicationClick = (publicationId) => {
-    setClickedPublicationId(publicationId);
-    console.log("cambie a : ", publicationId);
-  };
+
 
   useEffect(() => {
     axios
@@ -52,10 +47,7 @@ const PublicationsCard = ({ pub }) => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
-
-  useEffect(() => {
-    axios
+      axios
       .get(`http://localhost:4000/getSharedNumber/${pub._id}`)
       .then((res) => {
         setQuantityTimesShared(res.data.length);
@@ -64,6 +56,8 @@ const PublicationsCard = ({ pub }) => {
         console.log(err);
       });
   }, []);
+
+ 
 
   const settingPubData = (x) => {
     setPubChoosen(x);
