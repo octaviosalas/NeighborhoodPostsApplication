@@ -5,12 +5,14 @@ import { useContext } from 'react'
 import { UserContext } from '../../store/usercontext'
 import LoadingPublications from '../../Hooks/LoadingPublications'
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { Link } from 'react-router-dom'
 
 
 const Favorites = () => {
 
     const userContx = useContext(UserContext)
     const [allMyFavs, setAllMyFavs] = useState([])
+    const [noFavs, setNoFavs] = useState(false)
     const [loading, setLoading] = useState(false)
  
 
@@ -23,6 +25,9 @@ const Favorites = () => {
         axios.get(`http://localhost:4000/getMyFavs/${userContx.userId}`)
             .then((res) => { 
             console.log(res.data)
+            if(res.data.length === 0) { 
+                setNoFavs(true)
+            }
             setAllMyFavs(res.data)
             setTimeout(() => { 
                  setLoading(true)
@@ -38,21 +43,28 @@ const Favorites = () => {
   return (
       <>
     
-      <div className='border grid grid-cols-3'>
+      <div className='border grid grid-cols-3'> 
+    
             {loading ? (
+                noFavs ? (
+                    <div className="flex items-center justify-center w-screen">
+                        <div className='flex flex-col mt-4'>
+                            <small>At the moment, you dont have Publications saved in your Favs.</small>
+                            <Link to={"/wall"}><small className='text-gray-500 font-bold underline cursor-pointer mt-2'>Go to the Wall</small></Link>
+                        </div>
+                    </div>             
+                ) : (
                 allMyFavs.map((p) => (
-                    <div key={p.id} className='border grid col-span-1 m-2'> 
+           <div key={p.id} className='border grid col-span-1 m-2'>
+                    <div className='flex max-w-fit-contain'>
+                            <div className="flex justify-start items-center" style={{ flex: 1 }}>
+                                <img src={p.creatorProfileImage} className='h-12 w-12 rounded-full' />
+                                <small className='text-black text-xs ml-2'>{p.creatorName}</small>
+                            </div>
 
-                    <div className='flex  max-w-fit-contain'>
-
-                        <div className="flex justify-start items-center" style={{ flex: 1 }}>
-                            <img src={p.creatorProfileImage} className='h-12 w-12 rounded-full' />
-                            <small className='text-black text-xs ml-2'>{p.creatorName}</small>
-                        </div>
-                        <div className="flex justify-end items-center mr-2 " style={{ flex: 1 }}>
-                          <FavoriteBorderIcon/>
-                        </div>
-
+                            <div className="flex justify-end items-center mr-2 " style={{ flex: 1 }}>
+                               <FavoriteBorderIcon/>
+                            </div>
                     </div>
                             <div className=' max-w-fit-contain'>
                             <div className="grid col-span-1 max-w-fit-contain ml-4">
@@ -73,8 +85,9 @@ const Favorites = () => {
                             </div>
                     </div>
                 ))
+    )
             ) : (
-                <div className='flex items-center justify-center h-full'>
+                <div className='flex items-center justify-center w-screen'>
                     <LoadingPublications text={"Favorites"} />
                 </div>
                 )}
