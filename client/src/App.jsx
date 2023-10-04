@@ -15,7 +15,7 @@ import SearchWithMultipleFilters from './pages/SearchWithMultipleFilters'
 import OtherUsersProfile from './pages/OtherUsersProfile'
 import Prueba from './components/Prueba'
 import UserManualSearch from './pages/UserManualSearch'
-import ProfileDos from './pages/ProfileDos'
+import ProfileDos from './components/MyProfile/ProfileDos'
 
 function App() {
   
