@@ -18,11 +18,12 @@ import ImagesModal from "../Modals/ImagesModal";
 
 const PublicationsCard = ({ pub }) => {
 
-  
+  console.log(pub)
   const [clickedPublicationId, setClickedPublicationId] = useState(null);
   const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const [isWhoShareModalOpen, setIsWhoShareModalOpen] = useState(false);
+  const [isPhotosModalOpen, setIsPhotosModalOpen] = useState(false);
   const [pubChoosen, setPubChoosen] = useState([]);
   const [publicationChoosenFirstImage, setPublicationChoosenFirstImage] = useState("");
   const [publicationChoosenSecondImage, setPublicationChoosenSecondImage] =useState("");
@@ -148,6 +149,18 @@ const PublicationsCard = ({ pub }) => {
     settingPubData(pub);
     setIsWhoShareModalOpen(true);
   };
+
+  const showPhotosModal = (pub) => { 
+    setIsPhotosModalOpen(true)
+    settingPubData(pub)
+  }
+
+  const closeModalPhotos = () => { 
+    setIsPhotosModalOpen(false)
+ 
+  }
+
+ 
   
   
  
@@ -224,12 +237,17 @@ const PublicationsCard = ({ pub }) => {
             </div>
           </div>
 
-         {/*     <small className="text-xs text-gray-500 cursor-pointer underline "> Photos</small> */}
+         {/*     <small className="text-xs text-gray-500 cursor-pointer underline "> Photos</small> 
+          <ImagesModal firstImage={pub.publicationImages[0]} secondImage={pub.publicationImages[1]}/>
+         */}
             
           <div className="grid col-span-2 mt-2">
              <div className="flex">
                 <div className="flex flex-justify-start">
-                   <ImagesModal firstImage={pub.publicationImages[0]} secondImage={pub.publicationImages[1]}/>
+                {isPhotosModalOpen ?
+                 <ImagesModal firstImage={publicationChoosenFirstImage} secondImage={publicationChoosenSecondImage} close={closeModalPhotos}/> 
+                 : 
+                 <small className="text-xs text-gray-500 cursor-pointer underline" onClick={() => showPhotosModal(pub)}> +2 Photos</small>}
                 </div>
              </div>
              <div className="grid col-start-2">
