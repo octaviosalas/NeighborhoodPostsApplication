@@ -6,6 +6,7 @@ import ModalProfileChangePicture from './ModalProfileChangePicture'
 import { useState, useEffect } from 'react'
 import Privacity from './Privacity'
 import Favorites from './Favorites'
+import MyPubs from './MyPubs'
 
 
 
@@ -14,6 +15,7 @@ const ProfileDos = () => {
    const userCtx = useContext(UserContext)
    const [showFavorites, setShowFavorites] = useState(false)
    const [showPrivacity, setShowPrivacity] = useState(true)
+   const [showMyPubs, setShowMyPubs] = useState(false)
  
  
    const skipPrivacity = () => { 
@@ -23,18 +25,27 @@ const ProfileDos = () => {
    const showJustPrivacy = () => { 
     setShowFavorites(false)
     setShowPrivacity(true)
+    setShowMyPubs(false)
    }
 
    const showJustFavorites = () => { 
     setShowFavorites(true)
     setShowPrivacity(false)
+    setShowMyPubs(false)
+   }
+
+   const showJustMyPubs = () => { 
+    setShowFavorites(false)
+    setShowPrivacity(false)
+    setShowMyPubs(true)
    }
 
   return (
     <>
+
     <div className='mt-22'>
-        <div className='grid grid-cols-7 max-w-fit-contain sm:flex-col'>
-            <div className='grid border col-span-7  sm'>
+        <div className='grid grid-cols-7 max-w-fit-contain sm:flex-col bg-gray-100 mt-22'>
+            <div className='grid border col-span-7 sm'>
                  <div className='flex justify-end items-center'>
                     <img src={ConfigIcon} className='cursor-pointer mt-2 mr-2'></img>
                  </div>
@@ -48,17 +59,20 @@ const ProfileDos = () => {
                     </div>
                 </div>
                 <div className='flex items-centert justify-center content-between gap-0 lg:gap-6 mt-6 max-w-fit-contain ml-2 mr-2 mb-2 max-w-fit-contain'>
-                    <small className={`font-bold text-xxs ml-2 sm:ml-16 ${showPrivacity ? 'text-blue-600' : ''} underline cursor-pointer`} onClick={() => showJustPrivacy()}>Privacity </small>
-                    <small className={`font-bold text-xxs ml-2 sm:ml-16 ${showFavorites ? 'text-blue-600' : ''} underline cursor-pointer`} onClick={() => showJustFavorites()}>Favorites </small>
-                    <small className='font-bold text-xxs ml-2 sm:ml-16 underline cursor-pointer'>Publications </small>
+                    <small className={`font-bold text-xxs ml-2 sm:ml-16 ${showPrivacity ? 'text-gray-500 font-bold' : ''} underline cursor-pointer`} onClick={() => showJustPrivacy()}>Privacity </small>
+                    <small className={`font-bold text-xxs ml-2 sm:ml-16 ${showFavorites ? 'text-gray-500 font-bold' : ''} underline cursor-pointer`} onClick={() => showJustFavorites()}>Favorites </small>
+                    <small className={`font-bold text-xxs ml-2 sm:ml-16 ${showMyPubs ? 'text-gray-500 font-bold' : ''} underline cursor-pointer`} onClick={() => showJustMyPubs()}>Publications </small>
                     <small className='font-bold text-xxs ml-2 sm:ml-16 underline cursor-pointer'>Pagina Principal </small>
                     <small className='font-bold text-xxs ml-2 sm:ml-16 mr-2 sm:mr-8 underline cursor-pointer'>Pagina Principal </small>
                 </div>
             </div>
-        </div>    
+        </div>  
 
-      {showPrivacity ?  <Privacity close={() => skipPrivacity()}/> : null}
-      {showFavorites ?  <Favorites/> : null}
+        <div className='mt-2'>
+            {showPrivacity ?  <Privacity close={() => skipPrivacity()}/> : null}
+            {showFavorites ?  <Favorites/> : null}
+            {showMyPubs ?     <MyPubs/> : null}
+        </div>  
     </div>
     
  </>

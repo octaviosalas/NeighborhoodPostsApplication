@@ -43,7 +43,7 @@ const Favorites = () => {
   return (
       <>
     
-      <div className='border grid grid-cols-3'> 
+      <div className='border grid grid-cols-3 bg-gray-100 overflow-auto max-h-[350px]'> 
     
             {loading ? (
                 noFavs ? (
@@ -55,10 +55,10 @@ const Favorites = () => {
                     </div>             
                 ) : (
                 allMyFavs.map((p) => (
-           <div key={p.id} className='border grid col-span-1 m-2'>
+           <div key={p.id} className='border rounded-lg grid col-span-1 m-2 bg-white'>
                     <div className='flex max-w-fit-contain'>
                             <div className="flex justify-start items-center" style={{ flex: 1 }}>
-                                <img src={p.creatorProfileImage} className='h-12 w-12 rounded-full' />
+                                <img src={p.creatorProfileImage} className='h-12 w-12 m-2 rounded-full' />
                                 <small className='text-black text-xs ml-2'>{p.creatorName}</small>
                             </div>
 
@@ -79,7 +79,7 @@ const Favorites = () => {
                                          <img src={p.publicationImages[0]} className='h-16 w-16'/>
                                     </div>
                                     <div>
-                                        <small className='underline text-xs font-bold text-gray-400'>Delete</small>
+                                        <small className='underline text-xs font-bold text-gray-500 cursor-pointer hover:text-black'>Remove of Favs</small>
                                     </div>
                             </div>
                             </div>
