@@ -179,8 +179,7 @@ const ShareModal = ({
           </div>
         )}
       </dialog>
-      <ToastContainer />
-    </div>
+    </div>  
   );
 };
 
