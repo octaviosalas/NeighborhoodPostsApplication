@@ -101,7 +101,16 @@ export const login = async (req, res) => {
       res.send("The data entered is Incorrect. I cant find it")
         console.log(error)
    }
-
-   
-   
 }
+
+export const getUserData = async (req, res) => { 
+       const {userId} = req.params
+       console.log("El id que recibio es: ",  userId)
+       User.find({_id: userId})
+           .then((user) => { 
+            res.json(user)
+           })
+           .catch((err) => { 
+            console.log(err)
+           })
+   }

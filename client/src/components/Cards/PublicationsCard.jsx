@@ -164,9 +164,9 @@ const PublicationsCard = ({ pub }) => {
       <div className="card 2xl:w-[500px] xl:w-[480px] lg:w-[480px] md:max-w-fit-contain bg-base-100 shadow-2xl shadow-side-left mt-4">
         <div className="card-body grid grid-cols-2" key={pub._id}>
           <div className="grid col-span-2">
-            <div className="flex">
+            <div className="flex flex-col items-center justify-center xxs:flex xxs:flex-row">
               <div className="avatar">
-                <div className="w-8 rounded-full">
+                <div className="w-12 xxs:w-8 rounded-full">
                   <img src={pub.creatorProfileImage} />
                 </div>
               </div>
@@ -183,7 +183,7 @@ const PublicationsCard = ({ pub }) => {
                 <div className="flex flex-grow justify-end">
                   <Link to={`/publicationsSearched/${pub.typeOfPublication}`}>
                     {" "}
-                    <p className="ml-8 whitespace-no-wrap text-sm  h-6  cursor-pointer hover:font-bold w-[70px]">
+                    <p className="ml-8 mt-2 xxs:mt-0 whitespace-no-wrap text-sm  h-6  cursor-pointer hover:font-bold w-[70px]">
                       {pub.typeOfPublication}
                     </p>
                   </Link>
@@ -192,7 +192,7 @@ const PublicationsCard = ({ pub }) => {
             </div>
           </div>
 
-          <div className="grid col-span-2 max-w-fit-contain">
+          <div className="grid col-span-2 max-w-fit-contain mt-2">
             <div className=" ml-4">
               <Link to={`/publication/${pub._id}`}>
                 {" "}

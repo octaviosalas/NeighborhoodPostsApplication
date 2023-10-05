@@ -13,7 +13,7 @@ const CommentsPublications = ({comments, close}) => {
     })
 
   return (
-    <div>
+    <div className=''>
       <div className='flex flex-grow justify-end'>
           <small onClick={close} className='cursor-pointer'>X</small>
       </div>
