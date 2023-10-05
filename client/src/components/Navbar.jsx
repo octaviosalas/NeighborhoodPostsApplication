@@ -8,13 +8,8 @@ import { useContext } from 'react';
 import { UserContext } from '../store/usercontext';
 import { useNavigate } from 'react-router-dom';
 
+ const Navbar = () => {
 
-   
-
-  
-  const Navbar = () => {
-
-   
         const userContx = useContext(UserContext) 
         const navigate = useNavigate()
         const [showPic, setShowPic] = useState(true)
@@ -36,9 +31,6 @@ import { useNavigate } from 'react-router-dom';
         function classNames(...classes) {
           return classes.filter(Boolean).join(' ')
         }
-
-
-
 
     return (
       <Disclosure as="nav" className="">
@@ -69,7 +61,7 @@ import { useNavigate } from 'react-router-dom';
                           key={item.name}
                           href={item.href}
                           className={classNames(
-                            item.current ? 'bg-gray-900 text-white' : 'text-black hover:bg-gray-700 hover:text-white',
+                            item.current ? ' text-white' : 'text-black hover:bg-gray-700 hover:text-white',
                             'rounded-md px-3 py-2 text-sm font-medium'
                           )}
                           aria-current={item.current ? 'page' : undefined}
@@ -81,21 +73,35 @@ import { useNavigate } from 'react-router-dom';
                   </div>
                 </div>
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                  <button
-                    type="button"
-                    className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                  >
-                    <span className="absolute -inset-1.5" />
-                    <span className="sr-only">View notifications</span>
-                    <BellIcon className="h-6 w-6" aria-hidden="true" />
-                  </button>
-
+                    <div className="dropdown dropdown-end">
+                      <label tabIndex={0} className="btn btn-ghost btn-circle">
+                          <div className="indicator">
+                            <BellIcon className="h-6 w-6 text-black" aria-hidden="true" />
+                            <span className="badge badge-sm indicator-item">3</span>
+                          </div>
+                      </label>
+                    <div tabIndex={0} className="mt-3 z-[1] card card-compact dropdown-content w-auto bg-base-100 shadow-xl">
+                        <div className="card-body">
+                          <div className='flex flex-col items-center justify-center'>
+                            <small className='text-lg font-bold'>Notifications</small>
+                          </div>
+                             <div className='flex flex-col justify-start items-start'>
+                                     <small className='text-black text-xs whitespace-nowrap m-2 bg-gray-100 cursor-pointer'><b> 🚩 Richard Peniston has commented your Publication</b></small>
+                                     <small className='text-black text-xs whitespace-nowrap m-2 mt-4 bg-gray-100 cursor-pointer'><b> 🚩 Alexa Diamond shared your Publication</b></small>
+                                     <small className='text-black text-xs whitespace-nowrap m-2 mt-4 bg-gray-100 cursor-pointer'><b> 🚩 Emily Watson saved your Publication in Favorites</b></small>
+                             </div>
+                             <div className='flex flex-col justify-start items-start'>
+                                <small className='text-black underline cursor-pointer text-sm ml-2'>View old Notifications</small>
+                             </div>
+                        </div>
+                    </div>
+                 </div> 
+                 
                   {/* Profile dropdown */}
                   <Menu as="div" className="relative ml-3">
                     <div>
-                      <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                        <span className="absolute -inset-1.5" />
-                        <span className="sr-only">Open user menu</span>
+                      <Menu.Button className="relative flex rounded-full bg-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-400">
+                     
                         <img
                           className="h-8 w-8 rounded-full"
                           src={userContx.userProfileImage}
@@ -167,8 +173,5 @@ import { useNavigate } from 'react-router-dom';
     )
   }
 
-  export default Navbar
+ export default Navbar
 
-/*
-   <div className="navbar md:ml-10 xs:ml-10 sm:ml-10 xxs:ml-10 xxxs:ml-10 2xl:w-[100%] fixed top-0 left-0 right-0 main-content z-50">
-*/

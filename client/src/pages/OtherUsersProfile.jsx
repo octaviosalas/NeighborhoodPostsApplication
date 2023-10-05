@@ -61,7 +61,7 @@ const OtherUsersProfile = () => {
 
 
   return (
-        <div className='mt-22 xl:mt-12 overflow-auto max-h-[700px] border'>
+        <div className='mt-22 xl:mt-12 overflow-auto max-h-[300px] xl:max-h-[550px] 2xl:max-h-[750px] border'>
                {load ? (
                 <LoadingPublications text={`${userName} data..`}/>
                    ) : (
