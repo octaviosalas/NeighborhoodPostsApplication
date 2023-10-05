@@ -6,6 +6,7 @@ import useGetBackendQueries from '../Hooks/useGetBackendQueries';
 import PublicationsCard from '../components/Cards/PublicationsCard';
 import LoadingPublications from '../Hooks/LoadingPublications';
 import OtherUserInfo from '../components/OtherUserInfo';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 
 const OtherUsersProfile = () => {  
@@ -83,8 +84,9 @@ const OtherUsersProfile = () => {
 
                   {showUserPublications ?  
                       <div className='ml-2 md:ml-12 flex flex-col items-center justify-center'>
-                         <div className='flex justify-center items-center mt-24 md:mt-12'>
+                         <div className='flex flex-col justify-center items-center mt-24 md:mt-12'>
                               <small className='font-bold text-black text-sm'> Publications</small>
+                              <KeyboardArrowDownIcon/>
                          </div>
                         {userPublications.map((p) => <PublicationsCard pub={p} />)}
                       </div> 
@@ -93,8 +95,9 @@ const OtherUsersProfile = () => {
 
                     {showFavorites ? 
                         <div className='ml-2 md:ml-12 flex flex-col items-center justify-center'>
-                            <div className='flex justify-center items-center mt-24 md:mt-12'>
+                            <div className='flex flex-col  justify-center items-center mt-24 md:mt-12'>
                               <small className='font-bold text-black text-sm'> Favorites Publications</small>
+                              <KeyboardArrowDownIcon/>
                             </div>
                             {userPublicationsFavories.map((p) => <PublicationsCard pub={p} />)}
                         </div> 
