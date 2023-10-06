@@ -11,7 +11,7 @@ const UserContext = createContext({
     updateUserEmail: () => {},
     userQuantityNotifications: null,
     updateUserQuantityNotifications: () => {},
-    userNotifications: null,
+    userNotifications: [],
     updateUserNotifications: () => {}         
 });
 
@@ -78,9 +78,9 @@ const updateUserQuantityNotifications = (x) => {
   sessionStorage.setItem("userQuantityNotifications", x)
 }
 
-const updateUserNotifications = (x) => { 
-  setUserNotifications(x)
-  sessionStorage.setItem("userNotifications", x)
+const updateUserNotifications = ([]) => { 
+  setUserNotifications([])
+  sessionStorage.setItem("userNotifications", [])
 }
 
 /*const updateUserNotifications = (x) => { 

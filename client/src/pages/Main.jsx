@@ -22,6 +22,8 @@ export default function Landing() {
         }
       })
 
+      
+
       useEffect(() => { 
              axios.get(`http://localhost:4000/getMyNotifications/${userContx.userId}`)
                   .then((res) => { 
@@ -35,7 +37,6 @@ export default function Landing() {
                   setTimeout(() => {
                     console.log(userContx.userQuantityNotifications)
                     console.log(userContx.userNotifications)
-
                   }, 2000)
       }, [userContx.userId])
 

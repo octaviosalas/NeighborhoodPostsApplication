@@ -89,6 +89,7 @@ import { useNavigate } from 'react-router-dom';
                             <small className='text-lg font-bold'>Notifications</small>
                           </div>
                              <div className='flex flex-col justify-start items-start'>
+                              
                                      <small className='text-black text-xs whitespace-nowrap m-2 bg-gray-100 cursor-pointer'><b> 🚩 Richard Peniston has commented your Publication</b></small>
                                      <small className='text-black text-xs whitespace-nowrap m-2 mt-4 bg-gray-100 cursor-pointer'><b> 🚩 Alexa Diamond shared your Publication</b></small>
                                      <small className='text-black text-xs whitespace-nowrap m-2 mt-4 bg-gray-100 cursor-pointer'><b> 🚩 Emily Watson saved your Publication in Favorites</b></small>
