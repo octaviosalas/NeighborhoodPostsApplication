@@ -20,8 +20,8 @@ const CommentsPublications = ({comments, close}) => {
       {noComments ? <small className='font-bold'>This Publication has no comments yet</small> : 
        <>
           {comments.map((c) => ( 
-            <div className='mt-2'>
-                <div className='flex flex-grow'>
+            <div className='mt-6'>
+                <div className='flex flex-grow items-start justify-start'>
                     <div className='flex justify-start'>
                         <img src={c.senderProfileImage} className='h-8 w-8 rounded-xl'/>
                         <small className='text-xs font-bold text-black ml-2 mt-2'>{c.senderName}</small>

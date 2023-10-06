@@ -101,9 +101,8 @@ import { useNavigate } from 'react-router-dom';
                   <Menu as="div" className="relative ml-3">
                     <div>
                       <Menu.Button className="relative flex rounded-full bg-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-400">
-                     
                         <img
-                          className="h-8 w-8 rounded-full"
+                          className="h-12 w-12 rounded-full"
                           src={userContx.userProfileImage}
                           alt=""
                         /> 

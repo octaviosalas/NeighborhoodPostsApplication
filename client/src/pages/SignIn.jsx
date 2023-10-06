@@ -64,7 +64,7 @@ const SignIn = () => {
     <div className=' mt-12 justify-center'>
 
         
-       <main className='flex justify-end  items-center  gap-10 sm:gap-0 my-6 mx-2 sm:mx-5 md:mx-10'>
+       <main className='flex justify-end  items-center  gap-10 sm:gap-0 my-6 mx-2 sm:mx-5 md:mx-10 bg-gray-200 rounded-xl'>
         
             <div className="basis-1/2 w-[50vh] flex flex-1 flex-col sm:gap-0 justify-center p-6 py-8 sm:py-6 lg:px-8 rounded-lg  bg-opacity-60 shadow-md">
             <h2 className="text-center text-2xl font-PoppinsBold leading-9 tracking-tight text-pallete-black">
@@ -88,7 +88,7 @@ const SignIn = () => {
                       </div>
 
                       <div className='justify-center text-center mt-6 bg-blue-950 border rounded-xl'>
-                          <button className=' bg-blue-950 w-full border-none  text-white  hover:bg-gray-300 hover:text-black hover:font-bold' onClick={() => login()}>Iniciar Sesion</button>
+                          <button className=' bg-blue-950 w-full border-none  text-white  hover:bg-yellow-500 hover:text-black hover:font-bold' onClick={() => login()}>Iniciar Sesion</button>
                       </div>
 
                       <div className=' flex justify-center mt-4 bg-white border rounded-xl'>

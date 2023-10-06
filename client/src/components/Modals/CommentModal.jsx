@@ -11,7 +11,6 @@ const CommentModal = ({publicationId, creatorName, creatorId}) => {
      const userContx = useContext(UserContext)
      const [commentText, setCommentText] = useState("")
 
-
      const commentNotificationToast = () =>{ 
       toast.success(`Your comment has been send`, {
         position: toast.POSITION.TOP_CENTER,
@@ -20,10 +19,6 @@ const CommentModal = ({publicationId, creatorName, creatorId}) => {
         },
       });
     }
-
-     useEffect(() => { 
-      console.log(publicationId)
-     }, [])
 
     function openModalThree() {
         const modal = document.getElementById('my_modal_3');
@@ -59,6 +54,24 @@ const CommentModal = ({publicationId, creatorName, creatorId}) => {
             .catch((err) => { 
               console.log(err)
             })
+
+         const newNotification = ( { 
+           userId: userContx.userId,
+           typeOfNotification: "comment",
+           dateNotification: actualDate,
+           message: ` ${userContx.userName} Has commented your Publication`, 
+           isRead: false,
+           recipientId: creatorId, 
+           recipientName: creatorName, 
+           publicationId: publicationId , 
+         })
+         axios.post("http://localhost:4000/saveNewNotification", newNotification)   
+              .then((res) => { 
+                console.log(res.data)
+              }) 
+              .catch((err) => { 
+                console.log(err)
+              })
     }
 
 
