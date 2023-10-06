@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useContext } from "react";
 import { UserContext } from "../store/usercontext";
 import fon from "../img/imageFon.png"
+import axios from "axios";
 
 
 
@@ -22,8 +23,21 @@ export default function Landing() {
       })
 
       useEffect(() => { 
-               console.log(userContx.userId, userContx.userName, userContx.userProfileImage)
-      }, [userContx.userId, userContx.userName, userContx.userProfileImage])
+             axios.get(`http://localhost:4000/getMyNotifications/${userContx.userId}`)
+                  .then((res) => { 
+                    console.log(res.data) 
+                    userContx.updateUserQuantityNotifications(res.data.length)
+                    userContx.updateUserNotifications(res.data)
+                  })
+                  .catch((err) => { 
+                    console.log(err)
+                  })
+                  setTimeout(() => {
+                    console.log(userContx.userQuantityNotifications)
+                    console.log(userContx.userNotifications)
+
+                  }, 2000)
+      }, [userContx.userId])
 
   return (
     <main className="px-20 py-2">

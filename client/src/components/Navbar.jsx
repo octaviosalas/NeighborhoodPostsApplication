@@ -12,12 +12,13 @@ import { useNavigate } from 'react-router-dom';
 
         const userContx = useContext(UserContext) 
         const navigate = useNavigate()
-        const [showPic, setShowPic] = useState(true)
+        const [notificationsDetail, setNotificationsDetail] = useState([])
 
         const logOut = () => { 
           userContx.updateUser(null)
           userContx.updateUserProfileImage(null)
           userContx.updateUserName(null)
+          userContx.updateUserQuantityNotifications(null)
           setTimeout(() => { 
             navigate("/login")
           }, 500)
@@ -31,6 +32,8 @@ import { useNavigate } from 'react-router-dom';
         function classNames(...classes) {
           return classes.filter(Boolean).join(' ')
         }
+
+      
 
     return (
       <Disclosure as="nav" className="">
@@ -77,7 +80,7 @@ import { useNavigate } from 'react-router-dom';
                       <label tabIndex={0} className="btn btn-ghost btn-circle">
                           <div className="indicator">
                             <BellIcon className="h-6 w-6 text-black" aria-hidden="true" />
-                            <span className="badge badge-sm indicator-item">3</span>
+                          {userContx.userId === null ? null :  <span className="badge badge-sm indicator-item">{userContx.userQuantityNotifications}</span>}
                           </div>
                       </label>
                     <div tabIndex={0} className="mt-3 z-[1] card card-compact dropdown-content w-auto bg-base-100 shadow-xl">

@@ -8,7 +8,11 @@ const UserContext = createContext({
     userName: null,
     updateUserName: () => {},
     userEmail: null,
-    updateUserEmail: () => {}         
+    updateUserEmail: () => {},
+    userQuantityNotifications: null,
+    updateUserQuantityNotifications: () => {},
+    userNotifications: null,
+    updateUserNotifications: () => {}         
 });
 
 
@@ -32,12 +36,21 @@ const [userId, setUserId] = useState(() => {
  })
 
 
-
  const [userEmail, setUserEmail] = useState(() => { 
   const storedUserEmail = sessionStorage.getItem("userEmail")
   return storedUserEmail !== null ? storedUserEmail : null
  })
 
+ 
+ const [userQuantityNotifications, setUserQuantityNotifications] = useState(() => { 
+  const storedUserQuantityNotifications = sessionStorage.getItem("userQuantityNotifications")
+  return storedUserQuantityNotifications !== null ? storedUserQuantityNotifications : null
+ })
+
+const [userNotifications, setUserNotifications] = useState(() => { 
+  const storedUserNotifications =  sessionStorage.getItem("userNotifications")
+  return storedUserNotifications !== null ? storedUserNotifications : null
+})
 
 const updateUser = (id) => {                   
     setUserId(id)
@@ -60,6 +73,22 @@ const updateUserEmail = (x) => {
   sessionStorage.setItem("userEmail", x)
 }
 
+const updateUserQuantityNotifications = (x) => { 
+  setUserQuantityNotifications(x)
+  sessionStorage.setItem("userQuantityNotifications", x)
+}
+
+const updateUserNotifications = (x) => { 
+  setUserNotifications(x)
+  sessionStorage.setItem("userNotifications", x)
+}
+
+/*const updateUserNotifications = (x) => { 
+  const info = JSON.stringify(x)
+  setUserNotifications(info)
+  sessionStorage.setItem("userNotifications", info)
+}*/
+
 useEffect(() => {
     const handleStorageChange = (event) => {    
       if (event.key === 'userId') {            
@@ -70,6 +99,10 @@ useEffect(() => {
         setUserName(event.newValue);
       } else if (event.key === "userEmail") { 
         setUserEmail(event.newValue)
+      } else if (event.key === "userQuantityNotifications") { 
+        setUserQuantityNotifications(event.newValue)
+      } else if (event.key === "userNotifications") { 
+        setUserNotifications(event.newValue)
       }
     };
     window.addEventListener('storage', handleStorageChange); 
@@ -79,7 +112,9 @@ useEffect(() => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ userId, updateUser, userProfileImage, updateUserProfileImage, userName, updateUserName, userEmail, updateUserEmail }}>
+    <UserContext.Provider value={{ userId, updateUser, userProfileImage, updateUserProfileImage, 
+     userName, updateUserName, userEmail, updateUserEmail,
+      userQuantityNotifications, updateUserQuantityNotifications, userNotifications, updateUserNotifications }}>
       {children}
     </UserContext.Provider>
   );
