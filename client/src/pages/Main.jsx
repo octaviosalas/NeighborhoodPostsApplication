@@ -25,21 +25,16 @@ export default function Landing() {
       
 
       useEffect(() => { 
-             axios.get(`http://localhost:4000/getMyNotifications/${userContx.userId}`)
-                  .then((res) => { 
-                    console.log(res.data) 
-                    userContx.updateUserQuantityNotifications(res.data.length)
-                    const notifications = res.data;
-                    const newNotificationsArray = []; 
-                    notifications.forEach(objeto => {
-                      newNotificationsArray.push(objeto);
-                    });
-                    userContx.updateUserNotifications(newNotificationsArray);
-                                })
-                                .catch((err) => { 
-                                  console.log(err)
-                                })
-                    }, [userContx.userId])
+        axios.get(`http://localhost:4000/getMyNotifications/${userContx.userId}`)
+          .then((res) => { 
+            console.log(res.data) 
+            userContx.updateUserQuantityNotifications(res.data.length);
+            userContx.updateUserNotifications(res.data); // Actualiza el contexto con los datos directamente
+          })
+          .catch((err) => { 
+            console.log(err);
+          });
+      }, [userContx.userId]);
 
 
   useEffect(() => { 

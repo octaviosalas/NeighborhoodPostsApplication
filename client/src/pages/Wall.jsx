@@ -8,17 +8,24 @@ import PublicationsCard from '../components/Cards/PublicationsCard'
 import LoadingPublications from '../Hooks/LoadingPublications'
 import useGetBackendQueries from '../Hooks/useGetBackendQueries';
 import FiltersModal from '../components/Modals/FiltersModal'
-
+import { useContext } from 'react'
+import { UserContext } from '../store/usercontext'
 
 const Wall = () => {
 
   const [load, setLoad] = useState(true)
   const { data, loading } = useGetBackendQueries(`getOtherUsersPublications`); 
+  const userCtx = useContext(UserContext)
 
   useEffect(() => { 
      setTimeout(() => { 
          setLoad(false)
      }, 1500)
+  }, [])
+
+  useEffect(() => { 
+    console.log(userCtx.userNotifications)
+    console.log(userCtx.userQuantityNotifications)
   }, [])
 
   return (
