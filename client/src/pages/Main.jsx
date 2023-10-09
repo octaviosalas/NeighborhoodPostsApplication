@@ -23,25 +23,6 @@ export default function Landing() {
       })
 
       
-
-      useEffect(() => { 
-        axios.get(`http://localhost:4000/getMyNotifications/${userContx.userId}`)
-          .then((res) => { 
-            console.log(res.data) 
-            userContx.updateUserQuantityNotifications(res.data.length);
-            userContx.updateUserNotifications(res.data); // Actualiza el contexto con los datos directamente
-          })
-          .catch((err) => { 
-            console.log(err);
-          });
-      }, [userContx.userId]);
-
-
-  useEffect(() => { 
-    console.log(userContx.userNotifications)
-    console.log(userContx.userQuantityNotifications)
-  }, [userContx.userNotifications])
-
   return (
     <main className="px-20 py-2">
       <div

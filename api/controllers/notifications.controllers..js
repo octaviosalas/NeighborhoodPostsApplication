@@ -47,3 +47,30 @@ export const searchingNotifications = async (req, res) => {
                     console.log(err)
                   })
 }
+
+export const markAsRead = async (req, res) => {
+  try {
+    const { notificationId } = req.params;
+
+    const updatedNotification = await Notifications.findOneAndUpdate(
+      { _id: notificationId },
+      { isRead: true },
+      { new: true } 
+    )
+
+    if (!updatedNotification) {
+      return res.status(404).json({ message: "Notificación no encontrada"});
+    }
+
+    res.status(200).json(updatedNotification);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error interno del servidor" });
+  }
+};
+
+
+
+
+
+

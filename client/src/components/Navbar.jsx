@@ -13,8 +13,22 @@ import axios from "axios"
 
         const userContx = useContext(UserContext) 
         const navigate = useNavigate()
-        const [notificationsDetail, setNotificationsDetail] = useState([])
-        const [noNotifications, setNoNotifications] = useState(false)
+        const [showOldNotifications, setShowOldNotifications] = useState(false)
+ 
+
+        useEffect(() => { 
+          axios.get(`http://localhost:4000/getMyNotifications/${userContx.userId}`)
+            .then((res) => { 
+                console.log(res.data)
+                const allNotifications = res.data
+                const unreadNotifications = allNotifications.filter(notis => notis.isRead === false)
+                userContx.updateUserQuantityNotifications(unreadNotifications.length);
+                userContx.updateUserNotifications(res.data); 
+            })
+            .catch((err) => { 
+              console.log(err);
+            })
+        }, [userContx.userId]);
 
         const logOut = () => { 
           userContx.updateUser(null)
@@ -27,37 +41,26 @@ import axios from "axios"
           }, 500)
         }
 
-        const navigation = [
-          { name: 'Wall', href: '/wall', current: false },
-          { name: 'My Publications', href: `/myPublications/${userContx.userId}`, current: false }
-        ]
-    
-        function classNames(...classes) {
-          return classes.filter(Boolean).join(' ')
+       
+        const viewNotification = (x, y) => { 
+          axios.put(`http://localhost:4000/markAsRead/${y}`)
+               .then((res) => { 
+                console.log(res.data)
+               })
+               .catch((err) => { 
+                console.log(err)
+               })
+          navigate(`/publication/${x}`)
         }
-
-        useEffect(() => { 
-          axios.get(`http://localhost:4000/getMyNotifications/${userContx.userId}`)
-            .then((res) => { 
-              if(res.data.length !== 0) { 
-                console.log(res.data) 
-                userContx.updateUserQuantityNotifications(res.data.length);
-                userContx.updateUserNotifications(res.data); // Actualiza el contexto con los datos directamente
-              } else { 
-                setNoNotifications(true)
-              }
-            })
-            .catch((err) => { 
-              console.log(err);
-            });
-        }, [userContx.userId]);
-  
-  
-    useEffect(() => { 
-      console.log(userContx.userNotifications)
-      console.log(userContx.userQuantityNotifications)
-    }, [userContx.userNotifications])
      
+    const navigation = [
+      { name: 'Wall', href: '/wall', current: false },
+      { name: 'My Publications', href: `/myPublications/${userContx.userId}`, current: false }
+    ]
+
+    function classNames(...classes) {
+      return classes.filter(Boolean).join(' ')
+    }
 
       
 
@@ -81,7 +84,7 @@ import axios from "axios"
                 </div>
                 <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                   <div className="flex flex-shrink-0 items-center">
-                    <Link to={"/"}><p className='text-yellow-500' >Nei United.</p></Link> 
+                    <Link to={"/"}><p className='text-yellow-500 invisible xxxs:visible' >Nei United.</p></Link> 
                   </div>
                   <div className="hidden sm:ml-6 sm:block">
                     <div className="flex space-x-4">
@@ -109,17 +112,17 @@ import axios from "axios"
                           {userContx.userId === null ? null :  <span className="badge badge-sm indicator-item">{userContx.userQuantityNotifications}</span>}
                           </div>
                       </label>
-                    <div tabIndex={0} className="mt-3 z-[1] card card-compact dropdown-content w-auto bg-base-100 shadow-xl">
+                    <div tabIndex={0} className="mt-3 z-[1] card card-compact dropdown-content w-auto max-w-fit-contain shadow-xl bg-gray-100">
                         <div className="card-body">
                           <div className='flex flex-col items-center justify-center'>
                             <small className='text-lg font-bold'>Notifications</small>
                           </div>
                              <div className='flex flex-col justify-start items-start'>
                              {Array.isArray(userContx.userNotifications) ? (
-                                    userContx.userNotifications.map((n) => ( 
+                                    userContx.userNotifications.filter((n) => !n.isRead).map((n, index) => ( 
                                       <div className='flex flex-col items-center justify-center'>
-                                          <div className='bg-gray-100 w-full mt-4'>
-                                             <small onClick={() => console.log(n.publicationId)} key={n._id} className="text-xs  whitespace-no-wrap font-bold cursor-pointer">{n.message}</small>
+                                          <div className='bg-gray-100 w-full mt-4 hover:underline'>
+                                             <small onClick={() => viewNotification(n.publicationId, n._id)} key={n._id} className="text-xs font-bold cursor-pointer">{n.message}</small>
                                           </div>                                     
                                       </div>
                                     ))
@@ -130,8 +133,27 @@ import axios from "axios"
                                   )}
                              </div>
                              
-                             <div className='flex flex-col justify-start items-start'>
-                                <small className='text-black underline cursor-pointer text-sm ml-2'>View old Notifications</small>
+                             <div className='flex flex-col justify-center items-center'>
+                                <small className='text-black underline cursor-pointer text-sm ml-2' style={{ whiteSpace: 'nowrap' }} onClick={() => setShowOldNotifications(true)}>View old Notifications</small> 
+
+                               {showOldNotifications ? 
+                                  <div className='flex flex-col items-center justify-center'>
+                                      {Array.isArray(userContx.userNotifications) ? (
+                                          userContx.userNotifications.filter((n) => n.isRead).map((n, index) => ( 
+                                            <div className='flex flex-col items-center justify-center'>
+                                                <div className='bg-gray-100 w-full mt-4 hover:underline'>
+                                                  <small onClick={() => viewNotification(n.publicationId, n._id)} key={n._id} className="text-xs font-bold cursor-pointer">{n.message}</small>
+                                                </div>                                     
+                                            </div>
+                                          ))
+                                        ) : (
+                                          <div className='flex items-center justify-center'>
+                                              <p className='text-xs font-bold '>You have no unread notifications</p>
+                                          </div>
+                                        )}
+                                 </div> : 
+                                 null}
+
                              </div>
                         </div>
                     </div>

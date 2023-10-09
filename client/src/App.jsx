@@ -16,6 +16,7 @@ import OtherUsersProfile from './pages/OtherUsersProfile'
 import Prueba from './components/Prueba'
 import UserManualSearch from './pages/UserManualSearch'
 import ProfileDos from './components/MyProfile/ProfileDos'
+import PublicationDetailDos from './components/PublicationDetailDos'
 
 function App() {
   
@@ -33,7 +34,7 @@ function App() {
                       <Route path="/myPublications/:id" element={<MyPublications/>}></Route> 
                       <Route path="/publicationsSearched/:searchParam" element={<UserSearch/>}></Route> 
                       <Route path="/myProfile/:userId" element={<MyProfile/>}></Route> 
-                      <Route path="/publication/:publicationId" element={<PublicationDetail/>}></Route> 
+                      <Route path="/publication/:publicationId" element={<PublicationDetailDos/>}></Route> 
                       <Route path="/searchWithFilters" element={<SearchWithMultipleFilters/>}></Route> 
                       <Route path="/userProfile/:userId" element={<OtherUsersProfile/>}></Route> 
                       <Route path="/userManualSearch/:searchParam" element={<UserManualSearch/>}></Route> 
