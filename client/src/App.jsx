@@ -16,7 +16,7 @@ import OtherUsersProfile from './pages/OtherUsersProfile'
 import Prueba from './components/Prueba'
 import UserManualSearch from './pages/UserManualSearch'
 import ProfileDos from './components/MyProfile/ProfileDos'
-import PublicationDetailDos from './components/PublicationDetailDos'
+import PublicationDetailDos from './components/PublicationDetail/PublicationDetailDos'
 
 function App() {
   

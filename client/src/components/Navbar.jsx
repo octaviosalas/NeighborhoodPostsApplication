@@ -134,14 +134,20 @@ import axios from "axios"
                              </div>
                              
                              <div className='flex flex-col justify-center items-center'>
-                                <small className='text-black underline cursor-pointer text-sm ml-2' style={{ whiteSpace: 'nowrap' }} onClick={() => setShowOldNotifications(true)}>View old Notifications</small> 
 
                                {showOldNotifications ? 
+                               <small className='text-black underline cursor-pointer text-sm ml-2' style={{ whiteSpace: 'nowrap' }} onClick={() => setShowOldNotifications(false)}>Close old Notifications</small>
+                                    :
+                               <small className='text-black underline cursor-pointer text-sm ml-2' style={{ whiteSpace: 'nowrap' }} onClick={() => setShowOldNotifications(true)}>View old Notifications</small> 
+                                
+                                }
+                               {showOldNotifications ? 
                                   <div className='flex flex-col items-center justify-center'>
+                                    <div className='border border-black w-full mt-4'></div>
                                       {Array.isArray(userContx.userNotifications) ? (
                                           userContx.userNotifications.filter((n) => n.isRead).map((n, index) => ( 
                                             <div className='flex flex-col items-center justify-center'>
-                                                <div className='bg-gray-100 w-full mt-4 hover:underline'>
+                                                <div className='bg-gray-100 w-full mt-2 hover:underline'>
                                                   <small onClick={() => viewNotification(n.publicationId, n._id)} key={n._id} className="text-xs font-bold cursor-pointer">{n.message}</small>
                                                 </div>                                     
                                             </div>

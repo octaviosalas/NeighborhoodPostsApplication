@@ -1,20 +1,9 @@
 import React from "react";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { useState, useEffect, useM } from "react";
+import { useState, useEffect} from "react";
 import { UserContext } from "../../store/usercontext";
 import { useContext } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
-import useGetBackendQueries from "../../Hooks/useGetBackendQueries";
-import CommentModal from "../Modals/CommentModal";
-import ShareModal from "../Modals/ShareModal";
-import CommentsPublications from "../CommentsPublications";
-import LoadingPublications from "../../Hooks/LoadingPublications";
-import RateReviewIcon from "@mui/icons-material/RateReview";
-import ShareIcon from "@mui/icons-material/Share";
-import WhoSharedPub from "../Modals/WhoSharedPub";
-import ImagesModal from "../Modals/ImagesModal";
 import ImagesModalDetail from "../Modals/ImagesModalDetail";
 
 const PublicationDetailCard = ({ pub }) => {

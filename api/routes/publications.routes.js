@@ -1,7 +1,7 @@
 import express from "express"
 const publicationsRoutes = express.Router()
 import { savePublication, getAllPublications, myPublications, getPublicationWithParam, getOnePublication, savePubInFavs,
-getFavs, deleteMyPub, sharePublication,  mySharedPublications, getSharedNumber, getUserPublications} from "../controllers/publications.controllers.js"
+getFavs, deleteMyPub, sharePublication,  mySharedPublications, getSharedNumber, getUserPublications, getPublicationLikes} from "../controllers/publications.controllers.js"
 
 publicationsRoutes.post("/saveNewPublication", savePublication)
 publicationsRoutes.get("/getMyPublications/:userId", myPublications)
@@ -16,7 +16,7 @@ publicationsRoutes.get("/getMyFavs/:userId", getFavs)
 publicationsRoutes.post("/sharePublication/:publicationId", sharePublication)
 publicationsRoutes.get("/getMySharedPublications/:userId", mySharedPublications)
 publicationsRoutes.get(`/getSharedNumber/:publicationId`, getSharedNumber)
-
+publicationsRoutes.get(`/getPublicationsLikes/:publicationId`, getPublicationLikes)
 
 
 export default publicationsRoutes;

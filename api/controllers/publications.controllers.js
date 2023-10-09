@@ -231,3 +231,13 @@ export const getSharedNumber = async (req, res) => {
                       })
 }
 
+export const getPublicationLikes = async (req, res) => { 
+    const {publicationId} = req.params
+    Favorites.find({publicationId: publicationId})
+             .then((favs) => { 
+               res.json(favs)
+             })
+             .catch((err) => { 
+               console.log(err)
+             })
+}

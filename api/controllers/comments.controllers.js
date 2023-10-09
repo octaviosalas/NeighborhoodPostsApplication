@@ -32,6 +32,7 @@ export const saveComment = async (req, res) => {
 export const getMyComments = async (req, res) => { 
     const {userId} = req.params
 
+
     Comments.find({addresseeId: userId})
             .then((com) => { 
                 res.json(com)
@@ -44,6 +45,7 @@ export const getMyComments = async (req, res) => {
 
 export const viewPublicationComments = async (req, res) => { 
     const {idPublication} = req.params
+    console.log("Me llego algo!", req.params)
     
     Comments.find({publicationId: idPublication})
             .then((comments) => { 
