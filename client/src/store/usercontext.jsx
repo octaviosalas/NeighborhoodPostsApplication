@@ -16,6 +16,7 @@ const UserContext = createContext({
 });
 
 
+
 const UserProvider = ({ children }) => {    
                     
 
@@ -78,16 +79,10 @@ const updateUserQuantityNotifications = (x) => {
   sessionStorage.setItem("userQuantityNotifications", x)
 }
 
-const updateUserNotifications = ([]) => { 
-  setUserNotifications([])
-  sessionStorage.setItem("userNotifications", [])
+const updateUserNotifications = (x) => { 
+  setUserNotifications(x)
+  sessionStorage.setItem("userNotifications", x)
 }
-
-/*const updateUserNotifications = (x) => { 
-  const info = JSON.stringify(x)
-  setUserNotifications(info)
-  sessionStorage.setItem("userNotifications", info)
-}*/
 
 useEffect(() => {
     const handleStorageChange = (event) => {    

@@ -19,6 +19,7 @@ import { useNavigate } from 'react-router-dom';
           userContx.updateUserProfileImage(null)
           userContx.updateUserName(null)
           userContx.updateUserQuantityNotifications(null)
+          userContx.updateUserNotifications(null)
           setTimeout(() => { 
             navigate("/login")
           }, 500)
@@ -32,6 +33,10 @@ import { useNavigate } from 'react-router-dom';
         function classNames(...classes) {
           return classes.filter(Boolean).join(' ')
         }
+
+        useEffect(() => { 
+          console.log(userContx.userNotifications)
+        }, [])
 
       
 

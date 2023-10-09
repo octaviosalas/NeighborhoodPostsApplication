@@ -3,6 +3,7 @@ import Notifications from "../models/notifications.js";
 
 export const saveNotification = async (req, res) => { 
     const { userId, typeOfNotification, message, dateNotification, isRead, recipientId, recipientName, publicationId } = req.body;
+    console.log("Me llego una notificacion", req.body)
 
     try {
         const creator = await User.find({_id: userId});

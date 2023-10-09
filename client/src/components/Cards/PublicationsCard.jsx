@@ -36,6 +36,16 @@ const PublicationsCard = ({ pub }) => {
   const [loadComments, setLoadComments] = useState(false);
   const userContx = useContext(UserContext);
 
+  const getActualDate = () => {
+    const fechaActual = new Date();
+    const year = fechaActual.getFullYear();
+    const month = String(fechaActual.getMonth() + 1).padStart(2, '0');
+    const day = String(fechaActual.getDate()).padStart(2, '0');
+    
+    return `${year}-${month}-${day}`;
+  };
+
+  const actualDate = getActualDate();
 
 
   useEffect(() => {
@@ -92,15 +102,32 @@ const PublicationsCard = ({ pub }) => {
       creatorProfileImage: pub.creatorProfileImage,
       creatorName: pub.creatorName,
     };
-    axios
-      .post("http://localhost:4000/markAsFavorite", newFavPub)
-      .then((res) => {
-        console.log(res.data);
-        notificacionDeToast();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    axios.post("http://localhost:4000/markAsFavorite", newFavPub)
+         .then((res) => {
+          console.log(res.data);
+          notificacionDeToast();
+         })
+        .catch((err) => {
+          console.log(err);
+        });
+
+        const newNotification = ( { 
+          userId: userContx.userId,
+          typeOfNotification: "like",
+          dateNotification: actualDate,
+          message: `${userContx.userName} Liked your Post`, 
+          isRead: false,
+          recipientId: pub.creatorId, 
+          recipientName: pub.creatorName, 
+          publicationId: pub._id, 
+        })
+        axios.post("http://localhost:4000/saveNewNotification", newNotification)   
+             .then((res) => { 
+               console.log(res.data)
+             }) 
+             .catch((err) => { 
+               console.log(err)
+             })
   };
 
   const getPublicationComments = (idPublication) => {

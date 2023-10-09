@@ -29,16 +29,23 @@ export default function Landing() {
                   .then((res) => { 
                     console.log(res.data) 
                     userContx.updateUserQuantityNotifications(res.data.length)
-                    userContx.updateUserNotifications(res.data)
-                  })
-                  .catch((err) => { 
-                    console.log(err)
-                  })
-                  setTimeout(() => {
-                    console.log(userContx.userQuantityNotifications)
-                    console.log(userContx.userNotifications)
-                  }, 2000)
-      }, [userContx.userId])
+                    const notifications = res.data;
+                    const newNotificationsArray = []; 
+                    notifications.forEach(objeto => {
+                      newNotificationsArray.push(objeto);
+                    });
+                    userContx.updateUserNotifications(newNotificationsArray);
+                                })
+                                .catch((err) => { 
+                                  console.log(err)
+                                })
+                    }, [userContx.userId])
+
+
+  useEffect(() => { 
+    console.log(userContx.userNotifications)
+    console.log(userContx.userQuantityNotifications)
+  }, [userContx.userNotifications])
 
   return (
     <main className="px-20 py-2">

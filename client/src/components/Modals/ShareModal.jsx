@@ -8,14 +8,8 @@ import { UserContext } from "../../store/usercontext";
 import { useContext } from "react";
 import { toast, ToastContainer } from "react-toastify";
 
-const ShareModal = ({
-  pubChoosen,
-  publicationId,
-  creatorName,
-  creatorId,
-  closeModalShare,
-  profileImage,
-}) => {
+const ShareModal = ({ pubChoosen, publicationId,creatorName,creatorId,closeModalShare,profileImage}) => {
+  
   const [publicationTotal, setPublicationTotal] = useState([]);
   const [loading, setLoading] = useState(false);
   const [commentShared, setCommentShared] = useState("");
@@ -59,10 +53,6 @@ const ShareModal = ({
     return `${year}-${month}-${day}`;
   };
 
-  useEffect(() => {
-    console.log(pubChoosen);
-  }, [pubChoosen]);
-
   const actualDate = getActualDate();
 
   const shareOnMyWall = () => {
@@ -89,21 +79,34 @@ const ShareModal = ({
         publicationAddress: pubChoosen.address,
         publicationUbication: pubChoosen.creatorLocation,
       };
-      axios
-        .post(
-          `http://localhost:4000/sharePublication/${publicationId}`,
-          publicationDataToBeShared
-        )
-        .then((res) => {
-          console.log(res.data);
-          setTimeout(() => {
-            closeModalShare();
-          }, 400);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
+      axios.post(`http://localhost:4000/sharePublication/${publicationId}`, publicationDataToBeShared)
+          .then((res) => {
+            console.log(res.data);
+            setTimeout(() => {
+              closeModalShare();
+            }, 400);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      };
+      const newNotification = ( { 
+        userId: userCtx.userId,
+        typeOfNotification: "share",
+        dateNotification: actualDate,
+        message: `${userCtx.userName} Has Shared your Publication`, 
+        isRead: false,
+        recipientId: pubChoosen.creatorId, 
+        recipientName: pubChoosen.creatorName, 
+        publicationId: publicationId , 
+      })
+      axios.post("http://localhost:4000/saveNewNotification", newNotification)   
+           .then((res) => { 
+             console.log(res.data)
+           }) 
+           .catch((err) => { 
+             console.log(err)
+           })
     }
     
 
