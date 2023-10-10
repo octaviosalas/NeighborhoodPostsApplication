@@ -110,7 +110,7 @@ export const savePubInFavs = async (req, res) => {
 
     const {publicationId, userId, publicationAddress, publicationCreatorName,
            publicationImages, publicationTitle, publicationDescription, 
-           typeOfPublication, creatorLocation, creatorProfileImage, creatorName} = req.body
+           typeOfPublication, creatorLocation, creatorProfileImage, creatorName, likedBy, likedByPhoto} = req.body
 
      try {
        const newFavPublication = new Favorites({ 
@@ -124,7 +124,9 @@ export const savePubInFavs = async (req, res) => {
          typeOfPublication, 
          creatorLocation, 
          creatorProfileImage,
-         creatorName
+         creatorName,
+         likedBy,
+         likedByPhoto
        })
        await newFavPublication.save()
                               .then((saved) => { 
@@ -221,6 +223,7 @@ export const mySharedPublications = async (req, res) => {
 }
 
 export const getSharedNumber = async (req, res) => { 
+   console.log("Me llego", req.params)
     const {publicationId} = req.params
     SharedPublications.find({publicationId: publicationId})
                       .then((pubs) => { 

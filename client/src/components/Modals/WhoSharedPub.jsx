@@ -5,6 +5,7 @@ import axios from "axios"
 import SharedPublicationsCard from '../Cards/SharedPublicationsCard';
 
 const WhoSharedPub = ({ publicationId, close}) => {
+  console.log(publicationId)
   const [peopleWhoShared, setPeopleWhoShared] = useState([]);
   const [showThePublication, setShowThePublication] = useState(false)
   const [selectedPost, setSelectedPost] = useState(null)

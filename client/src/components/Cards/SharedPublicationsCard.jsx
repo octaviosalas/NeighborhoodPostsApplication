@@ -22,7 +22,7 @@ const SharedPublicationsCard = ({pub}) => {
             const [loadComments, setLoadComments] = useState(false)
          
   return (
-    <div className='card w-[460px] bg-base-100 shadow-2xl shadow-side-left mt-4'> 
+    <div className='card w-[300px] md:w-[460px] bg-base-100  mt-4'> 
         <div>
             <div className='flex flex-grow'>
 
@@ -31,15 +31,7 @@ const SharedPublicationsCard = ({pub}) => {
                         <small className="ml-2 mt-2 whitespace-nowrap">{pub.sharer} </small>
                     </div>
       
-                   <div className='flex justify-end ml-60'>
-                         <div className="dropdown ">
-                             <label tabIndex={0} className="btn m-1 font-bold text-xl">...</label>
-                             <ul tabIndex={0} className="dropdown-content text-blue-950 z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-                                <li ><a className=" text-blue-950 hover:text-yellow-400">Edit</a></li>
-                                <li ><a className=" text-blue-950 hover:text-yellow-400">Delete</a></li>
-                             </ul>
-                         </div>
-                   </div> 
+                  
 
             </div>
 
@@ -50,24 +42,20 @@ const SharedPublicationsCard = ({pub}) => {
             </div>
          <div className="rounded-lg bg-base-100 shadow-[0_35px_60px_-15px_rgba(0.2,0.2,0.2,0.3)] ring-1 ring-gray-300 mt-4">
                                 <div className="card-body" key={pub._id}>
-                                        <div className='flex'>
+                                        <div className='flex flex-col items-center justify-center md:flex'>
                                                <div className="avatar">
                                                     <div className="w-8 rounded-full">
-                                                        <img src={pub.publicationCreatorProfileImage}  />
+                                                        <img className='h-full w-16 md:w-24' src={pub.publicationCreatorProfileImage}  />
                                                     </div>
                                                 </div>
 
-                                                <div className='flex'>
+                                                <div className='flex flex-col items-center justify-center md:flex'>
 
                                                       <div className='flex flex-grow justify-start'>
                                                         <p className="text-black text-sm ml-2 mt-[6px]">{pub.publicationCreatorName}</p>
                                                       </div>
 
-                                                      <div className='flex flew-grow justify-end ml-24'>
-                                                        <Link to={`/publicationsSearched/${pub.categoryPub}`}> <p className='ml-8 whitespace-no-wrap text-sm  h-6  cursor-pointer hover:font-bold w-[70px]'>
-                                                          {pub.categoryPub}
-                                                        </p></Link>
-                                                    </div>
+                                                 
                                                     
                                                 </div>
 

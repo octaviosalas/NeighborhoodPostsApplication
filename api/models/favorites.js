@@ -40,6 +40,12 @@ const favsSchema = mongoose.Schema( {
     },
     creatorName: { 
         type: String
+    },
+    likedBy: { 
+        type: String
+    },
+    likedByPhoto: { 
+        type: String
     }
    
 

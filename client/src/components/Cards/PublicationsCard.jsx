@@ -101,6 +101,8 @@ const PublicationsCard = ({ pub }) => {
       creatorLocation: pub.creatorLocation,
       creatorProfileImage: pub.creatorProfileImage,
       creatorName: pub.creatorName,
+      likedBy: userContx.userName,
+      likedByPhoto: userContx.userProfileImage
     };
     axios.post("http://localhost:4000/markAsFavorite", newFavPub)
          .then((res) => {

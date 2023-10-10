@@ -9,6 +9,8 @@ import LoadingPublications from '../../Hooks/LoadingPublications'
 import PublicationDetailCard from '../Cards/PublicationDetailCard'
 import Comments from './Comments';
 import Likes from './Likes';
+import WhoSharedPub from '../Modals/WhoSharedPub';
+import WhoSharedDetail from './WhoSharedDetail';
 
 
 const PublicationDetailDos = () => {
@@ -19,11 +21,13 @@ const PublicationDetailDos = () => {
     const [showSecond, setShowSecond] = useState(false);
     const [showComments, setShowComments] = useState(true)
     const [showLikes, setShowLikes] = useState(false)
+    const [showShared, setShowShared] = useState(false)
   
     const { data } = useGetBackendQueries(`getOnePublication/${params.publicationId}`); 
     const { data: pubComments} = useGetBackendQueries(`viewPublicationComments/${params.publicationId}`); 
     const { data: pubShared} = useGetBackendQueries(`getSharedNumber/${params.publicationId}`); 
     const { data: pubLikes} = useGetBackendQueries(`getPublicationsLikes/${params.publicationId}`); 
+    
     
     const getScreenSize = () => {
         const screenSize = window.innerWidth;
@@ -51,11 +55,19 @@ const PublicationDetailDos = () => {
       const showOnlyLikes = () => { 
         setShowComments(false)
         setShowLikes(true)
+        setShowShared(false)
       }
 
       const showOnlyComments = () => { 
         setShowComments(true)
         setShowLikes(false)
+        setShowShared(false)
+      }
+
+      const showOnlyShared = () => { 
+        setShowComments(false)
+        setShowLikes(false)
+        setShowShared(true)
       }
     
 
@@ -73,15 +85,15 @@ const PublicationDetailDos = () => {
                 <div className='grid col-span-1 w-full border'>
                     <div className='w-full flex justify-center max-w-fit-contain'> 
                         <div className='mt-2 max-w-fit-contain'>
-                            <small className='mx-auto  ml-2 sm:ml-12 font-bold cursor-pointer' onClick={() => showOnlyComments()}>Coments</small>
-                            <small className='mx-auto  ml-2 sm:ml-16 font-bold cursor-pointer' onClick={() => showOnlyLikes()}>Likes</small>
-                            <small className='mx-auto  ml-2 sm:ml-16 font-bold cursor-pointer'>Who shared it</small>
-                            <small className='mx-auto  ml-2 sm:ml-16 font-bold cursor-pointer'>Visits</small>
+                            <small className={`mx-auto  ml-6 lg:ml-12 font-bold cursor-pointer ${showComments ? 'text-blue-500' : ''}`} onClick={() => showOnlyComments()}>Coments</small>
+                            <small className={`mx-auto  ml-6 lg:ml-16 font-bold cursor-pointer ${showLikes ? "text-blue-500" : ""}`} onClick={() => showOnlyLikes()}>Likes</small>
+                            <small className={`mx-auto  ml-6 lg:ml-16 font-bold cursor-pointer ${showShared ? "text-blue-500" : ""}`}onClick={() => showOnlyShared()}>Who shared it</small>
+                            <small className='mx-auto   ml-6 lg:ml-16 font-bold cursor-pointer'>Visits</small>
                         </div>
                     </div>
 
                     {showComments ?
-                     <div>
+                     <div className=''>
                         <Comments comments={pubComments}/>
                     </div>
                      :
@@ -92,12 +104,21 @@ const PublicationDetailDos = () => {
                         <Likes likes={pubLikes}/>
                     </div>
                      :
-                     null}                
+                     null} 
+
+                     
+                    {showShared ?
+                     <div>
+                        <WhoSharedDetail sharedData={pubShared}/>
+                    </div>
+                     :
+                     null}                    
 
                 </div>
             </div> : null}
 
-            {showSecond ? <div className='flex flex-col items-center justify-center gap-4 w-full max-w-fit-contain border border-gray-200 visible md:invisible'>    
+            {showSecond ?
+             <div className='flex flex-col items-center justify-center gap-4 w-full max-w-fit-contain border border-gray-200 visible md:invisible'>    
                 <div className='grid col-span-1 w-full m-4 max-w-fit-contain'> 
                     <div className='flex items-center justify-center  max-w-fit-contain'>
                         {data.map((d) => <PublicationDetailCard pub={d}/>)}
@@ -106,15 +127,38 @@ const PublicationDetailDos = () => {
                 <div className='grid col-span-1 w-full border'>
                     <div className='w-full flex justify-center max-w-fit-contain'> 
                         <div className='mt-2 max-w-fit-contain'>
-                            <small className='mx-auto  ml-2 font-bold'>Coments</small>
-                            <small className='mx-auto  ml-6  font-bold'>Likes</small>
-                            <small className='mx-auto  ml-6  font-bold'>Who shared it</small>
+                            <small className={`mx-auto  ml-6 lg:ml-12 font-bold cursor-pointer ${showComments ? 'text-blue-500' : ''}`} onClick={() => showOnlyComments()}>Coments</small>
+                            <small className={`mx-auto  ml-6 lg:ml-16 font-bold cursor-pointer ${showLikes ? "text-blue-500" : ""}`} onClick={() => showOnlyLikes()}>Likes</small>
+                            <small className={`mx-auto  ml-6 lg:ml-16 font-bold cursor-pointer ${showShared ? "text-blue-500" : ""}`}onClick={() => showOnlyShared()}>Who shared it</small>
                             <small className='mx-auto  ml-6  font-bold'>Visits</small>
                         </div>
                     </div>
+
+                    {showComments ?
+                     <div className=''>
+                        <Comments comments={pubComments}/>
+                    </div>
+                     :
+                     null}
+
+                    {showLikes ?
+                     <div>
+                        <Likes likes={pubLikes}/>
+                    </div>
+                     :
+                     null} 
+
+                    {showShared ?
+                     <div>
+                        <WhoSharedDetail sharedData={pubShared}/>
+                    </div>
+                     :
+                     null} 
                    
                 </div>
-            </div> : null}
+            </div> 
+            : 
+            null}
     
     </div>
   )

@@ -1,14 +1,14 @@
 import React from 'react'
 
 const ImagesModalDetail = ({firstImage, secondImage, close}) => { 
-
+ 
   return (
     <div className=''> 
           <small className="cursor-pointer object-" onClick={()=>document.getElementById('my_modal_11').showModal()} >View Pictures</small>     
             <dialog id="my_modal_11" className="modal">
                 <div className="modal-box">
                         <form method="dialog">
-                        <button className="btn btn-sm border-none  absolute right-2 top-2">✕</button>
+                        <button className="btn btn-sm border-none absolute right-2 top-2">✕</button>
                         </form>
                         <div className="carousel w-full mt-6">
                               <div id="slide1" className="carousel-item relative w-full">
