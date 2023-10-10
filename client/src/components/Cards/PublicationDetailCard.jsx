@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import { UserContext } from "../../store/usercontext";
 import { useContext } from "react";
 import axios from "axios";
@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 import ImagesModalDetail from "../Modals/ImagesModalDetail";
 
 const PublicationDetailCard = ({ pub }) => {
-
   return (
     <div className="mb-4">
       <div className="card rounded-xs 2xl:w-[500px] xl:w-[480px] lg:w-[480px] md:max-w-fit-contain bg-base-100  mt-4">
@@ -16,7 +15,10 @@ const PublicationDetailCard = ({ pub }) => {
             <div className="flex flex-col items-center justify-center xxs:flex xxs:flex-row">
               <div className="avatar">
                 <div className="w-16 rounded-full">
-                  <img className=" rounded-full xxs:w-8" src={pub.creatorProfileImage} />
+                  <img
+                    className=" rounded-full xxs:w-8"
+                    src={pub.creatorProfileImage}
+                  />
                 </div>
               </div>
 
@@ -57,29 +59,31 @@ const PublicationDetailCard = ({ pub }) => {
                 <p className=" text-xs mr-4  whitespace-no-wrap">
                   {pub.creatorLocation}, {pub.address}
                 </p>
-                
               </div>
             </div>
           </div>
 
           <div className="grid col-span-2">
             <div className="flex justify-center items-center mt-2 max-w-fit-contain mr-12 xxxs:mr-0">
-                <div className="avatar flex justify-center items-center">
-                    <div className="w-16 xxs:w-24 sm:w-32 h-full border rounded">
-                      <img src={pub.publicationImages[0]} />
-                    </div> 
+              <div className="avatar flex justify-center items-center">
+                <div className="w-16 xxs:w-24 sm:w-32 h-full border rounded">
+                  <img src={pub.publicationImages[0]} />
                 </div>
+              </div>
 
-                <div className="avatar flex justify-center items-center">
-                  <div className="w-16 xxs:w-24 sm:w-32 border rounded ml-4">
-                    <img src={pub.publicationImages[1]} />
-                  </div>
+              <div className="avatar flex justify-center items-center">
+                <div className="w-16 xxs:w-24 sm:w-32 border rounded ml-4">
+                  <img src={pub.publicationImages[1]} />
                 </div>
+              </div>
             </div>
             <div className="mt-4 text-gray-500 underline cursor-pointer">
-               <ImagesModalDetail firstImage={pub.publicationImages[0]} secondImage={pub.publicationImages[1]}/>
+              <ImagesModalDetail
+                firstImage={pub.publicationImages[0]}
+                secondImage={pub.publicationImages[1]}
+              />
             </div>
-          </div>         
+          </div>
         </div>
       </div>
     </div>

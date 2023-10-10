@@ -3,7 +3,7 @@ import React from 'react'
 const ModalProfileChangePicture = ({photo}) => {
   return (
     <div>
-       <img src={photo} className="rounded-full m-2 h-44 w-44 cursor-pointer" onClick={()=>document.getElementById('my_modal_6').showModal()} title="Leave a Comment"/>
+       <img src={photo} className="rounded-full m-2 h-24 w-24 xxs:h-32 xxs:w-32 lg:w-44 lg:h-44 cursor-pointer" onClick={()=>document.getElementById('my_modal_6').showModal()} title="Leave a Comment"/>
            <dialog id="my_modal_6" className="modal">
                 <form method="dialog" className="modal-box">
                     <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" >✕</button>

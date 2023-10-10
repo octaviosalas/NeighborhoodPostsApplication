@@ -10,6 +10,7 @@ const MyPubs = () => {
     const userContx = useContext(UserContext)
     const [noPublications, setNoPublications] = useState(false)
     const [myPublications, setMyPublications] = useState([])
+    const [number, setNumber] = useState(0)
     const [loading, setLoading] = useState(false)
 
  
@@ -17,6 +18,7 @@ const MyPubs = () => {
             axios.get(`http://localhost:4000/getMyPublications/${userContx.userId}`)
                   .then((res) => { 
                         console.log(res.data)
+                        setNumber(res.data.length)
                         if(res.data.length === 0) { 
                             setNoPublications(true)
                         } else { 
@@ -34,7 +36,7 @@ const MyPubs = () => {
 
   return (
     <>
-    <div className='border grid grid-cols-3'> 
+  <div className={`border flex flex-col md:grid ${number === 1 ? 'md:grid-cols-1' : number === 2 ? 'md:grid-cols-2' : 'md:grid-cols-3'} bg-gray-100 overflow-auto max-h-[350px]`}>
     {loading ? (
         noPublications ? (
             <div className="flex items-center justify-center w-screen">
@@ -46,7 +48,7 @@ const MyPubs = () => {
         ) : (
            
             myPublications.map((p, index) => (
-                <div key={p.id} className={'border grid col-span-1 m-2 items-center  overflow-auto max-h-[350px]'}>
+                <div key={p.id} className='border grid col-span-1 m-2 items-center bg-white'>
                     
                     <div className='flex max-w-fit-contain'>
                         <div className="flex justify-start items-center" style={{ flex: 1 }}>
@@ -82,7 +84,7 @@ const MyPubs = () => {
                             </div>
                       </div>
                     </div>
-            </div>
+                </div>
         ))  
 )
 

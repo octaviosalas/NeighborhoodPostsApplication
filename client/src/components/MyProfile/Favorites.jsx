@@ -13,6 +13,7 @@ const Favorites = () => {
     const userContx = useContext(UserContext)
     const [allMyFavs, setAllMyFavs] = useState([])
     const [noFavs, setNoFavs] = useState(false)
+    const [number, setNumber] = useState(0)
     const [loading, setLoading] = useState(false)
  
 
@@ -25,6 +26,7 @@ const Favorites = () => {
         axios.get(`http://localhost:4000/getMyFavs/${userContx.userId}`)
             .then((res) => { 
             console.log(res.data)
+            setNumber(res.data.length)
             if(res.data.length === 0) { 
                 setNoFavs(true)
             }
@@ -43,7 +45,8 @@ const Favorites = () => {
   return (
       <>
     
-      <div className='border grid grid-cols-3 bg-gray-100 overflow-auto max-h-[350px]'> 
+    <div className={`border flex flex-col md:grid ${number === 1 ? 'md:grid-cols-1' : number === 2 ? 'md:grid-cols-2' : 'md:grid-cols-3'} bg-gray-100 overflow-auto max-h-[350px]`}>
+      
     
             {loading ? (
                 noFavs ? (
@@ -56,7 +59,7 @@ const Favorites = () => {
                 ) : (
                 allMyFavs.map((p) => (
            <div key={p.id} className='border rounded-lg grid col-span-1 m-2 bg-white'>
-                    <div className='flex max-w-fit-contain'>
+                    <div className='flex flex-col md:flex max-w-fit-contain'>
                             <div className="flex justify-start items-center" style={{ flex: 1 }}>
                                 <img src={p.creatorProfileImage} className='h-12 w-12 m-2 rounded-full' />
                                 <small className='text-black text-xs ml-2'>{p.creatorName}</small>

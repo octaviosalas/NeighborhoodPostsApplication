@@ -43,7 +43,7 @@ const ProfileDos = () => {
   return (
     <>
 
-    <div className='mt-22'>
+    <div className='mt-22 xxs:mt-12 '>
         <div className='grid grid-cols-7 max-w-fit-contain sm:flex-col bg-gray-100 mt-22'>
             <div className='grid border col-span-7 sm'>
                  <div className='flex justify-end items-center'>
@@ -53,17 +53,16 @@ const ProfileDos = () => {
                     <div className='flex justify-start items-center'>
                         <ModalProfileChangePicture photo={userCtx.userProfileImage}/>
                         <div className='flex-box'>
-                            <h4 className='ml-4 font-bold text-xl'>{userCtx.userName}</h4>
+                            <h4 className='ml-2 font-bold text-sm xxs:text-xl'>{userCtx.userName}</h4>
                             <small className='text-sm text-gray-500 cursor-pointer underline'>Change Picture</small>
                         </div>
                     </div>
                 </div>
                 <div className='flex items-centert justify-center content-between gap-0 lg:gap-6 mt-6 max-w-fit-contain ml-2 mr-2 mb-2 max-w-fit-contain'>
-                    <small className={`font-bold text-xxs ml-2 sm:ml-16 ${showPrivacity ? 'text-gray-500 font-bold' : ''} underline cursor-pointer`} onClick={() => showJustPrivacy()}>Privacity </small>
-                    <small className={`font-bold text-xxs ml-2 sm:ml-16 ${showFavorites ? 'text-gray-500 font-bold' : ''} underline cursor-pointer`} onClick={() => showJustFavorites()}>Favorites </small>
-                    <small className={`font-bold text-xxs ml-2 sm:ml-16 ${showMyPubs ? 'text-gray-500 font-bold' : ''} underline cursor-pointer`} onClick={() => showJustMyPubs()}>Publications </small>
-                    <small className='font-bold text-xxs ml-2 sm:ml-16 underline cursor-pointer'>Pagina Principal </small>
-                    <small className='font-bold text-xxs ml-2 sm:ml-16 mr-2 sm:mr-8 underline cursor-pointer'>Pagina Principal </small>
+                    <small className={`font-bold text-xxs ml-12 sm:ml-16 ${showPrivacity ? 'text-gray-500 font-bold' : ''} underline cursor-pointer`} onClick={() => showJustPrivacy()}>Privacity </small>
+                    <small className={`font-bold text-xxs ml-12 sm:ml-16 ${showFavorites ? 'text-gray-500 font-bold' : ''} underline cursor-pointer`} onClick={() => showJustFavorites()}>Favorites </small>
+                    <small className={`font-bold text-xxs ml-4 sm:ml-12 ${showMyPubs ? 'text-gray-500 font-bold' : ''} underline cursor-pointer`} onClick={() => showJustMyPubs()}>Publications </small>
+                    
                 </div>
             </div>
         </div>  

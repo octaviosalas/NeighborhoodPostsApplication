@@ -17,18 +17,23 @@ import WhoSharedPub from "../Modals/WhoSharedPub";
 import ImagesModal from "../Modals/ImagesModal";
 
 const PublicationsCard = ({ pub }) => {
-
   const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const [isWhoShareModalOpen, setIsWhoShareModalOpen] = useState(false);
   const [isPhotosModalOpen, setIsPhotosModalOpen] = useState(false);
   const [pubChoosen, setPubChoosen] = useState([]);
-  const [publicationChoosenFirstImage, setPublicationChoosenFirstImage] = useState("");
-  const [publicationChoosenSecondImage, setPublicationChoosenSecondImage] =useState("");
+  const [publicationChoosenFirstImage, setPublicationChoosenFirstImage] =
+    useState("");
+  const [publicationChoosenSecondImage, setPublicationChoosenSecondImage] =
+    useState("");
   const [publicationChoosenId, setPublicationChoosenId] = useState("");
-  const [publicationChoosenUserProfileImage,setPublicationChoosenUserProfileImage] = useState("");
+  const [
+    publicationChoosenUserProfileImage,
+    setPublicationChoosenUserProfileImage,
+  ] = useState("");
   const [publicationChoosenName, setPublicationChoosenName] = useState("");
-  const [publicationChoosenaddresseeName, setPublicationChoosenaddresseeName] =useState("");
+  const [publicationChoosenaddresseeName, setPublicationChoosenaddresseeName] =
+    useState("");
   const [publicationComments, setPublicationComments] = useState([]);
   const [quantityComments, setQuantityComments] = useState(0);
   const [quantityTimesShared, setQuantityTimesShared] = useState(0);
@@ -39,14 +44,13 @@ const PublicationsCard = ({ pub }) => {
   const getActualDate = () => {
     const fechaActual = new Date();
     const year = fechaActual.getFullYear();
-    const month = String(fechaActual.getMonth() + 1).padStart(2, '0');
-    const day = String(fechaActual.getDate()).padStart(2, '0');
-    
+    const month = String(fechaActual.getMonth() + 1).padStart(2, "0");
+    const day = String(fechaActual.getDate()).padStart(2, "0");
+
     return `${year}-${month}-${day}`;
   };
 
   const actualDate = getActualDate();
-
 
   useEffect(() => {
     axios
@@ -57,7 +61,7 @@ const PublicationsCard = ({ pub }) => {
       .catch((err) => {
         console.log(err);
       });
-      axios
+    axios
       .get(`http://localhost:4000/getSharedNumber/${pub._id}`)
       .then((res) => {
         setQuantityTimesShared(res.data.length);
@@ -66,8 +70,6 @@ const PublicationsCard = ({ pub }) => {
         console.log(err);
       });
   }, []);
-
- 
 
   const settingPubData = (x) => {
     setPubChoosen(x);
@@ -102,34 +104,36 @@ const PublicationsCard = ({ pub }) => {
       creatorProfileImage: pub.creatorProfileImage,
       creatorName: pub.creatorName,
       likedBy: userContx.userName,
-      likedByPhoto: userContx.userProfileImage
+      likedByPhoto: userContx.userProfileImage,
     };
-    axios.post("http://localhost:4000/markAsFavorite", newFavPub)
-         .then((res) => {
-          console.log(res.data);
-          notificacionDeToast();
-         })
-        .catch((err) => {
-          console.log(err);
-        });
+    axios
+      .post("http://localhost:4000/markAsFavorite", newFavPub)
+      .then((res) => {
+        console.log(res.data);
+        notificacionDeToast();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
-        const newNotification = ( { 
-          userId: userContx.userId,
-          typeOfNotification: "like",
-          dateNotification: actualDate,
-          message: `${userContx.userName} Liked your Post`, 
-          isRead: false,
-          recipientId: pub.creatorId, 
-          recipientName: pub.creatorName, 
-          publicationId: pub._id, 
-        })
-        axios.post("http://localhost:4000/saveNewNotification", newNotification)   
-             .then((res) => { 
-               console.log(res.data)
-             }) 
-             .catch((err) => { 
-               console.log(err)
-             })
+    const newNotification = {
+      userId: userContx.userId,
+      typeOfNotification: "like",
+      dateNotification: actualDate,
+      message: `${userContx.userName} Liked your Post`,
+      isRead: false,
+      recipientId: pub.creatorId,
+      recipientName: pub.creatorName,
+      publicationId: pub._id,
+    };
+    axios
+      .post("http://localhost:4000/saveNewNotification", newNotification)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const getPublicationComments = (idPublication) => {
@@ -173,41 +177,42 @@ const PublicationsCard = ({ pub }) => {
     setIsWhoShareModalOpen(true);
   };
 
-  const showPhotosModal = (pub) => { 
-    setIsPhotosModalOpen(true)
-    settingPubData(pub)
-  }
+  const showPhotosModal = (pub) => {
+    setIsPhotosModalOpen(true);
+    settingPubData(pub);
+  };
 
-  const closeModalPhotos = () => { 
-    setIsPhotosModalOpen(false)
- 
-  }
-
+  const closeModalPhotos = () => {
+    setIsPhotosModalOpen(false);
+  };
 
   return (
     <div className="mb-4">
       <div className="card rounded-xs 2xl:w-[500px] xl:w-[480px] lg:w-[480px] md:max-w-fit-contain bg-base-100 shadow-2xl shadow-side-left mt-4 ">
         <div className="card-body grid grid-cols-2" key={pub._id}>
           <div className="grid col-span-2">
-          <div className="flex flex-col items-center xxs:flex-row  mt-2 ">
-            <div className="avatar">
-              <div className="h-full w-16 xxs:w-8 rounded-full">
-                <img src={pub.creatorProfileImage} />
+            <div className="flex flex-col items-center xxs:flex-row  mt-2 ">
+              <div className="avatar">
+                <div className="h-full w-16 xxs:w-8 rounded-full">
+                  <img src={pub.creatorProfileImage} />
+                </div>
+              </div>
+
+              <div className="">
+                <p className="text-black text-sm ml-2 font-bold">
+                  {" "}
+                  {pub.creatorName}
+                </p>
+              </div>
+
+              <div className="flex flex-grow justify-end invisible xxs:visible">
+                <Link to={`/publicationsSearched/${pub.typeOfPublication}`}>
+                  <p className=" ml-8 whitespace-no-wrap text-sm  h-6  cursor-pointer hover:font-bold w-[70px]">
+                    {pub.typeOfPublication}
+                  </p>
+                </Link>
               </div>
             </div>
-
-            <div className="">
-              <p className="text-black text-sm ml-2 font-bold"> {pub.creatorName}</p>
-            </div>
-
-            <div className="flex flex-grow justify-end invisible xxs:visible">
-              <Link to={`/publicationsSearched/${pub.typeOfPublication}`}>
-                <p className=" ml-8 whitespace-no-wrap text-sm  h-6  cursor-pointer hover:font-bold w-[70px]">
-                  {pub.typeOfPublication}
-                </p>
-              </Link>
-            </div>
-          </div>
           </div>
 
           <div className="grid col-span-2 max-w-fit-contain mt-2">
@@ -235,10 +240,10 @@ const PublicationsCard = ({ pub }) => {
 
           <div className="grid col-span-2">
             <div className="flex justify-center items-center mt-2 max-w-fit-contain ">
-            <div className="avatar flex">
+              <div className="avatar flex">
                 <div className="w-24 h-full border rounded">
                   <img src={pub.publicationImages[0]} />
-                </div> 
+                </div>
               </div>
 
               <div className="avatar flex">
@@ -249,20 +254,27 @@ const PublicationsCard = ({ pub }) => {
             </div>
           </div>
 
-         {/*     <small className="text-xs text-gray-500 cursor-pointer underline "> Photos</small> 
-          <ImagesModal firstImage={pub.publicationImages[0]} secondImage={pub.publicationImages[1]}/>
-         */}
-            
           <div className="grid col-span-2 mt-2">
-             <div className="flex">
-                <div className="flex flex-justify-start">
-                {isPhotosModalOpen ?
-                 <ImagesModal firstImage={publicationChoosenFirstImage} secondImage={publicationChoosenSecondImage} close={closeModalPhotos}/> 
-                 : 
-                 <small className="text-xs text-gray-500 cursor-pointer underline" onClick={() => showPhotosModal(pub)}> +2 Photos</small>}
-                </div>
-             </div>
-             <div className="grid col-start-2">
+            <div className="flex">
+              <div className="flex flex-justify-start">
+                {isPhotosModalOpen ? (
+                  <ImagesModal
+                    firstImage={publicationChoosenFirstImage}
+                    secondImage={publicationChoosenSecondImage}
+                    close={closeModalPhotos}
+                  />
+                ) : (
+                  <small
+                    className="text-xs text-gray-500 cursor-pointer underline"
+                    onClick={() => showPhotosModal(pub)}
+                  >
+                    {" "}
+                    +2 Photos
+                  </small>
+                )}
+              </div>
+            </div>
+            <div className="grid col-start-2">
               <div className="h-6">
                 <div className="flex flex-grow justify-end">
                   <small
