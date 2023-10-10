@@ -56,7 +56,7 @@ import axios from "axios"
     const navigation = [
       { name: 'Wall', href: '/wall', current: false },
       { name: 'My Publications', href: `/myPublications/${userContx.userId}`, current: false },
-      { name: 'Create New Report', href: `/`, current: false },
+      { name: 'New Report', href: `/`, current: false },
     ]
 
     function classNames(...classes) {
@@ -85,7 +85,7 @@ import axios from "axios"
                 </div>
                 <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                   <div className="flex flex-shrink-0 items-center">
-                    <Link to={"/"}><p className='text-yellow-500 invisible xxxs:visible' >Nei United.</p></Link> 
+                    <Link to={"/"}><p className='text-yellow-500 invisible xxs:visible' >Nei United.</p></Link> 
                   </div>
                   <div className="hidden sm:ml-6 sm:block">
                     <div className="flex space-x-4">

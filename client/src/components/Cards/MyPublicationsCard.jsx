@@ -61,7 +61,7 @@ const MyPublicationsCard = ({ pub, comments }) => {
 
   return (
     <div>
-      <div className="card w-[460px] bg-base-100 shadow-2xl shadow-side-left mt-6 ">
+      <div className="card max-w-fit-contain bg-base-100 shadow-2xl shadow-side-left mt-6 ">
         <div className="card-body">
           <div className="flex justify-end">
             <div className="dropdown ">
@@ -87,9 +87,9 @@ const MyPublicationsCard = ({ pub, comments }) => {
             </div>
           </div>
 
-          <div className="flex mt-2">
+          <div className="flex flex-col items-center xxs:flex-row  mt-2 ">
             <div className="avatar">
-              <div className="w-8 rounded-full">
+              <div className="h-full w-12 xxs:w-8 rounded-full">
                 <img src={pub.creatorProfileImage} />
               </div>
             </div>
@@ -98,7 +98,7 @@ const MyPublicationsCard = ({ pub, comments }) => {
               <p className="text-black text-sm ml-2"> {pub.creatorName}</p>
             </div>
 
-            <div className="flex flex-grow justify-end ">
+            <div className="flex flex-grow justify-end invisible xxs:visible">
               <Link to={`/publicationsSearched/${pub.typeOfPublication}`}>
                 <p className=" ml-8 whitespace-no-wrap text-sm  h-6  cursor-pointer hover:font-bold w-[70px]">
                   {pub.typeOfPublication}

@@ -41,21 +41,13 @@ const MyPublications = () => {
    
 
   return (
-    <div>  
+    <div className=''>  
         {myNoPublications ? ( 
                      <>
                            <div>
-                                   <p><b>{userContx.userName}</b> , at the moment you dont have Publications </p> 
-                                   <div className='mt-6'>
-                                           <div className='flex'> 
-                                                <div id="hero-section__img">
-                                                    <img width="300" height="300" src={fon} alt="Personas sobre un rompecabezas" />
-                                                </div> 
-                                                <div className='flex flex-col items-center gap-4 justify-center  ml-6'>
-                                                   <New/>      
-                                                </div>
-                                           </div>
-                                   </div>
+                              <b>{userContx.userName}</b> 
+                              <br />
+                              <small>At the moment you dont have Publications</small>                                
                           </div>  
                      </>
           )  : myLoading ? ( 
@@ -63,8 +55,12 @@ const MyPublications = () => {
                          )
                        : ( 
                    <>
-                        <div className='mt-12'>
-                            <span className='text-md'> <b>{userContx.userName}</b> these are your Publications at the moment.</span>
+                        <div className='mt-24 xxs:mt-12 flex flex-col items-center justify-center'>
+                            <span className='text-md'> 
+                                <b>{userContx.userName}</b>
+                                <br />
+                                these are your Publications at the moment.
+                           </span>
                         </div> 
 
                         <div>

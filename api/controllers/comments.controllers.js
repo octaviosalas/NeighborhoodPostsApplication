@@ -45,7 +45,6 @@ export const getMyComments = async (req, res) => {
 
 export const viewPublicationComments = async (req, res) => { 
     const {idPublication} = req.params
-    console.log("Me llego algo!", req.params)
     
     Comments.find({publicationId: idPublication})
             .then((comments) => { 

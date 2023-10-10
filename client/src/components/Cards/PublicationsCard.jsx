@@ -186,35 +186,28 @@ const PublicationsCard = ({ pub }) => {
 
   return (
     <div className="mb-4">
-      <div className="card rounded-xs 2xl:w-[500px] xl:w-[480px] lg:w-[480px] md:max-w-fit-contain bg-base-100 shadow-2xl shadow-side-left mt-4">
+      <div className="card rounded-xs 2xl:w-[500px] xl:w-[480px] lg:w-[480px] md:max-w-fit-contain bg-base-100 shadow-2xl shadow-side-left mt-4 ">
         <div className="card-body grid grid-cols-2" key={pub._id}>
           <div className="grid col-span-2">
-            <div className="flex flex-col items-center justify-center xxs:flex xxs:flex-row">
-              <div className="avatar">
-                <div className="w-12 xxs:w-8 rounded-full">
-                  <img src={pub.creatorProfileImage} />
-                </div>
-              </div>
-
-              <div className="flex flex-grow">
-                <div className="flex justify-start">
-                  <Link to={`/userProfile/${pub.creatorId}`}>
-                    <p className="text-black text-sm ml-2 mt-[6px]">
-                      {pub.creatorName}
-                    </p>
-                  </Link>
-                </div>
-
-                <div className="flex flex-grow justify-end">
-                  <Link to={`/publicationsSearched/${pub.typeOfPublication}`}>
-                    {" "}
-                    <p className="ml-8 mt-2 xxs:mt-0 whitespace-no-wrap text-sm  h-6  cursor-pointer hover:font-bold w-[70px]">
-                      {pub.typeOfPublication}
-                    </p>
-                  </Link>
-                </div>
+          <div className="flex flex-col items-center xxs:flex-row  mt-2 ">
+            <div className="avatar">
+              <div className="h-full w-16 xxs:w-8 rounded-full">
+                <img src={pub.creatorProfileImage} />
               </div>
             </div>
+
+            <div className="">
+              <p className="text-black text-sm ml-2 font-bold"> {pub.creatorName}</p>
+            </div>
+
+            <div className="flex flex-grow justify-end invisible xxs:visible">
+              <Link to={`/publicationsSearched/${pub.typeOfPublication}`}>
+                <p className=" ml-8 whitespace-no-wrap text-sm  h-6  cursor-pointer hover:font-bold w-[70px]">
+                  {pub.typeOfPublication}
+                </p>
+              </Link>
+            </div>
+          </div>
           </div>
 
           <div className="grid col-span-2 max-w-fit-contain mt-2">
@@ -241,7 +234,7 @@ const PublicationsCard = ({ pub }) => {
           </div>
 
           <div className="grid col-span-2">
-            <div className="flex justify-center mt-2 max-w-fit-contain">
+            <div className="flex justify-center items-center mt-2 max-w-fit-contain ">
             <div className="avatar flex">
                 <div className="w-24 h-full border rounded">
                   <img src={pub.publicationImages[0]} />
