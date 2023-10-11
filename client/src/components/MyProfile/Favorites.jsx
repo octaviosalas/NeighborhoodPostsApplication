@@ -45,7 +45,7 @@ const Favorites = () => {
   return (
       <>
     
-    <div className={`border flex flex-col md:grid ${number === 1 ? 'md:grid-cols-1' : number === 2 ? 'md:grid-cols-2' : 'md:grid-cols-3'} bg-gray-100 overflow-auto max-h-[350px]`}>
+    <div className={`border flex flex-col md:grid ${number === 1 ? 'md:grid-cols-1' : number === 2 ? 'md:grid-cols-2' : 'md:grid-cols-3'} bg-gray-200 overflow-auto max-h-[350px]`}>
       
     
             {loading ? (

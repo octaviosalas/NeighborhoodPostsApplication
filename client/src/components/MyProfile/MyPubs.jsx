@@ -36,7 +36,7 @@ const MyPubs = () => {
 
   return (
     <>
-  <div className={`border flex flex-col md:grid ${number === 1 ? 'md:grid-cols-1' : number === 2 ? 'md:grid-cols-2' : 'md:grid-cols-3'} bg-gray-100 overflow-auto max-h-[350px]`}>
+  <div className={`border flex flex-col md:grid ${number === 1 ? 'md:grid-cols-1' : number === 2 ? 'md:grid-cols-2' : 'md:grid-cols-3'} bg-gray-200 overflow-auto max-h-[350px]`}>
     {loading ? (
         noPublications ? (
             <div className="flex items-center justify-center w-screen">
@@ -52,7 +52,7 @@ const MyPubs = () => {
                     
                     <div className='flex max-w-fit-contain'>
                         <div className="flex justify-start items-center" style={{ flex: 1 }}>
-                            <img src={p.creatorProfileImage} className='h-12 w-12 rounded-full' />
+                            <img src={p.creatorProfileImage} className='h-12 w-12 rounded-full ml-2 mt-2' />
                             <small className='text-black text-xs ml-2'>{p.creatorName}</small>
                         </div>
 

@@ -83,18 +83,18 @@ import axios from "axios"
                     )}
                   </Disclosure.Button>
                 </div>
-                <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start ">
                   <div className="flex flex-shrink-0 items-center">
                     <Link to={"/"}><p className='text-yellow-500 invisible xxs:visible' >Nei United.</p></Link> 
                   </div>
-                  <div className="hidden sm:ml-6 sm:block">
-                    <div className="flex space-x-4">
+                  <div className="hidden sm:ml-6 sm:block ">
+                    <div className="flex space-x-4 ">
                       {navigation.map((item) => (
                         <a
                           key={item.name}
                           href={item.href}
                           className={classNames(
-                            item.current ? ' text-white' : 'text-black hover:bg-gray-700 hover:text-white',
+                            item.current ? ' text-white' : 'text-black hover:bg-gray-700 hover:text-white ',
                             'rounded-md px-3 py-2 text-sm font-medium'
                           )}
                           aria-current={item.current ? 'page' : undefined}
@@ -218,14 +218,14 @@ import axios from "axios"
             </div>
 
             <Disclosure.Panel className="sm:hidden">
-              <div className="space-y-1 px-2 pb-3 pt-2">
+              <div className=" bg-gray-200 mt-10 flex flex-col items-start justify-start">
                 {navigation.map((item) => (
                   <Disclosure.Button
                     key={item.name}
                     as="a"
                     href={item.href}
                     className={classNames(
-                      item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                      item.current ? 'bg-gray-900 text-white' : 'text-blue-800 font-bold hover:bg-gray-700 hover:text-white',
                       'block rounded-md px-3 py-2 text-base font-medium'
                     )}
                     aria-current={item.current ? 'page' : undefined}

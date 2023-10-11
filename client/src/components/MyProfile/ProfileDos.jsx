@@ -43,9 +43,9 @@ const ProfileDos = () => {
   return (
     <>
 
-    <div className='mt-22 xxs:mt-12 '>
-        <div className='grid grid-cols-7 max-w-fit-contain sm:flex-col bg-gray-100 mt-22'>
-            <div className='grid border col-span-7 sm'>
+    <div className=' mt-22 xxs:mt-12 '>
+        <div className='grid grid-cols-7 max-w-fit-contain sm:flex-col bg-gray-100 '>
+            <div className='grid border col-span-7 mt-24 xxs:mt-16'>
                  <div className='flex justify-end items-center'>
                     <img src={ConfigIcon} className='cursor-pointer mt-2 mr-2'></img>
                  </div>
@@ -59,9 +59,9 @@ const ProfileDos = () => {
                     </div>
                 </div>
                 <div className='flex items-centert justify-center content-between gap-0 lg:gap-6 mt-6 max-w-fit-contain ml-2 mr-2 mb-2 max-w-fit-contain'>
-                    <small className={`font-bold text-xxs ml-12 sm:ml-16 ${showPrivacity ? 'text-gray-500 font-bold' : ''} underline cursor-pointer`} onClick={() => showJustPrivacy()}>Privacity </small>
-                    <small className={`font-bold text-xxs ml-12 sm:ml-16 ${showFavorites ? 'text-gray-500 font-bold' : ''} underline cursor-pointer`} onClick={() => showJustFavorites()}>Favorites </small>
-                    <small className={`font-bold text-xxs ml-4 sm:ml-12 ${showMyPubs ? 'text-gray-500 font-bold' : ''} underline cursor-pointer`} onClick={() => showJustMyPubs()}>Publications </small>
+                    <small className={`font-bold text-xxs ml-8 xxs:ml-2 sm:ml-16 ${showPrivacity ? 'text-gray-500 font-bold' : ''} underline cursor-pointer`} onClick={() => showJustPrivacy()}>Privacity </small>
+                    <small className={`font-bold text-xxs ml-8 xxs:ml-2 sm:ml-16 ${showFavorites ? 'text-gray-500 font-bold' : ''} underline cursor-pointer`} onClick={() => showJustFavorites()}>Favorites </small>
+                    <small className={`font-bold text-xxs ml-8 xxs:ml-2 sm:ml-12 ${showMyPubs ? 'text-gray-500 font-bold' : ''} underline cursor-pointer`} onClick={() => showJustMyPubs()}>Publications </small>
                     
                 </div>
             </div>
