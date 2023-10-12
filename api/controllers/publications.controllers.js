@@ -174,9 +174,9 @@ export const deleteMyPub = async (req, res) => {
 export const sharePublication = async (req, res) => { 
     const {publicationId} = req.params
       const {sharer, sharerId, sharerProfileImage, publicationCreatorId, publicationCreatorName, 
-      publicationCreatorProfileImage, sharingDate, comment, pubDate, categoryPub, publicationImages, publicationDescription, publicationTitle, publicationUbication, publicationAddress} = req.body
-    console.log(req.body)
-    console.log(sharerProfileImage)
+             publicationCreatorProfileImage, sharingDate, comment, pubDate, categoryPub, publicationImages, publicationDescription, publicationTitle, publicationUbication, publicationAddress} = req.body
+             console.log(req.body)
+             console.log(sharerProfileImage)
 
     try {
       const newPublicationToShareInMyWall = new SharedPublications({ 

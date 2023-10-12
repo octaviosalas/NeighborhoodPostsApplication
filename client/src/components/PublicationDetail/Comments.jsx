@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Comments = ({comments}) => {
   return (
@@ -11,7 +12,7 @@ const Comments = ({comments}) => {
                         </div>
 
                         <div className='flex flex-col items-start justify-start'>
-                            <small className='ml-2 text-sm tengo-black font-bold'> {c.senderName}</small>
+                          <Link to={`/userProfile/${c.senderId}`}><small className='ml-2 text-sm tengo-black font-bold cusror-pointer'> {c.senderName}</small></Link>
                             <p className="ml-2 text-xxs text-gray-500" >{c.comment}</p>
                         </div>
                     </div>            

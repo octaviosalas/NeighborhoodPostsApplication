@@ -68,7 +68,7 @@ const OtherUsersProfile = () => {
                 userPublications.length !== 0 ? (
                 <div className='flex flex-col jusitfy-center mt-12 m-2 md:flex-row md:mt-6 lg:m-6'>
 
-                    <div className="border">
+                    <div className="">
                         <OtherUserInfo 
                         quantity={quantityPublications} 
                         photo={profileImage} 
@@ -104,10 +104,7 @@ const OtherUsersProfile = () => {
                         : 
                     null}
 
-                  
-
-                   </div> 
-               
+                   </div>               
                     ) : (
                     <small>{userName} has not Publications yet..`</small>
                     )

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const CommentsPublications = ({comments, close}) => {
     console.log(comments) 
@@ -15,7 +16,7 @@ const CommentsPublications = ({comments, close}) => {
   return (
     <div className=''>
       <div className='flex flex-grow justify-end'>
-          <small onClick={close} className='cursor-pointer'>X</small>
+          <small onClick={close} className='cursor-pointer font-bold'>X</small>
       </div>
       {noComments ? <small className='font-bold'>This Publication has no comments yet</small> : 
        <>
@@ -24,7 +25,7 @@ const CommentsPublications = ({comments, close}) => {
                 <div className='flex flex-grow items-start justify-start'>
                     <div className='flex justify-start'>
                         <img src={c.senderProfileImage} className='h-8 w-8 rounded-xl'/>
-                        <small className='text-xs font-bold text-black ml-2 mt-2'>{c.senderName}</small>
+                      <Link to={`/userProfile/${c.senderId}`}><small className='text-xs font-bold text-black ml-2 mt-2'>{c.senderName}</small></Link>
                     </div>
 
                     <div className='flex justify-end ml-auto'>

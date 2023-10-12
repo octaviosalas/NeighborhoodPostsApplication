@@ -34,21 +34,21 @@ const OtherUserInfo = ({quantity, photo, name, favorites, birthdate, email, loca
 
   return (
     <div>
-      <div className='flex flex-col items-center justify-center bg-white max-w-fit-contain'>
-  <div className='m-8 flex flex-col items-center justify-center'> 
-    <img className='rounded-full h-28 w-28 lg:h-40 lg:w-40 max-w-fit-contain' src={photo}/>
-    <small className='text-black font-bold text-lg mt-2'>{name}</small>
-  </div>
+      <div className='flex flex-col items-center justify-center bg-white  max-w-fit-contain'>
+          <div className='m-8 flex flex-col items-center justify-center'> 
+              <img className='rounded-full h-28 w-28 lg:h-40 lg:w-40 max-w-fit-contain' src={photo}/>
+              <small className='text-black font-bold text-lg mt-2'>{name}</small>
+          </div>
 
-  <div className='flex flex-col max-w-fit-contain mt-2 md:mt-4'>
-    <small className='text-sm text-black font-bold mt-2'>{location}</small>
-    <small className='text-sm font-bold text-black'>{birthdate}</small>
-    <small className='text-sm font-bold text-black'>{email}</small>
-  </div>
+          <div className='flex flex-col max-w-fit-contain mt-2 md:mt-4'>
+            <small className='text-sm text-black font-bold mt-2'>{location}</small>
+            <small className='text-sm font-bold text-black'>{birthdate}</small>
+            <small className='text-sm font-bold text-black'>{email}</small>
+          </div>
 
  
 
-  <div className='border border-gray-600 mr-2 ml-2 mt-4 w-full invisible md:visible'></div>
+         <div className='border border-gray-600 mr-2 ml-2 mt-4 w-full invisible md:visible'></div>
 
   {showFirst? 
             <div className='flex flex-col items-center justify-center mt-2 md:mt-6 max-w-fit-contain '>

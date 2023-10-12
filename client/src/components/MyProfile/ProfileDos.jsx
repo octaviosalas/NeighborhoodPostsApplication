@@ -54,7 +54,7 @@ const ProfileDos = () => {
                         <ModalProfileChangePicture photo={userCtx.userProfileImage}/>
                         <div className='flex-box'>
                             <h4 className='ml-2 font-bold text-sm xxs:text-xl'>{userCtx.userName}</h4>
-                            <small className='text-sm text-gray-500 cursor-pointer underline'>Change Picture</small>
+                            <small className='text-sm text-gray-500 cursor-pointer underline'>Click Photo to Change it</small>
                         </div>
                     </div>
                 </div>
