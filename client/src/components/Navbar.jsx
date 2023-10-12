@@ -218,7 +218,7 @@ import axios from "axios"
             </div>
 
             <Disclosure.Panel className="sm:hidden">
-              <div className=" bg-gray-200 mt-10 flex flex-col items-start justify-start">
+              <div className=" bg-gray-200 rounded-lg mt-10 flex flex-col items-start justify-start">
                 {navigation.map((item) => (
                   <Disclosure.Button
                     key={item.name}
@@ -226,7 +226,7 @@ import axios from "axios"
                     href={item.href}
                     className={classNames(
                       item.current ? 'bg-gray-900 text-white' : 'text-blue-800 font-bold hover:bg-gray-700 hover:text-white',
-                      'block rounded-md px-3 py-2 text-base font-medium'
+                      'block rounded-md px-3 py-2 text-md font-medium'
                     )}
                     aria-current={item.current ? 'page' : undefined}
                   >

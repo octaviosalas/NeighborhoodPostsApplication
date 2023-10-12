@@ -198,11 +198,13 @@ const PublicationsCard = ({ pub }) => {
                 </div>
               </div>
 
-              <div className="">
-                <p className="text-black text-sm ml-2 font-bold">
+              <div className="mt-2 xxs:mt-0">
+              <Link to={`/userProfile/${pub.creatorId}`}>
+               <p className="text-black text-sm ml-2 font-bold">
                   {" "}
                   {pub.creatorName}
                 </p>
+                </Link> 
               </div>
 
               <div className="flex flex-grow justify-end invisible xxs:visible">
@@ -241,13 +243,13 @@ const PublicationsCard = ({ pub }) => {
           <div className="grid col-span-2">
             <div className="flex justify-center items-center mt-2 max-w-fit-contain ">
               <div className="avatar flex">
-                <div className="w-24 h-full border rounded">
+                <div className="w-24 md:w-32 xl:w-40  h-full border rounded">
                   <img src={pub.publicationImages[0]} />
                 </div>
               </div>
 
               <div className="avatar flex">
-                <div className="w-24 border rounded ml-4">
+                <div className="w-24 md:w-32 xl:w-40 border rounded ml-4">
                   <img src={pub.publicationImages[1]} />
                 </div>
               </div>

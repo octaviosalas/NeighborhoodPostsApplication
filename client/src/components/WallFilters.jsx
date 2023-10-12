@@ -7,23 +7,6 @@ import {useNavigate} from "react-router-dom"
 import {toast, ToastContainer} from "react-toastify"
 import { Link } from 'react-router-dom';
 
-/*// Para almacenar un valor en localStorage
-localStorage.setItem('clave', 'valor');
-
-// Ejemplo:
-localStorage.setItem('usuario', 'juan');
-
-// Para recuperar un valor de localStorage
-const valorRecuperado = localStorage.getItem('clave');
-
-// Ejemplo:
-const usuario = localStorage.getItem('usuario');
-
-// Para eliminar un valor de localStorage
-localStorage.removeItem('clave');
-
-// Ejemplo:
-localStorage.removeItem('usuario');*/
 
 const WallFilters = () => {
 

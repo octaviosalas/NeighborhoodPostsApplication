@@ -85,10 +85,9 @@ const PublicationDetailDos = () => {
                 <div className='grid col-span-1 w-full border'>
                     <div className='w-full flex justify-center max-w-fit-contain'> 
                         <div className='mt-2 max-w-fit-contain'>
-                            <small className={`mx-auto  ml-6 lg:ml-12 font-bold cursor-pointer ${showComments ? 'text-blue-500' : ''}`} onClick={() => showOnlyComments()}>Coments</small>
-                            <small className={`mx-auto  ml-6 lg:ml-16 font-bold cursor-pointer ${showLikes ? "text-blue-500" : ""}`} onClick={() => showOnlyLikes()}>Likes</small>
-                            <small className={`mx-auto  ml-6 lg:ml-16 font-bold cursor-pointer ${showShared ? "text-blue-500" : ""}`}onClick={() => showOnlyShared()}>Who shared it</small>
-                            <small className='mx-auto   ml-6 lg:ml-16 font-bold cursor-pointer'>Visits</small>
+                            <small className={`mx-auto  ml-8 lg:ml-12 font-bold cursor-pointer ${showComments ? 'text-blue-500' : ''}`} onClick={() => showOnlyComments()}>Coments</small>
+                            <small className={`mx-auto  ml-8 lg:ml-16 font-bold cursor-pointer ${showLikes ? "text-blue-500" : ""}`} onClick={() => showOnlyLikes()}>Likes</small>
+                            <small className={`mx-auto  ml-8 lg:ml-16 font-bold cursor-pointer ${showShared ? "text-blue-500" : ""}`}onClick={() => showOnlyShared()}>Who shared it</small>
                         </div>
                     </div>
 
@@ -130,7 +129,7 @@ const PublicationDetailDos = () => {
                             <small className={`mx-auto  ml-6 lg:ml-12 font-bold cursor-pointer ${showComments ? 'text-blue-500' : ''}`} onClick={() => showOnlyComments()}>Coments</small>
                             <small className={`mx-auto  ml-6 lg:ml-16 font-bold cursor-pointer ${showLikes ? "text-blue-500" : ""}`} onClick={() => showOnlyLikes()}>Likes</small>
                             <small className={`mx-auto  ml-6 lg:ml-16 font-bold cursor-pointer ${showShared ? "text-blue-500" : ""}`}onClick={() => showOnlyShared()}>Who shared it</small>
-                            <small className='mx-auto  ml-6  font-bold'>Visits</small>
+                       
                         </div>
                     </div>
 

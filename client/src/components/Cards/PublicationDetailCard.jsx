@@ -11,34 +11,27 @@ const PublicationDetailCard = ({ pub }) => {
     <div className="mb-4">
       <div className="card rounded-xs 2xl:w-[500px] xl:w-[480px] lg:w-[480px] md:max-w-fit-contain bg-base-100  mt-4">
         <div className="card-body grid grid-cols-2" key={pub._id}>
-          <div className="grid col-span-2">
-            <div className="flex flex-col items-center justify-center xxs:flex xxs:flex-row">
+        <div className="grid col-span-2">
+            <div className="flex flex-col items-center xxs:flex-row  mt-2 ">
               <div className="avatar">
-                <div className="w-16 rounded-full">
-                  <img
-                    className=" rounded-full xxs:w-8"
-                    src={pub.creatorProfileImage}
-                  />
+                <div className="h-full w-20 sm:w-24 lg:w-24 xxs:w-8 rounded-full">
+                  <img src={pub.creatorProfileImage} />
                 </div>
               </div>
 
-              <div className="flex flex-grow">
-                <div className="flex justify-start">
-                  <Link to={`/userProfile/${pub.creatorId}`}>
-                    <p className="text-black text-md ml-2 mt-[6px]">
-                      {pub.creatorName}
-                    </p>
-                  </Link>
-                </div>
+              <div className="mt-2 xxs:mt-0">
+                <p className="text-black text-sm ml-2 font-bold">
+                  {" "}
+                  {pub.creatorName}
+                </p>
+              </div>
 
-                <div className="flex flex-grow justify-end">
-                  <Link to={`/publicationsSearched/${pub.typeOfPublication}`}>
-                    {" "}
-                    <p className="ml-8 mt-2 xxs:mt-0 whitespace-no-wrap text-md  h-6  cursor-pointer hover:font-bold w-[70px]">
-                      {pub.typeOfPublication}
-                    </p>
-                  </Link>
-                </div>
+              <div className="flex flex-grow justify-end invisible xxs:visible">
+                <Link to={`/publicationsSearched/${pub.typeOfPublication}`}>
+                  <p className=" ml-8 whitespace-no-wrap text-sm  h-6  cursor-pointer hover:font-bold w-[70px]">
+                    {pub.typeOfPublication}
+                  </p>
+                </Link>
               </div>
             </div>
           </div>

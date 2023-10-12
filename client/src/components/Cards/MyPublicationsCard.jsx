@@ -125,13 +125,13 @@ const MyPublicationsCard = ({ pub, comments }) => {
 
           <div className="flex justify-center items-center">
             <div className="avatar">
-              <div className="w-24 rounded">
+              <div className="w-24 md:w-32 xl:w-40  h-full  rounded">
                 <img src={pub.publicationImages[0]} />
               </div>
             </div>
 
             <div className="avatar">
-              <div className="w-24 rounded ml-4">
+              <div className="w-24 md:w-32 xl:w-40  h-full  rounded ml-4">
                 <img src={pub.publicationImages[1]} />
               </div>
             </div>
