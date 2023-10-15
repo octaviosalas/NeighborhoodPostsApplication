@@ -37,11 +37,11 @@ const OtherUserInfo = ({quantity, photo, name, favorites, birthdate, email, loca
       <div className='flex flex-col items-center justify-center bg-white  max-w-fit-contain'>
           <div className='m-8 flex flex-col items-center justify-center'> 
               <img className='rounded-full h-28 w-28 lg:h-40 lg:w-40 max-w-fit-contain' src={photo}/>
-              <small className='text-black font-bold text-lg mt-2'>{name}</small>
+              <small className='text-black font-bold text-lg '>{name}</small>
           </div>
 
-          <div className='flex flex-col max-w-fit-contain mt-2 md:mt-4'>
-            <small className='text-sm text-black font-bold mt-2'>{location}</small>
+          <div className='flex flex-col max-w-fit-contain  md:mt-4'>
+            <small className='text-sm text-black font-bold md:mt-2'>{location}</small>
             <small className='text-sm font-bold text-black'>{birthdate}</small>
             <small className='text-sm font-bold text-black'>{email}</small>
           </div>
@@ -56,10 +56,12 @@ const OtherUserInfo = ({quantity, photo, name, favorites, birthdate, email, loca
                 <small className='text-gray-500 text-sm font-bold underline cursor-pointer' onClick={() => openFavs()}>{favorites} Favorites</small>
             </div> : null}
             
-            {showSecond ? <div className='flex flex-col items-center justify-center mt-4'>
-     <small className='underline text-gray-400 cursor-pointer'  onClick={() => openPublications()}>Show Publications</small>
-     <small  className="underline text-gray-400 cursor-pointer" onClick={() => openFavs()}>Show Favorites</small>
-  </div> : null}
+            {showSecond ? <div className='flex gap-4 md:flex-col items-center justify-center mt-4'>
+                <small className='underline text-gray-400 cursor-pointer'  onClick={() => openPublications()}>Show Publications</small>
+                <small  className="underline text-gray-400 cursor-pointer" onClick={() => openFavs()}>Show Favorites</small>
+              </div>
+               :
+             null}
  
 </div>
     </div>

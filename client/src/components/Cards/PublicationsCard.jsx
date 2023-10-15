@@ -16,6 +16,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import WhoSharedPub from "../Modals/WhoSharedPub";
 import ImagesModal from "../Modals/ImagesModal";
 
+
 const PublicationsCard = ({ pub }) => {
   const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
@@ -225,7 +226,7 @@ const PublicationsCard = ({ pub }) => {
                   {pub.publicationTitle}
                 </p>
               </Link>
-              <p className="justify-center  text-xs mr-4">
+              <p className="justify-center  text-xs mr-4 mt-2">
                 {pub.publicationDescription}
               </p>
 
@@ -352,6 +353,8 @@ const PublicationsCard = ({ pub }) => {
                 )}
               </div>
             </div>
+
+
           </div>
         </div>
 

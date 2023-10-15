@@ -55,7 +55,7 @@ const MyPublications = () => {
                          )
                        : ( 
                    <>
-                        <div className='mt-24 xxs:mt-12 flex flex-col items-center justify-center'>
+                        <div className='mt-24 xxs:mt-20 flex flex-col items-center justify-center'>
                             <span className='text-md'> 
                                 <b>{userContx.userName}</b>
                                 <br />

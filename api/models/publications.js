@@ -38,9 +38,6 @@ const publicationsSchema = mongoose.Schema( {
     creatorProfileImage: { 
         type: String
     }
-   
-
-
 })
 
 const Publications = mongoose.model("Publications", publicationsSchema)

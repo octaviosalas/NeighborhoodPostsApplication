@@ -8,12 +8,12 @@ const Comments = ({comments}) => {
                 <div className=''>
                     <div className='flex mt-2'> 
                         <div>
-                          <img className='h-full w-12 md:w-20 rounded-full' src={c.senderProfileImage}/>
+                          <img className='h-12 md:h-16 w-12 md:w-16 rounded-full' src={c.senderProfileImage}/>
                         </div>
 
                         <div className='flex flex-col items-start justify-start'>
                           <Link to={`/userProfile/${c.senderId}`}><small className='ml-2 text-sm tengo-black font-bold cusror-pointer'> {c.senderName}</small></Link>
-                            <p className="ml-2 text-xxs text-gray-500" >{c.comment}</p>
+                            <p className="ml-2 text-xxs text-gray-500 items-start" >{c.comment}</p>
                         </div>
                     </div>            
                 </div>

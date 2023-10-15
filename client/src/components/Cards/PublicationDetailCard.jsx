@@ -14,7 +14,7 @@ const PublicationDetailCard = ({ pub }) => {
         <div className="grid col-span-2">
             <div className="flex flex-col items-center xxs:flex-row  mt-2 ">
               <div className="avatar">
-                <div className="h-full w-20 sm:w-24 lg:w-24 xxs:w-8 rounded-full">
+                <div className="h-full w-16 sm:w-16 xl:w-22 rounded-full">
                   <img src={pub.creatorProfileImage} />
                 </div>
               </div>
@@ -40,11 +40,11 @@ const PublicationDetailCard = ({ pub }) => {
             <div className="flex flex-col items-center justify-center ml-4">
               <Link to={`/publication/${pub._id}`}>
                 {" "}
-                <p className="font-bold text-md text-black">
+                <p className="font-bold text-sm  xxs:text-md text-black">
                   {pub.publicationTitle}
                 </p>
               </Link>
-              <p className="justify-center text-sm mr-4">
+              <p className="justify-center text-sm mr-4 mt-2">
                 {pub.publicationDescription}
               </p>
 

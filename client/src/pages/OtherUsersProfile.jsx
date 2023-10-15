@@ -61,12 +61,12 @@ const OtherUsersProfile = () => {
 
 
   return (
-        <div className='mt-22 xl:mt-12 overflow-auto max-h-[300px] xl:max-h-[550px] 2xl:max-h-[750px] border'>
+        <div className='mt-22 xl:mt-12 overflow-auto max-h-[4910px] xxs:max-h-[540px] sm:max-h-[470px] lg:max-h-[550px] 2xl:max-h-[750px] border'>
                {load ? (
                 <LoadingPublications text={`${userName} data..`}/>
                    ) : (
                 userPublications.length !== 0 ? (
-                <div className='flex flex-col jusitfy-center mt-12 m-2 md:flex-row md:mt-6 lg:m-6'>
+                <div className='flex flex-col jusitfy-center mt-4 m-2 md:flex-row md:mt-6 lg:m-6'>
 
                     <div className="">
                         <OtherUserInfo 
@@ -84,7 +84,7 @@ const OtherUsersProfile = () => {
 
                   {showUserPublications ?  
                       <div className='ml-2 md:ml-12 flex flex-col items-center justify-center'>
-                         <div className='flex flex-col justify-center items-center mt-24 md:mt-12'>
+                         <div className='flex flex-col justify-center items-center mt-8 md:mt-12'>
                               <small className='font-bold text-black text-sm'> Publications</small>
                               <KeyboardArrowDownIcon/>
                          </div>
@@ -95,7 +95,7 @@ const OtherUsersProfile = () => {
 
                     {showFavorites ? 
                         <div className='ml-2 md:ml-12 flex flex-col items-center justify-center'>
-                            <div className='flex flex-col  justify-center items-center mt-24 md:mt-12'>
+                            <div className='flex flex-col  justify-center items-center mt-8 md:mt-12'>
                               <small className='font-bold text-black text-sm'> Favorites Publications</small>
                               <KeyboardArrowDownIcon/>
                             </div>
