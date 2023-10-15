@@ -6,6 +6,7 @@ import { UserContext } from '../../store/usercontext'
 import LoadingPublications from '../../Hooks/LoadingPublications'
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { Link } from 'react-router-dom'
+import { deleteFavorite } from '../../../../api/controllers/publications.controllers'
 
 
 const Favorites = () => {
@@ -22,7 +23,6 @@ const Favorites = () => {
     }, [])
 
     useEffect(() => { 
-       
         axios.get(`http://localhost:4000/getMyFavs/${userContx.userId}`)
             .then((res) => { 
             console.log(res.data)
@@ -39,6 +39,20 @@ const Favorites = () => {
             console.log(err)
             })
     }, [])
+
+    const deleteOfMyFavorites = (id) => { 
+         axios.delete(`http://localhost:4000/deleteFav/${id}`)
+            .then((res) => { 
+                console.log(res.data)
+                setTimeout(() => { 
+                   window.location.reload()
+                }, 2000)
+                })
+                .catch((err) => { 
+                console.log(err)
+                })
+
+    }
 
     
 
@@ -82,7 +96,7 @@ const Favorites = () => {
                                          <img src={p.publicationImages[0]} className='h-16 w-16'/>
                                     </div>
                                     <div>
-                                        <small className='underline text-xs font-bold text-gray-500 cursor-pointer hover:text-black'>Remove of Favs</small>
+                                        <small className='underline text-xs font-bold text-gray-500 cursor-pointer hover:text-black' onClick={() => deleteOfMyFavorites(p._id)}>Remove of Favs</small>
                                     </div>
                             </div>
                             </div>

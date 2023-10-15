@@ -20,19 +20,25 @@ const SharedPublicationsCard = ({pub}) => {
             const userContx = useContext(UserContext)
             const [showComments, setShowComments] = useState(false)
             const [loadComments, setLoadComments] = useState(false)
+
+            const deleteSharedPublication = (id) => { 
+              axios.delete(`http://localhost:4000/deleteMyShared/${id}`)
+                   .then((res) => { 
+                    console.log(res.data)
+                   })
+                   .catch((err) => { 
+                    console.log(err)
+                   })
+            }
          
   return (
-    <div className='card w-[300px] md:w-[460px] bg-base-100  mt-4'> 
-        <div>
+    <div className='card rounded-xs 2xl:w-[500px] xl:w-[480px] lg:w-[480px] max-w-fit-contain bg-base-100 shadow-2xl shadow-side-left mt-4 '> 
+        <div className=''>
             <div className='flex flex-grow'>
-
                     <div className='flex justify-start mt-2'>
                         <img className="rounded-2xl h-8 w-8" src={pub.sharerProfileImage}/>
                         <small className="ml-2 mt-2 whitespace-nowrap">{pub.sharer} </small>
                     </div>
-      
-                  
-
             </div>
 
                 <div className='justify-center mt-4'>
@@ -40,7 +46,7 @@ const SharedPublicationsCard = ({pub}) => {
                 </div>
               
             </div>
-         <div className="rounded-lg bg-base-100 shadow-[0_35px_60px_-15px_rgba(0.2,0.2,0.2,0.3)] ring-1 ring-gray-300 mt-4">
+         <div className="rounded-lg bg-base-100 shadow-[0_35px_60px_-15px_rgba(0.2,0.2,0.2,0.3)] ring-1 ring-gray-300 mt-4 max-w-fit-contain">
                                 <div className="card-body" key={pub._id}>
                                         <div className='flex flex-col items-center justify-center md:flex'>
                                                <div className="avatar">
@@ -53,15 +59,8 @@ const SharedPublicationsCard = ({pub}) => {
 
                                                       <div className='flex flex-grow justify-start'>
                                                         <p className="text-black text-sm ml-2 mt-[6px]">{pub.publicationCreatorName}</p>
-                                                      </div>
-
-                                                 
-                                                    
-                                                </div>
-
-                                                
-
-                                                
+                                                      </div>                                                    
+                                                </div>                                               
                                          </div>
 
 
@@ -78,52 +77,23 @@ const SharedPublicationsCard = ({pub}) => {
 
                                        <div className='flex justify-center mt-2'>
                                                <div className="avatar">
-                                                    <div className="w-24 rounded">
+                                                    <div className="w-24 md:w-32 xl:w-40  rounded">
                                                         <img src={pub.publicationImages[0]} />
                                                     </div>
                                               </div>
 
                                                <div className="avatar">
-                                                    <div className="w-24 rounded ml-4">
+                                                    <div className="w-24 md:w-32 xl:w-40  rounded ml-4">
                                                         <img src={pub.publicationImages[1]} />
                                                     </div>
                                                </div>
-                                         </div> 
-
-
-                                          <div className="h-6 bg-gray-100">
-                                                <div className='flex flex-grow justify-end'>
-                                                    <small className='text-xs text-gray-500 cursor-pointer underline' > Comments  </small>
-                                                    <small className='text-xs text-gray-500 ml-2 cursor-pointer underline'>1 Shared</small>
-                                                </div>
-                                          </div>
-
-                                             <div className='flex justify-between '>
-                                                        <button className="btn border-none">
-                                                          <FavoriteBorderIcon />
-                                                        </button>  
-
-                                                         <div>
-                                                              <CommentModal  />
-                                                         </div> 
-
-                                                         <div>                   
-                                                              <ShareModal  />   
-                                                         </div> 
-                                                    
-                                             </div>                                                     
-                                </div>
-
-                                           {loadComments ? (
-                                              <div>
-                                                <LoadingPublications text={"comments"}/>
-                                              </div>
-                                            ) : showComments ? (
-                                              <div>
-                                                <CommentsPublications />
-                                              </div>
-                                            ) : null}
+                                         </div>                                                 
+                                </div>        
                         </div>
+
+                        <div className='flex items-center justify-center mt-4'>
+                                  <small className='underline cursor-pointer font-bold' onClick={() => deleteSharedPublication(pub._id)}>Delete</small>
+                        </div> 
       
 
       <ToastContainer/>

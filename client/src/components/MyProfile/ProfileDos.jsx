@@ -44,7 +44,7 @@ const ProfileDos = () => {
     <>
 
     <div className=' mt-22 xxs:mt-12 '>
-        <div className='grid grid-cols-7 max-w-fit-contain sm:flex-col bg-gray-100 '>
+        <div className='grid grid-cols-7 max-w-fit-contain sm:flex-col '>
             <div className='grid border col-span-7 mt-24 xxs:mt-16'>
                  <div className='flex justify-end items-center'>
                     <img src={ConfigIcon} className='cursor-pointer mt-2 mr-2'></img>

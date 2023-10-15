@@ -167,33 +167,27 @@ export const changeUserData = async (req, res) => {
        return res.status(401).json({ message: 'La contraseña actual es incorrecta' });
      }
  
-     // Crear un objeto para almacenar las actualizaciones
      const updates = {};
  
-     // Si se proporciona un nuevo nombre que es diferente, agregarlo a las actualizaciones
      if (name && name !== user.name) {
        updates.name = name;
      }
  
-     // Si se proporciona un nuevo correo electrónico que es diferente, agregarlo a las actualizaciones
      if (email && email !== user.email) {
        updates.email = email;
      }
  
-     // Si se proporciona una nueva contraseña, agregarla a las actualizaciones
      if (newPassword) {
        const hashedNewPassword = await bcrypt.hash(newPassword, 10);
        updates.password = hashedNewPassword;
      }
  
-     // Actualizar los datos solo si hay actualizaciones pendientes
      if (Object.keys(updates).length > 0) {
        await User.findOneAndUpdate({ _id: userId }, { $set: updates });
      }
  
      res.status(200).json({ message: 'Datos actualizados con éxito' });
    } catch (error) {
-     // Maneja errores
      console.error(error);
      res.status(500).json({ message: 'Error interno del servidor' });
    }

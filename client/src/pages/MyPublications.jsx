@@ -11,7 +11,7 @@ import fon from "../img/imageFon.png"
 import useGetBackendQueries from "../Hooks/useGetBackendQueries"
 import LoadingPublications from "../Hooks/LoadingPublications"
 import SharedPublicationsCard from '../components/Cards/SharedPublicationsCard';
-
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 
 const MyPublications = () => {
@@ -65,11 +65,20 @@ const MyPublications = () => {
 
                         <div>
                             {myData.map((p) => <MyPublicationsCard pub={p} comments={publicationsComments}/>)}
-                            {otherData.map((p) => <SharedPublicationsCard pub={p} />)}
                         </div>
 
-                        <div className='mt-12'>
-                            <Link to={`/`}> <span className='text-blue-950 cursor-pointer'>Create One</span></Link> 
+                        <div className='flex flex-col justify-center items-center mt-24'> 
+
+                           <div className='flex flex-col items-center justify-center'>
+                              <h4 className='font-bold text-xxs'>Shared Publications</h4>
+                              <KeyboardArrowDownIcon/>
+                           </div> 
+
+                           <div className='mt-4'>
+                             {otherData.map((p) => <SharedPublicationsCard pub={p} />)}
+                           </div>
+
+                   
                         </div>
                    </> 
                     )}

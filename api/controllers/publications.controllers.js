@@ -151,6 +151,22 @@ export const getFavs = async (req, res) => {
             })
 }
 
+export const deleteFavorite = async (req, res) => { 
+   const {id} = req.params 
+
+   try {
+        Favorites.findOneAndDelete({_id: id})
+                 .then((favorite) => { 
+                  res.json({message:"The Publication was removed of Favorites", favorite})
+                 })
+                 .catch((err) => { 
+                  console.log(err)
+                 })
+   } catch (error) {
+       console.log(error)
+   }
+}
+
 export const deleteMyPub = async (req, res) => { 
    const {id} = req.params
    
@@ -232,6 +248,19 @@ export const getSharedNumber = async (req, res) => {
                       .catch((err) => { 
                         console.log(err)
                       })
+}
+ 
+export const deleteSharedPublication = async (req, res) => { 
+   const {id} = req.params
+   try {
+      SharedPublications.findOneAndDelete({_id: id})
+                        .then((deleted) => { 
+                           res.json({message: "The Publication has been deleted of your Wall", deleted})
+                        })
+                        .catch((err) => console.log(err))
+   } catch (error) {
+       console.log(error)
+   }
 }
 
 export const getPublicationLikes = async (req, res) => { 
