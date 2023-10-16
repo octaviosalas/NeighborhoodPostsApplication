@@ -8,7 +8,7 @@ import { UserContext } from "../../store/usercontext";
 import { useContext } from "react";
 import { toast, ToastContainer } from "react-toastify";
 
-const ShareModal = ({ pubChoosen, publicationId,creatorName,creatorId,closeModalShare,profileImage}) => {
+const ShareModal = ({ pubChoosen, publicationId,creatorName,creatorId,closeModalShare,profileImage }) => {
   
   const [publicationTotal, setPublicationTotal] = useState([]);
   const [loading, setLoading] = useState(false);
