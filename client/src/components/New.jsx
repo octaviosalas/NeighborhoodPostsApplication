@@ -78,7 +78,7 @@ const New = () => {
             publicationDescription: description,
             creatorProfileImage: userContx.userProfileImage
         })
-        axios.post("http://localhost:4000/saveNewPublication", review)
+        axios.post("https://app-citizens.onrender.com/saveNewPublication", review)
              .then((res) => { 
                 console.log(res.data)
                 setSuccesfullyMsgBackend(res.data.message)

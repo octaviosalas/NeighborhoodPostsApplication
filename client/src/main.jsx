@@ -5,6 +5,8 @@ import './index.css'
 import './index.css'
 import { BrowserRouter } from 'react-router-dom';
 import "react-toastify/dist/ReactToastify.css"
+//axios.defaults.baseURL = "http://localhost:4000"
+axios.defaults.baseURL = "https://app-citizens.onrender.com/"
 
 
 

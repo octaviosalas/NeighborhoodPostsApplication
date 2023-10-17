@@ -55,7 +55,7 @@ const PublicationsCard = ({ pub }) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/viewPublicationComments/${pub._id}`)
+      .get(`https://app-citizens.onrender.com/viewPublicationComments/${pub._id}`)
       .then((res) => {
         setQuantityComments(res.data.length);
       })
@@ -63,7 +63,7 @@ const PublicationsCard = ({ pub }) => {
         console.log(err);
       });
     axios
-      .get(`http://localhost:4000/getSharedNumber/${pub._id}`)
+      .get(`https://app-citizens.onrender.com/getSharedNumber/${pub._id}`)
       .then((res) => {
         setQuantityTimesShared(res.data.length);
       })
@@ -108,7 +108,7 @@ const PublicationsCard = ({ pub }) => {
       likedByPhoto: userContx.userProfileImage,
     };
     axios
-      .post("http://localhost:4000/markAsFavorite", newFavPub)
+      .post("https://app-citizens.onrender.com/markAsFavorite", newFavPub)
       .then((res) => {
         console.log(res.data);
         notificacionDeToast();
@@ -128,7 +128,7 @@ const PublicationsCard = ({ pub }) => {
       publicationId: pub._id,
     };
     axios
-      .post("http://localhost:4000/saveNewNotification", newNotification)
+      .post("https://app-citizens.onrender.com/saveNewNotification", newNotification)
       .then((res) => {
         console.log(res.data);
       })
@@ -139,7 +139,7 @@ const PublicationsCard = ({ pub }) => {
 
   const getPublicationComments = (idPublication) => {
     axios
-      .get(`http://localhost:4000/viewPublicationComments/${idPublication}`)
+      .get(`https://app-citizens.onrender.com/viewPublicationComments/${idPublication}`)
       .then((res) => {
         console.log(res.data);
         setPublicationComments(res.data);

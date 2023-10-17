@@ -17,7 +17,7 @@ const SearchWithMultipleFilters = () => {
     const filterState = JSON.parse(sessionStorage.getItem('filterState'));
 
   useEffect(() => { 
-    axios.get("http://localhost:4000/getOtherUsersPublications")
+    axios.get("https://app-citizens.onrender.com/getOtherUsersPublications")
          .then((res) => { 
                 const allPubs = res.data
                 const publicacionesFiltradas = allPubs.filter((publicacion) => {

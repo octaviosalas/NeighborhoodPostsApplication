@@ -29,7 +29,7 @@ const Privacity = ({close}) => {
         } else if (newPassword.length <= 5) { 
             setShortPassword(true)
         } else { 
-            axios.put(`http://localhost:4000/changeUserData/${userCtx.userId}`, newData)
+            axios.put(`https://app-citizens.onrender.com/changeUserData/${userCtx.userId}`, newData)
                  .then((res) => { 
                     console.log(res.data)
                  })

@@ -24,7 +24,7 @@ const UserStats = () => {
     const [load, setLoad] = useState(true)
 
     useEffect(() =>{ 
-        axios.get(`http://localhost:4000/getMyPublications/${userContx.userId}`)
+        axios.get(`https://app-citizens.onrender.com/getMyPublications/${userContx.userId}`)
              .then((res) => { 
                  console.log(res.data)
                  setAllMyPubs(res.data)
@@ -35,7 +35,7 @@ const UserStats = () => {
      }, [])
 
      useEffect(() => { 
-        axios.get(`http://localhost:4000/getMyCommentsSent/${userContx.userId}`)
+        axios.get(`https://app-citizens.onrender.com/getMyCommentsSent/${userContx.userId}`)
              .then((res) => { 
                 console.log(res.data)
                 setCommentsSent(res.data)
@@ -46,7 +46,7 @@ const UserStats = () => {
      }, [])
 
      useEffect(() => { 
-        axios.get(`http://localhost:4000/getMyFavs/${userContx.userId}`)
+        axios.get(`https://app-citizens.onrender.com/getMyFavs/${userContx.userId}`)
              .then((res) => { 
                 console.log(res.data)
                 setAllMyFavs(res.data)

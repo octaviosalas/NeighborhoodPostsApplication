@@ -23,7 +23,7 @@ const Favorites = () => {
     }, [])
 
     useEffect(() => { 
-        axios.get(`http://localhost:4000/getMyFavs/${userContx.userId}`)
+        axios.get(`https://app-citizens.onrender.com/getMyFavs/${userContx.userId}`)
             .then((res) => { 
             console.log(res.data)
             setNumber(res.data.length)
@@ -41,7 +41,7 @@ const Favorites = () => {
     }, [])
 
     const deleteOfMyFavorites = (id) => { 
-         axios.delete(`http://localhost:4000/deleteFav/${id}`)
+         axios.delete(`https://app-citizens.onrender.com/deleteFav/${id}`)
             .then((res) => { 
                 console.log(res.data)
                 setTimeout(() => { 

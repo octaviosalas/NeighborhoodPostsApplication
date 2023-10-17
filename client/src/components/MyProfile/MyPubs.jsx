@@ -15,7 +15,7 @@ const MyPubs = () => {
 
  
         useEffect(() => { 
-            axios.get(`http://localhost:4000/getMyPublications/${userContx.userId}`)
+            axios.get(`https://app-citizens.onrender.com/getMyPublications/${userContx.userId}`)
                   .then((res) => { 
                         console.log(res.data)
                         setNumber(res.data.length)

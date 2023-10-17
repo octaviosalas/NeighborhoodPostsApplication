@@ -26,7 +26,7 @@ const WhoSharedPub = ({ publicationId, close}) => {
 
 
     useEffect(() => {
-      axios.get(`http://localhost:4000/getSharedNumber/${publicationId}`)
+      axios.get(`https://app-citizens.onrender.com/getSharedNumber/${publicationId}`)
         .then((res) => {
           setPeopleWhoShared(res.data);
           console.log(res.data)
@@ -124,7 +124,7 @@ const WhoSharedPub = ({ publicationId, close}) => {
 
 
     useEffect(() => {
-      axios.get(`http://localhost:4000/getSharedNumber/${publicationId}`)
+      axios.get(`https://app-citizens.onrender.com/getSharedNumber/${publicationId}`)
         .then((res) => {
           setPeopleWhoShared(res.data);
           console.log(res.data)

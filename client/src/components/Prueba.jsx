@@ -10,7 +10,7 @@ const Prueba = () => {
     const [publicationData, setPublicationData] = useState([])
 
     useEffect(() => { 
-       axios.get("http://localhost:4000/getOnePublication/64ef3f94a73bd05a4aab33a5") 
+       axios.get("https://app-citizens.onrender.com/getOnePublication/64ef3f94a73bd05a4aab33a5") 
             .then((res) => { 
                 console.log(res.data)
                 setPublicationData(res.data)

@@ -22,7 +22,7 @@ const SharedPublicationsCard = ({pub}) => {
             const [loadComments, setLoadComments] = useState(false)
 
             const deleteSharedPublication = (id) => { 
-              axios.delete(`http://localhost:4000/deleteMyShared/${id}`)
+              axios.delete(`https://app-citizens.onrender.com/deleteMyShared/${id}`)
                    .then((res) => { 
                     console.log(res.data)
                    })

@@ -9,7 +9,7 @@ const useGetBackendQueries = (route) => {
   const [noPublications, setNoPublications] = useState(false)
 
   useEffect(() => { 
-     axios.get(`http://localhost:4000/${route}`)
+     axios.get(`https://app-citizens.onrender.com/${route}`)
           .then((res) => { 
             if(res.data.length !== 0) { 
               setData(res.data)

@@ -16,7 +16,7 @@ const UserManualSearch = () => {
      console.log(params)
 
     useEffect(() => {
-        axios.get(`http://localhost:4000/getPublicationsWithParams/${params.searchParam}`)
+        axios.get(`https://app-citizens.onrender.com/getPublicationsWithParams/${params.searchParam}`)
              .then((res) => { 
              console.log(res.data)
              setResults(res.data)

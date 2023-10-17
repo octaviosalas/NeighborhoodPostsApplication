@@ -9,7 +9,7 @@ const ModalWhoSharedDetail = ({publicationId}) => {
 
     useEffect(() => {
         console.log("enviando", publicationId)
-        axios.get(`http://localhost:4000/getSharedNumber/${publicationId}`)
+        axios.get(`https://app-citizens.onrender.com/getSharedNumber/${publicationId}`)
           .then((res) => {
             setPublicationData(res.data);
             setTimeout(() => { 

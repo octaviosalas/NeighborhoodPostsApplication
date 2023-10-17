@@ -44,7 +44,7 @@ const ModalProfileChangePicture = ({photo}) => {
           const newPicture = ({ 
                newPicture: newImage
           })
-          axios.put(`http://localhost:4000/changeUserPhoto/${userCtx.userId}`, newPicture)
+          axios.put(`https://app-citizens.onrender.com/changeUserPhoto/${userCtx.userId}`, newPicture)
                .then((res) => { 
                     console.log(res.data)
                     setTimeout(() => { 

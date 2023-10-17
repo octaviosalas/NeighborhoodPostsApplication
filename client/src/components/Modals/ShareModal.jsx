@@ -18,7 +18,7 @@ const ShareModal = ({ pubChoosen, publicationId,creatorName,creatorId,closeModal
 
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/getOnePublication/${publicationId}`)
+      .get(`https://app-citizens.onrender.com/getOnePublication/${publicationId}`)
       .then((res) => {
         setPublicationTotal(res.data);
         console.log(res.data);
@@ -79,7 +79,7 @@ const ShareModal = ({ pubChoosen, publicationId,creatorName,creatorId,closeModal
         publicationAddress: pubChoosen.address,
         publicationUbication: pubChoosen.creatorLocation,
       };
-      axios.post(`http://localhost:4000/sharePublication/${publicationId}`, publicationDataToBeShared)
+      axios.post(`https://app-citizens.onrender.com/sharePublication/${publicationId}`, publicationDataToBeShared)
           .then((res) => {
             console.log(res.data);
             setTimeout(() => {
@@ -100,7 +100,7 @@ const ShareModal = ({ pubChoosen, publicationId,creatorName,creatorId,closeModal
         recipientName: pubChoosen.creatorName, 
         publicationId: publicationId , 
       })
-      axios.post("http://localhost:4000/saveNewNotification", newNotification)   
+      axios.post("https://app-citizens.onrender.com/saveNewNotification", newNotification)   
            .then((res) => { 
              console.log(res.data)
            }) 

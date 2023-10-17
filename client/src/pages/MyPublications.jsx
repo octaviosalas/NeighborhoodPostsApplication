@@ -24,7 +24,7 @@ const MyPublications = () => {
     const { data: otherData, loading: otherLoading, noPublications: otherNoPublications } = useGetBackendQueries(`getMySharedPublications/${userContx.userId}`); 
     
     useEffect(() => { 
-      axios.get(`http://localhost:4000/getPublicationComments/${userContx.userId}`)
+      axios.get(`https://app-citizens.onrender.com/getPublicationComments/${userContx.userId}`)
             .then((res) => { 
                   console.log(res.data)
                   setPublicationsComments(res.data)

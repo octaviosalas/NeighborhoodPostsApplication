@@ -17,7 +17,7 @@ import axios from "axios"
  
 
         useEffect(() => { 
-          axios.get(`http://localhost:4000/getMyNotifications/${userContx.userId}`)
+          axios.get(`https://app-citizens.onrender.com/getMyNotifications/${userContx.userId}`)
             .then((res) => { 
                 console.log(res.data)
                 const allNotifications = res.data
@@ -43,7 +43,7 @@ import axios from "axios"
 
        
         const viewNotification = (x, y) => { 
-          axios.put(`http://localhost:4000/markAsRead/${y}`)
+          axios.put(`https://app-citizens.onrender.com/markAsRead/${y}`)
                .then((res) => { 
                 console.log(res.data)
                })

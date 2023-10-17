@@ -46,7 +46,7 @@ const CommentModal = ({publicationId, creatorName, creatorId}) => {
           commentDate: actualDate,
           comment: commentText
         })
-        axios.post("http://localhost:4000/saveComment", newComment)
+        axios.post("https://app-citizens.onrender.com/saveComment", newComment)
             .then((res) => { 
               console.log(res.data)
               commentNotificationToast()
@@ -65,7 +65,7 @@ const CommentModal = ({publicationId, creatorName, creatorId}) => {
            recipientName: creatorName, 
            publicationId: publicationId , 
          })
-         axios.post("http://localhost:4000/saveNewNotification", newNotification)   
+         axios.post("https://app-citizens.onrender.com/saveNewNotification", newNotification)   
               .then((res) => { 
                 console.log(res.data)
               }) 

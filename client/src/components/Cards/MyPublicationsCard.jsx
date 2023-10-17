@@ -25,7 +25,7 @@ const MyPublicationsCard = ({ pub, comments }) => {
 
   const getPublicationComments = (idPublication) => {
     axios
-      .get(`http://localhost:4000/viewPublicationComments/${idPublication}`)
+      .get(`https://app-citizens.onrender.com/viewPublicationComments/${idPublication}`)
       .then((res) => {
         console.log(res.data);
         setPublicationComments(res.data);
@@ -42,7 +42,7 @@ const MyPublicationsCard = ({ pub, comments }) => {
 
   const deleteMyPublication = (pub) => {
     axios
-      .delete(`http://localhost:4000/deleteMyPublication/${pub._id}`)
+      .delete(`https://app-citizens.onrender.com/deleteMyPublication/${pub._id}`)
       .then((res) => {
         console.log(res.data);
       })

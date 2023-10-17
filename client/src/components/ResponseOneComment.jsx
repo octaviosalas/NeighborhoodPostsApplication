@@ -28,7 +28,7 @@ const ResponseOneComment = ({addresseeId, targetCommentId}) => {
           comment: commentText,
           targetCommentId:targetCommentId
         })
-        axios.post("http://localhost:4000/saveResponseToComment", responseData)
+        axios.post("https://app-citizens.onrender.com/saveResponseToComment", responseData)
              .then((res) => { 
               console.log(res.data)
               setTimeout(() => { 
