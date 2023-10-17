@@ -52,27 +52,29 @@ const Privacity = ({close}) => {
                </div>
            </div>     
            <div className='grid col-span-3 ml-2 mt-2'>
-               <div className='flex flex-col items-start justify-start lg:flex-row  lg:items-center lg:juistify-center'>
-                   <div className='flex items-center mt-2'>
-                       <small className='text-sm font-bold ml-2'>Name:</small>
-                       <input type="text" placeholder='Nombre..' className="text-xs h-6 border border-gray-200 ml-2" onChange={(e) => setNewName(e.target.value)}/>
-                   </div>
-                   <div className='flex items-center mt-2 '>
-                       <small className='text-sm font-bold ml-2'>Email:</small>
-                       <input type="text" placeholder='Email..' className="text-xs h-6 border border-gray-200  ml-2" onChange={(e) => setNewEmail(e.target.value)}/>
-                   </div>
-                   <div className='flex items-center mt-2'>
-                       <small className='text-sm font-bold ml-2'>Password:</small>
-                       <input type="text" placeholder='Actual Password..' className="text-xs h-6 border border-gray-200 ml-2" onChange={(e) => setLastPassword(e.target.value)}/>
-                   </div>
-                   <div className='flex items-center mt-2 mb-2 '>
-                       <small className='text-sm font-bold ml-2'>New Password:</small>
-                       <input type="text" placeholder='New Password..' className="text-xs h-6 border border-gray-200  ml-2" onChange={(e) => setNewPassword(e.target.value)}/>
-                   </div>
-               </div>
+
+              <div className='flex items-start justify-start mt-4'>
+
+                  <div className='flex flex-col items-start justify-start'>
+                     <small className='text-sm font-bold mt-2'>Name:</small>
+                     <small className='text-sm font-bold mt-2'>Email:</small>
+                     <small className='text-sm font-bold mt-2'>Password:</small>
+                     <small className='text-sm font-bold mt-2'>New Password:</small>
+                  </div>
+
+                  <div className='flex flex-col ml-4 md:ml-8'>
+                     <input type="text" placeholder='Name..' className="text-xs h-4  md:h-6 border border-gray-200 ml-2 mt-2" onChange={(e) => setNewName(e.target.value)}/>
+                     <input type="text" placeholder='Email..' className="text-xs h-4  md:h-6 border border-gray-200 ml-2 mt-2" onChange={(e) => setNewName(e.target.value)}/>
+                     <input type="text" placeholder='Password..' className="text-xs h-4  md:h-6 border border-gray-200 ml-2 mt-2" onChange={(e) => setNewName(e.target.value)}/>
+                     <input type="password" placeholder='New Password..' className="text-xs h-4  md:h-6 border border-gray-200 ml-2 mt-2" onChange={(e) => setNewName(e.target.value)}/>
+                  </div>
+              </div>
+
+
                <div className='mt-4'>
                    <button className='btn w-36 h-4 mb-2 text-white bg-blue-600 hover:bg-blue-800 hover:text-yellow-500' onClick={() => changeMyData()}>Save</button>
                </div>
+
                {shortPassword ? <p>The password must be more than 5 characteres</p> : null}
                {cantSendData ? <p>You must Complete all Items</p> : null}
            </div>

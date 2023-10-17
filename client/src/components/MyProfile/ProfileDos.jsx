@@ -58,7 +58,7 @@ const ProfileDos = () => {
                         </div>
                     </div>
                 </div>
-                <div className='flex items-centert justify-center content-between gap-0 lg:gap-6 mt-6 max-w-fit-contain ml-2 mr-2 mb-2 max-w-fit-contain'>
+                <div className='flex items-centert justify-center content-between gap-0 lg:gap-14 mt-6 max-w-fit-contain ml-2 mr-2 mb-2 max-w-fit-contain'>
                     <small className={`font-bold text-xxs ml-8 xxs:ml-2 sm:ml-16 ${showPrivacity ? 'text-gray-500 font-bold' : ''} underline cursor-pointer`} onClick={() => showJustPrivacy()}>Privacity </small>
                     <small className={`font-bold text-xxs ml-8 xxs:ml-2 sm:ml-16 ${showFavorites ? 'text-gray-500 font-bold' : ''} underline cursor-pointer`} onClick={() => showJustFavorites()}>Favorites </small>
                     <small className={`font-bold text-xxs ml-8 xxs:ml-2 sm:ml-12 ${showMyPubs ? 'text-gray-500 font-bold' : ''} underline cursor-pointer`} onClick={() => showJustMyPubs()}>Publications </small>
@@ -67,7 +67,7 @@ const ProfileDos = () => {
             </div>
         </div>  
 
-        <div className='mt-2'>
+        <div className='mt-2 '>
             {showPrivacity ?  <Privacity close={() => skipPrivacity()}/> : null}
             {showFavorites ?  <Favorites/> : null}
             {showMyPubs ?     <MyPubs/> : null}

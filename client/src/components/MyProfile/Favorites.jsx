@@ -59,17 +59,15 @@ const Favorites = () => {
   return (
       <>
     
-    <div className={`border flex flex-col md:grid ${number === 1 ? 'md:grid-cols-1' : number === 2 ? 'md:grid-cols-2' : 'md:grid-cols-3'} bg-gray-200 overflow-auto max-h-[350px]`}>
-      
-    
+    <div className={`border flex flex-col  md:grid ${number === 0 ? "flex flex-col items-center justify-center" : number === 1 ? 'md:grid-cols-1' : number === 2 ? 'md:grid-cols-2' : 'md:grid-cols-3'} bg-gray-200 overflow-auto max-h-[350px]`}>
             {loading ? (
                 noFavs ? (
-                    <div className="flex items-center justify-center w-screen">
-                        <div className='flex flex-col mt-4'>
-                            <small>At the moment, you dont have Publications saved in your Favs.</small>
+                    <div className="flex items-center justify-center">
+                        <div className='flex flex-col mt-4 mb-4'>
+                            <small className='flex items-center justify-center'>You dont have Publications saved in your Favs.</small>
                             <Link to={"/wall"}><small className='text-gray-500 font-bold underline cursor-pointer mt-2'>Go to the Wall</small></Link>
                         </div>
-                    </div>             
+                     </div>      
                 ) : (
                 allMyFavs.map((p) => (
            <div key={p.id} className='border rounded-lg grid col-span-1 m-2 bg-white'>
@@ -104,7 +102,7 @@ const Favorites = () => {
                 ))
     )
             ) : (
-                <div className='flex items-center justify-center w-screen'>
+                <div className='flex flex-col items-center justify-center '>
                     <LoadingPublications text={"Favorites"} />
                 </div>
                 )}

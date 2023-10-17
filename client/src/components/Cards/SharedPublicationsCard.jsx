@@ -91,9 +91,9 @@ const SharedPublicationsCard = ({pub}) => {
                                 </div>        
                         </div>
 
-                        <div className='flex items-center justify-center mt-4'>
-                                  <small className='underline cursor-pointer font-bold' onClick={() => deleteSharedPublication(pub._id)}>Delete</small>
-                        </div> 
+                      {pub.sharerId === userContx.userId ?  <div className='flex items-center justify-center mt-4'>
+                            <small className='underline cursor-pointer font-bold' onClick={() => deleteSharedPublication(pub._id)}>Delete</small>
+                        </div> : null }
       
 
       <ToastContainer/>

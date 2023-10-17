@@ -36,10 +36,10 @@ const MyPubs = () => {
 
   return (
     <>
-  <div className={`border flex flex-col md:grid ${number === 1 ? 'md:grid-cols-1' : number === 2 ? 'md:grid-cols-2' : 'md:grid-cols-3'} bg-gray-200 overflow-auto max-h-[350px]`}>
+  <div className={`border flex flex-col md:grid ${number === 0 ? "flex flex-col" :  number === 1 ? 'md:grid-cols-1' : number === 2 ? 'md:grid-cols-2' : 'md:grid-cols-3'} bg-gray-200 overflow-auto max-h-[350px]`}>
     {loading ? (
         noPublications ? (
-            <div className="flex items-center justify-center w-screen">
+            <div className="flex items-center justify-center">
                 <div className='flex flex-col mt-4'>
                     <small>At the moment, you dont have Publications posted.</small>
                     <Link to={"/wall"}><small className='text-gray-500 font-bold underline cursor-pointer mt-2'>Go to create First</small></Link>
@@ -51,23 +51,14 @@ const MyPubs = () => {
                 <div key={p.id} className='border grid col-span-1 m-2 items-center bg-white'>
                     
                     <div className='flex max-w-fit-contain'>
-                        <div className="flex justify-start items-center" style={{ flex: 1 }}>
-                            <img src={p.creatorProfileImage} className='h-12 w-12 rounded-full ml-2 mt-2' />
-                            <small className='text-black text-xs ml-2'>{p.creatorName}</small>
+                        <div className="flex flex-col md:flex-row items-center justify-center  md:justify-start " style={{ flex: 1 }}>
+                            <img src={p.creatorProfileImage} className='h-12 w-12 rounded-full ml-2 mt-4' />
+                            <small className='text-black text-xs ml-2 mt-0 md:mt-2'>{p.creatorName}</small>
                         </div>
 
-                        <div className="flex justify-end items-center mr-2 " style={{ flex: 1 }}>
-                            <div className="dropdown dropdown-end">
-                            <small tabIndex={0} className="text-lg cursor-pointer">...</small>
-                                <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-                                    <li><a className='text-black'>Edit</a></li>
-                                    <li><a className='text-black'>Delete</a></li>
-                                </ul>
-                            </div>
-                      </div>
                  </div>
 
-                    <div className=' max-w-fit-contain'>
+                    <div className='mt-4 max-w-fit-contain'>
                       <div className="grid col-span-1 max-w-fit-contain ml-4">
                                 <p className="font-bold text-sm text-black"> {p.publicationTitle}</p>
                                 <p className="justify-center text-xs mr-4">{p.publicationDescription} </p>
@@ -89,7 +80,7 @@ const MyPubs = () => {
 )
 
     ) : (
-        <div className='flex items-center justify-center w-screen'>
+        <div className='flex items-center justify-center '>
             <LoadingPublications text={"Your Publications"} />
         </div>
         )}

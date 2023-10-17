@@ -61,7 +61,7 @@ const OtherUsersProfile = () => {
 
 
   return (
-        <div className='mt-22 xl:mt-12 overflow-auto max-h-[4910px] xxs:max-h-[540px] sm:max-h-[470px] lg:max-h-[550px] 2xl:max-h-[750px] border'>
+        <div className='mt-24 md:mt-22 xl:mt-12 overflow-auto max-h-[4910px] xxs:max-h-[540px] sm:max-h-[470px] lg:max-h-[550px] 2xl:max-h-[750px] border'>
                {load ? (
                 <LoadingPublications text={`${userName} data..`}/>
                    ) : (
@@ -99,7 +99,14 @@ const OtherUsersProfile = () => {
                               <small className='font-bold text-black text-sm'> Favorites Publications</small>
                               <KeyboardArrowDownIcon/>
                             </div>
-                            {userPublicationsFavories.map((p) => <PublicationsCard pub={p} />)}
+                            {userFavs.length === 0 ? (
+                                <div className='flex flex-col items-center justify-center mt-12'>
+                                     <p className='text-sm font-bold'>At the Moment, {userName} has not favorites.</p>
+                                </div>
+                           
+                                ) : (
+                                userPublicationsFavories.map((p) => <PublicationsCard pub={p} />)
+                                )}
                         </div> 
                         : 
                     null}

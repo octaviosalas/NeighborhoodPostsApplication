@@ -67,19 +67,17 @@ const MyPublications = () => {
                             {myData.map((p) => <MyPublicationsCard pub={p} comments={publicationsComments}/>)}
                         </div>
 
-                        <div className='flex flex-col justify-center items-center mt-24'> 
+                  {otherData.length !== 0 ?   
+                        <div className='flex flex-col justify-center items-center mt-24'>   
+                            <div className='flex flex-col items-center justify-center'>
+                                <h4 className='font-bold text-xxs'>Shared Publications</h4>
+                                <KeyboardArrowDownIcon/>
+                            </div> 
 
-                           <div className='flex flex-col items-center justify-center'>
-                              <h4 className='font-bold text-xxs'>Shared Publications</h4>
-                              <KeyboardArrowDownIcon/>
-                           </div> 
-
-                           <div className='mt-4'>
-                             {otherData.map((p) => <SharedPublicationsCard pub={p} />)}
-                           </div>
-
-                   
-                        </div>
+                            <div className='mt-4'>
+                              {otherData.map((p) => <SharedPublicationsCard pub={p} />)}
+                            </div>
+                        </div> : null}
                    </> 
                     )}
     </div>
