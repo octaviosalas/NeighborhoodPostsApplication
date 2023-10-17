@@ -8,7 +8,6 @@ import commentsRoutes from "./routes/comments.routes.js"
 import notificationsRoutes from "./routes/notifications.routes.js"
 
 
-
 const app = express()
 const port = 4000
 
