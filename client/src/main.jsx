@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 import './index.css'
+import axios from 'axios'
 import { BrowserRouter } from 'react-router-dom';
 import "react-toastify/dist/ReactToastify.css"
 //axios.defaults.baseURL = "http://localhost:4000"
