@@ -77,7 +77,7 @@ const Register = () => {
 
         <div className=' mt-12 justify-center'>
 
-           <main className='flex justify-end items-center  gap-10 sm:gap-0 my-6 mx-2 sm:mx-5 md:mx-10'>
+           <main className='flex justify-end items-center  gap-10 sm:gap-0 my-6 mx-2 sm:mx-5 md:mx-10  bg-gray-200 rounded-xl'>
             
                 <div className="basis-1/2 w-[50vh] flex flex-1 flex-col sm:gap-0 justify-center p-6 py-8 sm:py-6 lg:px-8 rounded-lg bg-gray-white bg-opacity-60 shadow-md">
                 <h2 className="text-center font-bold text-2xl font-PoppinsBold leading-9 tracking-tight text-pallete-black"> Create Account </h2>

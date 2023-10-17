@@ -6,7 +6,7 @@ import { UserContext } from '../../store/usercontext'
 import LoadingPublications from '../../Hooks/LoadingPublications'
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { Link } from 'react-router-dom'
-import { deleteFavorite } from '../../../../api/controllers/publications.controllers'
+
 
 
 const Favorites = () => {
