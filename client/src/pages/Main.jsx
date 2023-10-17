@@ -32,9 +32,6 @@ export default function Landing() {
                     <img width="300px" height="300px" src={puzzle}  alt="Personas sobre un rompecabezas"/>
                 </div>
 
-                  <div id="hero-section__img">
-                      <img width="300" height="300" src={fon} alt="Personas sobre un rompecabezas" />
-                </div>
             </div>
         
           

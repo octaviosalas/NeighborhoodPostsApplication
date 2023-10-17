@@ -91,15 +91,7 @@ const SignIn = () => {
                           <button className=' bg-blue-950 w-full border-none  text-white  hover:bg-yellow-500 hover:text-black hover:font-bold' onClick={() => login()}>Iniciar Sesion</button>
                       </div>
 
-                      <div className=' flex justify-center mt-4 bg-white border rounded-xl'>
-                            <GoogleIcon className='mt-2'/>
-                          <button className='border-none'>Iniciar Sesion con Google</button>
-                      </div>
-                  
-                      <div className='justify-center bg-white border rounded-xl'>
-                          <FacebookIcon className=''/>
-                          <button className='border-none'>Iniciar Sesion con Meta</button>
-                      </div>
+                     
 
                       <div className='flex flex-col gap-3 mt-5 mx-auto items-center justify-center'>              
                           <Link to={"/register"}><p className=" text-center text-xs sm:text-sm font-PoppinsSemibold text-pallete-grey">Register with Email</p></Link> 
