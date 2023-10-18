@@ -95,6 +95,28 @@ export const sendResponseToOneComment = async (req, res) => {
    }
 }
 
-export const getResponsesToMyComments = async (req, res) => { 
-    
+export const likeComment = async (req, res) => { 
+    const { commentId } = req.params;
+    const { likerName, likerProfileImage, likerId } = req.body;
+    console.log("El cuerpo que llega es: ", req.body)
+    console.log("El ID del comentario es ", commentId)
+
+    try {
+        const comment = await Comments.findOne({ _id: commentId });
+
+        if (!comment) {
+            return res.status(404).json({ message: "Comentario no encontrado" });
+        }
+
+        comment.commentLikesReceived.push({
+            likerName,
+            likerProfileImage,
+            likerId
+        });
+
+        const updatedComment = await comment.save();
+        return res.status(200).json(updatedComment);
+    } catch (error) {
+        return res.status(500).json({ message: "Error al dar like al comentario", error: error.message });
+    }
  }

@@ -1,17 +1,39 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
+import { UserContext } from '../store/usercontext'
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+
 
 const CommentsPublications = ({comments, close}) => {
     console.log(comments) 
 
     const [noComments, setNoComments] = useState(false)
+    const userCtx = useContext(UserContext)
 
     useEffect(() => { 
       if(comments.length === 0) { 
         setNoComments(true)
       }
     })
+
+    const sendMyLike = (commentId) => { 
+       const userData = ({ 
+         likerName: userCtx.userName,
+         likerProfileImage: userCtx.userProfileImage,
+         likerId: userCtx.userId
+       }) 
+      axios.post(`http://localhost:4000/likeComment/${commentId}`, userData)
+           .then((res) => { 
+            console.log(res.data)
+           })
+           .catch((err) => { 
+            console.log(err)
+           })
+    }
+
+    
 
   return (
     <div className=''>
@@ -20,8 +42,9 @@ const CommentsPublications = ({comments, close}) => {
       </div>
       {noComments ? <small className='font-bold'>This Publication has no comments yet</small> : 
        <>
+       <div className='overflow-auto max-h-[400px] mt-2'>
           {comments.map((c) => ( 
-            <div className='mt-6'>
+            <div className='mt-8'>
                 <div className='flex flex-grow items-start justify-start'>
                     <div className='flex justify-start'>
                         <img src={c.senderProfileImage} className='h-8 w-8 rounded-xl'/>
@@ -33,16 +56,19 @@ const CommentsPublications = ({comments, close}) => {
                     </div>
                 </div>
 
-                <div className='h-12 w-auto  mt-4'> 
-                    <small className='flex justify-start text-sm'>{c.comment}</small>
+                <div className='h-12 w-auto mt-4'> 
+                    <div className='flex justify-start items-start'>
+                       <small className=' text-sm'>{c.comment}</small>
+                    </div>            
                     <div className='flex flex-grow mt-2'>
-                      <small className='text-xs text-gray-600 cursor-pointer'>Like</small>
+                    {c.commentLikesReceived.map((l) => l.likerId === userCtx.userId ? <ThumbUpIcon style={{height:"20px"}}/> :  <small className='text-xs text-gray-600 cursor-pointer' onClick={() => sendMyLike(c._id)}>Like</small>)} 
                       <small className='text-xs text-gray-600 ml-4 '>|</small>
                       <small className="text-xs text-gray-600 ml-4 cursor-pointer">Answer</small>
-                </div>
+                    </div>
                 </div>
             </div>
           ))}
+          </div>
        </>
       }
        
@@ -51,3 +77,6 @@ const CommentsPublications = ({comments, close}) => {
 }
 
 export default CommentsPublications
+
+/*
+*/

@@ -72,7 +72,6 @@ import axios from "axios"
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 fixed top-0 left-0 right-0 main-content z-50 bg-gray-200">
               <div className="relative flex h-16 items-center justify-between">
                 <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                  {/* Mobile menu button*/}
                   <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-black hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                     <span className="absolute -inset-0.5" />
                     <span className="sr-only">Open main menu</span>
@@ -169,9 +168,9 @@ import axios from "axios"
                   {/* Profile dropdown */}
                   <Menu as="div" className="relative ml-3">
                     <div>
-                      <Menu.Button className="relative flex rounded-full bg-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-400">
+                      <Menu.Button className="relative flex  rounded-full bg-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-400">
                         <img
-                          className="h-12 w-12 rounded-full"
+                          className="h-12 w-12 rounded-full border"
                           src={userContx.userProfileImage}
                           alt=""
                         /> 
@@ -218,7 +217,7 @@ import axios from "axios"
             </div>
 
             <Disclosure.Panel className="sm:hidden">
-              <div className=" bg-gray-200 rounded-lg mt-10 flex flex-col items-start justify-start">
+              <div className=" bg-gray-200 rounded-lg mt-[33px] flex flex-col items-start justify-start">
                 {navigation.map((item) => (
                   <Disclosure.Button
                     key={item.name}

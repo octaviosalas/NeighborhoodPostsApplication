@@ -28,6 +28,17 @@ const commentsSchema = mongoose.Schema( {
     comment: { 
         type: String
     },
+    commentLikesReceived: [{
+        likerName: {
+            type: String
+        },
+        likerProfileImage: {
+            type: String
+        },
+        likerId: { 
+            type: String
+        }
+    }]
 
 
    

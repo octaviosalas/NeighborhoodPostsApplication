@@ -23,18 +23,12 @@ const PublicationsCard = ({ pub }) => {
   const [isWhoShareModalOpen, setIsWhoShareModalOpen] = useState(false);
   const [isPhotosModalOpen, setIsPhotosModalOpen] = useState(false);
   const [pubChoosen, setPubChoosen] = useState([]);
-  const [publicationChoosenFirstImage, setPublicationChoosenFirstImage] =
-    useState("");
-  const [publicationChoosenSecondImage, setPublicationChoosenSecondImage] =
-    useState("");
+  const [publicationChoosenFirstImage, setPublicationChoosenFirstImage] = useState("");
+  const [publicationChoosenSecondImage, setPublicationChoosenSecondImage] =useState("");
   const [publicationChoosenId, setPublicationChoosenId] = useState("");
-  const [
-    publicationChoosenUserProfileImage,
-    setPublicationChoosenUserProfileImage,
-  ] = useState("");
+  const [publicationChoosenUserProfileImage,setPublicationChoosenUserProfileImage,] = useState("");
   const [publicationChoosenName, setPublicationChoosenName] = useState("");
-  const [publicationChoosenaddresseeName, setPublicationChoosenaddresseeName] =
-    useState("");
+  const [publicationChoosenaddresseeName, setPublicationChoosenaddresseeName] =useState("");
   const [publicationComments, setPublicationComments] = useState([]);
   const [quantityComments, setQuantityComments] = useState(0);
   const [quantityTimesShared, setQuantityTimesShared] = useState(0);
@@ -279,7 +273,7 @@ const PublicationsCard = ({ pub }) => {
             </div>
             <div className="grid col-start-2">
               <div className="h-6">
-                <div className="flex flex-grow justify-end">
+                <div className="flex flex-grow justify-end gap-4">
                   <small
                     className="text-xs text-gray-500 cursor-pointer underline ml-4"
                     onClick={() => getPublicationComments(pub._id)}
@@ -307,7 +301,7 @@ const PublicationsCard = ({ pub }) => {
             </div>
           </div>
 
-          <div className="grid col-span-2">
+          <div className="grid col-span-2 mt-2 md:mt-0">
             <div className="flex justify-between ">
               <button
                 className="btn border-none"
@@ -363,7 +357,7 @@ const PublicationsCard = ({ pub }) => {
             <LoadingPublications text={"comments"} />
           </div>
         ) : showComments ? (
-          <div>
+          <div className="">
             <CommentsPublications
               comments={publicationComments}
               close={() => setShowComments(false)}
