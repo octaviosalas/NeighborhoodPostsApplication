@@ -36,7 +36,7 @@ const PublicationDetailCard = ({ pub }) => {
             </div>
           </div>
 
-          <div className="grid col-span-2 max-w-fit-contain mt-6">
+          <div className="grid col-span-2 max-w-fit-contain mt-2 xxs:mt-6">
             <div className="flex flex-col items-center justify-center ml-4">
               <Link to={`/publication/${pub._id}`}>
                 {" "}
@@ -70,7 +70,7 @@ const PublicationDetailCard = ({ pub }) => {
                 </div>
               </div>
             </div>
-            <div className="mt-4 text-gray-500 underline cursor-pointer">
+            <div className="mt-2 text-gray-500 underline cursor-pointer">
               <ImagesModalDetail
                 firstImage={pub.publicationImages[0]}
                 secondImage={pub.publicationImages[1]}

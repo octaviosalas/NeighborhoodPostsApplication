@@ -118,12 +118,12 @@ const PublicationDetailDos = () => {
 
             {showSecond ?
              <div className='flex flex-col items-center justify-center gap-4 w-full max-w-fit-contain border border-gray-200 visible md:invisible'>    
-                <div className='grid col-span-1 w-full m-4 max-w-fit-contain'> 
-                    <div className='flex items-center justify-center  max-w-fit-contain'>
+                <div className='grid col-span-1 w-full max-w-fit-contain'> 
+                    <div className='flex items-center justify-center max-w-fit-contain border shadow-md shadow-left shadow-right shadow-top shadow-bottom-none overflow-auto max-h-[450px]'>
                         {data.map((d) => <PublicationDetailCard pub={d}/>)}
                     </div> 
                 </div>
-                <div className='grid col-span-1 w-full border'>
+                <div className='grid col-span-1 w-full border overflow-auto max-h-[400px]'>
                     <div className='w-full flex justify-center max-w-fit-contain'> 
                         <div className='mt-2 max-w-fit-contain'>
                             <small className={`mx-auto  ml-6 lg:ml-12 font-bold cursor-pointer ${showComments ? 'text-blue-500' : ''}`} onClick={() => showOnlyComments()}>Coments</small>
@@ -134,21 +134,21 @@ const PublicationDetailDos = () => {
                     </div>
 
                     {showComments ?
-                     <div className=''>
+                     <div className='mt-2'>
                         <Comments comments={pubComments}/>
                     </div>
                      :
                      null}
 
                     {showLikes ?
-                     <div>
+                     <div className='mt-2'>
                         <Likes likes={pubLikes}/>
                     </div>
                      :
                      null} 
 
                     {showShared ?
-                     <div>
+                     <div className='mt-2'>
                         <WhoSharedDetail sharedData={pubShared}/>
                     </div>
                      :

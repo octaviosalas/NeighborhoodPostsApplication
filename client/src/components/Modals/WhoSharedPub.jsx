@@ -55,7 +55,8 @@ const WhoSharedPub = ({ publicationId, close}) => {
 
      return (
       <div>
-        <small className='text-xs text-gray-500 ml-2 cursor-pointer underline' onClick={() => openModalFive()} > View Who Shared </small>
+        <small className='text-xs text-gray-500 ml-2 cursor-pointer underline ' onClick={() => openModalFive()} > View Shared </small>
+    
   
         <dialog id="my_modal_5" className="modal border border-black max-w: fit-content">
           <form method="dialog" className="modal-box">
@@ -72,7 +73,7 @@ const WhoSharedPub = ({ publicationId, close}) => {
                     <small className='text-sm font-bold ml-2'>{p.sharer}</small>
                 </div>
                }
-                {showThePublication ? null : <small className='text-sm text-gray-500 ml-6 underline cursor-pointer' onClick={() => selectedPostToShow(p)}>View the shared post</small>}
+                {showThePublication ? null : <small className='text-sm text-gray-500 ml-6 underline cursor-pointer' onClick={() => selectedPostToShow(p)}>View Post</small>}
                 {showThePublication && selectedPost && selectedPost._id === p._id ? (
                           <div>
                             <SharedPublicationsCard pub={selectedPost}/> 

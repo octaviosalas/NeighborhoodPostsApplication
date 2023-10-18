@@ -84,11 +84,13 @@ const OtherUsersProfile = () => {
 
                   {showUserPublications ?  
                       <div className='ml-2 md:ml-12 flex flex-col items-center justify-center'>
-                         <div className='flex flex-col justify-center items-center mt-8 md:mt-12'>
+                         <div className='flex flex-col justify-center items-center mt-6 md:mt-12'>
                               <small className='font-bold text-black text-sm'> Publications</small>
                               <KeyboardArrowDownIcon/>
-                         </div>
-                        {userPublications.map((p) => <PublicationsCard pub={p} />)}
+                         </div> 
+                         <div className='border overflow-auto max-h-[550px]'>
+                           {userPublications.map((p) => <PublicationsCard pub={p} />)}          
+                         </div>                  
                       </div> 
                       : 
                       null}
@@ -105,7 +107,9 @@ const OtherUsersProfile = () => {
                                 </div>
                            
                                 ) : (
-                                userPublicationsFavories.map((p) => <PublicationsCard pub={p} />)
+                                    <div className='border overflow-auto max-h-[550px]'>
+                                        {userPublicationsFavories.map((p) => <PublicationsCard pub={p} />)}
+                                     </div>
                                 )}
                         </div> 
                         : 
