@@ -24,7 +24,7 @@ const CommentsPublications = ({comments, close}) => {
          likerProfileImage: userCtx.userProfileImage,
          likerId: userCtx.userId
        }) 
-      axios.post(`http://localhost:4000/likeComment/${commentId}`, userData)
+      axios.post(`https://app-citizens.onrender.com/likeComment/${commentId}`, userData)
            .then((res) => { 
             console.log(res.data)
            })
@@ -61,7 +61,17 @@ const CommentsPublications = ({comments, close}) => {
                        <small className=' text-sm'>{c.comment}</small>
                     </div>            
                     <div className='flex flex-grow mt-2'>
-                    {c.commentLikesReceived.map((l) => l.likerId === userCtx.userId ? <ThumbUpIcon style={{height:"20px"}}/> :  <small className='text-xs text-gray-600 cursor-pointer' onClick={() => sendMyLike(c._id)}>Like</small>)} 
+                         {
+                            c.commentLikesReceived ? (
+                              c.commentLikesReceived.some((l) => l.likerId === userCtx.userId) ? (
+                                <ThumbUpIcon style={{ height: "20px" }} />
+                              ) : (
+                                <small className='text-xs text-gray-600 cursor-pointer' onClick={() => sendMyLike(c._id)}>Like</small>
+                              )
+                            ) : (
+                              <small className='text-xs text-gray-600 cursor-pointer' onClick={() => sendMyLike(c._id)}>Like</small>
+                            )
+                          }
                       <small className='text-xs text-gray-600 ml-4 '>|</small>
                       <small className="text-xs text-gray-600 ml-4 cursor-pointer">Answer</small>
                     </div>
