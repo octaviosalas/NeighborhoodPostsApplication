@@ -4,13 +4,15 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { UserContext } from '../store/usercontext'
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import SendIcon from '@mui/icons-material/Send';
 
 
 const CommentsPublications = ({comments, close}) => {
     console.log(comments) 
 
     const [noComments, setNoComments] = useState(false)
-    const [showIconLike, setShowIconLike] = useState(false)
+    const [showAnswer, setShowAnswer] = useState({})
+    const [responseComment, setResponseComment] = useState("")
     const userCtx = useContext(UserContext)
 
     useEffect(() => { 
@@ -18,6 +20,13 @@ const CommentsPublications = ({comments, close}) => {
         setNoComments(true)
       }
     })
+
+    const toggleAnswer = (index) => {
+      setShowAnswer((prevState) => ({
+        ...prevState,
+        [index]: !prevState[index], // Cambia el estado de abierto a cerrado o viceversa
+      }));
+    };
 
     const sendMyLike = (commentId) => { 
        const userData = ({ 
@@ -28,7 +37,7 @@ const CommentsPublications = ({comments, close}) => {
       axios.post(`https://app-citizens.onrender.com/likeComment/${commentId}`, userData)
            .then((res) => { 
             console.log(res.data)
-            setShowIconLike(true)
+            close()
            })
            .catch((err) => { 
             console.log(err)
@@ -46,6 +55,16 @@ const CommentsPublications = ({comments, close}) => {
            })
     }
 
+ /*   const sendMyResponse = () => { 
+      const myResponse = ( { 
+        senderName: userCtx.userName,
+        senderId: userCtx.userId,
+        senderProfileImage: userCtx.userProfileImage,
+        addresseeId: 
+      })
+      axios.post("http://localhost:4000/saveResponseToComment")
+    }*/
+
     
 
   return (
@@ -56,7 +75,7 @@ const CommentsPublications = ({comments, close}) => {
       {noComments ? <small className='font-bold'>This Publication has no comments yet</small> : 
        <>
        <div className='overflow-auto max-h-[400px] mt-2'>
-          {comments.map((c) => ( 
+          {comments.map((c, index) => ( 
             <div className='mt-8'>
                 <div className='flex flex-grow items-start justify-start'>
                     <div className='flex justify-start'>
@@ -77,7 +96,7 @@ const CommentsPublications = ({comments, close}) => {
                          {
                             c.commentLikesReceived ? (
                               c.commentLikesReceived.some((l) => l.likerId === userCtx.userId) ? (
-                                <ThumbUpIcon style={{ height: "20px" }} onClick={() => deleteMylike(c._id, c.commentLikesReceived.filter(d => d.likerId === userCtx.userId).map((n) => n._id))}/>
+                                <ThumbUpIcon style={{ height: "20px",  cursor:"pointer" }} onClick={() => deleteMylike(c._id, c.commentLikesReceived.filter(d => d.likerId === userCtx.userId).map((n) => n._id))}/>
                               ) : (
                                 <small className='text-xs text-gray-600 cursor-pointer' onClick={() => sendMyLike(c._id)}>Like</small>
                               )
@@ -86,11 +105,18 @@ const CommentsPublications = ({comments, close}) => {
                             )
                           }
                       <small className='text-xs text-gray-600 ml-4 '>|</small>
-                      <small className="text-xs text-gray-600 ml-4 cursor-pointer">Answer</small>
+                      <small className="text-xs text-gray-600 ml-4 cursor-pointer" onClick={() => toggleAnswer(index)}>Answer</small>
                     </div>
                 </div>
+                {showAnswer[index] ? (
+                <div className='flex items-start justify-start mt-2'>
+                  <input type="text" className='rounded-xl' placeholder='Answer..' onChange={(e) => setResponseComment(e.target.value)}/>
+                  <SendIcon style={{height: "20px", cursor:"pointer", marginTop:"9px"}}/>
+                </div>
+              ) : null}
             </div>
           ))}
+          
           </div>
        </>
       }
