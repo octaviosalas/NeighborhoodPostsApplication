@@ -120,3 +120,29 @@ export const likeComment = async (req, res) => {
         return res.status(500).json({ message: "Error al dar like al comentario", error: error.message });
     }
  }
+
+ export const deleteMyLike = async (req, res) => {
+    const commentId = req.params.commentId;
+    const likeId = req.params.likeId;
+
+    try {
+        const comment = await Comments.findOne({ _id: commentId });
+
+        if (!comment) {
+            return res.status(404).json({ message: "Comentario no encontrado" });
+        }
+        const likeIndex = comment.commentLikesReceived.findIndex(like => like._id == likeId);
+
+        if (likeIndex === -1) {
+            return res.status(404).json({ message: "Like no encontrado en el comentario" });
+        }
+
+        comment.commentLikesReceived.splice(likeIndex, 1);
+
+        const updatedComment = await comment.save();
+        
+        return res.status(200).json({message: "Like Eliminado", updatedComment});
+    } catch (error) {
+        return res.status(500).json({ message: "Error al eliminar el Like del comentario", error: error.message });
+    }
+}
