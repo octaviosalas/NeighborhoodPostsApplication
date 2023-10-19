@@ -22,12 +22,16 @@ const CommentsPublications = ({comments, close}) => {
       }
     })
 
+   
+
     const toggleAnswer = (index) => {
       setShowAnswer((prevState) => ({
         ...prevState,
         [index]: !prevState[index], // Cambia el estado de abierto a cerrado o viceversa
       }));
     };
+
+
 
     const toggleResponses = (index) => {
       setShowResponses((prevState) => ({
@@ -134,7 +138,7 @@ const CommentsPublications = ({comments, close}) => {
                           c.commentResponsesReceived.length !== 0 ? (
                             <div className='flex'>
                                 <small className="text-xs text-gray-600 ml-4 cursor-pointer"> | </small>
-                                <small className="text-xs text-gray-600 ml-4 cursor-pointer underline" onClick={() => toggleResponses(index)}> {c.commentLikesReceived.length} Responses </small>
+                                <small className="text-xs text-gray-600 ml-4 cursor-pointer underline" onClick={() => toggleResponses(index)}> {c.commentResponsesReceived.length} Responses </small>
                             </div>
                           ) : (
                              null
@@ -145,7 +149,7 @@ const CommentsPublications = ({comments, close}) => {
                 </div>
 
                 {showAnswer[index] ? (
-                <div className='flex items-start justify-start mt-2'>
+                <div className='flex items-start justify-start mt-4 sm:mt-2'>
                   <input type="text" className='rounded-xl h-8 text-sm w-48 xl:w-56' placeholder='Answer..' onChange={(e) => setResponseComment(e.target.value)}/>
                   <SendIcon style={{height: "20px", cursor:"pointer", marginTop:"7px"}} onClick={() => sendMyResponse(c._id, c.senderId)}/>
                 </div>
