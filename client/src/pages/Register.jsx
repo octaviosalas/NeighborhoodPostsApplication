@@ -56,7 +56,7 @@ const Register = () => {
           email: email,
           password: password
         })
-        axios.post("https://app-citizens.onrender.com0/registerNewUser", newUser)
+        axios.post("https://app-citizens.onrender.com/registerNewUser", newUser)
              .then((res) => { 
                 console.log(res.data)
                 setBackendMsg(res.data.message)
