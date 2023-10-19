@@ -70,7 +70,7 @@ const CommentsPublications = ({comments, close}) => {
         commentResponse: responseComment,
         addresseeId: second
       })
-      axios.post(`http://localhost:4000/saveResponseToComment/${commentId}`, myResponse)
+      axios.post(`https://app-citizens.onrender.com/saveResponseToComment/${commentId}`, myResponse)
            .then((res) => { 
             console.log(res.data)
            })
@@ -80,7 +80,7 @@ const CommentsPublications = ({comments, close}) => {
     }
 
     const deleteMyResponse = (commentId, responseId) => { 
-        axios.delete(`http://localhost:4000/deleteMyResponse/${commentId}/${responseId}`)
+        axios.delete(`https://app-citizens.onrender.com/deleteMyResponse/${commentId}/${responseId}`)
              .then((res) => { 
               console.log(res.data)
              })
