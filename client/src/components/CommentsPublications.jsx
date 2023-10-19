@@ -146,14 +146,20 @@ const CommentsPublications = ({comments, close}) => {
                         ) : null
                       }
                     </div>
-                </div>
+                </div> 
 
-                {showAnswer[index] ? (
-                <div className='flex items-start justify-start mt-4 sm:mt-2'>
-                  <input type="text" className='rounded-xl h-8 text-sm w-48 xl:w-56' placeholder='Answer..' onChange={(e) => setResponseComment(e.target.value)}/>
-                  <SendIcon style={{height: "20px", cursor:"pointer", marginTop:"7px"}} onClick={() => sendMyResponse(c._id, c.senderId)}/>
-                </div>
-              ) : null}
+      
+                  {showAnswer[index] ? (
+                    <div className='mt-4 '>
+                      <div className='flex items-start justify-start mt-4 sm:mt-2'>
+                        <input type="text" className='rounded-xl h-8 text-sm w-48 xl:w-56' placeholder='Answer..' onChange={(e) => setResponseComment(e.target.value)}/>
+                        <SendIcon style={{height: "20px", cursor:"pointer", marginTop:"7px"}} onClick={() => sendMyResponse(c._id, c.senderId)}/>
+                      </div>
+                   </div>
+                ) : null}
+             
+
+            
 
               {showResponses[index] ? (
                   <div className='flex items-start justify-start mt-4 sm:mt-2'>

@@ -32,12 +32,12 @@ const SharedPublicationsCard = ({pub}) => {
             }
          
   return (
-    <div className='card rounded-xs 2xl:w-[500px] xl:w-[480px] lg:w-[480px] max-w-fit-contain bg-base-100 shadow-2xl shadow-side-left mt-4 '> 
+    <div className='card rounded-xs  max-w-fit-contain bg-base-100  mt-4 '> 
         <div className=''>
             <div className='flex flex-grow'>
-                    <div className='flex justify-start mt-2'>
-                        <img className="rounded-2xl h-8 w-8" src={pub.sharerProfileImage}/>
-                        <small className="ml-2 mt-2 whitespace-nowrap">{pub.sharer} </small>
+                    <div className='flex justify-start items-center mt-2'>
+                        <img className="rounded-2xl h-8 w-8 md:h-12 md:w-12" src={pub.sharerProfileImage}/>
+                        <small className="ml-2  text-[12px] sm:text-[14px] text-black font-bold">{pub.sharer} </small>
                     </div>
             </div>
 
