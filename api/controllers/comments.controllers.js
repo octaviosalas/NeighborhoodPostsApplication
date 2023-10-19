@@ -69,37 +69,39 @@ export const getMyCommentsSent = async (req, res) => {
             })
 }
 
+
 export const sendResponseToOneComment = async (req, res) => { 
-   console.log(req.body)
-   const {senderName, senderId, senderProfileImage, addresseeId, commentDate, comment, targetCommentId} = req.body
+   const {commentId} = req.params
+   const {commentResponse, transmitterName, transmitterPhoto, transmitterId, addresseeId} = req.body
 
    try {
-     const newResponseForComment = new ResponseToComments( { 
-        senderName, 
-        senderId, 
-        senderProfileImage, 
-        addresseeId, 
-        commentDate, 
-        comment, 
-        targetCommentId
-     })
-     newResponseForComment.save()
-                           .then((saved) => { 
-                            res.json({message: "Yout comment has been Send!", saved})
-                           })
-                           .catch((err) => { 
-                            console.log(err)
-                           })
-   } catch (error) {
-    
-   }
+     const comment = await Comments.findOne({ _id: commentId });
+
+       if (!comment) {
+            return res.status(404).json({ message: "Comentario no encontrado" });
+        }
+
+        comment.commentResponsesReceived.push({
+            commentResponse,
+            transmitterName,
+            transmitterId,
+            transmitterPhoto,
+            addresseeId
+        });
+
+        const updatedComment = await comment.save();
+        return res.status(200).json({message:"The response has been send", updatedComment});
+    } catch (error) {
+        return res.status(500).json({ message: "Error al dar like al comentario", error: error.message });
+    }
+
 }
+
+
 
 export const likeComment = async (req, res) => { 
     const { commentId } = req.params;
     const { likerName, likerProfileImage, likerId } = req.body;
-    console.log("El cuerpo que llega es: ", req.body)
-    console.log("El ID del comentario es ", commentId)
 
     try {
         const comment = await Comments.findOne({ _id: commentId });
@@ -145,4 +147,33 @@ export const likeComment = async (req, res) => {
     } catch (error) {
         return res.status(500).json({ message: "Error al eliminar el Like del comentario", error: error.message });
     }
+}
+
+export const deleteMyResponse = async (req, res) => { 
+    const commentId = req.params.commentId
+    const responseId = req.params.responseId
+
+    try {
+       const comment = await Comments.findOne({_id: commentId})
+
+       if (!comment) {
+        return res.status(404).json({ message: "Comentario no encontrado" });
+       }
+
+       const responseIndex = comment.commentResponsesReceived.findIndex(response => response._id == responseId);
+
+       if (responseIndex === -1) {
+           return res.status(404).json({ message: "Like no encontrado en el comentario" });
+       }
+
+       comment.commentResponsesReceived.splice(responseIndex, 1);
+
+       const updatedComment = await comment.save();
+       
+       return res.status(200).json({message: "Response deleted", updatedComment});
+       
+        }
+        catch (error) {
+            return res.status(500).json({ message: "Error al eliminar el Like del comentario", error: error.message });
+        }
 }

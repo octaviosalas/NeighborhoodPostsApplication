@@ -16,9 +16,6 @@ const responseToCommentsSchema = mongoose.Schema( {
     addresseeId: { 
         type: String
     },
-    commentDate: { 
-        type: String
-    },
     comment: { 
         type: String
     },
