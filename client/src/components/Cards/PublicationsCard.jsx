@@ -183,7 +183,7 @@ const PublicationsCard = ({ pub }) => {
 
   return (
     <div className="mb-4">
-      <div className="card rounded-xs 2xl:w-[500px] xl:w-[480px] lg:w-[480px] md:max-w-fit-contain bg-base-100 shadow-2xl shadow-side-left mt-4 ">
+      <div className="card rounded-xs 2xl:w-[500px] xl:w-[480px] lg:w-[480px] shadow-lg md:max-w-fit-contain  mt-4"  style={{background:"#F1F1F1"}}>
         <div className="card-body grid grid-cols-2" key={pub._id}>
           <div className="grid col-span-2">
             <div className="flex flex-col items-center xxs:flex-row  mt-2 ">

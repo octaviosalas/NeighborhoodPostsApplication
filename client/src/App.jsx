@@ -17,6 +17,7 @@ import Prueba from './components/Prueba'
 import UserManualSearch from './pages/UserManualSearch'
 import ProfileDos from './components/MyProfile/ProfileDos'
 import PublicationDetailDos from './components/PublicationDetail/PublicationDetailDos'
+import Footer from './components/Footer'
 
 function App() {
   
@@ -40,8 +41,8 @@ function App() {
                       <Route path="/userManualSearch/:searchParam" element={<UserManualSearch/>}></Route> 
                       <Route path="/prueba" element={<ProfileDos/>}></Route> 
                     </Routes>
-
              </UserProvider>
+
             
         
     </>
