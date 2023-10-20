@@ -72,10 +72,10 @@ const WallFilters = () => {
 
 
   return (
-        <div className='bg-gray-200 rounded-lg'>
+        <div className='rounded-lg'>
               <div className="mr-4">
                       <div className='flex'>
-                          <input type="text" placeholder='Search..' className=' border border-gray-200 rounded-lg text-center mt-2' onChange={(e) => setSearchParam(e.target.value)}/>
+                          <input type="text" placeholder='Search..' className=' border border-gray-200 bg-gray-200 rounded-lg text-center mt-2' onChange={(e) => setSearchParam(e.target.value)}/>
                           <div onClick={() => searchParamPublication()} className='mt-4'>
                              <SearchIcon style={{cursor: "pointer", marginLeft:"3px"}}/>
                           </div>                       

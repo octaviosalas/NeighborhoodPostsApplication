@@ -183,7 +183,7 @@ const PublicationsCard = ({ pub }) => {
 
   return (
     <div className="mb-4">
-      <div className="card rounded-xs 2xl:w-[500px] xl:w-[480px] lg:w-[480px] shadow-lg md:max-w-fit-contain  mt-4"  style={{background:"#F1F1F1"}}>
+      <div className="card rounded-xs 2xl:w-[500px] xl:w-[480px] lg:w-[480px] shadow-lg md:max-w-fit-contain bg-gray-200 border border-slate-300   mt-4">
         <div className="card-body grid grid-cols-2" key={pub._id}>
           <div className="grid col-span-2">
             <div className="flex flex-col items-center xxs:flex-row  mt-2 ">
@@ -304,17 +304,17 @@ const PublicationsCard = ({ pub }) => {
           <div className="grid col-span-2 mt-2 md:mt-0">
             <div className="flex justify-between ">
               <button
-                className="btn border-none"
+                className="btn border-none bg-gray-200 hover:bg-white"
                 onClick={() => saveInFavorites(pub)}
               >
-                <FavoriteBorderIcon />
+                <FavoriteBorderIcon/>
               </button>
 
               {/* isWhoShareModalOpen*/}
 
               <div className="border">
                 {isCommentModalOpen ? null : (
-                  <button onClick={() => openCommentModal(pub)}>
+                  <button onClick={() => openCommentModal(pub)} className=" bg-gray-200 hover:bg-white">
                     <RateReviewIcon />
                   </button>
                 )}
@@ -329,7 +329,7 @@ const PublicationsCard = ({ pub }) => {
 
               <div>
                 {isShareModalOpen ? null : (
-                  <button onClick={() => openShareModal(pub)}>
+                  <button onClick={() => openShareModal(pub)}  className=" bg-gray-200 hover:bg-white">
                     <ShareIcon />
                   </button>
                 )}

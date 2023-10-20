@@ -10,9 +10,10 @@ import useGetBackendQueries from '../Hooks/useGetBackendQueries';
 import FiltersModal from '../components/Modals/FiltersModal'
 import { useContext } from 'react'
 import { UserContext } from '../store/usercontext'
-import Solucionadios from '../components/Solucionadios'
+import ResolvedComplainsWall from '../components/Wall/ResolvedComplainsWall'
 import Footer from '../components/Footer'
 import Paginacion from '../components/Paginacion'
+import LeaveYourOpinionWall from '../components/Wall/LeaveYourOpinionWall'
 
 const Wall = () => {
 
@@ -58,9 +59,9 @@ const Wall = () => {
                                       </div>
 
                                       <div className='fixed flex flex-col 3xl:right-52 2xl:right-44 xl:right-12 lg:right-7 invisible  lg:visible'>
-                                          <Solucionadios/> 
+                                          <ResolvedComplainsWall/> 
                                         <div className='mt-6'>
-                                            <Solucionadios style={{marginTop:"10px"}}/>
+                                            <LeaveYourOpinionWall style={{marginTop:"10px"}}/>
                                         </div>
                                       </div> 
                                 </div>    

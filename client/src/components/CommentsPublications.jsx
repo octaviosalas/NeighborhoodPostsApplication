@@ -5,6 +5,7 @@ import axios from 'axios'
 import { UserContext } from '../store/usercontext'
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import SendIcon from '@mui/icons-material/Send';
+import {toast, ToastContainer} from "react-toastify"
 
 
 const CommentsPublications = ({comments, close}) => {
@@ -14,7 +15,18 @@ const CommentsPublications = ({comments, close}) => {
     const [showAnswer, setShowAnswer] = useState({})
     const [responseComment, setResponseComment] = useState("")
     const [showResponses, setShowResponses] = useState({})
+    const [showLikeIcon, setShowLikeIcon] = useState(false)
+    const [showLikeItem, setShowLikeItem] = useState(false)
     const userCtx = useContext(UserContext)
+
+    const notificacionDeToast = () =>{ 
+      toast.success("Your response has been send", {
+        position: toast.POSITION.TOP_RIGHT_CENTER,
+        style: {
+          color: "#082E58", 
+        },
+      });
+    }
 
     useEffect(() => { 
       if(comments.length === 0) { 
@@ -22,16 +34,12 @@ const CommentsPublications = ({comments, close}) => {
       }
     })
 
-   
-
     const toggleAnswer = (index) => {
       setShowAnswer((prevState) => ({
         ...prevState,
         [index]: !prevState[index], // Cambia el estado de abierto a cerrado o viceversa
       }));
     };
-
-
 
     const toggleResponses = (index) => {
       setShowResponses((prevState) => ({
@@ -49,6 +57,7 @@ const CommentsPublications = ({comments, close}) => {
       axios.post(`https://app-citizens.onrender.com/likeComment/${commentId}`, userData)
            .then((res) => { 
             console.log(res.data)
+            
            })
            .catch((err) => { 
             console.log(err)
@@ -77,6 +86,10 @@ const CommentsPublications = ({comments, close}) => {
       axios.post(`https://app-citizens.onrender.com/saveResponseToComment/${commentId}`, myResponse)
            .then((res) => { 
             console.log(res.data)
+            setTimeout(() => { 
+              setShowAnswer(false)
+              notificacionDeToast()
+            }, 400)
            })
            .catch((err) => { 
             console.log(err)
@@ -148,7 +161,6 @@ const CommentsPublications = ({comments, close}) => {
                     </div>
                 </div> 
 
-      
                   {showAnswer[index] ? (
                     <div className='mt-4 '>
                       <div className='flex items-start justify-start mt-4 sm:mt-2'>
@@ -157,39 +169,31 @@ const CommentsPublications = ({comments, close}) => {
                       </div>
                    </div>
                 ) : null}
-             
-
-            
-
-              {showResponses[index] ? (
-                  <div className='flex items-start justify-start mt-4 sm:mt-2'>
-                     {c.commentResponsesReceived.map((res) => ( 
-                       <div className='flex flex-col justify-start items-start mt-2 '>
-                          <div className='flex justify-start items-start'>
-                            <img src={res.transmitterPhoto} className='h-6 w-6 rounded-full'/>
-                           <Link to={`/userProfile/${res.transmitterId}`}><small className='text-xs text-black font-bold ml-2'>{res.transmitterName}</small></Link>
+                
+                  {showResponses[index] ? (
+                      <div className='flex items-start justify-start mt-4 sm:mt-2'>
+                        {c.commentResponsesReceived.map((res) => ( 
+                          <div className='flex flex-col justify-start items-start mt-2 '>
+                              <div className='flex justify-start items-start'>
+                                <img src={res.transmitterPhoto} className='h-6 w-6 rounded-full'/>
+                              <Link to={`/userProfile/${res.transmitterId}`}><small className='text-xs text-black font-bold ml-2'>{res.transmitterName}</small></Link>
+                              </div>
+                              <div className='flex items-center justify-center mt-2'>
+                                  <small className='text-sm'>{res.commentResponse}</small>
+                              </div>
+                            {res.transmitterId === userCtx.userId ? <div className='flex items-start justify-start'>
+                                  <small className='text-xs text-gray-500 underline cursor-pointer' onClick={() => deleteMyResponse(c._id, res._id)}>Delete</small>
+                              </div> : null}
                           </div>
-                          <div className='flex items-center justify-center mt-2'>
-                               <small className='text-sm'>{res.commentResponse}</small>
-                          </div>
-                         {res.transmitterId === userCtx.userId ? <div className='flex items-start justify-start'>
-                               <small className='text-xs text-gray-500 underline cursor-pointer' onClick={() => deleteMyResponse(c._id, res._id)}>Delete</small>
-                          </div> : null}
-                       </div>
-                     ))}
+                        ))}
+                      </div>
+                    ) : null}
                   </div>
-                ) : null}
-              </div>
-          ))}   
-
-          
-
-             
-          
+              ))}             
           </div>
        </>
       }
-       
+       <ToastContainer/>
     </div>
   )
 }

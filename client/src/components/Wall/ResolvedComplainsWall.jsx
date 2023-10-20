@@ -1,15 +1,15 @@
 import React from 'react'
 import { useContext } from 'react';
-import { UserContext } from '../store/usercontext';
+import { UserContext } from '../../store/usercontext';
 import AnnouncementIcon from '@mui/icons-material/Announcement';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
-const Solucionadios = () => {
+const ResolvedComplainsWall = () => {
  
     const userCtx = useContext(UserContext)
 
   return (
-    <div className='border w-60 xl:w-80'  style={{background:"#F2F2F2"}}>
+    <div className='border border-slate-300 w-60 xl:w-80 bg-gray-200  rounded-lg'>
         <div className='flex flex-col '>
         <div className='flex justify-between'>
             <p className='text-left ml-2 font-bold text-sm'>Resolved Complains</p>
@@ -60,4 +60,4 @@ const Solucionadios = () => {
   )
 }
 
-export default Solucionadios
+export default ResolvedComplainsWall
