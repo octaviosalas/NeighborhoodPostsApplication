@@ -18,7 +18,7 @@ const FiltersModal = () => {
 
 
   return (
-    <div className="dropdown dropdown-hover flex flex-col items-center ">
+    <div className="dropdown dropdown-hover flex flex-col items-center mt-8">
         <label tabIndex={0} className="btn m-1">Apply Filters</label>
           <ul tabIndex={0} className="dropdown-content z-[1] mt-4 menu p-2 shadow bg-gray-200 rounded-box w-52 flex flex-col max-w-fit-contain">
 

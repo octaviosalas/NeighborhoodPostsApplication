@@ -4,7 +4,7 @@ import izquierda from "../img/izquierda.png"
 import derecha from "../img/derecha.png"
 
 
-const Paginacion = ({actualizar}) => {
+const Paginacion = ({actualizar, showFirst, showSecond}) => {
 
 
   const [showOneToFive, setShowOneToFive] = useState(true)
@@ -44,8 +44,8 @@ const Paginacion = ({actualizar}) => {
     <div className="join ">
       <img src={izquierda} className='h-8 w-8 mt-2 cursor pointer hover:bg-gray-300' onClick={() => onceAlDoce()}></img>
 
-       {showOneToFive ? <> <button className="join-item btn 2xl:text-sm xxs:text-xs xxs:w-[20px]  hover:bg-gray-400"  onClick={() => actualizandoPagina(1)}>1</button>
-        <button className="join-item btn 2xl:text-sm xxs:text-xs xxs:w-[20px]  hover:bg-gray-400"  onClick={() => actualizandoPagina(2)}>2</button>
+       {showOneToFive ? <> <button className="join-item btn 2xl:text-sm xxs:text-xs xxs:w-[20px]  hover:bg-gray-400"  onClick={() => showFirst()}>1</button>
+        <button className="join-item btn 2xl:text-sm xxs:text-xs xxs:w-[20px]  hover:bg-gray-400"  onClick={() => showSecond()}>2</button>
         <button className="join-item btn 2xl:text-sm xxs:text-xs xxs:w-[20px]  hover:bg-gray-400"  onClick={() => actualizandoPagina(3)}>3</button>
         <button className="join-item btn 2xl:text-sm xxs:text-xs xxs:w-[20px]  hover:bg-gray-400"  onClick={() => actualizandoPagina(4)}>4</button>
         <button className="join-item btn 2xl:text-sm xxs:text-xs xxs:w-[20px]  hover:bg-gray-400"  onClick={() => actualizandoPagina(5)}>5</button> </> : null}
