@@ -11,10 +11,10 @@ import FiltersModal from "../components/Modals/FiltersModal";
 import { useContext } from "react";
 import { UserContext } from "../store/usercontext";
 import ResolvedComplainsWall from "../components/Wall/ResolvedComplainsWall";
-import Footer from "../components/Footer";
 import Paginacion from "../components/Paginacion";
 import LeaveYourOpinionWall from "../components/Wall/LeaveYourOpinionWall";
 import OpinionsAndResolveMobile from "../components/Wall/OpinionsAndResolveMobile";
+import ReactConfetti from "react-confetti"
 
 const Wall = () => {
   const [load, setLoad] = useState(true);

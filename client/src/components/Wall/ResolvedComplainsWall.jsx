@@ -5,6 +5,7 @@ import AnnouncementIcon from '@mui/icons-material/Announcement';
 import axios from "axios"
 import { useEffect, useState } from 'react';
 import LoadingPublications from "../../Hooks/LoadingPublications"
+import ReactConfetti from 'react-confetti';
 
 
 const ResolvedComplainsWall = () => {
@@ -13,6 +14,7 @@ const ResolvedComplainsWall = () => {
 
     const [resolvedClaims, setResolvedClaims] = useState([])
     const [loading, setLoading] = useState(true)
+    const [isConfettiActive, setIsConfettiActive] = useState(false);
 
     useEffect(() => { 
       axios.get("https://app-citizens.onrender.com/getOtherUsersPublications")
@@ -30,11 +32,16 @@ const ResolvedComplainsWall = () => {
     }, [])
 
 
-
+    const handleMouseEnter = () => {
+        setIsConfettiActive(true)
+        setTimeout(() => { 
+            setIsConfettiActive(false)
+        }, 4200)
+    };
     
 
   return (
-    <div className='border border-slate-300 w-60 xl:w-80 bg-gray-200  rounded-lg'>
+    <div className='border border-slate-300 w-60 xl:w-80 bg-gray-200  rounded-lg' onMouseEnter={handleMouseEnter}>
         <div className='flex flex-col '>
             <div className='flex justify-between'>
                 <p className='text-left ml-2 font-bold text-sm'>Resolved Complains</p>
@@ -67,7 +74,7 @@ const ResolvedComplainsWall = () => {
             <div className='flex items-center justify-start mt-4 ml-2'>
                 <small className='text-gray-400 font-bold cursor-pointer underline hover:text-black'>See all success stories</small>
             </div>
-            
+            {isConfettiActive ?  <ReactConfetti /> : null}
         </div>
     </div>
   )

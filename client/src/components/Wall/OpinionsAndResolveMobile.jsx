@@ -47,14 +47,14 @@ const OpinionsAndResolveMobile = () => {
     <div className='flex max-w-fit-contain h-40 border rounded-lg border-slate-300 shadow-xl overflow-auto max-h-[200px]'>
       <div className="carousel w-full">
                 <div id="slide1" className="carousel-item relative w-80 sm:w-[400px] md:w-[550px]">
-                    <div className='flex flex-col items-center justify-center w-full'>
+                    <div className='flex flex-col  w-full'>
                           <div className='flex items-center justify-center'>
                             <small className='font-bold text-sm'>Resolved Complains</small>
                           </div>
 
                          {resolvedClaims.map((r) => ( 
-                            <div className='flex items-center justify-center'>
-                                <div className='flex  mt-4'>
+                            <div className='flex items-center justify-center border-b mb-2'>
+                                <div className='flex items-center justify-center  mt-4'>
                                     <div className='ml-2'>
                                          <img src={r.creatorProfileImage} className='h-8 w-8 sm:h-12 sm:w-12 rounded-full'/>
                                     </div>

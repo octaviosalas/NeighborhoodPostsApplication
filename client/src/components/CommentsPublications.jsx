@@ -116,7 +116,7 @@ const CommentsPublications = ({comments, close}) => {
        <>
        <div className='overflow-auto max-h-[400px] mt-2'>
           {comments.map((c, index) => ( 
-            <div className='mt-8 bg-white rounded-xl'>
+            <div className='mt-8 bg-gray-100 rounded-xl'>
                 <div className='flex flex-grow items-start justify-start m-2'>
                     <div className='flex justify-start'>
                         <img src={c.senderProfileImage} className='h-8 w-8 rounded-xl'/>
@@ -188,7 +188,7 @@ const CommentsPublications = ({comments, close}) => {
                         ))}
                       </div>
                     ) : null}
-                  </div>
+             </div>
               ))}             
           </div>
        </>

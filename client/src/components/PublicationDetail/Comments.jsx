@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom'
 
 const Comments = ({comments}) => {
   return (
-    <div className=' flex flex-col  m-4 max-w-fit-contain overflow-auto max-h-[130px] md:max-h-[250px]'>
+    <div className=' flex flex-col bg-gray-100 rounded-lg  m-4 max-w-fit-contain overflow-auto max-h-[130px] md:max-h-[250px]'>
             {comments.map((c) => ( 
                 <div className=''>
-                    <div className='flex mt-2'> 
+                    <div className='flex m-4'> 
                         <div>
                           <img className='h-12 md:h-16 w-12 md:w-16 rounded-full' src={c.senderProfileImage}/>
                         </div>

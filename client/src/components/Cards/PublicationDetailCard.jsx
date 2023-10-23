@@ -9,12 +9,12 @@ import ImagesModalDetail from "../Modals/ImagesModalDetail";
 const PublicationDetailCard = ({ pub }) => {
   return (
     <div className="mb-4">
-      <div className="card rounded-xs 2xl:w-[500px] xl:w-[480px] lg:w-[480px] md:max-w-fit-contain bg-base-100  mt-4">
+      <div className="card rounded-xs 2xl:w-[500px] xl:w-[480px] lg:w-[480px] md:max-w-fit-contain mt-44 sm:mt-24 lg:mt-4  bg-gray-200 md:bg-white m-4 border border-slate-300">
         <div className="card-body grid grid-cols-2" key={pub._id}>
         <div className="grid col-span-2">
             <div className="flex flex-col items-center xxs:flex-row  mt-2 ">
               <div className="avatar">
-                <div className="h-full w-16 sm:w-16 xl:w-22 rounded-full">
+                <div className="h-full w-16 sm:w-16 xl:w-22 rounded-full ">
                   <img src={pub.creatorProfileImage} />
                 </div>
               </div>
@@ -59,13 +59,13 @@ const PublicationDetailCard = ({ pub }) => {
           <div className="grid col-span-2">
             <div className="flex justify-center items-center mt-2 max-w-fit-contain mr-12 xxxs:mr-0">
               <div className="avatar flex justify-center items-center">
-                <div className="w-16 xxs:w-24 sm:w-32 h-full border rounded">
+                <div className="w-16 xxs:w-24 sm:w-24 lg:w-32 h-full border rounded">
                   <img src={pub.publicationImages[0]} />
                 </div>
               </div>
 
               <div className="avatar flex justify-center items-center">
-                <div className="w-16 xxs:w-24 sm:w-32 border rounded ml-4">
+                <div className="w-16 xxs:w-24 sm:w-24 lg:w-32 border rounded ml-4">
                   <img src={pub.publicationImages[1]} />
                 </div>
               </div>

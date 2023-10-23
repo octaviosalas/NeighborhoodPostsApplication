@@ -76,13 +76,14 @@ const PublicationDetailDos = () => {
   return (
     <div className='w-auto m-4 max-w-fit-contain mt-24'>
        
-            {showFirst ? <div className='grid grid-cols-2 gap-4 w-full max-w-fit-contain border border-gray-200 invisible md:visible'>    
-                <div className='grid col-span-1 w-full m-4 max-w-fit-contain'> 
-                    <div className='flex items-center justify-center  max-w-fit-contain'>
+            {showFirst ? 
+            <div className='grid grid-cols-2 gap-4 w-full max-w-fit-contain  invisible md:visible '>    
+                <div className='grid col-span-1 w-full h-full max-w-fit-contain bg-gray-200 rounded-xl'> 
+                    <div className='flex items-center justify-center max-w-fit-contain'>
                         {data.map((d) => <PublicationDetailCard pub={d}/>)}
                     </div> 
                 </div>
-                <div className='grid col-span-1 w-full border'>
+                <div className='grid col-span-1 w-full border border-slate-300 bg-gray-200 rounded-2xl'>
                     <div className='w-full flex justify-center max-w-fit-contain'> 
                         <div className='mt-2 max-w-fit-contain'>
                             <small className={`mx-auto  ml-8 lg:ml-12 font-bold cursor-pointer ${showComments ? 'text-blue-500' : ''}`} onClick={() => showOnlyComments()}>Coments</small>

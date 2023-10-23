@@ -16,6 +16,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import WhoSharedPub from "../Modals/WhoSharedPub";
 import ImagesModal from "../Modals/ImagesModal";
 import CheckIcon from '@mui/icons-material/Check';
+import ReactConfetti from "react-confetti"
 
 
 const PublicationsCard = ({ pub }) => {
@@ -35,6 +36,7 @@ const PublicationsCard = ({ pub }) => {
   const [quantityTimesShared, setQuantityTimesShared] = useState(0);
   const [showComments, setShowComments] = useState(false);
   const [loadComments, setLoadComments] = useState(false);
+  const [isConfettiActive, setIsConfettiActive] = useState(false);
   const userContx = useContext(UserContext);
 
   const getActualDate = () => {
@@ -182,9 +184,11 @@ const PublicationsCard = ({ pub }) => {
     setIsPhotosModalOpen(false);
   };
 
+
+
   return (
     <div className="mb-4">
-      <div className="card rounded-xs 2xl:w-[500px] xl:w-[480px] lg:w-[480px] shadow-lg md:max-w-fit-contain bg-gray-200 border border-slate-300   mt-4">
+      <div className="card rounded-xs 2xl:w-[500px] xl:w-[480px] lg:w-[480px] shadow-lg md:max-w-fit-contain bg-gray-200 border border-slate-300 mt-4">
         <div className="card-body grid grid-cols-2" key={pub._id}>
           <div className="grid col-span-2">
             <div className="flex flex-col items-center xxs:flex-row  mt-2 ">
@@ -371,7 +375,7 @@ const PublicationsCard = ({ pub }) => {
           </div>
         ) : null}
       </div>
-
+     
       <ToastContainer />
     </div>
   );
