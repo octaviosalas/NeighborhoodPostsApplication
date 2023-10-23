@@ -5,8 +5,9 @@ import SharedPublications from "../models/shared.js"
 
 export const savePublication = async (req, res) => { 
    
-    const {creatorName, creatorId, publicationDate, publicationImages, publicationTitle, typeOfPublication, creatorLocation, address, creatorProfileImage, publicationDescription} = req.body
+    const {creatorName, creatorId, publicationDate, publicationImages, publicationTitle, typeOfPublication, creatorLocation, address, creatorProfileImage, publicationDescription, resolved} = req.body
     console.log(req.body)
+    console.log("RECIBI UNA NUEVA PUBLICACION")
     
 
     try {
@@ -20,7 +21,8 @@ export const savePublication = async (req, res) => {
          creatorLocation: creatorLocation,
          address: address,
          creatorProfileImage: creatorProfileImage,
-         publicationDescription: publicationDescription
+         publicationDescription: publicationDescription,
+         resolved: resolved
        })
        saveNewPub.save()
                  .then((saved) => { 

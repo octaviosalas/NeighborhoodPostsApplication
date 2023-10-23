@@ -42,7 +42,7 @@ const SharedPublicationsCard = ({pub}) => {
             </div>
 
                 <div className='justify-center mt-4'>
-                    <h2 className='text-lg font-bold justify-center'>{pub.comment}</h2>
+                    <h2 className=' text-sm xl:text-lg font-bold justify-center'>{pub.comment}</h2>
                 </div>
               
             </div>

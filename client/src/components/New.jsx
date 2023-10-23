@@ -59,12 +59,7 @@ const New = () => {
 
       
       
-       useEffect(() => { 
-            console.log(userContx.userId, userContx.userName)
-            console.log(actualDate)
-       }, [])
-
-
+    
        const sendMyReview = () => { 
         const review = ({ 
             creatorName: userContx.userName,
@@ -76,7 +71,8 @@ const New = () => {
             creatorLocation: ubication,
             address: address,
             publicationDescription: description,
-            creatorProfileImage: userContx.userProfileImage
+            creatorProfileImage: userContx.userProfileImage,
+            resolved: false
         })
         axios.post("https://app-citizens.onrender.com/saveNewPublication", review)
              .then((res) => { 

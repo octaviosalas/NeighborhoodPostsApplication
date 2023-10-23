@@ -13,6 +13,7 @@ import LoadingPublications from "../Hooks/LoadingPublications";
 import SharedPublicationsCard from "../components/Cards/SharedPublicationsCard";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import ResolvedComplainsWall from "../components/Wall/ResolvedComplainsWall";
+import OpinionsAndResolveMobile from "../components/Wall/OpinionsAndResolveMobile";
 
 const MyPublications = () => {
   const userContx = useContext(UserContext);
@@ -66,6 +67,10 @@ const MyPublications = () => {
                     </span>  
                 </div>
 
+                <div className="flex flex-col items-center justify-center visible lg:hidden  mt-12">
+                    <OpinionsAndResolveMobile />
+              </div>
+
                 <div className="">
                     {myData.map((p) => (
                     <MyPublicationsCard pub={p} comments={publicationsComments} />
@@ -88,7 +93,7 @@ const MyPublications = () => {
                 ) : null}
             </div> 
 
-            <div className=" flex flex-col items-center mt-28 fixed 3xl:right-40 2xl:right-36 xl:right-12 lg:right-5 border invisible lg:visible">
+            <div className=" flex flex-col items-center mt-28 fixed 2xl:right-40 xl:right-12 lg:right-5 border invisible lg:visible">
                <ResolvedComplainsWall/>
             </div>
         </div>

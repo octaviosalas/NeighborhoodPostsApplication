@@ -37,6 +37,10 @@ const publicationsSchema = mongoose.Schema( {
     },
     creatorProfileImage: { 
         type: String
+    },
+    resolved: { 
+        type: Boolean,
+        default: false
     }
 })
 
