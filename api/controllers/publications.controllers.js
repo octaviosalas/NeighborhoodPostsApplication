@@ -275,3 +275,30 @@ export const getPublicationLikes = async (req, res) => {
                console.log(err)
              })
 }
+
+
+export const markPublicationAsResolved = async (req, res) => { 
+   const { publicationId } = req.params;
+   const { comment, images } = req.body;
+   
+   console.log("Recibi por parametro a ", publicationId)
+   console.log(comment, images)
+
+
+   try {
+       const thePublication = await Publications.findOne({ _id: publicationId });
+
+       if (!thePublication) {
+           return res.status(404).json({ message: "Publicación no encontrada" });
+       }
+
+       thePublication.resolvedImages.push(...images);
+       thePublication.resolvedComment = comment;
+       thePublication.resolved = true;
+
+       const updatedPublication = await thePublication.save();
+       return res.status(200).json(updatedPublication);
+   } catch (error) {
+       return res.status(500).json({ message: "Error", error: error.message });
+   }
+}

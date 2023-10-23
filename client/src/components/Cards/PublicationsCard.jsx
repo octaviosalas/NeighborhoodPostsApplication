@@ -15,6 +15,7 @@ import RateReviewIcon from "@mui/icons-material/RateReview";
 import ShareIcon from "@mui/icons-material/Share";
 import WhoSharedPub from "../Modals/WhoSharedPub";
 import ImagesModal from "../Modals/ImagesModal";
+import CheckIcon from '@mui/icons-material/Check';
 
 
 const PublicationsCard = ({ pub }) => {
@@ -347,8 +348,13 @@ const PublicationsCard = ({ pub }) => {
                 )}
               </div>
             </div>
-
-
+           {pub.resolved === true ? 
+           <div className="flex items-center justify-center mt-2">
+             <small className="font-bold text-sm text-green-600">The claim was resolved</small>
+             <CheckIcon style={{color:"green", height:"20px", width:"20px"}}/>
+          </div> 
+          : 
+          null}
           </div>
         </div>
 

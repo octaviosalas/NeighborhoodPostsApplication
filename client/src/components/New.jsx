@@ -58,8 +58,6 @@ const New = () => {
       };
 
       
-      
-    
        const sendMyReview = () => { 
         const review = ({ 
             creatorName: userContx.userName,
@@ -93,10 +91,10 @@ const New = () => {
     <div>
        <button className="btn text-white bg-blue-950 hover:text-blue-950 hover:bg-yellow-400 border p-2 rounded-2xl border-terciary-100 font-bold text-terciary-100  transition-colors" onClick={()=>window.my_modal_3.showModal()}>Create new Report</button>
                     <dialog id="my_modal_3" className="modal">
-                    <form method="dialog" className="modal-box">
+                    <div method="dialog" className="modal-box">
                         <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                         <div className='inline-block flex-row'>
-                        <form className='w-full' action="#">
+                        <div className='w-full' action="#">
                 <div className="flex flex-col gap-6 sm:gap-4 mt-9 sm:mx-auto sm:w-full max-w-fit-contain">
 
                             <div className='flex items-center justify-center w-72 xxxs:w-80 xxs:w-full max-w-fit-contain '>
@@ -205,12 +203,12 @@ const New = () => {
                                     </div>
                                  }
                           </div>
-                  </form>
+                  </div>
                                 
                               
                         </div>
                         
-                    </form>
+                    </div>
                     </dialog>
     </div>
   )

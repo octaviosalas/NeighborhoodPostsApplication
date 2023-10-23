@@ -4,7 +4,7 @@ const LoadingPublications = ({text}) => {
   return (
     <div> 
             <div className=''>
-                 <span>Loading {text}..</span>
+                 <span className='font-bold text-sm lg:text-md'>Loading {text}..</span>
                  <br />
                  <span className="loading loading-dots loading-lg"></span>
             </div>

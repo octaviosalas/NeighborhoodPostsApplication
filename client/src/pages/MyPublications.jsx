@@ -93,7 +93,7 @@ const MyPublications = () => {
                 ) : null}
             </div> 
 
-            <div className=" flex flex-col items-center mt-28 fixed 2xl:right-40 xl:right-12 lg:right-5 border invisible lg:visible">
+            <div className=" flex flex-col items-center mt-28 fixed 2xl:right-36 xl:right-12 lg:right-5 border invisible lg:visible">
                <ResolvedComplainsWall/>
             </div>
         </div>

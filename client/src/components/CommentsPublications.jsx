@@ -116,8 +116,8 @@ const CommentsPublications = ({comments, close}) => {
        <>
        <div className='overflow-auto max-h-[400px] mt-2'>
           {comments.map((c, index) => ( 
-            <div className='mt-8'>
-                <div className='flex flex-grow items-start justify-start'>
+            <div className='mt-8 bg-white rounded-xl'>
+                <div className='flex flex-grow items-start justify-start m-2'>
                     <div className='flex justify-start'>
                         <img src={c.senderProfileImage} className='h-8 w-8 rounded-xl'/>
                       <Link to={`/userProfile/${c.senderId}`}><small className='text-xs font-bold text-black ml-2 mt-2'>{c.senderName}</small></Link>
@@ -129,10 +129,10 @@ const CommentsPublications = ({comments, close}) => {
                 </div>
 
                 <div className='h-12 w-auto mt-4'> 
-                    <div className='flex justify-start items-start'>
+                    <div className='flex justify-start items-start m-2'>
                        <small className=' text-sm'>{c.comment}</small>
                     </div>            
-                    <div className='flex flex-grow mt-2'>
+                    <div className='flex flex-grow  m-2'>
                          {
                             c.commentLikesReceived ? (
                               c.commentLikesReceived.some((l) => l.likerId === userCtx.userId) ? (
@@ -171,7 +171,7 @@ const CommentsPublications = ({comments, close}) => {
                 ) : null}
                 
                   {showResponses[index] ? (
-                      <div className='flex items-start justify-start mt-4 sm:mt-2'>
+                      <div className='flex items-start justify-start mt-4 sm:mt-2 m-2'>
                         {c.commentResponsesReceived.map((res) => ( 
                           <div className='flex flex-col justify-start items-start mt-2 '>
                               <div className='flex justify-start items-start'>

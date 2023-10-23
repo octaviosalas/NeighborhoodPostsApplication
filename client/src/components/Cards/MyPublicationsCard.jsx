@@ -13,14 +13,25 @@ import { useNavigate } from "react-router-dom";
 import useGetBackendQueries from "../../Hooks/useGetBackendQueries";
 import LoadingPublications from "../../Hooks/LoadingPublications";
 import CommentsPublications from "../CommentsPublications";
+import ResolvedComplaiModal from "../Modals/ResolvedComplaiModal";
 
 const MyPublicationsCard = ({ pub, comments }) => {
+
+
   const userContx = useContext(UserContext);
   const navigate = useNavigate();
   const [quantityCommentsPublication, setQuantityCommentsPublication] =useState(null);
   const [showComments, setShowComments] = useState(false);
   const [loadComments, setLoadComments] = useState(false);
   const [publicationComments, setPublicationComments] = useState([]);
+  const [showModal, setShowModal] = useState(false)
+  const [publicationChoosenId, setPublicationChoosenId] = useState("")
+  const [publicationChoosenDescription, setPublicationChoosenDescription] = useState("")
+  const [publicationChoosenTitle, setPublicationChoosenTitle] = useState("")
+  const [publicationChoosenFirstPhoto, setPublicationChoosenFirstPhoto] = useState("")
+  const [publicationChoosenSecondPhoto, setPublicationChoosenSecondPhoto] = useState("")
+ 
+
   const { data: commentsData } = useGetBackendQueries(`viewPublicationComments/${pub._id}`);
 
   const getPublicationComments = (idPublication) => {
@@ -58,6 +69,19 @@ const MyPublicationsCard = ({ pub, comments }) => {
   const goToPublicationDetail = (pub) => {
     navigate(`/publication/${pub._id}`);
   };
+
+  const publicationSelected = (x) => { 
+    setPublicationChoosenDescription(x.publicationDescription)
+    setPublicationChoosenTitle(x.publicationTitle)
+    setPublicationChoosenFirstPhoto(x.publicationImages[0])
+    setPublicationChoosenSecondPhoto(x.publicationImages[1])
+    setPublicationChoosenId(x._id)
+    setShowModal(true)
+  }
+
+  const closeModal = () => { 
+    setShowModal(false)
+  }
 
   return (
     <div>
@@ -159,11 +183,18 @@ const MyPublicationsCard = ({ pub, comments }) => {
               </p>
             </div>
 
-            <div className="justify-end">
-              <p className="font-bold text-xs underline cursor-pointer">
-                Shared the news
-              </p>
-            </div>
+          {showModal ?  <div className="justify-end">
+              <ResolvedComplaiModal
+               photo={userContx.userProfileImage}
+               name={userContx.userName}
+               title={publicationChoosenTitle}
+               description={publicationChoosenDescription}
+               imageOne={publicationChoosenFirstPhoto}
+               imageTwo={publicationChoosenSecondPhoto}     
+               close={closeModal}  
+               publicationId={publicationChoosenId}       
+               />
+            </div> : <small onClick={() => publicationSelected(pub)} className="text-xs font-bold underline cursor-pointer">Problem has been resolved</small>}
           </div>
 
           {loadComments ? (

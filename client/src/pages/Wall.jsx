@@ -47,6 +47,10 @@ const Wall = () => {
     });
   };
 
+  useEffect(() => { 
+    console.log(data)
+  }, [data])
+
   const firstFive = data.slice(0, 5);
   const secondFive = data.slice(5, 10);
 

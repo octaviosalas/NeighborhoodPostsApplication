@@ -38,10 +38,20 @@ const publicationsSchema = mongoose.Schema( {
     creatorProfileImage: { 
         type: String
     },
-    resolved: { 
+    resolved: {
         type: Boolean,
-        default: false
-    }
+        default: false,
+      },
+      resolvedImages: {
+        type: [String],
+        default: [],
+      },
+      resolvedComment: {
+        type: String,
+        default: "",
+      },
+   
+   
 })
 
 const Publications = mongoose.model("Publications", publicationsSchema)
