@@ -3,17 +3,17 @@
 import daisyui from 'daisyui';
 import formsPlugin from '@tailwindcss/forms';
 
-
-
-
-
 export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        white: '#fff',
+      },
+    },
     screens: {
       "2xs": "1px",
       'xxxs': '360px',
@@ -30,5 +30,6 @@ export default {
   plugins: [
     daisyui,
     formsPlugin,
-  ]
-}
+  ],
+  darkMode: 'media',
+};

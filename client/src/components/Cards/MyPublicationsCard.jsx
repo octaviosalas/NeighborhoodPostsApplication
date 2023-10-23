@@ -61,11 +61,11 @@ const MyPublicationsCard = ({ pub, comments }) => {
 
   return (
     <div>
-      <div className="card max-w-fit-contain bg-base-100 shadow-2xl shadow-side-left mt-6 ">
+      <div className="card max-w-fit-contain mt-6 bg-gray-200 border border-slate-300 ">
         <div className="card-body">
           <div className="flex justify-end">
             <div className="dropdown ">
-              <label tabIndex={0} className="btn m-1 font-bold text-xl">
+              <label tabIndex={0} className="btn m-1 font-bold text-xl bg-gray-200 border border-none hover:bg-white">
                 ...
               </label>
               <ul
@@ -140,14 +140,14 @@ const MyPublicationsCard = ({ pub, comments }) => {
           <div className="flex justify-between">
             <div className="flex">
               <button
-                className="btn"
+                className="btn bg-gray-200 border border-none hover:bg-white"
                 onClick={() => getPublicationComments(pub._id)}
               >
                 {quantityCommentsPublication}{" "}
                 <MarkUnreadChatAltIcon titleAccess="View Comments" />
               </button>
             </div>
-            <button className="btn">
+            <button className="btn bg-gray-200 border border-none hover:bg-white">
               1 <ShareIcon />
             </button>
           </div>

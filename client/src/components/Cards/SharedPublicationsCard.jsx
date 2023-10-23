@@ -32,11 +32,11 @@ const SharedPublicationsCard = ({pub}) => {
             }
          
   return (
-    <div className='card rounded-xs  max-w-fit-contain bg-base-100  mt-4 '> 
+    <div className='card rounded-xs max-w-fit-contain bg-gray-200 border border-slate-300 mt-4 '> 
         <div className=''>
             <div className='flex flex-grow'>
                     <div className='flex justify-start items-center mt-2'>
-                        <img className="rounded-2xl h-8 w-8 md:h-12 md:w-12" src={pub.sharerProfileImage}/>
+                        <img className="rounded-full h-12 w-12 md:h-12 md:w-12" src={pub.sharerProfileImage}/>
                         <small className="ml-2  text-[12px] sm:text-[14px] text-black font-bold">{pub.sharer} </small>
                     </div>
             </div>
@@ -46,7 +46,7 @@ const SharedPublicationsCard = ({pub}) => {
                 </div>
               
             </div>
-         <div className="rounded-lg bg-base-100 shadow-[0_35px_60px_-15px_rgba(0.2,0.2,0.2,0.3)] ring-1 ring-gray-300 mt-4 max-w-fit-contain">
+         <div className="rounded-2xl bg-base-100 border-slate-300 ring-1 ring-gray-300 mt-4 max-w-fit-contain">
                                 <div className="card-body" key={pub._id}>
                                         <div className='flex flex-col items-center justify-center md:flex'>
                                                <div className="avatar">
