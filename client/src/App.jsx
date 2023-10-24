@@ -18,6 +18,7 @@ import UserManualSearch from './pages/UserManualSearch'
 import ProfileDos from './components/MyProfile/ProfileDos'
 import PublicationDetailDos from './components/PublicationDetail/PublicationDetailDos'
 import Footer from './components/Footer'
+import SuccesStories from './pages/SuccesStories'
 
 function App() {
   
@@ -40,6 +41,7 @@ function App() {
                       <Route path="/userProfile/:userId" element={<OtherUsersProfile/>}></Route> 
                       <Route path="/userManualSearch/:searchParam" element={<UserManualSearch/>}></Route> 
                       <Route path="/prueba" element={<ProfileDos/>}></Route> 
+                      <Route path="/succesStories" element={<SuccesStories/>}></Route> 
                     </Routes>
              </UserProvider>
 

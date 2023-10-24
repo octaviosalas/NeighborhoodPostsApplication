@@ -20,6 +20,7 @@ const Wall = () => {
   const [load, setLoad] = useState(true);
   const [firstFivePublications, setFirstFivePublications] = useState(true);
   const [secondFivePublications, setSecondFivePublications] = useState(false);
+  const [thirdFivePublications, setThirdFivePublications] = useState(false);
   const { data, loading } = useGetBackendQueries(`getOtherUsersPublications`);
   const userCtx = useContext(UserContext);
 
@@ -47,12 +48,23 @@ const Wall = () => {
     });
   };
 
+  const showThirdFivePublications = () => {
+    setSecondFivePublications(false);
+    setFirstFivePublications(false);
+    setThirdFivePublications(true)
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // Para un desplazamiento suave
+    });
+  };
+
   useEffect(() => { 
     console.log(data)
   }, [data])
 
   const firstFive = data.slice(0, 5);
   const secondFive = data.slice(5, 10);
+  const thirdFive = data.slice(10, 15)
 
   return (
     <div>
@@ -79,10 +91,14 @@ const Wall = () => {
                   {secondFivePublications
                     ? secondFive.map((p) => <PublicationsCard pub={p} />)
                     : null}
+                     {thirdFivePublications
+                    ? thirdFive.map((p) => <PublicationsCard pub={p} />)
+                    : null}
                   <div className="mb-6">
                     <Paginacion
                       showFirst={showFirstFivePublications}
                       showSecond={showSecondFivePublications}
+                      showThird={showThirdFivePublications}
                     />
                   </div>
                 </div>

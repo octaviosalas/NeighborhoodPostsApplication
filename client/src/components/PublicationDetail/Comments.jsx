@@ -12,7 +12,7 @@ const Comments = ({comments}) => {
                         </div>
 
                         <div className='flex flex-col items-start justify-start'>
-                          <Link to={`/userProfile/${c.senderId}`}><small className='ml-2 text-sm tengo-black font-bold cusror-pointer'> {c.senderName}</small></Link>
+                          <Link to={`/userProfile/${c.senderId}`}><small className='ml-2 text-sm tengo-black font-bold cusror-pointer text-black  hover:text-blue-700'> {c.senderName}</small></Link>
                             <p className="ml-2 text-xxs text-gray-500 items-start" >{c.comment}</p>
                         </div>
                     </div>            

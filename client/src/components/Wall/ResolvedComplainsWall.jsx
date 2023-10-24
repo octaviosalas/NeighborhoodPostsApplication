@@ -4,6 +4,7 @@ import { UserContext } from '../../store/usercontext';
 import AnnouncementIcon from '@mui/icons-material/Announcement';
 import axios from "axios"
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import LoadingPublications from "../../Hooks/LoadingPublications"
 import ReactConfetti from 'react-confetti';
 
@@ -12,7 +13,8 @@ const ResolvedComplainsWall = () => {
  
     const userCtx = useContext(UserContext)
 
-    const [resolvedClaims, setResolvedClaims] = useState([])
+    const [firstThreeResolvedClaims, setFirstThreeResolvedClaims] = useState([])
+    const [secondThreeResolvedClaims, setSecondThreeResolvedClaims] = useState([])
     const [loading, setLoading] = useState(true)
     const [isConfettiActive, setIsConfettiActive] = useState(false);
 
@@ -21,7 +23,8 @@ const ResolvedComplainsWall = () => {
            .then((res) => { 
             const data = res.data
             const onlyResolved = data.filter(pubs => pubs.resolved === true)
-            setResolvedClaims(onlyResolved)
+            const firstThreeResolved = onlyResolved.slice(0, 3)
+            setFirstThreeResolvedClaims(firstThreeResolved)
             setTimeout(() => { 
               setLoading(false)
             }, 1500)
@@ -56,7 +59,7 @@ const ResolvedComplainsWall = () => {
                   <LoadingPublications text="Success Stories" />
                 </div>
                 ) : (
-                resolvedClaims.map((r, index) => (
+                    firstThreeResolvedClaims.map((r, index) => (
                     <div key={index} className='flex  mt-4'>
                     <div className='ml-2'>
                         <img src={r.creatorProfileImage} className='h-12 w-12 rounded-full' alt={r.creatorName} />
@@ -72,7 +75,7 @@ const ResolvedComplainsWall = () => {
 
             
             <div className='flex items-center justify-start mt-4 ml-2'>
-                <small className='text-gray-400 font-bold cursor-pointer underline hover:text-black'>See all success stories</small>
+               <Link to={"/succesStories"}><small className='text-gray-400 font-bold cursor-pointer underline hover:text-black'>See all success stories</small></Link>
             </div>
             {isConfettiActive ?  <ReactConfetti /> : null}
         </div>

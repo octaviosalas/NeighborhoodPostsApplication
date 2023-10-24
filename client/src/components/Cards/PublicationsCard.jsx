@@ -183,6 +183,7 @@ const PublicationsCard = ({ pub }) => {
   const closeModalPhotos = () => {
     setIsPhotosModalOpen(false);
   };
+  
 
 
 

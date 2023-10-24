@@ -108,8 +108,13 @@ const WallFilters = () => {
                       </div>
 
                       <div className="flex mt-4">
-                          <input  type="checkbox" className="checkbox checkbox-sm border-slate-700" />
-                          <p className="ml-2 text-black">Todo</p>
+                          <input  type="checkbox" className="checkbox checkbox-sm border-slate-700" name="Resolved" checked={filterState.Resolved} onChange={handleCheckboxChange}/>
+                          <p className="ml-2 text-black">Resolved Claims</p>
+                      </div>
+
+                      <div className="flex mt-4">
+                          <input  type="checkbox" className="checkbox checkbox-sm border-slate-700" name="Unsolved" checked={filterState.Unsolved} onChange={handleCheckboxChange}/>
+                          <p className="ml-2 text-black">Still unsolved</p>
                       </div>
 
                       <div className=" mt-4  text-left">

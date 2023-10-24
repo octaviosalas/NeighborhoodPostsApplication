@@ -49,7 +49,7 @@ const ResolvedComplaiModal = ({photo, name, title, description, imageOne, imageT
       comment: comment,
       images: imagenes
     })
-    axios.post(`http://localhost:4000/markPublicationAsResolved/${publicationId}`, data)
+    axios.post(`https://app-citizens.onrender.com/markPublicationAsResolved/${publicationId}`, data)
          .then((res) => { 
             console.log(res.data)
             setIsConfettiActive(true);
@@ -146,8 +146,8 @@ const ResolvedComplaiModal = ({photo, name, title, description, imageOne, imageT
                                 </div> : null}   
 
                                 <div className='mt-4'>
-                                      <button className='text-black bg-yellow-400 hover:text-white text-center hover:bg-blue-700 w-18 h-10 text-md' onClick={(() => markPublicationAsResolved())}>Post</button>
-                                      <button onClick={() => ejecutandoConfetti()}>JJ</button>
+                                      <button className='text-black bg-yellow-400 hover:text-white text-center hover:bg-blue-700 w-18 xl:w-36 h-10 text-md' onClick={(() => markPublicationAsResolved())}>Post</button>
+                                    
                                       {isConfettiActive ?  <ReactConfetti /> : null}
                                 </div>              
                         </div>

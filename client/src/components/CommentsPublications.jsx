@@ -90,6 +90,7 @@ const CommentsPublications = ({comments, close}) => {
               setShowAnswer(false)
               notificacionDeToast()
             }, 400)
+            
            })
            .catch((err) => { 
             console.log(err)
@@ -116,8 +117,8 @@ const CommentsPublications = ({comments, close}) => {
        <>
        <div className='overflow-auto max-h-[400px] mt-2'>
           {comments.map((c, index) => ( 
-            <div className='mt-8 bg-gray-100 rounded-xl'>
-                <div className='flex flex-grow items-start justify-start m-2'>
+            <div className='mt-8 bg-gray-100 rounded-xl mr-2'>
+                <div className='flex flex-grow items-start justify-start m-4'>
                     <div className='flex justify-start'>
                         <img src={c.senderProfileImage} className='h-8 w-8 rounded-xl'/>
                       <Link to={`/userProfile/${c.senderId}`}><small className='text-xs font-bold text-black ml-2 mt-2'>{c.senderName}</small></Link>
