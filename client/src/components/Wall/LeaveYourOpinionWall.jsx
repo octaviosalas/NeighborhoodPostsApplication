@@ -3,6 +3,7 @@ import AnnouncementIcon from '@mui/icons-material/Announcement';
 import { useContext } from 'react';
 import { UserContext } from '../../store/usercontext';
 import logi from "../../img/logi-removebg-preview.png";
+import { Link } from 'react-router-dom';
 
 const LeaveYourOpinionWall = () => {
 
@@ -25,7 +26,7 @@ const LeaveYourOpinionWall = () => {
            <div className='flex flex-col mt-4 mb-4 items-center justify-center'>
               <small className='text-sm'>We want to know your opinion</small>
               <small className='text-sm font-bold mt-2'> Make your voice heard!</small>
-              <button className='border border-none w-36  text-black text-xs mt-4 bg-yellow-500 hover:bg-blue-700 hover:text-white rounded-xl'>Take a free survey</button>
+              <Link to={"/survey"}><button className='border border-none w-36  text-black text-xs mt-4 bg-yellow-500 hover:bg-blue-700 hover:text-white rounded-xl'>Take a free survey</button></Link>  
            </div>
        </div>
     </div>

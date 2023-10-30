@@ -78,12 +78,7 @@ const MyPublications = () => {
                 </div>
 
                 {otherData.length !== 0 ? (
-                    <div className="flex flex-col justify-center items-center mt-24 ">
-                        <div className="flex flex-col items-center justify-center">
-                            <h4 className="font-bold text-xxs">Shared Publications</h4>
-                            <KeyboardArrowDownIcon />
-                        </div>
-
+                    <div className="flex flex-col justify-center items-center mt-6 ">
                         <div className="mt-4">
                             {otherData.map((p) => (
                             <SharedPublicationsCard pub={p} />

@@ -19,6 +19,7 @@ import ProfileDos from './components/MyProfile/ProfileDos'
 import PublicationDetailDos from './components/PublicationDetail/PublicationDetailDos'
 import Footer from './components/Footer'
 import SuccesStories from './pages/SuccesStories'
+import Survey from './pages/Survey'
 
 function App() {
   
@@ -42,6 +43,7 @@ function App() {
                       <Route path="/userManualSearch/:searchParam" element={<UserManualSearch/>}></Route> 
                       <Route path="/prueba" element={<ProfileDos/>}></Route> 
                       <Route path="/succesStories" element={<SuccesStories/>}></Route> 
+                      <Route path="/survey" element={<Survey/>}></Route> 
                     </Routes>
              </UserProvider>
 

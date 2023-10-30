@@ -6,6 +6,7 @@ import publicationsRoutes from "./routes/publications.routes.js"
 import connectDataBase from "./database/connectdb.js"
 import commentsRoutes from "./routes/comments.routes.js"
 import notificationsRoutes from "./routes/notifications.routes.js"
+import surveyRoutes from "./routes/survey.routes.js"
 
 
 const app = express()
@@ -23,6 +24,7 @@ app.use(usersRoutes)
 app.use(publicationsRoutes)
 app.use(commentsRoutes)
 app.use(notificationsRoutes)
+app.use(surveyRoutes)
 
 
 app.get('/', (req, res) => {
