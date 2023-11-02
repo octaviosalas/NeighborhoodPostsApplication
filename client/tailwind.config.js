@@ -8,12 +8,9 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: 'class',
   theme: {
-    extend: {
-      colors: {
-        white: '#fff',
-      },
-    },
+   
     screens: {
       "2xs": "1px",
       'xxxs': '360px',
@@ -30,6 +27,5 @@ export default {
   plugins: [
     daisyui,
     formsPlugin,
-  ],
-  darkMode: 'media',
+  ]
 };

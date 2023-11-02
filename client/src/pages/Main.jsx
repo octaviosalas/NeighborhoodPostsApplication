@@ -8,8 +8,9 @@ import { useContext } from "react";
 import { UserContext } from "../store/usercontext";
 import fon from "../img/imageFon.png"
 import axios from "axios";
+import logo from "../img/logi-removebg-preview.png";
 
-
+//dark:bg-slate-800
 
 export default function Landing() {
 
@@ -21,10 +22,9 @@ export default function Landing() {
           setShowButtons(false)
         }
       })
-
-      
+    
   return (
-    <main className="flex flex-col items-center justify-center">
+    <main className="flex flex-col items-center justify-center bg-white dark:bg-white">
       <div  id="hero-section"className="h-screen flex flex-col items-center gap-4 justify-center" >
         <div className="flex justify-center items-center gap-4 ">
             <div className="hidden xxs:block">
@@ -37,8 +37,8 @@ export default function Landing() {
             </div>
         
             <div id="hero-section__content"  className="flex flex-col justify-center items-center gap-4 ml-0 sm:ml-6 ">
-                  <img className="w-96" src={logi} alt="Logo de la página" />
-                  <p className="w-[30ch] text-center text-title-lg font-bold"> Your contribution as a citizen helps to make visible problems in  goods for public use </p>
+                  <img className="w-96" src={logo} alt="Logo de la página" />
+                  <p class="w-[30ch] text-black text-center text-title-lg font-bold dark:text-white"> Your contribution as a citizen helps to make visible problems in  goods for public use </p>
                     <div className="flex gap-2">
                     {showButtons ?
                     <>
