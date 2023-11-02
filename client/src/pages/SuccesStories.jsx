@@ -54,7 +54,7 @@ const SuccesStories = () => {
                         pubsResolved.length === 4 || pubsResolved.length === 8 ? 'xl:grid-cols-4' :
                         pubsResolved.length === 3 || pubsResolved.length === 6 ? 'xl:grid-cols-3' :
                         'xl:grid-cols-2'} 
-                         mt-16 xl:mt-0 gap-2 2xl:gap-6 overflow-y-auto max-h-[600px] xl:overflow-hidden xl:max-h-[2000px] border border-slate-300`}>
+                         mt-16 xl:mt-0 gap-2 2xl:gap-6 overflow-y-auto max-h-[600px] xl:overflow-hidden xl:max-h-[2000px] border border-slate-300 xl:border-none`}>
             {pubsResolved.map((p) => (
                 <div className='flex items-center justify-center m-2'>
                     <div className='flex flex-col  border border-slate-300 bg-gray-200 h-full w-72 2xl:w-80 rounded-lg'>
