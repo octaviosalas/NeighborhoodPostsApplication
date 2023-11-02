@@ -8,14 +8,26 @@ import { useContext } from 'react';
 import { UserContext } from '../store/usercontext';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios"
+import theme from "../img/theme.png"
 
  const Navbar = () => {
 
         const userContx = useContext(UserContext) 
         const navigate = useNavigate()
         const [showOldNotifications, setShowOldNotifications] = useState(false)
- 
+        const [theme, setTheme] = useState("light");
 
+        useEffect(() => {
+          const isDarkMode = matchMedia("(prefers-color-scheme: dark)").matches;
+          console.log(isDarkMode)
+          setTheme(isDarkMode ? "dark" : "light");
+        }, []);
+        
+        useEffect(() => {
+          document.querySelector("html").classList.remove("dark");
+          document.querySelector("html").classList.add(theme);
+        }, [theme]);
+  
         useEffect(() => { 
           axios.get(`https://app-citizens.onrender.com/getMyNotifications/${userContx.userId}`)
             .then((res) => { 
@@ -41,6 +53,9 @@ import axios from "axios"
           }, 500)
         }
 
+        const handleChangeTheme = () => {
+          setTheme(prevTheme => prevTheme === "light" ? "dark" : "light");
+        };
        
         const viewNotification = (x, y) => { 
           axios.put(`https://app-citizens.onrender.com/markAsRead/${y}`)
@@ -85,6 +100,7 @@ import axios from "axios"
                 <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start ">
                   <div className="flex flex-shrink-0 items-center">
                     <Link to={"/"}><p className='text-yellow-500 invisible xxs:visible' >Nei United.</p></Link> 
+                    
                   </div>
                   <div className="hidden sm:ml-6 sm:block ">
                     <div className="flex space-x-4 ">
@@ -198,6 +214,15 @@ import axios from "axios"
                           {({ active }) => (
                             <a  href="#"   className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}  >
                               Settings
+                            </a>
+                          )}
+                        </Menu.Item>
+
+                        
+                        <Menu.Item>
+                          {({ active }) => (
+                            <a  href="#" onClick={handleChangeTheme}  className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}  >
+                              Change Theme
                             </a>
                           )}
                         </Menu.Item>

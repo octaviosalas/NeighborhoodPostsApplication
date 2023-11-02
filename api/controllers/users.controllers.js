@@ -105,6 +105,17 @@ export const login = async (req, res) => {
    }
 }
 
+
+export const getAllUsersData = async (req, res) => { 
+      User.find()
+          .then((users) => { 
+            res.send(users)
+           })
+          .catch((err) => { 
+           console.log(err)
+           })
+}
+
 export const getUserData = async (req, res) => { 
        const {userId} = req.params
        console.log("El id que recibio es: ",  userId)

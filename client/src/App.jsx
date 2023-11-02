@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './App.css'
 import Navbar from './components/Navbar'
 import {Routes, Route} from "react-router-dom"
@@ -19,15 +19,15 @@ import ProfileDos from './components/MyProfile/ProfileDos'
 import PublicationDetailDos from './components/PublicationDetail/PublicationDetailDos'
 import Footer from './components/Footer'
 import SuccesStories from './pages/SuccesStories'
+import Survey from './pages/Survey'
+import { useState } from 'react'
 
 function App() {
   
-
   return (
     <>
-     
              <UserProvider>
-                  <Navbar/>
+                  <Navbar />
                     <Routes>
                       <Route path="/" element={<Main/>}></Route> 
                       <Route path="/register" element={<Register/>}></Route> 
@@ -42,6 +42,7 @@ function App() {
                       <Route path="/userManualSearch/:searchParam" element={<UserManualSearch/>}></Route> 
                       <Route path="/prueba" element={<ProfileDos/>}></Route> 
                       <Route path="/succesStories" element={<SuccesStories/>}></Route> 
+                      <Route path="/survey" element={<Survey/>}></Route> 
                     </Routes>
              </UserProvider>
 
@@ -52,3 +53,4 @@ function App() {
 }
 
 export default App
+
