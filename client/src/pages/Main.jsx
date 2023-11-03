@@ -38,7 +38,7 @@ export default function Landing() {
         
             <div id="hero-section__content"  className="flex flex-col justify-center items-center gap-4 ml-0 sm:ml-6 ">
                   <img className="w-96" src={logo} alt="Logo de la página" />
-                  <p class="w-[30ch] text-black text-center text-title-lg font-bold dark:text-white"> Your contribution as a citizen helps to make visible problems in  goods for public use </p>
+                  <p class="w-[30ch] text-black text-center text-title-lg font-bold dark:text-black"> Your contribution as a citizen helps to make visible problems in  goods for public use </p>
                     <div className="flex gap-2">
                     {showButtons ?
                     <>

@@ -15,7 +15,7 @@ axios.defaults.baseURL = "https://app-citizens.onrender.com/"
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
      <BrowserRouter>
-       <App /> 
+        <App /> 
      </BrowserRouter>
   </React.StrictMode>
 )

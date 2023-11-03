@@ -25,7 +25,7 @@ import { useState } from 'react'
 function App() {
   
   return (
-    <>
+    <div >
              <UserProvider>
                   <Navbar />
                     <Routes>
@@ -44,11 +44,8 @@ function App() {
                       <Route path="/succesStories" element={<SuccesStories/>}></Route> 
                       <Route path="/survey" element={<Survey/>}></Route> 
                     </Routes>
-             </UserProvider>
-
-            
-        
-    </>
+             </UserProvider>     
+    </div>
   )
 }
 

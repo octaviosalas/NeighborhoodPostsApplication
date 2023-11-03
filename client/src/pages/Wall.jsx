@@ -67,7 +67,7 @@ const Wall = () => {
   const thirdFive = data.slice(10, 15)
 
   return (
-    <div>
+    <div >
       <div className="flex flex-col justify-center mb-2">
         {load ? (
           <LoadingPublications text={"Publications"} />
