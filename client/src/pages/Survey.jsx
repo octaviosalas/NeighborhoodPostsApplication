@@ -26,7 +26,7 @@ const Survey = () => {
      const [location, setLocation] = React.useState("")
     
     useEffect(() => { 
-        axios.get("http://localhost:4000/allUsersData")
+        axios.get("https://app-citizens.onrender.com/allUsersData")
              .then((res) => { 
                 console.log(res.data)
                 const allData = res.data

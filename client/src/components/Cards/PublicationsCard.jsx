@@ -226,7 +226,7 @@ const PublicationsCard = ({ pub }) => {
                   {pub.publicationTitle}
                 </p>
               </Link>
-              <p className="justify-center  text-xs mr-4 mt-2">
+              <p className="justify-center  text-xs mr-4 mt-2 text-black dark:text-black">
                 {pub.publicationDescription}
               </p>
 
