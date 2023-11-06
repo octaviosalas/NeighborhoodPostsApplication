@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MagicMotion } from "react-magic-motion";
 
 const menuPages = new Map([
@@ -20,12 +20,23 @@ const menuPages = new Map([
 const WallFilters = () => {
   const [currentPage, setCurrentPage] = useState("home");
   const [selectedCategory, setSelectedCategory] = useState(null);
-
+ 
   const handleClick = (category) => {
-    console.log("Categoría seleccionada:", category);
-    setSelectedCategory(category);
+    if(category === "By Location") { 
+      console.log("..")
+    } else if (category === "By Type of Publication") { 
+      console.log("...")
+    } else if (category === "Personal Filters") { 
+      console.log("....")
+    } else { 
+      setSelectedCategory(category);
+    }
   };
 
+  useEffect(() => { 
+      console.log(selectedCategory);
+  }, [selectedCategory])
+ 
   return (
     <MagicMotion transition={{ type: "spring", stiffness: 200, damping: 15 }}>
       <menu className="bg-slate-200 flex flex-col justify-start gap-2 w-64 2xl:w-80 my-4 p-3 rounded-2xl min-w-[12.5rem]">
@@ -53,17 +64,17 @@ const WallFilters = () => {
         <ul style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
           {menuPages.get(currentPage)?.map((item) => (
             <button
-              disabled={currentPage !== "home"}
               className="w-full text-left flex items-center justify-between gap-1.5 cursor-pointer"
               onClick={() => {
-                if (item.includes("By Location")) {
-                  setCurrentPage("By Location");
-                } else if (item.includes("By Type of Publication")) {
-                  setCurrentPage("By Type of Publication");
-                } else if (item.includes("Personal Filters")) {
-                  setCurrentPage("Personal Filters");
-                } else if (item !== "By Location" && item !== "By Type of Publication" && item !== "Personal Filters") {
-                  console.log("Categoría seleccionada:", item);
+                handleClick(item);
+                if (currentPage === "home") {
+                 if (item.includes("By Location")) {
+                   setCurrentPage("By Location");
+                 } else if (item.includes("By Type of Publication")) {
+                   setCurrentPage("By Type of Publication");
+                 } else if (item.includes("Personal Filters")) {
+                   setCurrentPage("Personal Filters");
+                 }
                 }
               }}
             >
@@ -72,12 +83,11 @@ const WallFilters = () => {
           ))}
         </ul>
       </menu>
-      
     </MagicMotion>
   );
-};
-
-export default WallFilters;
+ };
+ 
+ export default WallFilters;
 
 /*import React from 'react'
 import SearchIcon from '@mui/icons-material/Search';

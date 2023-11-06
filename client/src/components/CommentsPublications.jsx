@@ -125,7 +125,7 @@ const CommentsPublications = ({comments, close}) => {
                     </div>
 
                     <div className='flex justify-end ml-auto'>
-                        <small>{c.commentDate}</small>
+                        <small className='text-black dark:text-black'>{c.commentDate}</small>
                     </div>
                 </div>
 
@@ -180,7 +180,7 @@ const CommentsPublications = ({comments, close}) => {
                               <Link to={`/userProfile/${res.transmitterId}`}><small className='text-xs text-black font-bold ml-2'>{res.transmitterName}</small></Link>
                               </div>
                               <div className='flex items-center justify-center mt-2'>
-                                  <small className='text-sm'>{res.commentResponse}</small>
+                                  <small className='text-sm text-black dark:text-black'>{res.commentResponse}</small>
                               </div>
                             {res.transmitterId === userCtx.userId ? <div className='flex items-start justify-start'>
                                   <small className='text-xs text-gray-500 underline cursor-pointer' onClick={() => deleteMyResponse(c._id, res._id)}>Delete</small>
