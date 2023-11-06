@@ -16,7 +16,7 @@ const UserManualSearch = () => {
      console.log(params)
 
     useEffect(() => {
-        axios.get(`https://app-citizens.onrender.com/getPublicationsWithParams/${params.searchParam}`)
+        axios.get(`https://app-citizens.onrender.com/getPublicationsWithParams/${params.category}`)
              .then((res) => { 
              console.log(res.data)
              setResults(res.data)

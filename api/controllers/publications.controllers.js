@@ -76,13 +76,14 @@ export const myPublications = async (req, res) => {
 
 
 export const getPublicationWithParam = async (req, res) => { 
-   const { searchParam } = req.params;
+   const { category } = req.params;
    console.log("RECIBI", req.params)
-   const regex = new RegExp(searchParam, 'i');
+   const regex = new RegExp(category, 'i');
  
    Publications.find({
      $or: [
        { creatorName: regex },
+       { creatorLocation: regex },
        { publicationTitle: regex }, 
        { typeOfPublication: regex },   
        { creatorLocation: regex},

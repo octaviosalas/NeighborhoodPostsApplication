@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { MagicMotion } from "react-magic-motion";
+import { useNavigate } from "react-router-dom";
 
 const menuPages = new Map([
   ["home", ["By Location", "By Type of Publication", "Personal Filters"]],
@@ -19,9 +20,11 @@ const menuPages = new Map([
 
 const WallFilters = () => {
   const [currentPage, setCurrentPage] = useState("home");
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [searchParam, setSearchParam] = useState(null);
+  const navigate = useNavigate()
  
   const handleClick = (category) => {
+    console.log(category)
     if(category === "By Location") { 
       console.log("..")
     } else if (category === "By Type of Publication") { 
@@ -29,13 +32,17 @@ const WallFilters = () => {
     } else if (category === "Personal Filters") { 
       console.log("....")
     } else { 
-      setSelectedCategory(category);
+      setSearchParam(category);
+      setTimeout(() => { 
+        navigate(`/userManualSearch/${category}`)
+      }, 1000)
+
     }
   };
 
   useEffect(() => { 
-      console.log(selectedCategory);
-  }, [selectedCategory])
+     console.log(searchParam)
+  }, [searchParam])
  
   return (
     <MagicMotion transition={{ type: "spring", stiffness: 200, damping: 15 }}>
