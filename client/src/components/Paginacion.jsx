@@ -44,20 +44,20 @@ const Paginacion = ({actualizar, showFirst, showSecond, showThird}) => {
     <div className="join ">
       <img src={izquierda} className='h-8 w-8 mt-2 cursor pointer hover:bg-gray-300' onClick={() => onceAlDoce()}></img>
 
-       {showOneToFive ? <> <button className="join-item btn 2xl:text-sm xxs:text-xs xxs:w-[20px] bg-white dark:bg-white hover:bg-gray-400"  onClick={() => showFirst()}>1</button>
-        <button className="join-item btn 2xl:text-sm xxs:text-xs xxs:w-[20px] bg-white dark:bg-white  hover:bg-gray-400"  onClick={() => showSecond()}>2</button>
-        <button className="join-item btn 2xl:text-sm xxs:text-xs xxs:w-[20px] bg-white dark:bg-white  hover:bg-gray-400"  onClick={() => showThird(3)}>3</button>
-        <button className="join-item btn 2xl:text-sm xxs:text-xs xxs:w-[20px] bg-white dark:bg-white  hover:bg-gray-400"  onClick={() => actualizandoPagina(4)}>4</button>
-        <button className="join-item btn 2xl:text-sm xxs:text-xs xxs:w-[20px] bg-white dark:bg-white  hover:bg-gray-400"  onClick={() => actualizandoPagina(5)}>5</button> </> : null}
+       {showOneToFive ? <> <button className="join-item border border-none btn 2xl:text-sm xxs:text-xs xxs:w-[20px] bg-white dark:bg-white hover:bg-gray-400"  onClick={() => showFirst()}>1</button>
+        <button className="join-item border border-none btn 2xl:text-sm xxs:text-xs xxs:w-[20px] bg-white dark:bg-white  hover:bg-gray-400"  onClick={() => showSecond()}>2</button>
+        <button className="join-item border border-none btn 2xl:text-sm xxs:text-xs xxs:w-[20px] bg-white dark:bg-white  hover:bg-gray-400"  onClick={() => showThird(3)}>3</button>
+        <button className="join-item border border-none btn 2xl:text-sm xxs:text-xs xxs:w-[20px] bg-white dark:bg-white  hover:bg-gray-400"  onClick={() => actualizandoPagina(4)}>4</button>
+        <button className="join-item border border-none btn 2xl:text-sm xxs:text-xs xxs:w-[20px] bg-white dark:bg-white  hover:bg-gray-400"  onClick={() => actualizandoPagina(5)}>5</button> </> : null}
 
-      {showSixToTen ? <>  <button className="join-item btn 2xl:text-sm xxs:text-xs xxs:w-[20px]"  onClick={() => actualizandoPagina(6)}>6</button>
-        <button className="join-item btn 2xl:text-sm xxs:text-xs xxs:w-[20px]  hover:bg-gray-400"  onClick={() => actualizandoPagina(7)}>7</button>
-        <button className="join-item btn 2xl:text-sm xxs:text-xs xxs:w-[20px]  hover:bg-gray-400"  onClick={() => actualizandoPagina(8)}>8</button>
-        <button className="join-item btn 2xl:text-sm xxs:text-xs xxs:w-[20px]  hover:bg-gray-400"  onClick={() => actualizandoPagina(9)}>9</button>
-        <button className="join-item btn 2xl:text-sm xxs:text-xs xxs:w-[20px]  hover:bg-gray-400"  onClick={() => actualizandoPagina(10)}>10</button>  </> : null}
+      {showSixToTen ? <>  <button className="join-item border border-none btn 2xl:text-sm xxs:text-xs xxs:w-[20px]"  onClick={() => actualizandoPagina(6)}>6</button>
+        <button className="join-item border border-none btn 2xl:text-sm xxs:text-xs xxs:w-[20px]  hover:bg-gray-400"  onClick={() => actualizandoPagina(7)}>7</button>
+        <button className="join-item border border-none btn 2xl:text-sm xxs:text-xs xxs:w-[20px]  hover:bg-gray-400"  onClick={() => actualizandoPagina(8)}>8</button>
+        <button className="join-item border border-none btn 2xl:text-sm xxs:text-xs xxs:w-[20px]  hover:bg-gray-400"  onClick={() => actualizandoPagina(9)}>9</button>
+        <button className="join-item border border-none btn 2xl:text-sm xxs:text-xs xxs:w-[20px]  hover:bg-gray-400"  onClick={() => actualizandoPagina(10)}>10</button>  </> : null}
 
-      {showEleventToThirteen ?  <> <button className="join-item btn 2xl:text-sm xxs:text-xs xxs:w-[20px]  hover:bg-gray-400"  onClick={() => actualizandoPagina(11)}>11</button>
-        <button className="join-item btn 2xl:text-sm xxs:text-xs xxs:w-[20px]  hover:bg-gray-400"  onClick={() => actualizandoPagina(12)}>12</button>
+      {showEleventToThirteen ?  <> <button className="join-item border border-none btn 2xl:text-sm xxs:text-xs xxs:w-[20px]  hover:bg-gray-400"  onClick={() => actualizandoPagina(11)}>11</button>
+        <button className="join-item border border-none btn 2xl:text-sm xxs:text-xs xxs:w-[20px]  hover:bg-gray-400"  onClick={() => actualizandoPagina(12)}>12</button>
         <button className="join-item btn 2xl:text-sm xxs:text-xs xxs:w-[20px]  hover:bg-gray-400"  onClick={() => actualizandoPagina(13)}>13</button>  </>: null }
 
        <img src={derecha} className='h-8 w-8 mt-2 cursor pointer  hover:bg-gray-300' onClick={() => seisAlDiez()}></img>

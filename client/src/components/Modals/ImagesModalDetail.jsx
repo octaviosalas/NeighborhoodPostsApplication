@@ -5,7 +5,7 @@ const ImagesModalDetail = ({firstImage, secondImage, close}) => {
   return (
     <div className=''> 
           <small className="cursor-pointer object-" onClick={()=>document.getElementById('my_modal_11').showModal()} >View Pictures</small>     
-            <dialog id="my_modal_11" className="modal">
+            <dialog id="my_modal_11" className="modal bg-white dark:bg-white">
                 <div className="modal-box">
                         <form method="dialog">
                         <button className="btn btn-sm border-none absolute right-2 top-2">✕</button>

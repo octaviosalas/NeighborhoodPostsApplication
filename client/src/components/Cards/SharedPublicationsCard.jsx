@@ -46,7 +46,7 @@ const SharedPublicationsCard = ({pub}) => {
                 </div>
               
             </div>
-         <div className="rounded-2xl bg-base-100 border-slate-300 ring-1 ring-gray-300 mt-4 max-w-fit-contain">
+         <div className="rounded-2xl bg-base-100 border-slate-300 ring-1 ring-gray-300 mt-4 max-w-fit-contain dark:bg-white">
                                 <div className="card-body" key={pub._id}>
                                         <div className='flex flex-col items-center justify-center md:flex'>
                                                <div className="avatar">

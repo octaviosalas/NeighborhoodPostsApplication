@@ -117,7 +117,7 @@ const CommentsPublications = ({comments, close}) => {
        <>
        <div className='overflow-auto max-h-[400px] mt-2'>
           {comments.map((c, index) => ( 
-            <div className='mt-8 bg-gray-100 rounded-xl mr-2'>
+            <div className='mt-8  rounded-xl mr-2'>
                 <div className='flex flex-grow items-start justify-start m-4'>
                     <div className='flex justify-start'>
                         <img src={c.senderProfileImage} className='h-8 w-8 rounded-xl'/>
@@ -130,8 +130,8 @@ const CommentsPublications = ({comments, close}) => {
                 </div>
 
                 <div className='h-12 w-auto mt-4'> 
-                    <div className='flex justify-start items-start m-2'>
-                       <small className=' text-sm'>{c.comment}</small>
+                    <div className='flex justify-start text-center items-start m-2'>
+                       <small className='text-black  dark:text-black text-sm'>{c.comment}</small>
                     </div>            
                     <div className='flex flex-grow  m-2'>
                          {

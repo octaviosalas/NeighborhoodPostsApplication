@@ -115,7 +115,7 @@ const ShareModal = ({ pubChoosen, publicationId,creatorName,creatorId,closeModal
       <button className="btn" onClick={() => openModalFour()}>
         <ShareIcon />
       </button>
-      <dialog id="my_modal_4" className="modal ">
+      <dialog id="my_modal_4" className="modal bg-white dark:bg-white">
         {loading ? (
           <form method="dialog" className="modal-box max-w-fit-contain">
             <button
@@ -140,12 +140,12 @@ const ShareModal = ({ pubChoosen, publicationId,creatorName,creatorId,closeModal
                       className="rounded-2xl h-8 w-8"
                       src={p.creatorProfileImage}
                     ></img>
-                    <small className="ml-4">{p.creatorName}</small>
+                    <small className="ml-4 text-black dark:text-black">{p.creatorName}</small>
                   </div>
                   <div className="justify-center">
-                    <h2 className="font-bold text-lg">{p.publicationTitle}</h2>
-                    <small className="mt-4">{p.publicationDescription}</small>
-                    <small className="mt-6">
+                    <h2 className="font-bold text-lg text-black dark:text-blac">{p.publicationTitle}</h2>
+                    <small className="mt-4 text-black dark:text-blac">{p.publicationDescription}</small>
+                    <small className="mt-6 text-black dark:text-blac">
                       {p.creatorLocation}, {p.address}
                     </small>
                   </div>

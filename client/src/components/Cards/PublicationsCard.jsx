@@ -234,7 +234,7 @@ const PublicationsCard = ({ pub }) => {
                 <p className=" text-xs mr-4  whitespace-no-wrap text-black dark:text-black">
                   {pub.creatorLocation}, {pub.address}
                 </p>
-                <p className=" text-xs mr-4 underline cursor-pointer">
+                <p className=" text-xs mr-4 underline cursor-pointer text-black dark:text-black">
                   Ver en Mapa
                 </p>
               </div>
@@ -320,7 +320,7 @@ const PublicationsCard = ({ pub }) => {
 
               <div className="border">
                 {isCommentModalOpen ? null : (
-                  <button onClick={() => openCommentModal(pub)} className=" bg-gray-200 hover:bg-white">
+                  <button onClick={() => openCommentModal(pub)} className="btn border-none bg-gray-200 dark:bg-gray-200 hover:bg-white">
                     <RateReviewIcon />
                   </button>
                 )}
@@ -335,7 +335,7 @@ const PublicationsCard = ({ pub }) => {
 
               <div>
                 {isShareModalOpen ? null : (
-                  <button onClick={() => openShareModal(pub)}  className=" bg-gray-200 hover:bg-white">
+                  <button onClick={() => openShareModal(pub)}  className="btn border-none bg-gray-200 dark:bg-gray-200 hover:bg-white">
                     <ShareIcon />
                   </button>
                 )}
