@@ -68,15 +68,15 @@ const SignIn = () => {
                     <div className="flex flex-col gap-6 sm:gap-4 mt-9 sm:mx-auto sm:w-full sm:max-w-sm">
                         <div>
                             <div className="mt-2">
-                                <input  id="Email" name="user" placeholder="Email" type="text" required className="input input-sm block w-full border border-black font-PoppinsRegular 
-                                ring-pallete-grey focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6" onChange={(e) => setEmail(e.target.value)}/>
+                                <input  id="Email" name="user" placeholder="Email" type="text" required className="input  input-sm block w-full border border-black font-PoppinsRegular 
+                                ring-pallete-grey focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6 text-black bg-white dark:bg-white dark:text-black" onChange={(e) => setEmail(e.target.value)}/>
                             </div>
                         </div>
 
                         <div>
                             <div className="mt-2 flex flex-col">
                                 <input  id="Contraseña" name="Contraseña" placeholder="Contraseña" type="password" required className="input input-sm block w-full border border-black font-PoppinsRegular 
-                                ring-pallete-grey focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"  onChange={(e) => setPassword(e.target.value)}
+                                ring-pallete-grey focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6 text-black bg-white dark:bg-white dark:text-black"  onChange={(e) => setPassword(e.target.value)}
                                 />
                                 <p className="mt-2 flex justify-end text-xs text-black underline cursor-pointer xs:whitespace-nowrap">I miss my Password</p>
                             </div>

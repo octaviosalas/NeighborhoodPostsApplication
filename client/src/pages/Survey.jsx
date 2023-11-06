@@ -75,10 +75,11 @@ const Survey = () => {
     }
 
   return (
-    <div className='mt-12 md:mt-0'>
+    <div className='mt-16 md:mt-12'>
          { showSurvey ?
         <>  
          <div className="flex flex-col items-center justify-center">
+            <img src={userCtx.userProfileImage} className='h-24 w-24 rounded-full'/>
             <h3 className="text-base font-semibold leading-7 text-gray-900">Survey to find out the quality of life in your location</h3>
             <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Your answers will be saved, so that you can obtain general statistics and make your voice heard..</p>
             <select className='w-full text-center mt-4' title="a" onChange={(e) => setLocation(e.target.value)}>

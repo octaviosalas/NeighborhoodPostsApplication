@@ -49,7 +49,7 @@ const OpinionsAndResolveMobile = () => {
                 <div id="slide1" className="carousel-item relative w-80 sm:w-[400px] md:w-[550px]">
                     <div className='flex flex-col  w-full'>
                           <div className='flex items-center justify-center'>
-                            <small className='font-bold text-sm'>Resolved Complains</small>
+                            <small className='font-bold text-sm text-black dark:text-black'>Resolved Complains</small>
                           </div>
 
                          {resolvedClaims.map((r) => ( 
@@ -59,9 +59,9 @@ const OpinionsAndResolveMobile = () => {
                                          <img src={r.creatorProfileImage} className='h-8 w-8 sm:h-12 sm:w-12 rounded-full'/>
                                     </div>
                                     <div className='flex flex-col items-start justify-center mt-2 ml-4'>
-                                            <small className='text-md font-bold'>{r.creatorName} 's Claim</small>
-                                            <small className='font-bold text-sm  mt-2'>{r.publicationTitle}</small>
-                                            <small className='text-sm text-gray-500 underline cursor-pointer'>View Publication</small>
+                                            <small className='text-md font-bold text-black dark:text-black'>{r.creatorName} 's Claim</small>
+                                            <small className='font-bold text-sm  mt-2 text-black dark:text-black'>{r.publicationTitle}</small>
+                                            <small className='text-sm text-gray-500 underline cursor-pointer dark:text-gray-500'>View Publication</small>
                                     </div>
                                 </div>
                           </div>

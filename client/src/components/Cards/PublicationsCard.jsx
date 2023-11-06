@@ -231,7 +231,7 @@ const PublicationsCard = ({ pub }) => {
               </p>
 
               <div className="mt-4 whitespace-no-wrap">
-                <p className=" text-xs mr-4  whitespace-no-wrap">
+                <p className=" text-xs mr-4  whitespace-no-wrap text-black dark:text-black">
                   {pub.creatorLocation}, {pub.address}
                 </p>
                 <p className=" text-xs mr-4 underline cursor-pointer">
@@ -310,7 +310,7 @@ const PublicationsCard = ({ pub }) => {
           <div className="grid col-span-2 mt-2 md:mt-0">
             <div className="flex justify-between ">
               <button
-                className="btn border-none bg-gray-200 hover:bg-white"
+                className="btn border-none bg-gray-200 dark:bg-gray-200 hover:bg-white"
                 onClick={() => saveInFavorites(pub)}
               >
                 <FavoriteBorderIcon/>

@@ -1,37 +1,34 @@
-import React from 'react'
-import SearchIcon from '@mui/icons-material/Search';
-import { useState } from "react";
+import React, { useState } from "react";
 import { MagicMotion } from "react-magic-motion";
 
 const menuPages = new Map([
   ["home", ["By Location", "By Type of Publication", "Personal Filters"]],
-  [
-    "By Location",
-    [
-      "Ohio, USA  ",
-      "New York, USA",
-      "Manhattan, USA",
-      "Chicago, Illinios",
-      "Los Angeles, California",
-      "Miami, Florida",
-      "Las Vegas, Nevada",
-      "Washington D.C"
-    ],
-  ],
-  [
-    "By Type of Publication",
-    ["Gym", "Programming", "Watching NBA", "Learning about animation"],
-  ],
-  ["Personal Filters", ["JavaScript/React.js", "Python", "C#", "Java"]],
+  ["By Location", [
+    "Ohio, USA",
+    "New York, USA",
+    "Manhattan, USA",
+    "Chicago, Illinois",
+    "Los Angeles, California",
+    "Miami, Florida",
+    "Las Vegas, Nevada",
+    "Washington D.C",
+  ]],
+  ["By Type of Publication", ["Streets", "Transit", "Lighting", "Cleaning", "All Publication"]],
+  ["Personal Filters", ["Streets", "Transit", "Lighting", "Cleaning", "All Publication"]],
 ]);
 
 const WallFilters = () => {
+  const [currentPage, setCurrentPage] = useState("home");
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
-  const [currentPage, setCurrentPage] = useState("home")
+  const handleClick = (category) => {
+    console.log("Categoría seleccionada:", category);
+    setSelectedCategory(category);
+  };
 
   return (
-<MagicMotion transition={{ type: "spring", stiffness: 200, damping: 15 }}>
-      <menu className='bg-slate-200 flex flex-col justify-start gap-2 w-64 2xl:w-80 my-4 p-3 rounded-2xl min-w-[12.5rem]'>
+    <MagicMotion transition={{ type: "spring", stiffness: 200, damping: 15 }}>
+      <menu className="bg-slate-200 flex flex-col justify-start gap-2 w-64 2xl:w-80 my-4 p-3 rounded-2xl min-w-[12.5rem]">
         <header
           style={{
             textAlign: "center",
@@ -41,61 +38,46 @@ const WallFilters = () => {
           }}
         >
           {currentPage !== "home" && (
-            <small className='absolute text-xl cursor-pointer' onClick={() => setCurrentPage("home")} >   ←  </small>
+            <small
+              className="absolute text-xl cursor-pointer"
+              onClick={() => {
+                setCurrentPage("home");
+                setSelectedCategory(null); // Limpiar la categoría seleccionada al retroceder
+              }}
+            >
+              ←
+            </small>
           )}
           <span style={{ margin: "0 auto" }}>Filters</span>
         </header>
-        <ul
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "0.4rem",
-          }}
-        >
-          {menuPages.get(currentPage)?.map((item) => {
-            return (
-              <li  key={item} className="p-1.5 nx-bg-black/[.05] dark:nx-bg-gray-50/10 text-sm cursor-pointer"  >
-                <button disabled={currentPage !== "home"}  className='w-full text-left flex items-center justify-between gap-1.5"'
-                  onClick={() => {
-                    if (item.includes("By Location")) {
-                      setCurrentPage("By Location");
-                    } else if (item.includes("By Type of Publication")) {
-                      setCurrentPage("By Type of Publication");
-                    } else if (item.includes("Personal Filters")) {
-                      setCurrentPage("Personal Filters");
-                    }
-                  }}
-                >
-                  {item}
-                  {currentPage === "home" && (
-                    <svg
-                      width="12"
-                      height="12"
-                      viewBox="0 0 32 32"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M11 5.5L18.9261 12.8496C20.5999 14.4018 20.6376 17.0377 19.0087 18.6369L11 26.5"
-                        stroke="currentColor"
-                        strokeWidth="4"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  )}
-                </button>
-              </li>
-            );
-          })}
+        <ul style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
+          {menuPages.get(currentPage)?.map((item) => (
+            <button
+              disabled={currentPage !== "home"}
+              className="w-full text-left flex items-center justify-between gap-1.5 cursor-pointer"
+              onClick={() => {
+                if (item.includes("By Location")) {
+                  setCurrentPage("By Location");
+                } else if (item.includes("By Type of Publication")) {
+                  setCurrentPage("By Type of Publication");
+                } else if (item.includes("Personal Filters")) {
+                  setCurrentPage("Personal Filters");
+                } else if (item !== "By Location" && item !== "By Type of Publication" && item !== "Personal Filters") {
+                  console.log("Categoría seleccionada:", item);
+                }
+              }}
+            >
+              {item}
+            </button>
+          ))}
         </ul>
       </menu>
+      
     </MagicMotion>
-         
   );
 };
 
-export default WallFilters
+export default WallFilters;
 
 /*import React from 'react'
 import SearchIcon from '@mui/icons-material/Search';
