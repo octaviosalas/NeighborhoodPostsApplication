@@ -21,6 +21,7 @@ import Footer from './components/Footer'
 import SuccesStories from './pages/SuccesStories'
 import Survey from './pages/Survey'
 import { useState } from 'react'
+import Biblioteca from './components/Biblioteca'
 
 function App() {
   
@@ -43,6 +44,8 @@ function App() {
                       <Route path="/prueba" element={<ProfileDos/>}></Route> 
                       <Route path="/succesStories" element={<SuccesStories/>}></Route> 
                       <Route path="/survey" element={<Survey/>}></Route> 
+                      <Route path="/bibi" element={<Biblioteca/>}></Route> 
+
                     </Routes>
              </UserProvider>     
     </div>

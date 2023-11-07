@@ -73,7 +73,7 @@ const Wall = () => {
           <LoadingPublications text={"Publications"} />
         ) : (
           <div className="flex flex-wrap gap-4 items-center place-content-around">
-            <div className="flex flex-col fixed 2xl:left-72 xl:left-20 lg:left-6 invisible lg:visible ">
+            <div className="flex flex-col fixed 3xl:left-80 2xl:left-48 xl:left-20 lg:left-6 invisible lg:visible ">
               <WallFilters />
             </div>
 

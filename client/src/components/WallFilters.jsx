@@ -15,7 +15,7 @@ const menuPages = new Map([
     "Washington D.C",
   ]],
   ["By Type of Publication", ["Streets", "Transit", "Lighting", "Cleaning", "All Publication"]],
-  ["Personal Filters", ["Streets", "Transit", "Lighting", "Cleaning", "All Publication"]],
+  ["Other Filters", ["Resolved Claims", "Claims still unresolved"]],
 ]);
 
 const WallFilters = () => {
@@ -29,7 +29,7 @@ const WallFilters = () => {
       console.log("..")
     } else if (category === "By Type of Publication") { 
       console.log("...")
-    } else if (category === "Personal Filters") { 
+    } else if (category === "Other Filters") { 
       console.log("....")
     } else { 
       setSearchParam(category);
@@ -79,8 +79,8 @@ const WallFilters = () => {
                    setCurrentPage("By Location");
                  } else if (item.includes("By Type of Publication")) {
                    setCurrentPage("By Type of Publication");
-                 } else if (item.includes("Personal Filters")) {
-                   setCurrentPage("Personal Filters");
+                 } else if (item.includes("Other Filters")) {
+                   setCurrentPage("Other Filters");
                  }
                 }
               }}
