@@ -12,7 +12,7 @@ import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCar
   MDBListGroupItem
 } from 'mdb-react-ui-kit';
 
-export default function ProfilePage() {
+export default function UsersProfile() {
 
   const userCtx = useContext(UserContext)
 
@@ -27,6 +27,7 @@ export default function ProfilePage() {
   const [userLocation, setUserLocation] = useState("")
   const [userEmail, setUserEmail] = useState("")
   const [profileImage, setProfileImage] = useState("")
+  const [load, setLoad] = useState(false)
 
 
   const {userId} = useParams()
@@ -48,12 +49,15 @@ export default function ProfilePage() {
     console.log(data)
     console.log(userFavs)
     console.log(userId)
+    setTimeout(() => { 
+      setLoad(true)
+    }, 2000)
   }, [data])
 
   
   return (
     <section className='g-gray-200 mt-12'>
-      <MDBContainer className="">
+     {load ? <MDBContainer className="">
         <MDBRow>
           <MDBCol className=''>
        
@@ -63,9 +67,9 @@ export default function ProfilePage() {
                             <MDBCardBody className="text-center">
                               <div className='flex flex-col items-center justify-center'>
                                 <MDBCardImage  src={profileImage}  alt="avatar"  className="rounded-full w-20 h-20 xl:w-36 xl:h-36 mt-6" fluid />
-                                <p className="text-muted mb-1 font-bold mt-4">{userName}</p>
-                                <p className="text-muted mb-4">{userLocation}</p>
-                                <p className='text-sm underline cursor-pointer'> Opinions about {userLocation}</p>
+                                <p className="text-muted mb-1 font-bold mt-4 text-black">{userName}</p>
+                                <p className="text-muted mb-4  text-black">{userLocation}</p>
+                                <p className='text-sm underline cursor-pointer  text-black'> Opinions about {userLocation}</p>
                               </div>
                             </MDBCardBody>
                           </MDBCard>
@@ -78,46 +82,46 @@ export default function ProfilePage() {
                                 <MDBCardBody>
                                   <MDBRow className='flex flex-col md:flex-row gap-0  md:gap-28'>
                                     <MDBCol sm="3">
-                                      <MDBCardText className='font-bold'>Full Name:</MDBCardText>
+                                      <MDBCardText className='font-bold  text-black'>Full Name:</MDBCardText>
                                     </MDBCol>
                                     <MDBCol sm="9">
-                                      <MDBCardText className="text-muted">{userName}</MDBCardText>
+                                      <MDBCardText className="text-muted  text-black">{userName}</MDBCardText>
                                     </MDBCol>
                                   </MDBRow>
                                   <hr style={{borderColor: "white"}}/>
                                   <MDBRow className='flex flex-col md:flex-row gap-0  md:gap-28'>
                                     <MDBCol sm="3">
-                                      <MDBCardText className='font-bold'>Email:</MDBCardText>
+                                      <MDBCardText className='font-bold  text-black'>Email:</MDBCardText>
                                     </MDBCol>
                                     <MDBCol sm="9">
-                                      <MDBCardText className="text-muted">{userEmail}</MDBCardText>
+                                      <MDBCardText className="text-muted  text-black">{userEmail}</MDBCardText>
                                     </MDBCol>
                                   </MDBRow>
                                   <hr style={{borderColor: "white"}}/>
                                   <MDBRow className='flex flex-col md:flex-row gap-0  md:gap-28'>
                                     <MDBCol sm="3">
-                                      <MDBCardText className='font-bold'>Phone:</MDBCardText>
+                                      <MDBCardText className='font-bold  text-black'>Phone:</MDBCardText>
                                     </MDBCol>
                                     <MDBCol sm="9">
-                                      <MDBCardText className="text-muted">(097) 234-5678</MDBCardText>
+                                      <MDBCardText className="text-muted  text-black">(097) 234-5678</MDBCardText>
                                     </MDBCol>
                                   </MDBRow>
                                   <hr style={{borderColor: "white"}}/>
                                   <MDBRow className='flex flex-col md:flex-row gap-0  md:gap-28'>
                                     <MDBCol sm="3">
-                                      <MDBCardText className='font-bold'>BirthDate:</MDBCardText>
+                                      <MDBCardText className='font-bold  text-black'>BirthDate:</MDBCardText>
                                     </MDBCol>
                                     <MDBCol sm="9">
-                                      <MDBCardText className="text-muted">{userBirthdate}</MDBCardText>
+                                      <MDBCardText className="text-muted  text-black">{userBirthdate}</MDBCardText>
                                     </MDBCol>
                                   </MDBRow>
                                   <hr style={{borderColor: "white"}}/>
                                   <MDBRow className='flex flex-col md:flex-row gap-0  md:gap-28'>
                                     <MDBCol sm="3">
-                                      <MDBCardText className='font-bold'>Address:</MDBCardText>
+                                      <MDBCardText className='font-bold  text-black'>Address:</MDBCardText>
                                     </MDBCol>
                                     <MDBCol sm="9">
-                                      <MDBCardText className="text-muted">{userLocation}</MDBCardText>
+                                      <MDBCardText className="text-muted  text-black">{userLocation}</MDBCardText>
                                     </MDBCol>
                                   </MDBRow>
                                 </MDBCardBody>
@@ -129,7 +133,7 @@ export default function ProfilePage() {
                                   <MDBCol md="6">
                                           <MDBCard className="mb-4 mb-md-0">
                                             <MDBCardBody>
-                                              <MDBCardText className="mb-4 text-md font-bold">{userCtx.userName} Publications ({publicationsNumber}) </MDBCardText>
+                                              <MDBCardText className="mb-4 text-md font-bold  text-black">{userCtx.userName} Publications ({publicationsNumber}) </MDBCardText>
                                                 <div className='overflow-y-auto max-h-[400px] max-w-[400px]'>
                                                 
                                             {publicationsNumber !== 0 ? (
@@ -145,9 +149,9 @@ export default function ProfilePage() {
                                                           <div className='mt-4 max-w-fit-contain'>
                                                             <div className="grid col-span-1 max-w-fit-contain ml-4">
                                                               <p className="font-bold text-sm text-black">{p.publicationTitle}</p>
-                                                              <p className="justify-center text-xs mr-4 mt-2">{p.publicationDescription}</p>
+                                                              <p className="justify-center text-xs mr-4 mt-2  text-black">{p.publicationDescription}</p>
                                                               <div className="mt-4 whitespace-no-wrap">
-                                                                <p className="text-xs mr-4 whitespace-no-wrap">{p.creatorLocation}, {p.address}</p>
+                                                                <p className="text-xs mr-4 whitespace-no-wrap  text-black">{p.creatorLocation}, {p.address}</p>
                                                               </div>
                                                               <div className='flex items-center justify-center gap-2 m-2'>
                                                                 <img src={p.publicationImages[0]} className='h-16 w-16 rounded-lg'/>
@@ -158,7 +162,7 @@ export default function ProfilePage() {
                                                         </div>
                                                       ))}
                                                     </div>
-                                                  ) : <p>{userName} dosent have favorites</p>}
+                                                  ) : <p className=' text-black'>{userName} dosent have favorites</p>}
                                              
                                                 </div>
                                             </MDBCardBody>
@@ -184,9 +188,9 @@ export default function ProfilePage() {
                                                           <div className='mt-4 max-w-fit-contain'>
                                                             <div className="grid col-span-1 max-w-fit-contain ml-4">
                                                               <p className="font-bold text-sm text-black">{p.publicationTitle}</p>
-                                                              <p className="justify-center text-xs mr-4 mt-2">{p.publicationDescription}</p>
+                                                              <p className="justify-center text-xs mr-4 mt-2 text-black">{p.publicationDescription}</p>
                                                               <div className="mt-4 whitespace-no-wrap">
-                                                                <p className="text-xs mr-4 whitespace-no-wrap">{p.creatorLocation}, {p.address}</p>
+                                                                <p className="text-xs mr-4 whitespace-no-wrap text-black">{p.creatorLocation}, {p.address}</p>
                                                               </div>
                                                               <div className='flex items-center justify-center gap-2 m-2'>
                                                                 <img src={p.publicationImages[0]} className='h-16 w-16 rounded-lg'/>
@@ -197,7 +201,7 @@ export default function ProfilePage() {
                                                         </div>
                                                       ))}
                                                     </div>
-                                                  ) : <p>{userName} dosent have favorites</p>}
+                                                  ) : <p className='text-black'>{userName} dosent have favorites</p>}
                                                 </div>
                                           </MDBCardBody>
                                         </MDBCard>
@@ -205,18 +209,12 @@ export default function ProfilePage() {
                                  </div>  
                </div>
            </div>
-    </div>
-
-             
-           
-
-           
-          </MDBCol>
-       
+    </div>                     
+          </MDBCol>     
         </MDBRow>
-      </MDBContainer>
+      </MDBContainer> : <LoadingPublications text={"user data"}/>}
     </section>
-  )};
+  )}
 
 
 

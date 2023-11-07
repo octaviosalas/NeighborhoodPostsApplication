@@ -77,6 +77,36 @@ export const myPublications = async (req, res) => {
 
 export const getPublicationWithParam = async (req, res) => { 
    const { category } = req.params;
+   console.log(req.params);
+   console.log("RECIBI", req.params);
+   const regex = new RegExp(category, 'i');
+
+   if (category !== "Resolved Claims") { 
+      Publications.find({
+         $or: [
+           { creatorName: regex },
+           { creatorLocation: regex },
+           { publicationTitle: regex }, 
+           { typeOfPublication: regex },   
+           { address: regex}
+         ],
+       })
+         .then((results) => {
+           res.json({ message: "JAJAJA", results });
+         })
+         .catch((err) => console.log(err));
+   } else if (category === "Resolved Claims") { 
+      Publications.find({ resolvedClaims: true })
+                  .then((resultss) => { 
+                     res.json(resultss);
+                  })
+                  .catch((err) => console.log(err));
+   } 
+}
+
+
+/*export const getPublicationWithParam = async (req, res) => { 
+   const { category } = req.params;
    console.log("RECIBI", req.params)
    const regex = new RegExp(category, 'i');
  
@@ -94,7 +124,7 @@ export const getPublicationWithParam = async (req, res) => {
        res.json(results);
      })
      .catch((err) => console.log(err));
-}
+}*/
 
 
 export const getOnePublication = async (req, res) => { 

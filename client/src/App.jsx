@@ -12,7 +12,6 @@ import UserSearch from './pages/UserSearch'
 import MyProfile from './pages/MyProfile'
 import PublicationDetail from './components/PublicationDetail'
 import SearchWithMultipleFilters from './pages/SearchWithMultipleFilters'
-import OtherUsersProfile from './pages/OtherUsersProfile'
 import Prueba from './components/Prueba'
 import UserManualSearch from './pages/UserManualSearch'
 import ProfileDos from './components/MyProfile/ProfileDos'
@@ -21,7 +20,7 @@ import Footer from './components/Footer'
 import SuccesStories from './pages/SuccesStories'
 import Survey from './pages/Survey'
 import { useState } from 'react'
-import Biblioteca from './components/Biblioteca'
+import UsersProfile from './pages/UsersProfile'
 
 function App() {
   
@@ -43,7 +42,7 @@ function App() {
                       <Route path="/prueba" element={<ProfileDos/>}></Route> 
                       <Route path="/succesStories" element={<SuccesStories/>}></Route> 
                       <Route path="/survey" element={<Survey/>}></Route> 
-                      <Route path="/userProfile/:userId" element={<Biblioteca/>}></Route> 
+                      <Route path="/userProfile/:userId" element={<UsersProfile/>}></Route> 
 
                     </Routes>
              </UserProvider>     

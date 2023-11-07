@@ -15,7 +15,17 @@ const UserSearch = () => {
     console.log(param)
   
     const [searchResults, setSearchResults] = useState([])
-    const {data, loading} = useGetBackendQueries(`getPublicationsWithParams/${param.searchParam}`)
+    //const {data, loading} = useGetBackendQueries(`getPublicationsWithParams/${param.searchParam}`)
+
+    useEffect(() => { 
+         axios.get(`http://localhost:4000/getPublicationsWithParams/${param.searchParam}`)
+              .then((res) => { 
+                console.log(res.data)
+              })
+              .catch((err) => { 
+                console.log(err)
+              })
+    }, [param])
 
 
   return (

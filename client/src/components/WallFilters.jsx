@@ -3,7 +3,7 @@ import { MagicMotion } from "react-magic-motion";
 import { useNavigate } from "react-router-dom";
 
 const menuPages = new Map([
-  ["home", ["By Location", "By Type of Publication", "Personal Filters"]],
+  ["home", ["By Location", "By Type of Publication", "Other Filters"]],
   ["By Location", [
     "Ohio, USA",
     "New York, USA",
