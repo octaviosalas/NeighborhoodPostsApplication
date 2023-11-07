@@ -92,11 +92,11 @@ export const getPublicationWithParam = async (req, res) => {
          ],
        })
          .then((results) => {
-           res.json({ message: "JAJAJA", results });
+           res.json({ results });
          })
          .catch((err) => console.log(err));
    } else if (category === "Resolved Claims") { 
-      Publications.find({ resolved: true })
+      Publications.find({resolved: true })
                   .then((resultss) => { 
                      res.json(resultss);
                   })
