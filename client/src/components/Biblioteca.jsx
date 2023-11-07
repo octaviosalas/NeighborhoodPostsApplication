@@ -1,174 +1,447 @@
-import React from "react";
-import { useState } from "react";
-import { MagicCard } from "react-magic-motion";
-import "react-magic-motion/card.css";
- 
-function CloseFullscreenSvg() {
+import React from 'react';
+import { useContext } from "react";
+import { UserContext } from "../store/usercontext";
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import useGetBackendQueries from '../Hooks/useGetBackendQueries';
+import LoadingPublications from '../Hooks/LoadingPublications';
+
+import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBBtn, MDBBreadcrumb, MDBBreadcrumbItem, MDBProgress, MDBProgressBar, MDBIcon,
+ MDBListGroup,
+  MDBListGroupItem
+} from 'mdb-react-ui-kit';
+
+export default function ProfilePage() {
+
+  const userCtx = useContext(UserContext)
+
+  const [publicationsNumber, setPublicationsNumber] = useState(0)
+  const [favoritesNumber, setFavoritesNumber] = useState(0)
+  const [noPublications, setNoPublications] = useState(false)
+  const [noFavorites, setNoFavorites] = useState(false)
+  const [userPublications, setUserPublications] = useState([])
+  const [userFavorites, setUserFavorites] = useState([])
+  const [userName, setUserName] = useState(null)
+  const [userBirthdate, setUserBirthdate] = useState("")
+  const [userLocation, setUserLocation] = useState("")
+  const [userEmail, setUserEmail] = useState("")
+  const [profileImage, setProfileImage] = useState("")
+
+
+  const {userId} = useParams()
+
+  const { data, loading } = useGetBackendQueries(`getUserPublication/${userId}`); 
+  const { data: userData } = useGetBackendQueries(`getUserData/${userId}`); 
+  const { data: userFavs } = useGetBackendQueries(`getMyFavs/${userId}`);
+
+  useEffect(() => { 
+    setPublicationsNumber(data.length)
+    setFavoritesNumber(userFavs.length)
+    setUserPublications(data)
+    setUserFavorites(userFavs)
+    setProfileImage(userData.map((u) => u.profileImage))
+    setUserLocation(userData.map((u) => u.location))
+    setUserName(userData.map((d) => d.name))
+    setUserBirthdate(userData.map((d) => d.birthdate))
+    setUserEmail(userData.map((d) => d.email))
+    console.log(data)
+    console.log(userFavs)
+    console.log(userId)
+  }, [data])
+
+  
   return (
-    <>
-      <rect
-        x="1"
-        y="16"
-        width="14"
-        height="15"
-        stroke="currentColor"
-        strokeWidth="2"
-      />
-      <path
-        d="M26 5L18 13"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-      <path
-        d="M18 13H22"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-      <path
-        d="M18 13V9"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-      <rect
-        x="1"
-        y="1"
-        width="30"
-        height="30"
-        stroke="currentColor"
-        strokeWidth="2"
-      />
-    </>
-  );
-}
- 
-function OpenFullscreenSvg() {
-  return (
-    <>
-      <rect
-        x="1"
-        y="8"
-        width="21"
-        height="23"
-        stroke="currentColor"
-        strokeWidth="2"
-      />
-      <path
-        d="M7 24L15 16"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-      <path
-        d="M15 16H11"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-      <path
-        d="M15 16V20"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-      <rect
-        x="1"
-        y="1"
-        width="30"
-        height="30"
-        stroke="currentColor"
-        strokeWidth="2"
-      />
-    </>
-  );
-}
- 
-export default function Biblioteca() {
-  const [isCardExpanded, setIsCardExpanded] = useState(false);
- 
-  return (
-    <MagicCard  isCardExpanded={isCardExpanded}  onBackgroundFadeClick={() => setIsCardExpanded(false)}  transition={{ type: "spring", stiffness: 200, damping: 20 }}  >
-      <div style={{    width: isCardExpanded ? "40rem" : "17rem",  gap: "1rem",   display: "flex", flexDirection: "column",  padding: "1.35rem 0",  backgroundColor:"white",  color: isCardExpanded ? "black" : "currentColor",}} >
-        <div
-          style={{ position: "relative", display: "flex", alignItems: "center",  }}
- >
-          <h3
-            style={{
-              fontWeight: 600,
-              fontSize: "1.4em",
-            }}
-          >
-            Mona Lisa
-          </h3>
- 
-          <button
-            style={{ position: "absolute", right: 0, zIndex: 9999 }}
-            onClick={() => setIsCardExpanded(!isCardExpanded)}
-          >
-            <svg
-              key="exclude"
-              width="32"
-              height="32"
-              viewBox="0 0 32 32"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              {isCardExpanded ? (
-                <CloseFullscreenSvg />
-              ) : (
-                <OpenFullscreenSvg />
-              )}
-            </svg>
-          </button>
-        </div>
-        <div style={{ overflowY: "auto" }}>
-          <img
-            style={{
-              width: isCardExpanded ? "24rem" : "17.5rem",
-              height: "auto",
-            }}
-            alt="Mona Lisa"
-            src="https://react-magic-motion.nyc3.cdn.digitaloceanspaces.com/examples/expandable-card/mona-lisa.jpg"
-          />
-          {isCardExpanded && (
-            <section
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "1rem",
-              }}
-            >
-              <h4 style={{ fontSize: "1.2em", fontWeight: 600 }}>
-                Title: The Enigmatic Smile of Mona Lisa
-              </h4>
-              <p>
-                Unveil the allure of the world-renowned masterpiece, the Mona
-                Lisa, displayed in the heart of the Louvre Museum in Paris.
-                Painted by the illustrious Leonardo da Vinci between 1503 and
-                1506, this portrait is celebrated for Mona Lisa's enigmatic
-                smile that seems to change depending on the viewing angle.
-              </p>
-              <p>
-                The exquisite blending of light and shadow, known as sfumato,
-                contributes to the mystique of her expression. Da Vinci’s
-                remarkable attention to detail is evident in the delicate
-                veiling and the meticulous background landscapes that frame Mona
-                Lisa's serene demeanor.
-              </p>
-              <p>
-                The artistry and the mysteries enveloping the Mona Lisa continue
-                to captivate audiences, making it an enduring symbol of the
-                Renaissance era. Experience the magnetism of the Mona Lisa, a
-                testament to Leonardo da Vinci's genius, and delve into a visual
-                dialogue with a smile that has intrigued the world for
-                centuries.
-              </p>
-            </section>
-          )}
-        </div>
+    <section className='g-gray-200 mt-12'>
+      <MDBContainer className="">
+        <MDBRow>
+          <MDBCol className=''>
+       
+     <div className='flex flex-col xl:flex-row'>
+                        <div className='flex flex-col h-80 mt-8  bg-gray-200 rounded-xl m-2 items-center justify-center w-72 sm:w-80  md:w-[600px] xl:w-full'>
+                          <MDBCard className="mb-4">
+                            <MDBCardBody className="text-center">
+                              <div className='flex flex-col items-center justify-center'>
+                                <MDBCardImage  src={profileImage}  alt="avatar"  className="rounded-full w-20 h-20 xl:w-36 xl:h-36 mt-6" fluid />
+                                <p className="text-muted mb-1 font-bold mt-4">{userName}</p>
+                                <p className="text-muted mb-4">{userLocation}</p>
+                                <p className='text-sm underline cursor-pointer'> Opinions about {userLocation}</p>
+                              </div>
+                            </MDBCardBody>
+                          </MDBCard>
+                        </div>                          
+          
+           <div className="flex flex-col">
+               <div>
+                   <div className='bg-gray-200 rounded-xl m-2 mt-8 w-72 sm:w-80 md:w-[600px] xl:w-full'>
+                              <MDBCard className="mb-4">
+                                <MDBCardBody>
+                                  <MDBRow className='flex flex-col md:flex-row gap-0  md:gap-28'>
+                                    <MDBCol sm="3">
+                                      <MDBCardText className='font-bold'>Full Name:</MDBCardText>
+                                    </MDBCol>
+                                    <MDBCol sm="9">
+                                      <MDBCardText className="text-muted">{userName}</MDBCardText>
+                                    </MDBCol>
+                                  </MDBRow>
+                                  <hr style={{borderColor: "white"}}/>
+                                  <MDBRow className='flex flex-col md:flex-row gap-0  md:gap-28'>
+                                    <MDBCol sm="3">
+                                      <MDBCardText className='font-bold'>Email:</MDBCardText>
+                                    </MDBCol>
+                                    <MDBCol sm="9">
+                                      <MDBCardText className="text-muted">{userEmail}</MDBCardText>
+                                    </MDBCol>
+                                  </MDBRow>
+                                  <hr style={{borderColor: "white"}}/>
+                                  <MDBRow className='flex flex-col md:flex-row gap-0  md:gap-28'>
+                                    <MDBCol sm="3">
+                                      <MDBCardText className='font-bold'>Phone:</MDBCardText>
+                                    </MDBCol>
+                                    <MDBCol sm="9">
+                                      <MDBCardText className="text-muted">(097) 234-5678</MDBCardText>
+                                    </MDBCol>
+                                  </MDBRow>
+                                  <hr style={{borderColor: "white"}}/>
+                                  <MDBRow className='flex flex-col md:flex-row gap-0  md:gap-28'>
+                                    <MDBCol sm="3">
+                                      <MDBCardText className='font-bold'>BirthDate:</MDBCardText>
+                                    </MDBCol>
+                                    <MDBCol sm="9">
+                                      <MDBCardText className="text-muted">{userBirthdate}</MDBCardText>
+                                    </MDBCol>
+                                  </MDBRow>
+                                  <hr style={{borderColor: "white"}}/>
+                                  <MDBRow className='flex flex-col md:flex-row gap-0  md:gap-28'>
+                                    <MDBCol sm="3">
+                                      <MDBCardText className='font-bold'>Address:</MDBCardText>
+                                    </MDBCol>
+                                    <MDBCol sm="9">
+                                      <MDBCardText className="text-muted">{userLocation}</MDBCardText>
+                                    </MDBCol>
+                                  </MDBRow>
+                                </MDBCardBody>
+                              </MDBCard>
+                          </div>
+               </div>
+               <div className="flex flex-col xl:flex-row">
+                    <div className='rounded-xl bg-gray-200 m-2 w-72 sm:w-80 md:w-[600px] xl:w-full'>
+                                  <MDBCol md="6">
+                                          <MDBCard className="mb-4 mb-md-0">
+                                            <MDBCardBody>
+                                              <MDBCardText className="mb-4 text-md font-bold">{userCtx.userName} Publications ({publicationsNumber}) </MDBCardText>
+                                                <div className='overflow-y-auto max-h-[400px] max-w-[400px]'>
+                                                
+                                            {publicationsNumber !== 0 ? (
+                                                     <div>
+                                                      {userPublications.map((p, index) => (
+                                                        <div key={p.id} className='border grid col-span-1 m-2 items-center bg-white rounded-xl max-w-fit-contain w-72'>
+                                                          <div className='flex max-w-fit-contain'>
+                                                            <div className="flex flex-col md:flex-row items-center justify-center md:justify-start" style={{ flex: 1 }}>
+                                                              <img src={p.creatorProfileImage} className='h-12 w-12 rounded-full ml-2 mt-4' />
+                                                              <small className='text-black text-xs ml-2 mt-0 md:mt-2'><b>{p.creatorName}</b></small>
+                                                            </div>
+                                                          </div>
+                                                          <div className='mt-4 max-w-fit-contain'>
+                                                            <div className="grid col-span-1 max-w-fit-contain ml-4">
+                                                              <p className="font-bold text-sm text-black">{p.publicationTitle}</p>
+                                                              <p className="justify-center text-xs mr-4 mt-2">{p.publicationDescription}</p>
+                                                              <div className="mt-4 whitespace-no-wrap">
+                                                                <p className="text-xs mr-4 whitespace-no-wrap">{p.creatorLocation}, {p.address}</p>
+                                                              </div>
+                                                              <div className='flex items-center justify-center gap-2 m-2'>
+                                                                <img src={p.publicationImages[0]} className='h-16 w-16 rounded-lg'/>
+                                                                <img src={p.publicationImages[0]} className='h-16 w-16 rounded-lg'/>
+                                                              </div>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                      ))}
+                                                    </div>
+                                                  ) : <p>{userName} dosent have favorites</p>}
+                                             
+                                                </div>
+                                            </MDBCardBody>
+                                          </MDBCard>
+                                        </MDBCol>
+                                  </div>
+                                   <div className='rounded-xl bg-gray-200 m-2 w-72 sm:w-80 md:w-[600px] xl:w-full'>
+                                    <MDBCol md="6">
+                                        <MDBCard className="mb-4 mb-md-0">
+                                          <MDBCardBody>
+                                            <MDBCardText className="mb-4 text-lg font-bold">Posts he liked. ({favoritesNumber})</MDBCardText>
+                                            <div className='overflow-y-auto max-h-[400px] max-w-[400px]'>
+                                            {favoritesNumber !== 0 ? (
+                                                    <div>
+                                                      {userFavorites.map((p, index) => (
+                                                        <div key={p.id} className='border grid col-span-1 m-2 items-center bg-white rounded-xl max-w-fit-contain w-72'>
+                                                          <div className='flex max-w-fit-contain'>
+                                                            <div className="flex flex-col md:flex-row items-center justify-center md:justify-start" style={{ flex: 1 }}>
+                                                              <img src={p.creatorProfileImage} className='h-12 w-12 rounded-full ml-2 mt-4' />
+                                                              <small className='text-black text-xs ml-2 mt-0 md:mt-2'><b>{p.creatorName}</b></small>
+                                                            </div>
+                                                          </div>
+                                                          <div className='mt-4 max-w-fit-contain'>
+                                                            <div className="grid col-span-1 max-w-fit-contain ml-4">
+                                                              <p className="font-bold text-sm text-black">{p.publicationTitle}</p>
+                                                              <p className="justify-center text-xs mr-4 mt-2">{p.publicationDescription}</p>
+                                                              <div className="mt-4 whitespace-no-wrap">
+                                                                <p className="text-xs mr-4 whitespace-no-wrap">{p.creatorLocation}, {p.address}</p>
+                                                              </div>
+                                                              <div className='flex items-center justify-center gap-2 m-2'>
+                                                                <img src={p.publicationImages[0]} className='h-16 w-16 rounded-lg'/>
+                                                                <img src={p.publicationImages[0]} className='h-16 w-16 rounded-lg'/>
+                                                              </div>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                      ))}
+                                                    </div>
+                                                  ) : <p>{userName} dosent have favorites</p>}
+                                                </div>
+                                          </MDBCardBody>
+                                        </MDBCard>
+                                      </MDBCol>
+                                 </div>  
+               </div>
+           </div>
+    </div>
+
+             
+           
+
+           
+          </MDBCol>
+       
+        </MDBRow>
+      </MDBContainer>
+    </section>
+  )};
+
+
+
+     /*
+
+     
+  /*
+  import React from 'react';
+  import { useContext } from "react";
+  import { UserContext } from "../store/usercontext";
+  import axios from 'axios';
+  import { useState, useEffect } from 'react';
+  import { useParams } from 'react-router-dom';
+  import useGetBackendQueries from '../Hooks/useGetBackendQueries';
+  import LoadingPublications from '../Hooks/LoadingPublications';
+  
+  import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBBtn, MDBBreadcrumb, MDBBreadcrumbItem, MDBProgress, MDBProgressBar, MDBIcon,
+   MDBListGroup,
+    MDBListGroupItem
+  } from 'mdb-react-ui-kit';
+  
+  export default function ProfilePage() {
+  
+    const userCtx = useContext(UserContext)
+  
+    const [publicationsNumber, setPublicationsNumber] = useState(0)
+    const [favoritesNumber, setFavoritesNumber] = useState(0)
+    const [noPublications, setNoPublications] = useState(false)
+    const [noFavorites, setNoFavorites] = useState(false)
+    const [userPublications, setUserPublications] = useState([])
+    const [userFavorites, setUserFavorites] = useState([])
+    const [userName, setUserName] = useState(null)
+    const [userBirthdate, setUserBirthdate] = useState("")
+    const [userLocation, setUserLocation] = useState("")
+    const [userEmail, setUserEmail] = useState("")
+    const [profileImage, setProfileImage] = useState("")
+  
+  
+    const {userId} = useParams()
+  
+    const { data, loading } = useGetBackendQueries(`getUserPublication/${userId}`); 
+    const { data: userData } = useGetBackendQueries(`getUserData/${userId}`); 
+    const { data: userFavs } = useGetBackendQueries(`getMyFavs/${userId}`);
+  
+    useEffect(() => { 
+      setPublicationsNumber(data.length)
+      setFavoritesNumber(userFavs.length)
+      setUserPublications(data)
+      setUserFavorites(userFavs)
+      setProfileImage(userData.map((u) => u.profileImage))
+      setUserLocation(userData.map((u) => u.location))
+      setUserName(userData.map((d) => d.name))
+      setUserBirthdate(userData.map((d) => d.birthdate))
+      setUserEmail(userData.map((d) => d.email))
+      console.log(data)
+      console.log(userFavs)
+      console.log(userId)
+    }, [data])
+  
+    
+    return (
+      <section className='bg-gray-200 mt-12'>
+        <MDBContainer className="">
+          <MDBRow>
+            <MDBCol className=''>
+            <div className="flex">
+               <div className="">
+                    <div className='flex'>
+                          <div className='flex flex-col h-72 mt-8  bg-white rounded-xl m-2  items-center justify-center'>
+                            <MDBCard className="mb-4">
+                              <MDBCardBody className="text-center">
+                                <div className='flex flex-col items-center justify-center'>
+                                  <MDBCardImage  src={userCtx.userProfileImage}  alt="avatar"  className="rounded-full w-36 h-36 mt-6" fluid />
+                                  <p className="text-muted mb-1 font-bold mt-4">{userCtx.userName}</p>
+                                  <p className="text-muted mb-4">Bay Area, San Francisco, CA</p>
+                                
+                                </div>
+                            
+                              </MDBCardBody>
+                            </MDBCard>
+                          </div>                          
+                      </div>
+          </div>
+          <div className="flex flex-col">
+                 <div>
+                     <div className='bg-white rounded-xl m-2 mt-8'>
+                                <MDBCard className="mb-4">
+                                  <MDBCardBody>
+                                    <MDBRow className='flex gap-28'>
+                                      <MDBCol sm="3">
+                                        <MDBCardText className='font-bold'>Full Name:</MDBCardText>
+                                      </MDBCol>
+                                      <MDBCol sm="9">
+                                        <MDBCardText className="text-muted">{userCtx.userName}</MDBCardText>
+                                      </MDBCol>
+                                    </MDBRow>
+                                    <hr />
+                                    <MDBRow className='flex gap-28'>
+                                      <MDBCol sm="3">
+                                        <MDBCardText className='font-bold'>Email:</MDBCardText>
+                                      </MDBCol>
+                                      <MDBCol sm="9">
+                                        <MDBCardText className="text-muted">example@example.com</MDBCardText>
+                                      </MDBCol>
+                                    </MDBRow>
+                                    <hr />
+                                    <MDBRow className='flex gap-28'>
+                                      <MDBCol sm="3">
+                                        <MDBCardText className='font-bold'>Phone:</MDBCardText>
+                                      </MDBCol>
+                                      <MDBCol sm="9">
+                                        <MDBCardText className="text-muted">(097) 234-5678</MDBCardText>
+                                      </MDBCol>
+                                    </MDBRow>
+                                    <hr />
+                                    <MDBRow className='flex gap-28'>
+                                      <MDBCol sm="3">
+                                        <MDBCardText className='font-bold'>Mobile:</MDBCardText>
+                                      </MDBCol>
+                                      <MDBCol sm="9">
+                                        <MDBCardText className="text-muted">(098) 765-4321</MDBCardText>
+                                      </MDBCol>
+                                    </MDBRow>
+                                    <hr />
+                                    <MDBRow className='flex gap-28'>
+                                      <MDBCol sm="3">
+                                        <MDBCardText className='font-bold'>Address:</MDBCardText>
+                                      </MDBCol>
+                                      <MDBCol sm="9">
+                                        <MDBCardText className="text-muted">Bay Area, San Francisco, CA</MDBCardText>
+                                      </MDBCol>
+                                    </MDBRow>
+                                  </MDBCardBody>
+                                </MDBCard>
+                            </div>
+                 </div>
+                 <div className="flex">
+                      <div className='rounded-xl bg-white m-2'>
+                                    <MDBCol md="6">
+                                            <MDBCard className="mb-4 mb-md-0">
+                                              <MDBCardBody>
+                                                <MDBCardText className="mb-4 text-md font-bold">{userCtx.userName} Publications ({publicationsNumber}) </MDBCardText>
+                                                  <div className='overflow-y-auto max-h-[400px] max-w-[300px]'>
+                                                     {userPublications.map((p, index) => ( 
+                                                       <div key={p.id} className='border grid col-span-1 m-2 items-center bg-white'>
+                      
+                                                       <div className='flex max-w-fit-contain'>
+                                                           <div className="flex flex-col md:flex-row items-center justify-center  md:justify-start " style={{ flex: 1 }}>
+                                                               <img src={p.creatorProfileImage} className='h-12 w-12 rounded-full ml-2 mt-4' />
+                                                               <small className='text-black text-xs ml-2 mt-0 md:mt-2'><b>{p.creatorName}</b></small>
+                                                           </div>
+                                   
+                                                    </div>
+                                   
+                                                       <div className='mt-4 max-w-fit-contain'>
+                                                         <div className="grid col-span-1 max-w-fit-contain ml-4">
+                                                                   <p className="font-bold text-sm text-black"> {p.publicationTitle}</p>
+                                                                   <p className="justify-center text-xs mr-4 mt-2">{p.publicationDescription} </p>
+                                                               <div className="mt-4 whitespace-no-wrap">
+                                                                   <p className="text-xs mr-4  whitespace-no-wrap">  {p.creatorLocation}, {p.address} </p>
+                                                               </div>
+                                                               <div className='flex items-center justify-center gap-2 m-2'>
+                                                                    <img src={p.publicationImages[0]} className='h-16 w-16 rounded-lg'/>
+                                                                    <img src={p.publicationImages[0]} className='h-16 w-16 rounded-lg'/>
+                                                               </div>                                                        
+                                                         </div>
+                                                       </div>
+                                                   </div>
+                                                     ))}
+                                                  </div>
+                                              </MDBCardBody>
+                                            </MDBCard>
+                                          </MDBCol>
+                                    </div>
+                                     <div className='rounded-xl bg-white m-2'>
+                                      <MDBCol md="6">
+                                          <MDBCard className="mb-4 mb-md-0">
+                                            <MDBCardBody>
+                                              <MDBCardText className="mb-4 text-lg font-bold">Posts he liked. ({favoritesNumber})</MDBCardText>
+                                              <div className='overflow-y-auto max-h-[400px] max-w-[300px]'>
+                                                     {userFavorites.map((p, index) => ( 
+                                                       <div key={p.id} className='border grid col-span-1 m-2 items-center bg-white'>
+                      
+                                                       <div className='flex max-w-fit-contain'>
+                                                           <div className="flex flex-col md:flex-row items-center justify-center  md:justify-start " style={{ flex: 1 }}>
+                                                               <img src={p.creatorProfileImage} className='h-12 w-12 rounded-full ml-2 mt-4' />
+                                                               <small className='text-black text-xs ml-2 mt-0 md:mt-2'><b>{p.creatorName}</b></small>
+                                                           </div>
+                                   
+                                                    </div>
+                                   
+                                                       <div className='mt-4 max-w-fit-contain'>
+                                                         <div className="grid col-span-1 max-w-fit-contain ml-4">
+                                                                   <p className="font-bold text-sm text-black"> {p.publicationTitle}</p>
+                                                                   <p className="justify-center text-xs mr-4 mt-2">{p.publicationDescription} </p>
+                                                               <div className="mt-4 whitespace-no-wrap">
+                                                                   <p className="text-xs mr-4  whitespace-no-wrap">  {p.creatorLocation}, {p.address} </p>
+                                                               </div>
+                                                               <div className='flex items-center justify-center gap-2 m-2'>
+                                                                    <img src={p.publicationImages[0]} className='h-16 w-16 rounded-lg'/>
+                                                                    <img src={p.publicationImages[0]} className='h-16 w-16 rounded-lg'/>
+                                                               </div>                                                        
+                                                         </div>
+                                                       </div>
+                                                   </div>
+                                                     ))}
+                                                  </div>
+                                            </MDBCardBody>
+                                          </MDBCard>
+                                        </MDBCol>
+                                   </div>  
+                 </div>
+          </div>
       </div>
-    </MagicCard>
-  );
-}
+  
+               
+             
+  
+             
+            </MDBCol>
+         
+          </MDBRow>
+        </MDBContainer>
+      </section>
+    )};
+  
+
+ */

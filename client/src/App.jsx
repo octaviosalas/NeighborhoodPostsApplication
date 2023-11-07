@@ -39,12 +39,11 @@ function App() {
                       <Route path="/myProfile/:userId" element={<MyProfile/>}></Route> 
                       <Route path="/publication/:publicationId" element={<PublicationDetailDos/>}></Route> 
                       <Route path="/searchWithFilters" element={<SearchWithMultipleFilters/>}></Route> 
-                      <Route path="/userProfile/:userId" element={<OtherUsersProfile/>}></Route> 
                       <Route path="/userManualSearch/:category" element={<UserManualSearch/>}></Route> 
                       <Route path="/prueba" element={<ProfileDos/>}></Route> 
                       <Route path="/succesStories" element={<SuccesStories/>}></Route> 
                       <Route path="/survey" element={<Survey/>}></Route> 
-                      <Route path="/bibi" element={<Biblioteca/>}></Route> 
+                      <Route path="/userProfile/:userId" element={<Biblioteca/>}></Route> 
 
                     </Routes>
              </UserProvider>     
