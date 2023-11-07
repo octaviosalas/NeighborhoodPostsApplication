@@ -92,7 +92,7 @@ export const getPublicationWithParam = async (req, res) => {
          ],
        })
          .then((results) => {
-           res.json({ results });
+           res.json(results);
          })
          .catch((err) => console.log(err));
    } else if (category === "Resolved Claims") { 

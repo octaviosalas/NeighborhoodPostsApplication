@@ -36,6 +36,9 @@ const WallFilters = () => {
       setTimeout(() => { 
         navigate(`/userManualSearch/${category}`)
       }, 1000)
+      setTimeout(() => { 
+       window.location.reload()
+      }, 1000)
 
     }
   };
