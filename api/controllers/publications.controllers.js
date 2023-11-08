@@ -103,18 +103,19 @@ export const getPublicationWithParam = async (req, res) => {
                   .catch((err) => console.log(err));
    } else if (category === "Claims still unresolved") { 
       Publications.find({resolved: false })
-                  .then((resultss) => { 
-                     res.json(resultss);
+                  .then((onlyUnesolved) => { 
+                     res.json(onlyUnesolved);
                   })
                   .catch((err) => console.log(err));
-   } else if (category === "All Publications") { 
+   } else if (category === "All Publication") { 
                Publications.find()
-               .then((pubs) => { 
-                  res.send(pubs)
-               })
-               .catch((err) => { 
-                  console.log(err)
-               })
+                  .then((pubs) => { 
+                     res.send(pubs)
+                  })
+                  .catch((err) => { 
+                     console.error(err);
+                     res.status(500).json({ error: 'Internal Server Error' });
+                  })
    } 
 }
 
