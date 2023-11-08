@@ -73,7 +73,7 @@ const Wall = () => {
           <LoadingPublications text={"Publications"} />
         ) : (
           <div className="flex flex-wrap gap-4 items-center place-content-around">
-            <div className="flex flex-col fixed 3xl:left-80 2xl:left-48 xl:left-20 lg:left-6 invisible lg:visible ">
+            <div className="flex flex-col fixed 3xl:left-72 2xl:left-48 xl:left-20 lg:left-6 invisible lg:visible ">
               <WallFilters />
             </div>
 
@@ -103,7 +103,7 @@ const Wall = () => {
                   </div>
                 </div>
 
-                <div className="fixed flex flex-col 3xl:right-52 2xl:right-44 xl:right-12 lg:right-7 invisible lg:visible overflow-y-auto overflow-x-hidden max-h-[500px] 2xl:overflow-hidden 2xl:max-h-[none]">
+                <div className="fixed flex flex-col 3xl:right-52 2xl:right-44 xl:right-12 lg:right-7 invisible lg:visible overflow-y-auto overflow-x-hidden max-h-[500px] 2xl:overflow-hidden 2xl:max-h-[none] mt-6">
                   <ResolvedComplainsWall />
                   <div className="mt-6">
                     <LeaveYourOpinionWall style={{ marginTop: "10px" }} />

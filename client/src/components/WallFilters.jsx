@@ -6,7 +6,6 @@ const menuPages = new Map([
   ["home", ["By Location", "By Type of Publication", "Other Filters"]],
   ["By Location", [
     "Ohio, USA",
-    "New York, USA",
     "Manhattan, USA",
     "Chicago, Illinois",
     "Los Angeles, California",
@@ -49,7 +48,7 @@ const WallFilters = () => {
  
   return (
     <MagicMotion transition={{ type: "spring", stiffness: 200, damping: 15 }}>
-      <menu className="bg-slate-200 flex flex-col justify-start gap-2 w-64 2xl:w-80 my-4 p-3 rounded-2xl min-w-[12.5rem]">
+      <menu className="bg-gray-200 flex flex-col justify-start gap-2 w-64 2xl:w-80 my-4 p-3 rounded-2xl min-w-[12.5rem]">
         <header
           style={{
             textAlign: "center",

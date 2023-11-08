@@ -129,17 +129,17 @@ export default function UsersProfile() {
                           </div>
                </div>
                <div className="flex flex-col xl:flex-row">
-                    <div className='rounded-xl bg-gray-200 m-2 w-72 sm:w-80 md:w-[600px] xl:w-full'>
+                    <div className='flex items-center justify-center rounded-xl bg-gray-200 m-2 h-[650px] w-72 sm:w-80 md:w-[600px] xl:w-full'>
                                   <MDBCol md="6">
                                           <MDBCard className="mb-4 mb-md-0">
                                             <MDBCardBody>
-                                              <MDBCardText className="mb-4 text-md font-bold  text-black">{userCtx.userName} Publications ({publicationsNumber}) </MDBCardText>
-                                                <div className='overflow-y-auto max-h-[400px] max-w-[400px]'>
+                                              <MDBCardText className=" text-md font-bold  text-black">{userCtx.userName} Publications ({publicationsNumber}) </MDBCardText>
+                                                <div className='flex items-center justify-center overflow-y-auto max-h-[600px] max-w-[400px]'>
                                                 
                                             {publicationsNumber !== 0 ? (
                                                      <div>
                                                       {userPublications.map((p, index) => (
-                                                        <div key={p.id} className='border grid col-span-1 m-2 items-center bg-white rounded-xl max-w-fit-contain w-72'>
+                                                        <div key={p.id} className='border grid col-span-1 m-6 items-center bg-white rounded-xl max-w-fit-contain w-72'>
                                                           <div className='flex max-w-fit-contain'>
                                                             <div className="flex flex-col md:flex-row items-center justify-center md:justify-start" style={{ flex: 1 }}>
                                                               <img src={p.creatorProfileImage} className='h-12 w-12 rounded-full ml-2 mt-4' />
@@ -169,12 +169,12 @@ export default function UsersProfile() {
                                           </MDBCard>
                                         </MDBCol>
                                   </div>
-                                   <div className='rounded-xl bg-gray-200 m-2 w-72 sm:w-80 md:w-[600px] xl:w-full'>
+                                   <div className='flex items-center justify-center rounded-xl bg-gray-200 m-2  h-[650px] w-72 sm:w-80 md:w-[600px] xl:w-full'>
                                     <MDBCol md="6">
                                         <MDBCard className="mb-4 mb-md-0">
                                           <MDBCardBody>
-                                            <MDBCardText className="mb-4 text-lg font-bold">Posts he liked. ({favoritesNumber})</MDBCardText>
-                                            <div className='overflow-y-auto max-h-[400px] max-w-[400px]'>
+                                            <MDBCardText className="text-lg font-bold">Posts he liked. ({favoritesNumber})</MDBCardText>
+                                            <div className='flex items-center justify-center overflow-y-auto  max-h-[600px] max-w-[400px]'>
                                             {favoritesNumber !== 0 ? (
                                                     <div>
                                                       {userFavorites.map((p, index) => (

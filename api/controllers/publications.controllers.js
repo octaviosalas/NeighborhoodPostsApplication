@@ -101,6 +101,20 @@ export const getPublicationWithParam = async (req, res) => {
                      res.json(resultss);
                   })
                   .catch((err) => console.log(err));
+   } else if (category === "Claims still unresolved") { 
+      Publications.find({resolved: false })
+                  .then((resultss) => { 
+                     res.json(resultss);
+                  })
+                  .catch((err) => console.log(err));
+   } else if (category === "All Publications") { 
+               Publications.find()
+               .then((pubs) => { 
+                  res.send(pubs)
+               })
+               .catch((err) => { 
+                  console.log(err)
+               })
    } 
 }
 
