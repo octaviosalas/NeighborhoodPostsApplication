@@ -133,7 +133,7 @@ export default function UsersProfile() {
                                   <MDBCol md="6">
                                           <MDBCard className="mb-4 mb-md-0">
                                             <MDBCardBody>
-                                              <MDBCardText className=" text-md font-bold  text-black">{userCtx.userName} Publications ({publicationsNumber}) </MDBCardText>
+                                              <MDBCardText className=" text-md font-bold  text-black">{userName} Publications ({publicationsNumber}) </MDBCardText>
                                                 <div className='flex items-center justify-center overflow-y-auto max-h-[600px] max-w-[400px]'>
                                                 
                                             {publicationsNumber !== 0 ? (

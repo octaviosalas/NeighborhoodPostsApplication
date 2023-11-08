@@ -65,7 +65,7 @@ const MyPublications = () => {
                     </span>  
                 </div>
 
-                <div className="flex flex-col fixed 3xl:left-64 2xl:left-48 xl:left-20 lg:left-6 invisible lg:visible mt-24">
+                <div className="flex flex-col fixed 3xl:left-64 2xl:left-48 xl:left-20 lg:left-6 invisible lg:visible mt-44">
                   <WallFilters />
                 </div>
 
@@ -90,7 +90,7 @@ const MyPublications = () => {
                 ) : null}
             </div> 
 
-            <div className=" flex flex-col items-center mt-28 fixed 3xl:right-52 2xl:right-36 xl:right-12 lg:right-5 invisible lg:visible">
+            <div className=" flex flex-col items-center mt-28 fixed 3xl:right-52 2xl:right-36 xl:right-12 lg:right-5 invisible lg:visible overflow-y-auto overflow-x-hidden max-h-[500px] 2xl:overflow-hidden 2xl:max-h-[none]">
                <ResolvedComplainsWall/>
                   <div className="mt-6">
                     <LeaveYourOpinionWall style={{ marginTop: "10px" }} />
