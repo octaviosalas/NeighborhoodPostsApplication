@@ -107,39 +107,9 @@ export const getPublicationWithParam = async (req, res) => {
                      res.json(onlyUnesolved);
                   })
                   .catch((err) => console.log(err));
-   } else if (category === "All Publication") { 
-               Publications.find()
-                  .then((pubs) => { 
-                     res.send(pubs)
-                  })
-                  .catch((err) => { 
-                     console.error(err);
-                     res.status(500).json({ error: 'Internal Server Error' });
-                  })
    } 
 }
 
-
-/*export const getPublicationWithParam = async (req, res) => { 
-   const { category } = req.params;
-   console.log("RECIBI", req.params)
-   const regex = new RegExp(category, 'i');
- 
-   Publications.find({
-     $or: [
-       { creatorName: regex },
-       { creatorLocation: regex },
-       { publicationTitle: regex }, 
-       { typeOfPublication: regex },   
-       { creatorLocation: regex},
-       { address: regex}
-     ],
-   })
-     .then((results) => {
-       res.json(results);
-     })
-     .catch((err) => console.log(err));
-}*/
 
 
 export const getOnePublication = async (req, res) => { 

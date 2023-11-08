@@ -30,7 +30,11 @@ const WallFilters = () => {
       console.log("...")
     } else if (category === "Other Filters") { 
       console.log("....")
-    } else { 
+    } else if (category === "All Publication") { 
+      setTimeout(() => { 
+        navigate("/wall")
+      }, 1000)
+    }else { 
       setSearchParam(category);
       setTimeout(() => { 
         navigate(`/userManualSearch/${category}`)
