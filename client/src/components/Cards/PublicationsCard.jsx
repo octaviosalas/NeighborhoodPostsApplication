@@ -220,7 +220,7 @@ const PublicationsCard = ({ pub }) => {
 
           <div className="grid col-span-2 max-w-fit-contain mt-2">
             <div className=" ml-4">
-              <Link to={`/publication/${pub._id}`}>
+              <Link to={`/pruebaDetalle/${pub._id}`}>
                 {" "}
                 <p className="font-bold text-sm text-black">
                   {pub.publicationTitle}

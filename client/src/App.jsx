@@ -21,6 +21,7 @@ import SuccesStories from './pages/SuccesStories'
 import Survey from './pages/Survey'
 import { useState } from 'react'
 import UsersProfile from './pages/UsersProfile'
+import PruebaDeDetalle from './pages/PruebaDeDetalle'
 
 function App() {
   
@@ -43,6 +44,7 @@ function App() {
                       <Route path="/succesStories" element={<SuccesStories/>}></Route> 
                       <Route path="/survey" element={<Survey/>}></Route> 
                       <Route path="/userProfile/:userId" element={<UsersProfile/>}></Route> 
+                      <Route path="/pruebaDetalle/:publicationId" element={<PruebaDeDetalle/>}></Route> 
 
                     </Routes>
              </UserProvider>     

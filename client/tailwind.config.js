@@ -2,6 +2,7 @@
 
 import daisyui from 'daisyui';
 import formsPlugin from '@tailwindcss/forms';
+import aspectRatioPlugin from '@tailwindcss/aspect-ratio';
 
 export default {
   content: [
@@ -10,7 +11,6 @@ export default {
   ],
   darkMode: 'class',
   theme: {
-   
     screens: {
       "2xs": "1px",
       'xxxs': '360px',
@@ -21,11 +21,16 @@ export default {
       'xl': '1280px',
       '2xl': '1536px',
       '3xl': '1700px',
-
+    },
+    extend: {
+      gridTemplateRows: {
+        '[auto,auto,1fr]': 'auto auto 1fr',
+      },
     },
   },
   plugins: [
     daisyui,
     formsPlugin,
+    aspectRatioPlugin
   ]
 };

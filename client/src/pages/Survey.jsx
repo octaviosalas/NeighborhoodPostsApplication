@@ -90,7 +90,7 @@ const Survey = () => {
             </select>
          </div>
         <div className='flex flex-col items-center justify-center mt-4'>
-            <div className='mt-2  flex flex-col bg-gray-100 rounded-lg'>
+            <div className='mt-2  flex flex-col  rounded-lg'>
                 <div className='flex i gap-24 mt-8 m-2'>
                     <small className='font-bold' style={{ marginRight: 'auto' }}>  Security level </small>
                     <Box>  <Rating name="simple-controlled" value={securityLevel} onChange={(event, newValue) => { setSecurityLevel(newValue); }} />  </Box>

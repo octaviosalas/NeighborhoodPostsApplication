@@ -72,7 +72,10 @@ const WallFilters = () => {
               ←
             </small>
           )}
-          <span style={{ margin: "0 auto" }}>Filters</span>
+         {currentPage === "home" ? <span style={{ margin: "0 auto" }}>Filters</span> : null}
+         {currentPage === "By Location" ? <span style={{ margin: "0 auto" }}>By Location</span> : null}
+         {currentPage === "By Type of Publication" ? <span style={{ margin: "0 auto" }}>By Type of Publication</span> : null}
+         {currentPage === "Other Filters" ? <span style={{ margin: "0 auto" }}>Other Filters</span> : null}
         </header>
         <ul style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
           {menuPages.get(currentPage)?.map((item) => (
