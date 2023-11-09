@@ -7,58 +7,9 @@ import useGetBackendQueries from '../Hooks/useGetBackendQueries';
 import { Link } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 
-const product = {
-  name: 'Basic Tee 6-Pack',
-  price: '$192',
-  href: '#',
-  breadcrumbs: [
-    { id: 1, name: 'Men', href: '#' },
-    { id: 2, name: 'Clothing', href: '#' },
-  ],
-  images: [
-    {
-      src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg',
-      alt: 'Two each of gray, white, and black shirts laying flat.',
-    },
-    {
-      src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg',
-      alt: 'Model wearing plain black basic tee.',
-    },
-    {
-      src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-02.jpg',
-      alt: 'Model wearing plain gray basic tee.',
-    },
-    {
-      src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg',
-      alt: 'Model wearing plain white basic tee.',
-    },
-  ],
-  colors: [
-    { name: 'White', class: 'bg-white', selectedClass: 'ring-gray-400' },
-    { name: 'Gray', class: 'bg-gray-200', selectedClass: 'ring-gray-400' },
-    { name: 'Black', class: 'bg-gray-900', selectedClass: 'ring-gray-900' },
-  ],
-  sizes: [
-    { name: 'XXS', inStock: false },
-    { name: 'XS', inStock: true },
-    { name: 'S', inStock: true },
-    { name: 'M', inStock: true },
-    { name: 'L', inStock: true },
-    { name: 'XL', inStock: true },
-    { name: '2XL', inStock: true },
-    { name: '3XL', inStock: true },
-  ],
-  description:
-    'The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.',
-  highlights: [
-    'Hand cut and sewn locally',
-    'Dyed with our proprietary colors',
-    'Pre-washed & pre-shrunk',
-    'Ultra-soft 100% cotton',
-  ],
-  details:
-    'The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.',
-}
+
+  
+  
 const reviews = { href: '#', average: 4, totalCount: 117 }
 
 function classNames(...classes) {
@@ -69,13 +20,14 @@ function classNames(...classes) {
 export default function PruebaDeDetalle() {
 
   const params = useParams()
-  const [selectedColor, setSelectedColor] = useState(product.colors[0])
-  const [selectedSize, setSelectedSize] = useState(product.sizes[2])
   const [publicationSelected, setPublicationSelected] = useState([])
   const [quantityComments, setQuantityComments] = useState(0)
+  const [quantityLikes, setQuantityLikes] = useState(0)
   const [firstImage, setrFirstImage] = useState("")
   const [secondImage, setSecondImage] = useState("")
   const [description, setDescription] = useState("")
+  const [showComments, setShowComments] = useState(true)
+  const [showLikes, setShowLikes] = useState(false)
   const [pubData, setPubData] = useState({
     creatorName: '',
     publicationDate: '',
@@ -87,13 +39,15 @@ export default function PruebaDeDetalle() {
 
    const { data } = useGetBackendQueries(`getOnePublication/${params.publicationId}`);  
    const { data: commentData } = useGetBackendQueries(`viewPublicationComments/${params.publicationId}`);  
+   const { data: likesData } = useGetBackendQueries(`getPublicationsLikes/${params.publicationId}`);  
 
 
   useEffect(() => { 
      setPublicationSelected(data)  
      setQuantityComments(commentData.length)
-     console.log(commentData)
-  }, [data, commentData])
+     setQuantityLikes(commentData.length)
+     console.log(likesData)
+  }, [data, commentData, likesData])
 
   useEffect(() => { 
     publicationSelected.forEach((p) => { 
@@ -112,11 +66,16 @@ export default function PruebaDeDetalle() {
     });
   }, [publicationSelected]);
 
-  useEffect(() => { 
-  setTimeout(() => { 
-   console.log(pubData)
-  }, 2000)
-  }, [pubData])
+ 
+  const onlyShowComments = () => { 
+    setShowLikes(false)
+    setShowComments(true)
+  }
+
+  const onlyShowLikes = () => { 
+    setShowLikes(true)
+    setShowComments(false)
+  }
 
 
 
@@ -128,31 +87,27 @@ export default function PruebaDeDetalle() {
         <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8 ">
           <div className="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block ">
             <img
-             src={firstImage}
-              alt={product.images[0].alt}
+             src={firstImage}            
               className="h-full w-full object-cover object-center"
             />
           </div>
           <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
             <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
               <img
-                src={firstImage}
-                alt={product.images[1].alt}
+                src={firstImage}            
                 className="h-full w-full object-cover object-center"
               />
             </div>
             <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
               <img
-                src={secondImage}
-                alt={product.images[2].alt}
+                src={secondImage}             
                 className="h-full w-full object-cover object-center"
               />
             </div>
           </div>
           <div className="aspect-h-5 aspect-w-4 lg:aspect-h-4 lg:aspect-w-3 sm:overflow-hidden sm:rounded-lg">
             <img
-             src={secondImage}
-              alt={product.images[3].alt}
+             src={secondImage}             
               className="h-full w-full object-cover object-center"
             />
           </div>
@@ -168,8 +123,8 @@ export default function PruebaDeDetalle() {
           <div className="mt-4 lg:row-span-3 lg:mt-0">
             <h2 className="sr-only">Product information</h2>
               <div className='flex items-center justify-center gap-12'>
-                   <small className='text-md font-bold cursor-pointer'>View Comments</small>
-                   <small  className='text-md font-bold cursor-pointer'>View Likes</small>
+                   <small className='text-md font-bold cursor-pointer' onClick={() => onlyShowComments()}>View Comments</small>
+                   <small  className='text-md font-bold cursor-pointer' onClick={() => onlyShowLikes()}>View Likes</small>
               </div>
 
             {/* Reviews */}
@@ -214,115 +169,47 @@ export default function PruebaDeDetalle() {
                 
                 <p className="sr-only">{reviews.average} out of 5 stars</p>
                 <a href={reviews.href} className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
-                  {reviews.totalCount} Likes
+                  {quantityLikes} Likes
                 </a>
               </div>
             </div>
 
-            <form className="mt-10 border border-red-600">
+            <form className="mt-10">
               {/* Colors */}
-              <div>
-                <h3 className="text-sm font-medium text-gray-900">Color</h3>
+             {showComments ?
+               <div className=''>
+                {commentData.map((c) => ( 
+                      <div className='flex gap-2 m-2 mt-4'>
+                        <div className='h-full'>
+                          <img src={c.senderProfileImage} className='h-12 w-12 rounded-full'/>
+                        </div>
+                        <div className='flex flex-col justify-start items-start mt-2'>
+                          <small className='font-bold text-md'> {c.senderName} </small>
+                          <small className='text-sm '> {c.comment} </small>
+                        </div>
+                 </div>
+                ))}
+              </div> : null}
 
-                <RadioGroup value={selectedColor} onChange={setSelectedColor} className="mt-4">
-                  <RadioGroup.Label className="sr-only">Choose a color</RadioGroup.Label>
-                  <div className="flex items-center space-x-3">
-                    {product.colors.map((color) => (
-                      <RadioGroup.Option
-                        key={color.name}
-                        value={color}
-                        className={({ active, checked }) =>
-                          classNames(
-                            color.selectedClass,
-                            active && checked ? 'ring ring-offset-1' : '',
-                            !active && checked ? 'ring-2' : '',
-                            'relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none'
-                          )
-                        }
-                      >
-                        <RadioGroup.Label as="span" className="sr-only">
-                          {color.name}
-                        </RadioGroup.Label>
-                        <span
-                          aria-hidden="true"
-                          className={classNames(
-                            color.class,
-                            'h-8 w-8 rounded-full border border-black border-opacity-10'
-                          )}
-                        />
-                      </RadioGroup.Option>
-                    ))}
-                  </div>
-                </RadioGroup>
-              </div>
+             {showLikes ? <div className=''>
+                {likesData.map((c) => ( 
+                      <div className='flex gap-2 m-2 mt-4 text-center'>                   
+                          <img src={c.likedByPhoto} className='h-12 w-12 rounded-full'/>
+                          <small className='text-sm '> {c.likedBy} </small>                     
+                      </div>
+                ))}
+              </div> : null}
 
-              {/* Sizes */}
-              <div className="mt-10">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-sm font-medium text-gray-900">Size</h3>
-                  <a href="#" className="text-sm font-medium text-indigo-600 hover:text-indigo-500">
-                    Size guide
-                  </a>
-                </div>
 
-                <RadioGroup value={selectedSize} onChange={setSelectedSize} className="mt-4">
-                  <RadioGroup.Label className="sr-only">Choose a size</RadioGroup.Label>
-                  <div className="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4">
-                    {product.sizes.map((size) => (
-                      <RadioGroup.Option
-                        key={size.name}
-                        value={size}
-                        disabled={!size.inStock}
-                        className={({ active }) =>
-                          classNames(
-                            size.inStock
-                              ? 'cursor-pointer bg-white text-gray-900 shadow-sm'
-                              : 'cursor-not-allowed bg-gray-50 text-gray-200',
-                            active ? 'ring-2 ring-indigo-500' : '',
-                            'group relative flex items-center justify-center rounded-md border py-3 px-4 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6'
-                          )
-                        }
-                      >
-                        {({ active, checked }) => (
-                          <>
-                            <RadioGroup.Label as="span">{size.name}</RadioGroup.Label>
-                            {size.inStock ? (
-                              <span
-                                className={classNames(
-                                  active ? 'border' : 'border-2',
-                                  checked ? 'border-indigo-500' : 'border-transparent',
-                                  'pointer-events-none absolute -inset-px rounded-md'
-                                )}
-                                aria-hidden="true"
-                              />
-                            ) : (
-                              <span
-                                aria-hidden="true"
-                                className="pointer-events-none absolute -inset-px rounded-md border-2 border-gray-200"
-                              >
-                                <svg
-                                  className="absolute inset-0 h-full w-full stroke-2 text-gray-200"
-                                  viewBox="0 0 100 100"
-                                  preserveAspectRatio="none"
-                                  stroke="currentColor"
-                                >
-                                  <line x1={0} y1={100} x2={100} y2={0} vectorEffect="non-scaling-stroke" />
-                                </svg>
-                              </span>
-                            )}
-                          </>
-                        )}
-                      </RadioGroup.Option>
-                    ))}
-                  </div>
-                </RadioGroup>
-              </div>
+           
+
+             
 
               <button
                 type="submit"
-                className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-blue-950 px-8 py-3 text-base font-medium text-white hover:text-black hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
               >
-                Add to bag
+              Add a Comment
               </button>
             </form>
           </div>
