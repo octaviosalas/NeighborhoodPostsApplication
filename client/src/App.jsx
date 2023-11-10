@@ -10,18 +10,15 @@ import MyPublications from './pages/MyPublications'
 import { UserProvider } from './store/usercontext'
 import UserSearch from './pages/UserSearch'
 import MyProfile from './pages/MyProfile'
-import PublicationDetail from './components/PublicationDetail'
 import SearchWithMultipleFilters from './pages/SearchWithMultipleFilters'
-import Prueba from './components/Prueba'
 import UserManualSearch from './pages/UserManualSearch'
 import ProfileDos from './components/MyProfile/ProfileDos'
 import PublicationDetailDos from './components/PublicationDetail/PublicationDetailDos'
-import Footer from './components/Footer'
 import SuccesStories from './pages/SuccesStories'
 import Survey from './pages/Survey'
-import { useState } from 'react'
 import UsersProfile from './pages/UsersProfile'
-import PruebaDeDetalle from './pages/PruebaDeDetalle'
+import PublicationDetail from './pages/PublicationDetail'
+import PruebaSuccesStories from './pages/PruebaSuccesStories'
 
 function App() {
   
@@ -44,7 +41,8 @@ function App() {
                       <Route path="/succesStories" element={<SuccesStories/>}></Route> 
                       <Route path="/survey" element={<Survey/>}></Route> 
                       <Route path="/userProfile/:userId" element={<UsersProfile/>}></Route> 
-                      <Route path="/pruebaDetalle/:publicationId" element={<PruebaDeDetalle/>}></Route> 
+                      <Route path="/publicationDetail/:publicationId" element={<PublicationDetail/>}></Route> 
+                      <Route path="/pruebaSucces" element={<PruebaSuccesStories/>}></Route> 
 
                     </Routes>
              </UserProvider>     
