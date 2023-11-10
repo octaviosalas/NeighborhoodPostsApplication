@@ -4,120 +4,17 @@ import axios from "axios"
 import LoadingPublications from '../Hooks/LoadingPublications'
 import ImagesModal from '../components/Modals/ImagesModal'
 import PhotosResolved from '../components/Modals/PhotosResolved'
+import {Link} from "react-router-dom"
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import ViewResolvedComplai from '../components/Modals/ViewResolvedComplai'
 
-const posts = [
-   
-     {
-      id: 1,
-      title: 'Boost your conversion rate',
-      href: '#',
-      description:
-        'Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.',
-      date: 'Mar 16, 2020',
-      datetime: '2020-03-16',
-      category: { title: 'Marketing', href: '#' },
-      author: {
-        name: 'Michael Foster',
-        role: 'Co-Founder / CTO',
-        href: '#',
-        imageUrl:
-          'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      },
-    },
-    {
-        id: 1,
-        title: 'Boost your conversion rate',
-        href: '#',
-        description:
-          'Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.',
-        date: 'Mar 16, 2020',
-        datetime: '2020-03-16',
-        category: { title: 'Marketing', href: '#' },
-        author: {
-          name: 'Michael Foster',
-          role: 'Co-Founder / CTO',
-          href: '#',
-          imageUrl:
-            'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-        },
-      },
-      {
-        id: 1,
-        title: 'Boost your conversion rate',
-        href: '#',
-        description:
-          'Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.',
-        date: 'Mar 16, 2020',
-        datetime: '2020-03-16',
-        category: { title: 'Marketing', href: '#' },
-        author: {
-          name: 'Michael Foster',
-          role: 'Co-Founder / CTO',
-          href: '#',
-          imageUrl:
-            'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-        },
-      },
-      {
-        id: 1,
-        title: 'Boost your conversion rate',
-        href: '#',
-        description:
-          'Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.',
-        date: 'Mar 16, 2020',
-        datetime: '2020-03-16',
-        category: { title: 'Marketing', href: '#' },
-        author: {
-          name: 'Michael Foster',
-          role: 'Co-Founder / CTO',
-          href: '#',
-          imageUrl:
-            'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-        },
-      },
-      {
-        id: 1,
-        title: 'Boost your conversion rate',
-        href: '#',
-        description:
-          'Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.',
-        date: 'Mar 16, 2020',
-        datetime: '2020-03-16',
-        category: { title: 'Marketing', href: '#' },
-        author: {
-          name: 'Michael Foster',
-          role: 'Co-Founder / CTO',
-          href: '#',
-          imageUrl:
-            'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-        },
-      },
-      {
-        id: 1,
-        title: 'Boost your conversion rate',
-        href: '#',
-        description:
-          'Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.',
-        date: 'Mar 16, 2020',
-        datetime: '2020-03-16',
-        category: { title: 'Marketing', href: '#' },
-        author: {
-          name: 'Michael Foster',
-          role: 'Co-Founder / CTO',
-          href: '#',
-          imageUrl:
-            'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-        },
-      },
-
-  ]
 
 const PruebaSuccesStories = () => {
 
     const [pubsResolved, setPubsResolved] = useState([])
     const [loading, setLoading] = useState(false)
     const [showSuccesDetail, setShowSuccesDetail] = useState(false)
-    const [publicationSelected, setPublicationSelected] = useState({})
+    const [publicationSelected, setPublicationSelected] = useState("")
 
    useEffect(() => { 
      axios.get("https://app-citizens.onrender.com/getOtherUsersPublications")
@@ -125,30 +22,22 @@ const PruebaSuccesStories = () => {
             const data = res.data
             const resolvedComplains = data.filter(publications => publications.resolved === true)
             setPubsResolved(resolvedComplains)
-            console.log(resolvedComplains)
-            setTimeout(() => { 
-                setLoading(true)
-            }, 1500)
           })
           .catch((err) => console.log(err))
    }, [])
 
-   useEffect(() => { 
-    console.log(publicationSelected)
-   }, [publicationSelected])
-
-   const choosePub = (p) => { 
-     setPublicationSelected(p)
-     setTimeout(() => { 
-        setShowSuccesDetail(true)
-        window.scrollTo({
-            top: document.body.scrollHeight,
-            behavior: "smooth", // Para un desplazamiento suave
-          });
-     }, 500)
+   const showId = (post) => { 
+    console.log(post._id, post.publicationTitle)
+    setPublicationSelected(post._id)
    }
 
+   const resetSelect = () => { 
+    setPublicationSelected("")
+   }
 
+   useEffect(() => { 
+      console.log(publicationSelected)
+   }, [publicationSelected])
 
     return (
         <div className="bg-white py-24 sm:py-32 ">
@@ -161,43 +50,39 @@ const PruebaSuccesStories = () => {
             </div>
             <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
               {pubsResolved.map((post) => (
-                <article key={post._id} className="flex max-w-xl flex-col items-start justify-between" onClick={() => console.log(post._id, post.publicationTitle)}>
-                  <div className="flex items-center gap-x-4 text-xs">
-                    <time dateTime={post.publicationDate} className="text-gray-500">
-                      {post.publicationDate}
-                    </time>
-                    <a
-                      href={post.typeOfPublication}
-                      className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
-                    >
-                      {post.typeOfPublication}
-                    </a>
+                <article key={post._id} className="flex max-w-xl flex-col items-start justify-between" onClick={() => showId(post)}>
+                  <div className="flex items-center gap-x-8 text-xs">
+                  <div className="relative mt-8 flex items-center gap-x-4">
+                    <img src={post.creatorProfileImage} alt="" className="h-10 w-10 rounded-full bg-gray-50" />
+                    <div className="text-sm leading-6">
+                      <p className="font-semi-bold text-gray-900 font-bold">                      
+                          {post.creatorName}    
+                      </p>
+                      <p className="text-gray-600">{post.creatorLocation}</p>
+                    </div>
+                  </div>
+                     <Link to={`/userManualSearch/${post.typeOfPublication}`}> 
+                      <small className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-bold text-sm cursor-pointer text-blue-700 hover:bg-gray-100" >
+                          {post.typeOfPublication}
+                        </small>
+                      </Link>
                   </div>
                   <div className="group relative">
                     <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-                      <a href={post.publicationTitle}>
-                        <span className="absolute inset-0" />
+                      <small className='font-bold text-black'>
                         {post.publicationTitle}
-                      </a>
+                      </small>
                     </h3>
                     <p className="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">{post.publicationDescription}</p>
                     <div className="flex gap-2 items-center justify-center">
                          <img className='h-24 w-24 rounded-lg' src={post.publicationImages[0]}/>
                          <img className='h-24 w-24 rounded-lg' src={post.publicationImages[1]}/>
                     </div>
-                  </div>
-                  <div className="relative mt-8 flex items-center gap-x-4">
-                    <img src={post.creatorProfileImage} alt="" className="h-10 w-10 rounded-full bg-gray-50" />
-                    <div className="text-sm leading-6">
-                      <p className="font-semibold text-gray-900">
-                        <a href={post.creatorName}>
-                          <span className="absolute inset-0" />
-                          {post.creatorName}
-                        </a>
-                      </p>
-                      <p className="text-gray-600">{post.creatorLocation}</p>
+                    <div className='mt-4'>
+                      <ViewResolvedComplai reset={resetSelect} publicationId={publicationSelected} />
                     </div>
                   </div>
+             
                 </article>
               ))}
             </div>

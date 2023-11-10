@@ -48,9 +48,9 @@ const ResolvedComplainsWall = () => {
         <div className='flex flex-col '>
             <div className='flex justify-between'>
                 <p className='text-left ml-2 font-bold text-sm'>Resolved Complains</p>
-                <div className="tooltip text-right mr-2" data-tip="Check real events that have been solved">
-                <AnnouncementIcon style={{height:"20px", width:"20px"}}/>
-                </div>
+                    <div className="tooltip text-right mr-2" data-tip="Check real events that have been solved">
+                    <AnnouncementIcon style={{height:"20px", width:"20px"}}/>
+                    </div>
             </div>
 
 
@@ -75,7 +75,7 @@ const ResolvedComplainsWall = () => {
 
             
             <div className='flex items-center justify-start mt-4 ml-2'>
-               <Link to={"/succesStories"}><small className='text-gray-400 font-bold cursor-pointer underline hover:text-black'>See all success stories</small></Link>
+               <Link to={"/pruebaSucces"}><small className='text-gray-400 font-bold cursor-pointer underline hover:text-black'>See all success stories</small></Link>
             </div>
             {isConfettiActive ?  <ReactConfetti /> : null}
         </div>
